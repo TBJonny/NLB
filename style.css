@@ -1,62 +1,47 @@
-
 body {
+    font-family: Arial, sans-serif;
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #f8f9fa;
+    padding: 0;
+    background: #f9f9f9;
     color: #333;
 }
-
 header {
     background-color: #111;
-    color: white;
-    padding: 1rem;
+    color: #fff;
+    padding: 1em;
     text-align: center;
 }
-
-header h1 {
-    margin: 0;
-}
-
-nav a {
+header nav a {
     margin: 0 10px;
-    color: #ddd;
+    color: #fff;
     text-decoration: none;
 }
-
-nav a:hover {
-    color: #fff;
-}
-
 #hero {
     background: #222;
-    color: #fff;
+    color: white;
+    padding: 2em;
     text-align: center;
-    padding: 2rem;
 }
-
-section {
-    padding: 2rem;
-    max-width: 1000px;
-    margin: auto;
-}
-
 .gallery-container {
     display: flex;
+    justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
-    justify-content: center;
+    padding: 1em;
 }
-
 .gallery-container img {
     width: 300px;
     height: 200px;
     object-fit: cover;
-    border-radius: 8px;
 }
-
+section {
+    padding: 1em;
+    max-width: 900px;
+    margin: auto;
+}
 footer {
     text-align: center;
-    padding: 1rem;
+    padding: 1em;
     background-color: #111;
     color: white;
 }
