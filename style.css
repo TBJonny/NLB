@@ -44,8 +44,9 @@ header nav a {
     transform: scale(1.05);
 }
 .barber-name {
-    color: blue;
+    color: black;
     font-weight: bold;
+    text-transform: uppercase;
 }
 .barber-card .overlay {
     position: absolute;
