@@ -1,26 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Fruktur&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Fruktur', cursive, 'Old English Text MT', serif;
     margin: 0;
     padding: 0;
     background: #f9f9f9;
     color: #333;
+    transition: all 0.3s ease;
 }
 header {
     background-color: #111;
     color: #fff;
     padding: 1em;
     text-align: center;
+    transition: background-color 0.3s ease;
 }
 header nav a {
     margin: 0 10px;
     color: #fff;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 #hero, #home {
     background: #222;
     color: white;
     padding: 2em;
     text-align: center;
+    transition: all 0.3s ease;
 }
 .barber-gallery {
     display: flex;
@@ -38,15 +44,17 @@ header nav a {
     padding-top: 20px;
     cursor: pointer;
     border-radius: 10px;
-    transition: transform 0.3s;
+    transition: transform 0.3s, background-color 0.3s;
 }
 .barber-card:hover {
     transform: scale(1.05);
+    background-color: #ccc;
 }
 .barber-name {
     color: black;
     font-weight: bold;
     text-transform: uppercase;
+    transition: color 0.3s ease;
 }
 .barber-card .overlay {
     position: absolute;
@@ -59,9 +67,14 @@ header nav a {
     padding: 10px;
     border-radius: 8px;
     text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.barber-card:hover .overlay {
+    opacity: 1;
 }
 .barber-card .overlay a {
-    color: #00d2ff;
+    color: white;
     text-decoration: none;
     display: block;
 }
@@ -69,10 +82,12 @@ section {
     padding: 1em;
     max-width: 900px;
     margin: auto;
+    transition: all 0.3s ease;
 }
 section a {
     color: #007BFF;
     text-decoration: none;
+    transition: text-decoration 0.3s ease;
 }
 section a:hover {
     text-decoration: underline;
@@ -92,4 +107,5 @@ footer {
     padding: 1em;
     background-color: #111;
     color: white;
+    transition: background-color 0.3s ease;
 }
