@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Next Level BarberShop</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -27,38 +26,38 @@
     <section id="gallery">
         <h3>Our Barbers</h3>
         <div class="barber-gallery">
-            <div class="barber-card" onclick="this.classList.toggle('active')" onclick="window.location.href='tel:+15055036216'">
+            <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
                 <p class="barber-name">VINCENT (OWNER)</p>
 <div class="barber-bio">Founder. Fader. Visionary.</div>
-                <div class="overlay"><button class="close-btn"><i class="fas fa-times"></i></button><i class="fas fa-phone-alt"></i> Call to Book</div>
+                <div class="overlay">📞 Call to Book</div>
             </div>
-            <div class="barber-card" onclick="this.classList.toggle('active')" onclick="window.location.href='tel:+15055036216'">
+            <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
                 <p class="barber-name">ZWALUW</p>
 <div class="barber-bio">Precision in every pass.</div>
-                <div class="overlay"><button class="close-btn"><i class="fas fa-times"></i></button><i class="fas fa-phone-alt"></i> Call to Book</div>
+                <div class="overlay">📞 Call to Book</div>
             </div>
-            <div class="barber-card" onclick="this.classList.toggle('active')" onclick="window.location.href='tel:+15055036216'">
+            <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
                 <p class="barber-name">GIMO</p>
 <div class="barber-bio">Style that speaks before you do.</div>
-                <div class="overlay"><button class="close-btn"><i class="fas fa-times"></i></button><i class="fas fa-phone-alt"></i> Call to Book</div>
+                <div class="overlay">📞 Call to Book</div>
             </div>
-            <div class="barber-card" onclick="this.classList.toggle('active')" onclick="window.location.href='tel:+15055036216'">
+            <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
                 <p class="barber-name">DESHAUN</p>
 <div class="barber-bio">Sharp fades. Chill vibes.</div>
-                <div class="overlay"><button class="close-btn"><i class="fas fa-times"></i></button><i class="fas fa-phone-alt"></i> Call to Book</div>
+                <div class="overlay">📞 Call to Book</div>
             </div>
-            <div class="barber-card" onclick="this.classList.toggle('active')">
+            <div class="barber-card">
                 <p class="barber-name">CA$H</p>
 <div class="barber-bio">Quick with the clippers, real with the results.</div>
                 <div class="overlay">
-                    <a href="https://booksy.com/en-us/dl/show-business/1346592?utm_medium=c2c_referral" target="_blank"><i class="fas fa-cut"></i> Book here w/ Ca$h</a>
+                    <a href="https://booksy.com/en-us/dl/show-business/1346592?utm_medium=c2c_referral" target="_blank">Book here w/ Ca$h</a>
                 </div>
             </div>
             <div class="barber-card jonny">
                 <p class="barber-name">JONNY</p>
 <div class="barber-bio">Where art meets the edge.</div>
                 <div class="overlay">
-                    <a href="https://linktr.ee/TBJONNY" target="_blank"><i class="fas fa-cut"></i> Book here w/ Jonny</a>
+                    <a href="https://linktr.ee/TBJONNY" target="_blank">Book here w/ Jonny</a>
                 </div>
             </div>
         </div>
@@ -115,10 +114,19 @@
     </script>
 
 <script>
-document.querySelectorAll('.close-btn').forEach(button => {
-    button.addEventListener('click', function(event) {
-        event.stopPropagation();
-        this.closest('.barber-card').classList.remove('active');
+document.addEventListener('DOMContentLoaded', function () {
+    const barberCards = document.querySelectorAll('.barber-card');
+    barberCards.forEach(card => {
+        card.addEventListener('click', function () {
+            card.classList.toggle('active');
+        });
+    });
+
+    document.querySelectorAll('.close-btn').forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.stopPropagation();
+            this.closest('.barber-card').classList.remove('active');
+        });
     });
 });
 </script>
