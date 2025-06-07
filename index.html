@@ -25,7 +25,7 @@
 
     <section id="gallery">
         <h3>Our Barbers</h3>
-        <div class="barber-gallery">
+        <div class="barber-gallery scroll-x">
             <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
                 <p class="barber-name">VINCENT (OWNER)</p>
 <div class="barber-bio">Founder. Fader. Visionary.</div>
@@ -130,6 +130,42 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Card toggle logic
+    const barberCards = document.querySelectorAll('.barber-card');
+    barberCards.forEach(card => {
+        card.addEventListener('click', function () {
+            card.classList.toggle('active');
+        });
+    });
+
+    document.querySelectorAll('.close-btn').forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.stopPropagation();
+            this.closest('.barber-card').classList.remove('active');
+        });
+    });
+
+    // Scroll-in animation
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
+</script>
 </body>
+
 
 </html>
