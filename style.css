@@ -370,167 +370,74 @@ body {
     background: #202020;
 }
 
-/* Toggle Switch */
-.mode-toggle {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-}
-
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 46px;
-  height: 24px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #444;
-  transition: .4s;
-  border-radius: 34px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 4px;
-  bottom: 3px;
-  background-color: white;
-  transition: .4s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #ddd;
-}
-
-input:checked + .slider:before {
-  transform: translateX(22px);
-}
-
-/* Light Mode Theme */
-body.light-mode {
-    background: linear-gradient(to bottom, #ffffff 0%, #f4f4f4 100%);
-    color: #111;
-}
-
-body.light-mode header {
-    background: #eeeeee;
-    color: #000;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-body.light-mode .barber-card,
-body.light-mode .service-item,
-body.light-mode #services {
-    background-color: #fefefe;
-    color: #111;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-}
-
-body.light-mode .action-area a {
-    background: #111;
+/* Default Dark Mode */
+body {
+    background: linear-gradient(to bottom, #1f1f1f 0%, #2a2a2a 30%, #333 60%, #1f1f1f 100%);
     color: white;
 }
 
-/* Toggle icons */
-.icon {
-  position: absolute;
-  top: 3px;
-  font-size: 14px;
-  pointer-events: none;
+header, #services, #hours, footer, .barber-card, .service-item {
+    background-color: #1a1a1a;
+    color: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
 }
 
-.icon.sun {
-  left: -18px;
-  color: #FFD700;
+/* Light Mode for users who prefer it */
+@media (prefers-color-scheme: light) {
+    body {
+        background: linear-gradient(to bottom, #ffffff 0%, #f4f4f4 100%);
+        color: #111;
+    }
+
+    header, #services, #hours, footer, .barber-card, .service-item {
+        background-color: #ffffff;
+        color: #000;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .action-area a {
+        background: #111;
+        color: white;
+    }
 }
 
-.icon.moon {
-  right: -18px;
-  color: #aaa;
-}
-
-/* Highlight the Hours section */
 #hours {
     margin-top: 30px;
-    background: #181818;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.05);
-    color: white;
     text-align: center;
-}
-
-body.light-mode #hours {
-    background: #f9f9f9;
-    color: #000;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
 }
 
 #hours h3 {
-    font-size: 1.6em;
+    font-size: 1.5em;
     margin-bottom: 10px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+}
+
+.hours-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 300px;
 }
 
 .hours-list li {
     font-size: 1.1em;
-    padding: 6px 0;
+    padding: 8px 0;
     border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-body.light-mode .hours-list li {
-    border-color: rgba(0, 0, 0, 0.1);
+@media (prefers-color-scheme: light) {
+    .hours-list li {
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
 }
 
 .after-hours-note {
-    font-style: italic;
-    color: #0f0;
     margin-top: 12px;
     font-size: 0.95em;
-}
-
-/* Animate light/dark mode transitions */
-body {
-    transition: background 0.6s ease, color 0.6s ease;
-}
-
-.barber-card,
-.service-item,
-#services,
-#hours,
-footer,
-header {
-    transition: background-color 0.6s ease, color 0.6s ease, box-shadow 0.6s ease;
-}
-
-/* Animate toggle icons */
-.icon.sun,
-.icon.moon {
-    transition: color 0.4s ease, transform 0.4s ease;
-}
-
-input:checked ~ .icon.sun {
-    color: #111;
-    transform: rotate(15deg);
-}
-
-input:not(:checked) ~ .icon.moon {
-    transform: rotate(-15deg);
+    font-style: italic;
+    color: #0f0;
 }
