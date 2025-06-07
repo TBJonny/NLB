@@ -547,3 +547,9 @@ header {
     background-color: rgba(10, 10, 10, 0.85);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
