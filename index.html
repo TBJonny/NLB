@@ -48,27 +48,27 @@
     <section id="gallery">
         <h3>Our Barbers</h3>
         <div class="barber-gallery">
-            <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
+            <div class="barber-card fade-in" onclick="window.location.href='tel:+15055036216'">
                 <p class="barber-name">VINCENT (OWNER)</p>
 <div class="barber-bio">Founder. Fader. Visionary.</div>
                 <div class="overlay">📞 Call to Book</div>
             </div>
-            <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
+            <div class="barber-card fade-in" onclick="window.location.href='tel:+15055036216'">
                 <p class="barber-name">ZWALUW</p>
 <div class="barber-bio">Precision in every pass.</div>
                 <div class="overlay">📞 Call to Book</div>
             </div>
-            <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
+            <div class="barber-card fade-in" onclick="window.location.href='tel:+15055036216'">
                 <p class="barber-name">G-MO</p>
 <div class="barber-bio">Style that speaks before you do.</div>
                 <div class="overlay">📞 Call to Book</div>
             </div>
-            <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
+            <div class="barber-card fade-in" onclick="window.location.href='tel:+15055036216'">
                 <p class="barber-name">DESHAUN</p>
 <div class="barber-bio">Sharp fades. Chill vibes.</div>
                 <div class="overlay">📞 Call to Book</div>
             </div>
-            <div class="barber-card">
+            <div class="barber-card fade-in">
                 <p class="barber-name">CA$H</p>
 <div class="barber-bio">Quick with the clippers, real with the results.</div>
                 <div class="overlay">
@@ -86,7 +86,7 @@
     </section>
 
     
-    <section id="services">
+    <section id="services" class="slide-in-left">
         <h3>Our Services</h3>
         <div class="services-list">
             <div class="service-item">💇‍♂️ <strong>Regular Haircut</strong> - $30<br><span class="sub">w/ Beard +$5</span></div>
@@ -102,7 +102,7 @@
         </div>
     </section>
 
-    <section id="hours">
+    <section id="hours" class="slide-in-right">
         <h3>Business Hours</h3>
         <ul class="hours-list">
             <li>SUNDAY :    9:00am – 4:00pm</li>
@@ -247,6 +247,23 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const faders = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+    const options = { threshold: 0.1 };
+    const observer = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, options);
+    faders.forEach(el => observer.observe(el));
+  });
+</script>
 
 </body>
 
