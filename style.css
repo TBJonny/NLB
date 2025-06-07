@@ -134,3 +134,62 @@ footer {
 .barber-card:hover .barber-bio {
     opacity: 1;
 }
+
+.barber-card {
+    overflow: hidden;
+    height: 150px;
+    transition: all 0.4s ease;
+}
+
+.barber-card.active {
+    height: 250px;
+    background-color: #2a2a2a;
+}
+
+.barber-card .barber-bio,
+.barber-card .overlay {
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateY(10px);
+}
+
+.barber-card.active .barber-bio,
+.barber-card.active .overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.barber-card {
+    position: relative;
+    transform: translateX(0);
+}
+
+.barber-card.active {
+    animation: slideIn 0.4s ease forwards;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: red;
+}
