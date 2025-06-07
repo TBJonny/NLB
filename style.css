@@ -122,3 +122,15 @@ footer {
     background-position: center;
     color: white;
 }
+
+.barber-bio {
+    font-size: 0.85em;
+    color: #ccc;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    margin-top: 5px;
+}
+
+.barber-card:hover .barber-bio {
+    opacity: 1;
+}
