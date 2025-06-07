@@ -11,7 +11,7 @@
         <h1>Next Level BarberShop</h1>
         <nav>
             <a href="#home">HOME</a>
-            <a href="#barbers">OUR BARBERS</a>
+            <a href="#gallery">OUR BARBERS</a>
             <a href="#hours">HOURS</a>
             <a href="#contact">CONTACT SHOP</a>
             <a href="#location">LOCATION</a>
@@ -35,14 +35,14 @@
                 <div class="overlay">📞 Call to Book</div>
             </div>
             <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
-                <p class="barber-name">G-MO</p>
+                <p class="barber-name">GIMO</p>
                 <div class="overlay">📞 Call to Book</div>
             </div>
             <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
                 <p class="barber-name">DESHAUN</p>
                 <div class="overlay">📞 Call to Book</div>
             </div>
-            <div class="barber-card ca$h">
+            <div class="barber-card">
                 <p class="barber-name">CA$H</p>
                 <div class="overlay">
                     <a href="https://booksy.com/en-us/dl/show-business/1346592?utm_medium=c2c_referral" target="_blank">Book here w/ Ca$h</a>
@@ -87,5 +87,24 @@
     <footer>
         <p>&copy; 2025 Next Level BarberShop</p>
     </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    });
+    </script>
 </body>
 </html>
