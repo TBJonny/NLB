@@ -273,7 +273,7 @@ body, p, a, h1, h2, h3, h4 {
 
 /* Modern header styling */
 header {
-    background: linear-gradient(to right, #1e3c72, #2a5298);
+    background-color: #1f1f1f;
     color: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
@@ -297,4 +297,34 @@ section {
 
 section.visible {
     animation: slideFade 0.8s ease-out forwards;
+}
+
+/* Gradient background as you scroll down */
+body {
+    background: linear-gradient(to bottom, #1f1f1f 0%, #2a2a2a 30%, #333 60%, #1f1f1f 100%);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Parallax animation effect on barber cards */
+@keyframes parallaxRise {
+    0% {
+        opacity: 0;
+        transform: translateY(60px) scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.barber-card {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.barber-card.visible {
+    animation: parallaxRise 0.6s ease forwards;
 }

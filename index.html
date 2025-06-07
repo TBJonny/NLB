@@ -165,7 +165,50 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Existing section scroll observer
+    const sections = document.querySelectorAll('section');
+    const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.2 });
+
+    sections.forEach(section => sectionObserver.observe(section));
+
+    // New barber card scroll observer
+    const cards = document.querySelectorAll('.barber-card');
+    const cardObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    cards.forEach(card => cardObserver.observe(card));
+
+    // Card interaction
+    document.querySelectorAll('.barber-card').forEach(card => {
+        card.addEventListener('click', function () {
+            card.classList.toggle('active');
+        });
+    });
+
+    document.querySelectorAll('.close-btn').forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.stopPropagation();
+            this.closest('.barber-card').classList.remove('active');
+        });
+    });
+});
+</script>
 </body>
+
 
 
 </html>
