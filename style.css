@@ -224,3 +224,38 @@ section.visible {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* Enhanced Barber Cards */
+.barber-card {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: transform 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.barber-card:hover {
+    transform: scale(1.015);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Updated animation for sections */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    opacity: 0;
+    animation: none;
+}
+
+section.visible {
+    animation: fadeUp 0.8s ease forwards;
+}
