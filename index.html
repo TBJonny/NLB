@@ -248,7 +248,14 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
+
+<script>
+window.addEventListener("scroll", function () {
+  document.body.classList.toggle("scrolled", window.scrollY > 10);
+});
+</script>
 </body>
+
 
 
 
