@@ -259,3 +259,42 @@ section {
 section.visible {
     animation: fadeUp 0.8s ease forwards;
 }
+
+/* Typography */
+body, p, a, h1, h2, h3, h4 {
+    font-family: Arial, sans-serif;
+}
+
+.barber-card {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    font-weight: bold;
+}
+
+/* Modern header styling */
+header {
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced animation */
+@keyframes slideFade {
+    0% {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    opacity: 0;
+    animation: none;
+}
+
+section.visible {
+    animation: slideFade 0.8s ease-out forwards;
+}
