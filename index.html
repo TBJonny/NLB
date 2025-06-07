@@ -96,24 +96,6 @@
     </footer>
 
     <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const sections = document.querySelectorAll('section');
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                sections.forEach(sec => sec.classList.remove('visible'));
-                entry.target.classList.add('visible');
-            }
-        });
-    }, {
-        threshold: 0.4
-    });
-
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-});
-
     document.addEventListener('DOMContentLoaded', function () {
         const sections = document.querySelectorAll('section');
         const observer = new IntersectionObserver(entries => {
@@ -133,24 +115,6 @@ document.addEventListener('DOMContentLoaded', function () {
     </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const sections = document.querySelectorAll('section');
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                sections.forEach(sec => sec.classList.remove('visible'));
-                entry.target.classList.add('visible');
-            }
-        });
-    }, {
-        threshold: 0.4
-    });
-
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-});
-
 document.querySelectorAll('.close-btn').forEach(button => {
     button.addEventListener('click', function(event) {
         event.stopPropagation();
