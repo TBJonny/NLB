@@ -441,3 +441,46 @@ header, #services, #hours, footer, .barber-card, .service-item {
     font-style: italic;
     color: #0f0;
 }
+
+/* Header font adjustments */
+header h1, header h2, header h3 {
+    font-weight: 900;
+    font-size: 1.6em;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.4em;
+    }
+}
+
+/* Emphasize Hours header */
+#hours h3 {
+    font-size: 1.6em;
+    font-weight: 900;
+}
+
+/* Toggle Call/Book visibility */
+.barber-card .action-area {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.barber-card:hover .action-area,
+.barber-card.active .action-area {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Animation for Call/Book reveal */
+.barber-card .action-area {
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.barber-card:hover .action-area,
+.barber-card.active .action-area {
+    opacity: 1;
+    transform: translateY(0);
+}
