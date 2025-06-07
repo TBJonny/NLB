@@ -8,6 +8,12 @@
 </head>
 <body>
     <header>
+    <div class="mode-toggle">
+        <label class="switch">
+            <input type="checkbox" id="modeSwitcher">
+            <span class="slider round"></span>
+        </label>
+    </div>
     
         <h1>Next Level BarberShop</h1>
         <nav>
@@ -61,6 +67,23 @@
                     <a href="https://linktr.ee/TBJONNY" target="_blank">Book here w/ Jonny</a>
                 </div>
             </div>
+        </div>
+    </section>
+
+    
+    <section id="services">
+        <h3>Our Services</h3>
+        <div class="services-list">
+            <div class="service-item">💇‍♂️ <strong>Regular Haircut</strong> - $30<br><span class="sub">w/ Beard +$5</span></div>
+            <div class="service-item">🪒 <strong>Razor Fade</strong> - $35<br><span class="sub">w/ Beard +$5</span></div>
+            <div class="service-item">🧔 <strong>Head Shave</strong> - $35</div>
+            <div class="service-item">✂️ <strong>Style Cuts</strong> - $35</div>
+            <div class="service-item">💨 <strong>Blowout Tapers</strong></div>
+            <div class="service-item">🔥 <strong>Mullets</strong></div>
+            <div class="service-item">💥 <strong>Burst Fades</strong></div>
+            <div class="service-item">🌀 <strong>Perms</strong> starting at $100</div>
+            <div class="service-item">🎨 <strong>Color</strong> starting at $30</div>
+            <div class="service-item">🧔✂️ <strong>Beard Trim/Line Up</strong> - $20</div>
         </div>
     </section>
 
@@ -208,7 +231,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const toggle = document.getElementById('modeSwitcher');
+    toggle.addEventListener('change', function () {
+        document.body.classList.toggle('light-mode');
+    });
+});
+</script>
 </body>
+
 
 
 
