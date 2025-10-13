@@ -1,263 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Next Level BarberShop</title>
+  <meta name="description" content="Real cuts, real style. Book with Jonny, Ca$h & more today." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <style>
+    :root{
+      --bg: #0b0b0d; --card:#121216; --text:#f5f6f7; --muted:#a5a7ac; --brand:#7c3aed; --brand-2:#22d3ee; --ring:rgba(124,58,237,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;background:radial-gradient(1200px 800px at 10% -10%,#1f1147 0%,transparent 40%),radial-gradient(1000px 600px at 110% 10%,#083344 0%,transparent 45%),var(--bg);color:var(--text);line-height:1.55}
+    a{color:inherit}
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Real cuts, real style. Book with Jonny, Ca$h & more today.">
-    <meta property="og:title" content="Next Level Barbershop">
-    <meta property="og:description" content="Step up your look at the Next Level.">
-    <meta property="og:image" content="https://nlbnm.vercel.app/preview.png">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nlbnm.vercel.app">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Next Level Barbershop">
-    <meta name="twitter:description" content="Fades, cuts & clean vibes. Book now.">
-    <meta name="twitter:image" content="https://nlbnm.vercel.app/preview.png">
-    <link rel="icon" type="image/png" href="favicon.png">
+    /* Header */
+    header{position:sticky;top:0;z-index:30;background:rgba(12,12,16,.55);backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    header .wrap{max-width:1100px;margin:auto;display:flex;align-items:center;gap:24px;padding:14px 20px}
+    h1{margin:0;font-size:22px;letter-spacing:.08em}
+    nav{margin-left:auto;display:flex;gap:16px;flex-wrap:wrap}
+    nav a{font-size:13px;text-decoration:none;color:#e7e7ee;padding:8px 10px;border-radius:10px;opacity:.9}
+    nav a:hover{background:rgba(255,255,255,.06)}
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Next Level BarberShop</title>
-    <link rel="stylesheet" href="style.css">
+    /* Sections */
+    section{max-width:1100px;margin:0 auto;padding:64px 20px;opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease}
+    section.visible{opacity:1;transform:none}
+
+    /* Hero */
+    #home{padding-top:84px;text-align:center}
+    #home h2{font-size:40px;margin:0 0 12px;background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;color:transparent}
+    #home p{color:var(--muted);max-width:700px;margin:0 auto}
+
+    /* Barber gallery */
+    .barber-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .barber-card{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:20px;cursor:pointer;overflow:hidden;transform:translateZ(0);transition:transform .35s ease, box-shadow .35s ease}
+    .barber-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .barber-name{font-weight:700;letter-spacing:.06em;margin:2px 0 10px}
+    .barber-bio{color:var(--muted);font-size:14px}
+    .barber-card .overlay{position:absolute;inset:auto 12px 12px 12px;display:flex;justify-content:center}
+    .barber-card .overlay a{display:inline-block;background:linear-gradient(90deg,var(--brand),var(--brand-2));padding:10px 14px;border-radius:12px;text-decoration:none;color:white;font-weight:600}
+
+    /* Services */
+    #services .services-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+    .service-item{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:16px 16px 18px;position:relative;transition:transform .25s ease,border-color .25s ease, box-shadow .25s ease}
+    .service-item:hover{transform:translateY(-3px);border-color:var(--ring);box-shadow:0 8px 28px rgba(124,58,237,.15)}
+    .service-title{display:flex;justify-content:space-between;gap:8px;align-items:center}
+    .price{font-weight:800;background:rgba(255,255,255,.08);padding:6px 10px;border-radius:999px}
+    .sub{display:block;color:var(--muted);font-size:13px;margin-top:6px}
+
+    /* Hours */
+    .hours-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:6px;color:#e6e7ec}
+    .hours-list li{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 12px}
+    .after-hours-note{margin-top:12px;color:var(--muted)}
+
+    /* Map */
+    iframe{border-radius:16px}
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion:reduce){
+      section{opacity:1;transform:none}
+      .barber-card,.service-item{transition:none}
+    }
+  </style>
 </head>
 <body>
-    <header>
-    
-            
-            
-        
+  <header>
+    <div class="wrap">
+      <h1>Next Level BarberShop</h1>
+      <nav>
+        <a href="#home">HOME</a>
+        <a href="#gallery">OUR BARBERS</a>
+        <a href="#services">SERVICES</a>
+        <a href="#hours">HOURS</a>
+        <a href="#contact">CONTACT</a>
+        <a href="#location">LOCATION</a>
+      </nav>
     </div>
-    
-        <h1>Next Level BarberShop</h1>
-        <nav>
-            <a href="#home">HOME</a>
-            <a href="#gallery">OUR BARBERS</a>
-            <a href="#services">SERVICES</a>
-            <a href="#hours">HOURS</a>
-            <a href="#contact">CONTACT SHOP</a>
-            <a href="#location">LOCATION</a>
-        </nav>
-    </header>
+  </header>
 
-    <section id="home">
-        <h2>Welcome to Next Level BarberShop</h2>
-        <p>Professional cuts, sharp fades, and a clean vibe. Step up your look at the Next Level.</p>
-    </section>
+  <section id="home">
+    <h2>Welcome to Next Level BarberShop</h2>
+    <p>Professional cuts, sharp fades, and a clean vibe. Step up your look at the Next Level.</p>
+  </section>
 
-    <section id="gallery">
-        <h3>Our Barbers</h3>
-        <div class="barber-gallery">
-            <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
-                <p class="barber-name">VINCENT (OWNER)</p>
-<div class="barber-bio">Founder. Fader. Visionary.</div>
-                <div class="overlay">📞 Call to Book</div>
-            </div>
-            <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
-                <p class="barber-name">ZWALUW</p>
-<div class="barber-bio">Precision in every pass.</div>
-                <div class="overlay">📞 Call to Book</div>
-            </div>
-            <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
-                <p class="barber-name">G-MO</p>
-<div class="barber-bio">Style that speaks before you do.</div>
-                <div class="overlay">📞 Call to Book</div>
-            </div>
-            <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
-                <p class="barber-name">DESHAUN</p>
-<div class="barber-bio">Sharp fades. Chill vibes.</div>
-                <div class="overlay">📞 Call to Book</div>
-            </div>
-            <div class="barber-card">
-                <p class="barber-name">CA$H</p>
-<div class="barber-bio">Quick with the clippers, real with the results.</div>
-                <div class="overlay">
-                    <a href="https://booksy.com/en-us/dl/show-business/1346592?utm_medium=c2c_referral" target="_blank">Book here w/ Ca$h</a>
-                </div>
-            </div>
-            <div class="barber-card jonny">
-                <p class="barber-name">JONNY</p>
-<div class="barber-bio">Where art meets the edge.</div>
-                <div class="overlay">
-                    <a href="https://linktr.ee/TBJONNY" target="_blank">Book here w/ Jonny</a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section id="gallery">
+    <h3>Our Barbers</h3>
+    <div class="barber-gallery">
+      <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
+        <p class="barber-name">VINCENT (OWNER)</p>
+        <div class="barber-bio">Founder. Fader. Visionary.</div>
+        <div class="overlay">📞 Call to Book</div>
+      </div>
+      <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
+        <p class="barber-name">ZWALUW</p>
+        <div class="barber-bio">Precision in every pass.</div>
+        <div class="overlay">📞 Call to Book</div>
+      </div>
+      <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
+        <p class="barber-name">G-MO</p>
+        <div class="barber-bio">Style that speaks before you do.</div>
+        <div class="overlay">📞 Call to Book</div>
+      </div>
+      <div class="barber-card" onclick="window.location.href='tel:+15055036216'">
+        <p class="barber-name">DESHAUN</p>
+        <div class="barber-bio">Sharp fades. Chill vibes.</div>
+        <div class="overlay">📞 Call to Book</div>
+      </div>
+      <div class="barber-card">
+        <p class="barber-name">CA$H</p>
+        <div class="barber-bio">Quick with the clippers, real with the results.</div>
+        <div class="overlay"><a href="https://booksy.com/en-us/dl/show-business/1346592?utm_medium=c2c_referral" target="_blank">Book w/ Ca$h</a></div>
+      </div>
+      <div class="barber-card jonny">
+        <p class="barber-name">JONNY</p>
+        <div class="barber-bio">Where art meets the edge.</div>
+        <div class="overlay"><a href="https://linktr.ee/TBJONNY" target="_blank">Book w/ Jonny</a></div>
+      </div>
+    </div>
+  </section>
 
-    
-    <section id="services">
-        <h3>Our Services</h3>
-        <div class="services-list">
-            <div class="service-item">💇‍♂️ <strong>Regular Haircut</strong> - $30<br><span class="sub">w/ Beard +$5</span></div>
-            <div class="service-item">🪒 <strong>Razor Fade</strong> - $35<br><span class="sub">w/ Beard +$5</span></div>
-            <div class="service-item">🧔 <strong>Head Shave</strong> - $35</div>
-            <div class="service-item">✂️ <strong>Style Cuts</strong> - $35</div>
-            <div class="service-item">💨 <strong>Blowout Tapers</strong></div>
-            <div class="service-item">🔥 <strong>Mullets</strong></div>
-            <div class="service-item">💥 <strong>Burst Fades</strong></div>
-            <div class="service-item">🌀 <strong>Perms</strong> starting at $100</div>
-            <div class="service-item">🎨 <strong>Color</strong> starting at $30</div>
-            <div class="service-item">🧔✂️ <strong>Beard Trim/Line Up</strong> - $20</div>
-        </div>
-    </section>
+  <section id="services">
+    <h3>Our Services</h3>
+    <div class="services-list">
+      <div class="service-item">
+        <div class="service-title"><span>💈 <strong>MILITARY / FIRST RESPONDER</strong></span><span class="price">$28</span></div>
+        <span class="sub">Discounted cut for active military, veterans, police, firefighters, EMTs & first responders.</span>
+      </div>
 
-    <section id="hours">
-        <h3>Business Hours</h3>
-        <ul class="hours-list">
-            <li>SUNDAY :    9:00am – 4:00pm</li>
-            <li>MONDAY :    9:00am – 4:00pm</li>
-            <li>TUESDAY :    8:30am – 5:30pm</li>
-            <li>WEDNESDAY :    8:30am – 5:30pm</li>
-            <li>THURSDAY :   8:30am – 5:30pm</li>
-            <li>FRIDAY :    8:30am – 5:30pm</li>
-            <li>SATURDAY :    8:30am – 5:30pm</li>
-        </ul>
-        <p class="after-hours-note">NO ADITTIONAL CHARGE AFTER HOURS!</p>
-    </section>
+      <div class="service-item">
+        <div class="service-title"><span>💇‍♂️ <strong>HAIRCUT (STANDARD)</strong></span><span class="price">$35</span></div>
+        <span class="sub">Classic or trending — fades, tapers, or scissor work. <em>Detailed styles:</em> $40–$50+ depending on design/time.</span>
+      </div>
 
-    <section id="contact">
-        <h3>Contact Us</h3>
-        <p>📍 <a href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114" target="_blank">6510 Paradise Blvd NW Unit D, Albuquerque, NM 87114</a></p>
-        <p>📞 <a href="tel:+15055036216">(505) 503-6216</a></p>
-    </section>
+      <div class="service-item">
+        <div class="service-title"><span>🧔 <strong>HAIRCUT + BEARD</strong></span><span class="price">$40</span></div>
+        <span class="sub">Full cut plus beard trim/line-up for a sharp, balanced look.</span>
+      </div>
 
-    <section id="location">
-        <h3>Find Us</h3>
-        <iframe src="https://maps.google.com/maps?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy">
-        </iframe>
-    </section>
+      <div class="service-item">
+        <div class="service-title"><span>🪒 <strong>SKIN FADE / TAPER</strong></span><span class="price">$40</span></div>
+        <span class="sub">Down to the skin with foil shaver or razor for a clean finish.</span>
+      </div>
 
-    <footer>
-        <p>&copy; 2025 Next Level BarberShop</p>
-    </footer>
+      <div class="service-item">
+        <div class="service-title"><span>🪒🧔 <strong>SKIN FADE / TAPER + BEARD</strong></span><span class="price">$45</span></div>
+        <span class="sub">Skin-level fade/taper plus full beard lineup.</span>
+      </div>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const sections = document.querySelectorAll('section');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
+      <div class="service-item">
+        <div class="service-title"><span>🧴 <strong>SHAMPOO SERVICE</strong></span><span class="price">$15</span></div>
+        <span class="sub">Treat yourself — cleanse, set, relax.</span>
+      </div>
 
-        sections.forEach(section => {
-            observer.observe(section);
-        });
+      <div class="service-item">
+        <div class="service-title"><span>✂️ <strong>LONG HAIR (PAST SHOULDERS)</strong></span><span class="price">$35</span></div>
+        <span class="sub">Extra time & detail for longer lengths.</span>
+      </div>
+
+      <div class="service-item">
+        <div class="service-title"><span>🧔‍♂️ <strong>BEARD TRIM / LINE UP</strong></span><span class="price">$25</span></div>
+        <span class="sub">Clean edges, even bulk, crisp shape.</span>
+      </div>
+
+      <div class="service-item">
+        <div class="service-title"><span>🧼 <strong>FACE SHAVE</strong></span><span class="price">$25</span></div>
+        <span class="sub">Hot towel, lather, and smooth finish.</span>
+      </div>
+
+      <div class="service-item">
+        <div class="service-title"><span>📏 <strong>LINE UP ONLY</strong></span><span class="price">$15</span></div>
+        <span class="sub">Edges only. <em>Beard not included.</em></span>
+      </div>
+
+      <div class="service-item">
+        <div class="service-title"><span>🎨 <strong>DESIGN ONLY</strong></span><span class="price">$10</span></div>
+        <span class="sub">Add a freestyle design or bring a reference.</span>
+      </div>
+
+      <div class="service-item">
+        <div class="service-title"><span>🌀 <strong>PERM SERVICE</strong></span><span class="price">$90+</span></div>
+        <span class="sub">Beachy waves to tighter curls — premium products for lasting results.</span>
+      </div>
+
+      <div class="service-item">
+        <div class="service-title"><span>🪒 <strong>HEAD SHAVE</strong></span><span class="price">$35</span></div>
+        <span class="sub">Clean and polished dome with hot towel finish.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="hours">
+    <h3>Business Hours</h3>
+    <ul class="hours-list">
+      <li>SUNDAY : 9:00am – 4:00pm</li>
+      <li>MONDAY : 9:00am – 4:00pm</li>
+      <li>TUESDAY : 8:30am – 5:30pm</li>
+      <li>WEDNESDAY : 8:30am – 5:30pm</li>
+      <li>THURSDAY : 8:30am – 5:30pm</li>
+      <li>FRIDAY : 8:30am – 5:30pm</li>
+      <li>SATURDAY : 8:30am – 5:30pm</li>
+    </ul>
+    <p class="after-hours-note">NO ADDITIONAL CHARGE AFTER HOURS!</p>
+  </section>
+
+  <section id="contact">
+    <h3>Contact</h3>
+    <p>📍 <a href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114" target="_blank">6510 Paradise Blvd NW Unit D, Albuquerque, NM 87114</a></p>
+    <p>📞 <a href="tel:+15055036216">(505) 503-6216</a></p>
+  </section>
+
+  <section id="location">
+    <h3>Find Us</h3>
+    <iframe src="https://maps.google.com/maps?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="420" loading="lazy"></iframe>
+  </section>
+
+  <footer style="text-align:center;padding:28px 0;color:#a6a8ad;border-top:1px solid rgba(255,255,255,.06)">
+    © 2025 Next Level BarberShop
+  </footer>
+
+  <script>
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target);} });
+    },{threshold:.15});
+    document.querySelectorAll('section').forEach(s=>io.observe(s));
+
+    // Header shade on scroll
+    window.addEventListener('scroll',()=>{
+      document.body.classList.toggle('scrolled', window.scrollY>10);
     });
-    </script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const barberCards = document.querySelectorAll('.barber-card');
-    barberCards.forEach(card => {
-        card.addEventListener('click', function () {
-            card.classList.toggle('active');
-        });
-    });
-
-    document.querySelectorAll('.close-btn').forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.stopPropagation();
-            this.closest('.barber-card').classList.remove('active');
-        });
-    });
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Card toggle logic
-    const barberCards = document.querySelectorAll('.barber-card');
-    barberCards.forEach(card => {
-        card.addEventListener('click', function () {
-            card.classList.toggle('active');
-        });
-    });
-
-    document.querySelectorAll('.close-btn').forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.stopPropagation();
-            this.closest('.barber-card').classList.remove('active');
-        });
-    });
-
-    // Scroll-in animation
-    const sections = document.querySelectorAll('section');
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, {
-        threshold: 0.2
-    });
-
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Existing section scroll observer
-    const sections = document.querySelectorAll('section');
-    const sectionObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.2 });
-
-    sections.forEach(section => sectionObserver.observe(section));
-
-    // New barber card scroll observer
-    const cards = document.querySelectorAll('.barber-card');
-    const cardObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    cards.forEach(card => cardObserver.observe(card));
-
-    // Card interaction
-    document.querySelectorAll('.barber-card').forEach(card => {
-        card.addEventListener('click', function () {
-            card.classList.toggle('active');
-        });
-    });
-
-    document.querySelectorAll('.close-btn').forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.stopPropagation();
-            this.closest('.barber-card').classList.remove('active');
-        });
-    });
-});
-</script>
-
-
-
-<script>
-window.addEventListener("scroll", function () {
-  document.body.classList.toggle("scrolled", window.scrollY > 10);
-});
-</script>
+  </script>
 </body>
-
-
-
-
-
 </html>
