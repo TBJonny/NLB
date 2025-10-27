@@ -114,7 +114,7 @@
       transition:opacity .7s cubic-bezier(.16,1,.3,1),
                  transform .7s cubic-bezier(.16,1,.3,1),
                  filter .7s cubic-bezier(.16,1,.3,1);
-      scroll-margin-top:90px; /* fixes sticky-header anchor cutoff */
+      scroll-margin-top:90px; /* keeps anchor nav from hiding titles under sticky header */
     }
     section.visible {
       opacity:1;
@@ -122,7 +122,7 @@
       filter:none;
     }
 
-    /* subtle banded background used on some sections */
+    /* subtle band background behind some sections */
     section.band {
       background:
         radial-gradient(800px 400px at 20% 0%,var(--band-accent1) 0%,transparent 70%),
@@ -151,34 +151,72 @@
       gap:16px;
     }
 
-    /* brand gets upgraded styling */
+    /* BRAND (animated pulse every 10s) */
     .brand {
       display:flex;
-      flex-direction:column;
-      line-height:1.05;
+      align-items:center;
+      line-height:1.1;
     }
-    .brand-main {
-      font-size:clamp(16px,2vw,20px);
+
+    .brand-text {
       font-weight:800;
       letter-spacing:.12em;
-      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-      -webkit-background-clip:text;
-      color:transparent;
-      text-shadow:0 0 12px var(--glow-purple),0 0 32px var(--glow-teal);
-    }
-    .brand-sub {
-      font-size:11px;
-      font-weight:700;
-      letter-spacing:.2em;
-      color:var(--text-primary);
-      background:rgba(0,0,0,.4);
-      border:1px solid var(--border);
-      border-radius:6px;
-      padding:2px 6px;
-      align-self:flex-start;
-      line-height:1.2;
-      margin-top:4px;
       text-transform:uppercase;
+      font-size:clamp(16px,2vw,20px);
+
+      /* gradient text */
+      background:linear-gradient(90deg,#7c3aed 0%,#22d3ee 100%);
+      background-size:200% 100%;
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+
+      /* base glow */
+      text-shadow:
+        0 0 8px rgba(124,58,237,.45),
+        0 0 16px rgba(34,211,238,.3);
+
+      filter:drop-shadow(0 0 4px rgba(124,58,237,.4));
+
+      /* loop pulse */
+      animation:brandPulse 10s ease-in-out infinite;
+    }
+
+    @keyframes brandPulse {
+      0% {
+        text-shadow:
+          0 0 8px rgba(124,58,237,.45),
+          0 0 16px rgba(34,211,238,.3);
+        filter:drop-shadow(0 0 4px rgba(124,58,237,.4));
+        background-position:0% 0%;
+      }
+      10% {
+        text-shadow:
+          0 0 12px rgba(124,58,237,.85),
+          0 0 28px rgba(34,211,238,.6),
+          0 0 48px rgba(34,211,238,.4);
+        filter:
+          drop-shadow(0 0 6px rgba(124,58,237,.7))
+          drop-shadow(0 0 14px rgba(34,211,238,.5));
+        background-position:100% 0%;
+      }
+      18% {
+        text-shadow:
+          0 0 10px rgba(124,58,237,.6),
+          0 0 20px rgba(34,211,238,.4),
+          0 0 32px rgba(34,211,238,.25);
+        filter:
+          drop-shadow(0 0 4px rgba(124,58,237,.5))
+          drop-shadow(0 0 10px rgba(34,211,238,.4));
+        background-position:50% 0%;
+      }
+      100% {
+        text-shadow:
+          0 0 8px rgba(124,58,237,.45),
+          0 0 16px rgba(34,211,238,.3);
+        filter:drop-shadow(0 0 4px rgba(124,58,237,.4));
+        background-position:0% 0%;
+      }
     }
 
     .header-cta {
@@ -228,8 +266,10 @@
     @media (max-width:640px){
       nav.primary-nav { display:none; }
       .call-mobile { display:inline-flex; }
-      .brand-main { font-size:16px; }
-      .brand-sub { font-size:10px; }
+      .brand-text {
+        font-size:15px;
+        letter-spacing:.15em;
+      }
     }
 
     /* =========================
@@ -252,6 +292,7 @@
     .gradient-accent {
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
       -webkit-background-clip:text;
+      background-clip:text;
       color:transparent;
     }
 
@@ -294,7 +335,7 @@
     }
 
     /* =========================
-       REVEAL GROUPS + CARDS
+       REVEAL GROUPS + STAGGERED ITEMS
        ========================= */
     .reveal-group {}
 
@@ -590,7 +631,7 @@
       .badges-row { gap:8px; }
       .badge-pill { font-size:12px; padding:8px 12px; }
 
-      /* kill crazy hover on touch */
+      /* chill hover on touch */
       .barber-card:hover,
       .review-card:hover,
       .service-card:hover {
@@ -615,6 +656,9 @@
       .btn-primary {
         transition:none;
       }
+      .brand-text {
+        animation:none;
+      }
     }
   </style>
 </head>
@@ -624,8 +668,7 @@
   <header>
     <div class="wrap nav-row">
       <div class="brand">
-        <span class="brand-main">NEXT LEVEL</span>
-        <span class="brand-sub">BARBERSHOP</span>
+        <span class="brand-text">NEXT LEVEL BARBERSHOP</span>
       </div>
 
       <div class="header-cta">
@@ -890,7 +933,7 @@
   </footer>
 
   <script>
-    // Fade / slide / blur reveal for whole sections
+    // Reveal full sections on scroll (fade/slide/blur in)
     const sectionObserver=new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
         if(e.isIntersecting){
@@ -901,7 +944,7 @@
     },{threshold:.15});
     document.querySelectorAll('section').forEach(s=>sectionObserver.observe(s));
 
-    // Staggered reveal for card groups (barbers, services, reviews)
+    // Staggered reveal for groups of cards (barbers, services, reviews)
     const groupObserver=new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -909,7 +952,7 @@
           kids.forEach((el,i)=>{
             setTimeout(()=>{
               el.classList.add('show');
-            }, i*80);
+            }, i*80); // 80ms stagger per card
           });
           groupObserver.unobserve(entry.target);
         }
