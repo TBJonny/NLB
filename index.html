@@ -38,6 +38,9 @@
 
       --band-accent1: rgba(124,58,237,.18);
       --band-accent2: rgba(34,211,238,.12);
+
+      --glow-purple:rgba(124,58,237,.6);
+      --glow-teal:rgba(34,211,238,.4);
     }
 
     @media (prefers-color-scheme: light) {
@@ -64,6 +67,9 @@
 
         --band-accent1: rgba(124,58,237,.08);
         --band-accent2: rgba(6,182,212,.07);
+
+        --glow-purple:rgba(124,58,237,.35);
+        --glow-teal:rgba(6,182,212,.3);
       }
     }
 
@@ -95,18 +101,25 @@
       padding:0 20px;
     }
 
+    /* =========================
+       SECTION ANIMATION / LAYOUT
+       ========================= */
     section {
       max-width:1120px;
       margin:0 auto;
       padding:72px 20px;
       opacity:0;
-      transform:translateY(18px);
-      transition:opacity .6s ease, transform .6s ease;
+      transform:translateY(24px) scale(.98);
+      filter:blur(8px);
+      transition:opacity .7s cubic-bezier(.16,1,.3,1),
+                 transform .7s cubic-bezier(.16,1,.3,1),
+                 filter .7s cubic-bezier(.16,1,.3,1);
       scroll-margin-top:90px; /* fixes sticky-header anchor cutoff */
     }
     section.visible {
       opacity:1;
       transform:none;
+      filter:none;
     }
 
     /* subtle banded background used on some sections */
@@ -119,7 +132,7 @@
     }
 
     /* =========================
-       HEADER / NAV
+       HEADER / NAV / BRANDING
        ========================= */
     header {
       position:sticky;
@@ -132,23 +145,48 @@
 
     .nav-row {
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content:space-between;
       padding:14px 20px;
+      gap:16px;
     }
 
+    /* brand gets upgraded styling */
     .brand {
-      font-size:clamp(18px,2vw,22px);
-      font-weight:600;
-      letter-spacing:.08em;
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
+    }
+    .brand-main {
+      font-size:clamp(16px,2vw,20px);
+      font-weight:800;
+      letter-spacing:.12em;
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      -webkit-background-clip:text;
+      color:transparent;
+      text-shadow:0 0 12px var(--glow-purple),0 0 32px var(--glow-teal);
+    }
+    .brand-sub {
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.2em;
       color:var(--text-primary);
-      white-space:nowrap;
+      background:rgba(0,0,0,.4);
+      border:1px solid var(--border);
+      border-radius:6px;
+      padding:2px 6px;
+      align-self:flex-start;
+      line-height:1.2;
+      margin-top:4px;
+      text-transform:uppercase;
     }
 
     .header-cta {
       display:flex;
       align-items:center;
+      flex-wrap:wrap;
       gap:14px;
+      justify-content:flex-end;
     }
 
     .call-mobile {
@@ -190,6 +228,8 @@
     @media (max-width:640px){
       nav.primary-nav { display:none; }
       .call-mobile { display:inline-flex; }
+      .brand-main { font-size:16px; }
+      .brand-sub { font-size:10px; }
     }
 
     /* =========================
@@ -254,6 +294,25 @@
     }
 
     /* =========================
+       REVEAL GROUPS + CARDS
+       ========================= */
+    .reveal-group {}
+
+    .reveal {
+      opacity:0;
+      transform:translateY(24px) scale(.98);
+      filter:blur(8px);
+      transition:opacity .7s cubic-bezier(.16,1,.3,1),
+                 transform .7s cubic-bezier(.16,1,.3,1),
+                 filter .7s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.show {
+      opacity:1;
+      transform:none;
+      filter:none;
+    }
+
+    /* =========================
        BARBER CARDS
        ========================= */
     .barber-grid {
@@ -263,6 +322,8 @@
     }
 
     .barber-card {
+      position:relative;
+      overflow:hidden;
       background:var(--panel);
       border:1px solid var(--border);
       border-radius:18px;
@@ -273,10 +334,22 @@
       box-shadow:0 8px 28px rgba(0,0,0,.45);
       transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     }
+    .barber-card::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at 20% 20%,rgba(124,58,237,.28),transparent 60%);
+      opacity:0;
+      transition:opacity .22s ease;
+      pointer-events:none;
+    }
     .barber-card:hover {
-      transform:translateY(-3px) scale(1.01);
+      transform:translateY(-4px) scale(1.02) rotateX(1deg) rotateY(-1deg);
       border-color:var(--accent-1);
-      box-shadow:var(--shadow-card);
+      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
+    }
+    .barber-card:hover::before {
+      opacity:.4;
     }
 
     .barber-name {
@@ -313,11 +386,17 @@
       line-height:1.2;
       min-width:max-content;
       border:1px solid transparent;
+      transition:all .18s ease;
     }
 
     .btn-primary {
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
       color:#fff;
+      box-shadow:0 10px 20px rgba(0,0,0,.6);
+    }
+    .btn-primary:hover {
+      box-shadow:0 20px 40px rgba(0,0,0,.8),0 0 24px rgba(124,58,237,.5);
+      transform:translateY(-1px) scale(1.02);
     }
 
     .btn-outline {
@@ -346,9 +425,9 @@
       transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     }
     .review-card:hover {
-      transform:translateY(-3px) scale(1.01);
+      transform:translateY(-3px) scale(1.02);
       border-color:var(--accent-1);
-      box-shadow:var(--shadow-card);
+      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
     }
 
     .review-stars {
@@ -387,8 +466,8 @@
       transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     }
     .service-card:hover {
-      transform:translateY(-3px) scale(1.01);
-      box-shadow:var(--shadow-card);
+      transform:translateY(-3px) scale(1.02);
+      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
       border-color:var(--accent-1);
     }
 
@@ -510,14 +589,32 @@
       .nav-row { padding-left:16px; padding-right:16px; }
       .badges-row { gap:8px; }
       .badge-pill { font-size:12px; padding:8px 12px; }
+
+      /* kill crazy hover on touch */
+      .barber-card:hover,
+      .review-card:hover,
+      .service-card:hover {
+        transform:none;
+        box-shadow:0 8px 28px rgba(0,0,0,.45);
+      }
+      .barber-card:hover::before { opacity:0; }
     }
 
     /* =========================
        REDUCED MOTION
        ========================= */
     @media (prefers-reduced-motion:reduce){
-      section { opacity:1; transform:none; transition:none; }
-      .barber-card,.service-card,.review-card { transition:none; }
+      section,
+      .reveal {
+        opacity:1;
+        transform:none;
+        filter:none;
+        transition:none;
+      }
+      .barber-card,.service-card,.review-card,
+      .btn-primary {
+        transition:none;
+      }
     }
   </style>
 </head>
@@ -526,7 +623,10 @@
   <!-- ===== HEADER ===== -->
   <header>
     <div class="wrap nav-row">
-      <div class="brand">Next Level BarberShop</div>
+      <div class="brand">
+        <span class="brand-main">NEXT LEVEL</span>
+        <span class="brand-sub">BARBERSHOP</span>
+      </div>
 
       <div class="header-cta">
         <a class="call-mobile" href="tel:+15055036216">📞 (505) 503-6216</a>
@@ -570,8 +670,8 @@
       <h2 class="section-title">Our Barbers</h2>
       <p class="section-lead">Book directly with your barber or call the shop. Real craft, no gimmicks.</p>
 
-      <div class="barber-grid">
-        <article class="barber-card">
+      <div class="barber-grid reveal-group">
+        <article class="barber-card reveal">
           <p class="barber-name">VINCENT (OWNER)</p>
           <p class="barber-bio">Founder. Fader. Visionary.</p>
           <div class="cta-row">
@@ -579,7 +679,7 @@
           </div>
         </article>
 
-        <article class="barber-card">
+        <article class="barber-card reveal">
           <p class="barber-name">ZWALUW</p>
           <p class="barber-bio">Precision in every pass.</p>
           <div class="cta-row">
@@ -587,7 +687,7 @@
           </div>
         </article>
 
-        <article class="barber-card">
+        <article class="barber-card reveal">
           <p class="barber-name">G-MO</p>
           <p class="barber-bio">Style that speaks before you do.</p>
           <div class="cta-row">
@@ -595,7 +695,7 @@
           </div>
         </article>
 
-        <article class="barber-card">
+        <article class="barber-card reveal">
           <p class="barber-name">DESHAUN</p>
           <p class="barber-bio">Sharp fades. Chill vibes.</p>
           <div class="cta-row">
@@ -603,7 +703,7 @@
           </div>
         </article>
 
-        <article class="barber-card">
+        <article class="barber-card reveal">
           <p class="barber-name">CA$H</p>
           <p class="barber-bio">Quick with the clippers, real with the results.</p>
           <div class="cta-row">
@@ -611,7 +711,7 @@
           </div>
         </article>
 
-        <article class="barber-card">
+        <article class="barber-card reveal">
           <p class="barber-name">JONNY</p>
           <p class="barber-bio">Where art meets the edge.</p>
           <div class="cta-row">
@@ -619,7 +719,7 @@
           </div>
         </article>
 
-        <article class="barber-card">
+        <article class="barber-card reveal">
           <p class="barber-name">TAYLOR</p>
           <p class="barber-bio">Clean blends, subtle structure, quiet precision.</p>
           <div class="cta-row">
@@ -638,20 +738,20 @@
         Consistent work, good energy, no nonsense. Rated over 4★ with 100+ reviews. People drive in just for the cut.
       </p>
 
-      <div class="reviews-grid">
-        <div class="review-card">
+      <div class="reviews-grid reveal-group">
+        <div class="review-card reveal">
           <div class="review-stars">★★★★★</div>
           <p class="review-text">“When you go in ask for Ca$h. She is on point each and every time. Highly recommended.”</p>
           <div class="review-author">– Anthony V.</div>
         </div>
 
-        <div class="review-card">
+        <div class="review-card reveal">
           <div class="review-stars">★★★★★</div>
           <p class="review-text">“Everyone in here is so chill and down to earth. They do a fantastic job. My boys are always begging to go.”</p>
           <div class="review-author">– Stephanie A.</div>
         </div>
 
-        <div class="review-card">
+        <div class="review-card reveal">
           <div class="review-stars">★★★★★</div>
           <p class="review-text">“Fantastic job for my 15-year-old son — low taper, super clean. He loves the vibe. They’re welcoming.”</p>
           <div class="review-author">– Stacie B.</div>
@@ -668,68 +768,68 @@
         Straightforward pricing. Detailed / trending styles may cost more depending on design and time.
       </p>
 
-      <div class="services-grid">
-        <div class="service-card">
+      <div class="services-grid reveal-group">
+        <div class="service-card reveal">
           <div class="service-head"><span>💈 MILITARY / FIRST RESPONDER</span><span class="price-chip">$28</span></div>
           <span class="service-desc">Discounted cut for active military, veterans, police, firefighters, EMTs & first responders.</span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-head"><span>💇‍♂️ HAIRCUT (STANDARD)</span><span class="price-chip">$35</span></div>
           <span class="service-desc">Classic or trending — fades, tapers, or scissor work. <em>Detailed styles:</em> $40–$50+ depending on design / time.</span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-head"><span>🧔 HAIRCUT + BEARD</span><span class="price-chip">$40</span></div>
           <span class="service-desc">Full cut plus beard trim / line-up for a sharp, balanced look.</span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-head"><span>🪒 SKIN FADE / TAPER</span><span class="price-chip">$40</span></div>
           <span class="service-desc">Down to the skin with foil shaver or razor for a clean finish.</span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-head"><span>🪒🧔 SKIN FADE / TAPER + BEARD</span><span class="price-chip">$45</span></div>
           <span class="service-desc">Skin-level fade / taper plus full beard lineup.</span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-head"><span>🧴 SHAMPOO SERVICE</span><span class="price-chip">$15</span></div>
           <span class="service-desc">Treat yourself — cleanse, set, relax.</span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-head"><span>✂️ LONG HAIR (PAST SHOULDERS)</span><span class="price-chip">$35</span></div>
           <span class="service-desc">Extra time & detail for longer lengths.</span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-head"><span>🧔‍♂️ BEARD TRIM / LINE UP</span><span class="price-chip">$25</span></div>
           <span class="service-desc">Clean edges, even bulk, crisp shape.</span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-head"><span>🧼 FACE SHAVE</span><span class="price-chip">$25</span></div>
           <span class="service-desc">Hot towel, lather, and smooth finish.</span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-head"><span>📏 LINE UP ONLY</span><span class="price-chip">$15</span></div>
           <span class="service-desc">Edges only. <em>Beard not included.</em></span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-head"><span>🎨 DESIGN ONLY</span><span class="price-chip">$10</span></div>
           <span class="service-desc">Add a freestyle design or bring a reference.</span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-head"><span>🌀 PERM SERVICE</span><span class="price-chip">$90+</span></div>
           <span class="service-desc">Beachy waves to tighter curls — premium products for lasting results.</span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal">
           <div class="service-head"><span>🪒 HEAD SHAVE</span><span class="price-chip">$35</span></div>
           <span class="service-desc">Clean and polished dome with hot towel finish.</span>
         </div>
@@ -790,17 +890,32 @@
   </footer>
 
   <script>
-    // Fade / slide reveal on scroll
-    const io=new IntersectionObserver((entries)=>{
+    // Fade / slide / blur reveal for whole sections
+    const sectionObserver=new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
         if(e.isIntersecting){
           e.target.classList.add('visible');
-          io.unobserve(e.target);
+          sectionObserver.unobserve(e.target);
         }
       });
     },{threshold:.15});
+    document.querySelectorAll('section').forEach(s=>sectionObserver.observe(s));
 
-    document.querySelectorAll('section').forEach(s=>io.observe(s));
+    // Staggered reveal for card groups (barbers, services, reviews)
+    const groupObserver=new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const kids=[...entry.target.querySelectorAll('.reveal')];
+          kids.forEach((el,i)=>{
+            setTimeout(()=>{
+              el.classList.add('show');
+            }, i*80);
+          });
+          groupObserver.unobserve(entry.target);
+        }
+      });
+    },{threshold:.2});
+    document.querySelectorAll('.reveal-group').forEach(g=>groupObserver.observe(g));
   </script>
 </body>
 </html>
