@@ -4,252 +4,802 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Next Level BarberShop</title>
-  <meta name="description" content="Real cuts, real style. Book with Jonny, Ca$h & more today." />
+
+  <meta name="description" content="Real cuts, sharp fades, and a clean vibe. Book with Vincent, Ca$h, Jonny, Taylor & more." />
   <meta property="og:title" content="Next Level BarberShop" />
-  <meta property="og:description" content="Professional cuts, sharp fades, and a clean vibe in Albuquerque." />
+  <meta property="og:description" content="Locally owned. Walk-ins welcome. Appointments preferred. Right next to Bob's Burgers." />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/png" href="favicon.png" />
+
   <style>
-    :root{
-      --bg: #0b0b0d; --bg-grad-1:#1f1147; --bg-grad-2:#083344;
-      --card:#121216; --text:#f5f6f7; --muted:#a5a7ac;
-      --brand:#7c3aed; --brand-2:#22d3ee; --ring:rgba(124,58,237,.35);
-      --border:rgba(255,255,255,.10); --chip:rgba(255,255,255,.10);
-      --translucent:rgba(12,12,16,.55); --shadow:rgba(0,0,0,.35);
+    /* =========================
+       THEME TOKENS (DARK/LIGHT)
+       ========================= */
+    :root {
+      --bg: #0b0b0d;
+      --bg-grad-1:#1f1147;
+      --bg-grad-2:#083344;
+
+      --panel:#121216;
+      --panel-alt:#1a1a22;
+
+      --text-primary:#f5f6f7;
+      --text-dim:#a5a7ac;
+
+      --accent-1:#7c3aed;
+      --accent-2:#22d3ee;
+
+      --border:rgba(255,255,255,.12);
+      --border-subtle:rgba(255,255,255,.06);
+      --chip-bg:rgba(255,255,255,.08);
+      --header-bg:rgba(12,12,16,.6);
+
+      --shadow-card:0 24px 44px rgba(0,0,0,.6);
+
+      --band-accent1: rgba(124,58,237,.18);
+      --band-accent2: rgba(34,211,238,.12);
     }
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg:#f7f7fb; --bg-grad-1:#e0e7ff; --bg-grad-2:#cffafe;
-        --card:#ffffff; --text:#0f172a; --muted:#4b5563;
-        --border:rgba(15,23,42,.12); --chip:rgba(15,23,42,.06);
-        --translucent:rgba(255,255,255,.78); --shadow:rgba(2,6,23,.15);
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg:#f7f7fb;
+        --bg-grad-1:#e0e7ff;
+        --bg-grad-2:#cffafe;
+
+        --panel:#ffffff;
+        --panel-alt:#ffffff;
+
+        --text-primary:#0f172a;
+        --text-dim:#4b5563;
+
+        --accent-1:#7c3aed;
+        --accent-2:#06b6d4;
+
+        --border:rgba(15,23,42,.14);
+        --border-subtle:rgba(15,23,42,.06);
+        --chip-bg:rgba(15,23,42,.07);
+        --header-bg:rgba(255,255,255,.8);
+
+        --shadow-card:0 24px 44px rgba(2,6,23,.12);
+
+        --band-accent1: rgba(124,58,237,.08);
+        --band-accent2: rgba(6,182,212,.07);
       }
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
+
+    /* =========================
+       BASE / RESET
+       ========================= */
+    * {
+      box-sizing:border-box;
+      -webkit-font-smoothing:antialiased;
+    }
+    html, body { height:100%; }
+    html { scroll-behavior:smooth; }
+    body {
       margin:0;
       font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
       background:
         radial-gradient(1200px 800px at 10% -10%,var(--bg-grad-1) 0%,transparent 40%),
         radial-gradient(1000px 600px at 110% 10%,var(--bg-grad-2) 0%,transparent 45%),
         var(--bg);
-      color:var(--text);
-      line-height:1.55
+      color:var(--text-primary);
+      line-height:1.55;
     }
-    a{color:inherit}
-    img{max-width:100%;display:block}
-    header{
-      position:sticky;top:0;z-index:30;
-      background:var(--translucent);
-      backdrop-filter:saturate(1.1) blur(8px);
-      border-bottom:1px solid var(--border)
+    a { color:inherit; text-decoration:none; }
+    img { max-width:100%; display:block; }
+
+    .wrap {
+      max-width:1120px;
+      margin:auto;
+      padding:0 20px;
     }
-    .wrap{max-width:1120px;margin:auto;padding:14px 20px}
-    .nav{display:flex;align-items:center;gap:18px}
-    h1{margin:0;font-size:clamp(18px,2vw,22px);letter-spacing:.08em}
-    nav{margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
-    nav a{font-size:13.5px;text-decoration:none;padding:8px 10px;border-radius:10px;opacity:.92}
-    nav a:hover{background:var(--chip)}
-    section{max-width:1120px;margin:0 auto;padding:64px 20px;opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease}
-    section.visible{opacity:1;transform:none}
-    .section-title{margin:0 0 22px;text-transform:uppercase;font-weight:900;letter-spacing:.08em;line-height:1.1; font-size:clamp(28px,2.6vw + 6px,44px)}
-    .section-title .accent{background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;color:transparent}
-    #home{padding-top:84px;text-align:center}
-    #home h2{margin:0 0 12px;text-transform:uppercase;font-weight:900;letter-spacing:.06em;font-size:clamp(34px,3.2vw + 10px,60px);}
-    #home .accent{background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;color:transparent}
-    #home p{color:var(--muted);max-width:740px;margin:0 auto}
-    .barber-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-    .barber-card{
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border:1px solid var(--border);border-radius:18px;padding:18px;
-      display:flex;flex-direction:column;gap:8px;
-      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease
+
+    section {
+      max-width:1120px;
+      margin:0 auto;
+      padding:72px 20px;
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity .6s ease, transform .6s ease;
+      scroll-margin-top:90px; /* fixes sticky-header anchor cutoff */
     }
-    .barber-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px var(--shadow);border-color:var(--ring)}
-    .barber-name{font-weight:800;letter-spacing:.06em;margin:2px 0 2px}
-    .barber-bio{color:var(--muted);font-size:14px}
-    .cta-row{margin-top:10px;display:flex;gap:10px}
-    .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;border-radius:12px;padding:10px 14px}
-    .btn.primary{background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff}
-    .btn.ghost{border:1px solid var(--border);color:var(--text)}
-    #services .services-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
-    .service-item{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 16px 18px;transition:transform .25s ease,border-color .25s ease, box-shadow .25s ease}
-    .service-item:hover{transform:translateY(-3px);border-color:var(--ring);box-shadow:0 8px 28px var(--shadow)}
-    .service-title{display:flex;justify-content:space-between;gap:8px;align-items:center;font-weight:800}
-    .price{font-weight:900;background:var(--chip);padding:6px 10px;border-radius:999px}
-    .sub{display:block;color:var(--muted);font-size:14px;margin-top:6px}
-    .hours-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;color:#e6e7ec}
-    @media (prefers-color-scheme: light){ .hours-list{color:#1f2937} }
-    .hours-list li{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 12px}
-    .after-hours-note{margin-top:12px;color:var(--muted);font-weight:700}
-    iframe{border-radius:16px;border:1px solid var(--border)}
+    section.visible {
+      opacity:1;
+      transform:none;
+    }
+
+    /* subtle banded background used on some sections */
+    section.band {
+      background:
+        radial-gradient(800px 400px at 20% 0%,var(--band-accent1) 0%,transparent 70%),
+        radial-gradient(800px 400px at 80% 100%,var(--band-accent2) 0%,transparent 70%);
+      border-top:1px solid var(--border-subtle);
+      border-bottom:1px solid var(--border-subtle);
+    }
+
+    /* =========================
+       HEADER / NAV
+       ========================= */
+    header {
+      position:sticky;
+      top:0;
+      z-index:40;
+      background:var(--header-bg);
+      backdrop-filter:saturate(1.2) blur(8px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .nav-row {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 20px;
+    }
+
+    .brand {
+      font-size:clamp(18px,2vw,22px);
+      font-weight:600;
+      letter-spacing:.08em;
+      color:var(--text-primary);
+      white-space:nowrap;
+    }
+
+    .header-cta {
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .call-mobile {
+      display:none;
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      color:#fff;
+      font-size:13px;
+      font-weight:600;
+      padding:8px 10px;
+      border-radius:10px;
+      line-height:1.2;
+      white-space:nowrap;
+    }
+
+    nav.primary-nav {
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    nav.primary-nav a {
+      font-size:13px;
+      line-height:1;
+      font-weight:500;
+      padding:8px 10px;
+      border-radius:10px;
+      color:var(--text-primary);
+      background:transparent;
+      border:1px solid transparent;
+      transition:all .18s ease;
+    }
+
+    nav.primary-nav a:hover,
+    nav.primary-nav a:focus {
+      background:var(--chip-bg);
+      border-color:var(--border);
+    }
+
     @media (max-width:640px){
-      nav{display:none}
-      #home{padding-top:70px}
-      .barber-gallery{grid-template-columns:1fr}
-      #services .services-list{grid-template-columns:1fr}
-      .btn{padding:12px 16px}
+      nav.primary-nav { display:none; }
+      .call-mobile { display:inline-flex; }
     }
+
+    /* =========================
+       TITLES / HEADERS
+       ========================= */
+    .section-title {
+      margin:0 0 28px;
+      text-transform:uppercase;
+      font-weight:900;
+      letter-spacing:.08em;
+      line-height:1.1;
+      font-size:clamp(28px,2.4vw + 8px,44px);
+      color:var(--text-primary);
+      display:flex;
+      flex-wrap:wrap;
+      row-gap:.4em;
+      column-gap:.4em;
+    }
+
+    .gradient-accent {
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    .section-lead {
+      max-width:740px;
+      margin:0 0 16px;
+      color:var(--text-dim);
+      font-size:15px;
+      line-height:1.5;
+    }
+
+    /* =========================
+       HERO BADGES
+       ========================= */
+    .badges-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:20px;
+    }
+    .badge-pill {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 12px;
+      font-size:12px;
+      font-weight:600;
+      line-height:1.2;
+      border-radius:999px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      color:var(--text-primary);
+      box-shadow:0 10px 20px rgba(0,0,0,.4);
+    }
+    .badge-pill.gradient {
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      border:0;
+      color:#fff;
+      box-shadow:0 15px 30px rgba(0,0,0,.6);
+    }
+
+    /* =========================
+       BARBER CARDS
+       ========================= */
+    .barber-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:16px;
+    }
+
+    .barber-card {
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px 18px 20px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      box-shadow:0 8px 28px rgba(0,0,0,.45);
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+    .barber-card:hover {
+      transform:translateY(-3px) scale(1.01);
+      border-color:var(--accent-1);
+      box-shadow:var(--shadow-card);
+    }
+
+    .barber-name {
+      font-weight:800;
+      font-size:14px;
+      letter-spacing:.06em;
+      color:var(--text-primary);
+      margin:2px 0 2px;
+    }
+
+    .barber-bio {
+      color:var(--text-dim);
+      font-size:14px;
+      line-height:1.4;
+    }
+
+    .cta-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      text-decoration:none;
+      font-weight:700;
+      border-radius:12px;
+      padding:10px 14px;
+      font-size:14px;
+      line-height:1.2;
+      min-width:max-content;
+      border:1px solid transparent;
+    }
+
+    .btn-primary {
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      color:#fff;
+    }
+
+    .btn-outline {
+      background:transparent;
+      color:var(--text-primary);
+      border:1px solid var(--border);
+      background-color:rgba(0,0,0,.15);
+    }
+
+    /* =========================
+       REVIEWS / SOCIAL PROOF
+       ========================= */
+    .reviews-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:16px;
+    }
+
+    .review-card {
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px 18px 18px;
+      box-shadow:0 8px 28px rgba(0,0,0,.45);
+      position:relative;
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+    .review-card:hover {
+      transform:translateY(-3px) scale(1.01);
+      border-color:var(--accent-1);
+      box-shadow:var(--shadow-card);
+    }
+
+    .review-stars {
+      font-size:13px;
+      font-weight:700;
+      color:#ffd95a;
+      margin-bottom:8px;
+    }
+    .review-text {
+      color:var(--text-primary);
+      font-size:14px;
+      line-height:1.5;
+      margin:0 0 10px;
+    }
+    .review-author {
+      font-size:12px;
+      font-weight:600;
+      color:var(--text-dim);
+    }
+
+    /* =========================
+       SERVICES GRID
+       ========================= */
+    .services-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:16px;
+    }
+
+    .service-card {
+      background:var(--panel-alt);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px 16px 18px;
+      box-shadow:0 8px 28px rgba(0,0,0,.45);
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+    .service-card:hover {
+      transform:translateY(-3px) scale(1.01);
+      box-shadow:var(--shadow-card);
+      border-color:var(--accent-1);
+    }
+
+    .service-head {
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      flex-wrap:nowrap;
+      gap:8px;
+      font-weight:800;
+      color:var(--text-primary);
+      font-size:14px;
+      line-height:1.4;
+      letter-spacing:.03em;
+    }
+
+    .price-chip {
+      background:var(--chip-bg);
+      border-radius:999px;
+      padding:6px 10px;
+      font-weight:900;
+      font-size:13px;
+      line-height:1;
+      color:var(--text-primary);
+      border:1px solid var(--border);
+      white-space:nowrap;
+    }
+
+    .service-desc {
+      display:block;
+      margin-top:8px;
+      color:var(--text-dim);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    /* =========================
+       HOURS GRID
+       ========================= */
+    .hours-grid {
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:10px;
+    }
+
+    .hours-item {
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:13px;
+      font-weight:500;
+      color:var(--text-primary);
+      line-height:1.4;
+      display:flex;
+      align-items:center;
+      min-height:44px;
+    }
+
+    .after-hours {
+      margin-top:14px;
+      font-size:13px;
+      font-weight:600;
+      color:var(--text-dim);
+    }
+
+    /* =========================
+       CONTACT / MAP
+       ========================= */
+    .contact-block {
+      font-size:14px;
+      line-height:1.5;
+      color:var(--text-primary);
+    }
+    .contact-block a {
+      text-decoration:underline;
+    }
+
+    .map-frame {
+      width:100%;
+      height:400px;
+      border-radius:16px;
+      border:1px solid var(--border);
+    }
+
+    .landmark-note {
+      margin-top:12px;
+      font-size:13px;
+      font-weight:600;
+      color:var(--text-dim);
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+    footer {
+      border-top:1px solid var(--border);
+      color:var(--text-dim);
+      font-size:13px;
+      text-align:center;
+      padding:32px 20px;
+      margin-top:48px;
+    }
+
+    /* =========================
+       RESPONSIVE TWEAKS
+       ========================= */
+    @media (max-width:640px){
+      section {
+        padding:60px 20px;
+      }
+      .barber-grid { grid-template-columns:1fr; }
+      .services-grid { grid-template-columns:1fr; }
+      .reviews-grid { grid-template-columns:1fr; }
+      .section-lead { font-size:14px; }
+      .nav-row { padding-left:16px; padding-right:16px; }
+      .badges-row { gap:8px; }
+      .badge-pill { font-size:12px; padding:8px 12px; }
+    }
+
+    /* =========================
+       REDUCED MOTION
+       ========================= */
     @media (prefers-reduced-motion:reduce){
-      section{opacity:1;transform:none}
-      .barber-card,.service-item{transition:none}
+      section { opacity:1; transform:none; transition:none; }
+      .barber-card,.service-card,.review-card { transition:none; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ===== HEADER ===== -->
   <header>
-    <div class="wrap nav">
-      <h1>Next Level BarberShop</h1>
-      <nav aria-label="Primary">
-        <a href="#home">Home</a>
-        <a href="#gallery">Our Barbers</a>
-        <a href="#services">Services</a>
-        <a href="#hours">Hours</a>
-        <a href="#contact">Contact</a>
-        <a href="#location">Location</a>
-      </nav>
+    <div class="wrap nav-row">
+      <div class="brand">Next Level BarberShop</div>
+
+      <div class="header-cta">
+        <a class="call-mobile" href="tel:+15055036216">📞 (505) 503-6216</a>
+
+        <nav class="primary-nav" aria-label="Main">
+          <a href="#home">HOME</a>
+          <a href="#barbers">OUR BARBERS</a>
+          <a href="#reviews">REVIEWS</a>
+          <a href="#services">SERVICES</a>
+          <a href="#hours">HOURS</a>
+          <a href="#contact">CONTACT</a>
+          <a href="#location">LOCATION</a>
+        </nav>
+      </div>
     </div>
   </header>
 
-  <section id="home">
-    <h2 class="section-title"><span class="accent">Welcome</span> to Next Level BarberShop</h2>
-    <p>Professional cuts, sharp fades, and a clean vibe. Step up your look at the Next Level.</p>
-  </section>
+  <!-- ===== HERO ===== -->
+  <section id="home" class="band">
+    <div class="wrap">
+      <h2 class="section-title">
+        <span class="gradient-accent">Welcome</span>
+        to Next Level BarberShop
+      </h2>
 
-  <section id="gallery">
-    <h3 class="section-title">Our Barbers</h3>
-    <div class="barber-gallery">
-      <article class="barber-card">
-        <p class="barber-name">VINCENT (OWNER)</p>
-        <p class="barber-bio">Founder. Fader. Visionary.</p>
-        <div class="cta-row"><a class="btn ghost" href="tel:+15055036216">📞 Call to Book</a></div>
-      </article>
-      <article class="barber-card">
-        <p class="barber-name">ZWALUW</p>
-        <p class="barber-bio">Precision in every pass.</p>
-        <div class="cta-row"><a class="btn ghost" href="tel:+15055036216">📞 Call to Book</a></div>
-      </article>
-      <article class="barber-card">
-        <p class="barber-name">G-MO</p>
-        <p class="barber-bio">Style that speaks before you do.</p>
-        <div class="cta-row"><a class="btn ghost" href="tel:+15055036216">📞 Call to Book</a></div>
-      </article>
-      <article class="barber-card">
-        <p class="barber-name">DESHAUN</p>
-        <p class="barber-bio">Sharp fades. Chill vibes.</p>
-        <div class="cta-row"><a class="btn ghost" href="tel:+15055036216">📞 Call to Book</a></div>
-      </article>
-      <article class="barber-card">
-        <p class="barber-name">CA$H</p>
-        <p class="barber-bio">Quick with the clippers, real with the results.</p>
-        <div class="cta-row"><a class="btn primary" href="https://booksy.com/en-us/dl/show-business/1346592?utm_medium=c2c_referral" target="_blank" rel="noopener">Book w/ Ca$h</a></div>
-      </article>
-      <article class="barber-card">
-        <p class="barber-name">JONNY</p>
-        <p class="barber-bio">Where art meets the edge.</p>
-        <div class="cta-row"><a class="btn primary" href="https://linktr.ee/TBJONNY" target="_blank" rel="noopener">Book w/ Jonny</a></div>
-      </article>
-    
-      <article class="barber-card">
-        <p class="barber-name">TAYLOR</p>
-        <p class="barber-bio">Clean blends, subtle structure, quiet precision.</p>
-        <div class="cta-row"><a class="btn primary" href="https://booksy.com/en-us/dl/show-business/1592260" target="_blank" rel="noopener">Book w/ Taylor</a></div>
-      </article>
-</div>
-  </section>
+      <p class="section-lead">
+        Professional cuts, sharp fades, and a clean vibe. Locally owned. Walk-ins welcome. Appointments preferred.
+      </p>
 
-  <section id="services">
-    <h3 class="section-title">Our Services</h3>
-    <div class="services-list">
-      <div class="service-item">
-        <div class="service-title"><span>💈 MILITARY / FIRST RESPONDER</span><span class="price">$28</span></div>
-        <span class="sub">Discounted cut for active military, veterans, police, firefighters, EMTs & first responders.</span>
-      </div>
-      <div class="service-item">
-        <div class="service-title"><span>💇‍♂️ HAIRCUT (STANDARD)</span><span class="price">$35</span></div>
-        <span class="sub">Classic or trending — fades, tapers, or scissor work. <em>Detailed styles:</em> $40–$50+ depending on design/time.</span>
-      </div>
-      <div class="service-item">
-        <div class="service-title"><span>🧔 HAIRCUT + BEARD</span><span class="price">$40</span></div>
-        <span class="sub">Full cut plus beard trim/line-up for a sharp, balanced look.</span>
-      </div>
-      <div class="service-item">
-        <div class="service-title"><span>🪒 SKIN FADE / TAPER</span><span class="price">$40</span></div>
-        <span class="sub">Down to the skin with foil shaver or razor for a clean finish.</span>
-      </div>
-      <div class="service-item">
-        <div class="service-title"><span>🪒🧔 SKIN FADE / TAPER + BEARD</span><span class="price">$45</span></div>
-        <span class="sub">Skin-level fade/taper plus full beard lineup.</span>
-      </div>
-      <div class="service-item">
-        <div class="service-title"><span>🧴 SHAMPOO SERVICE</span><span class="price">$15</span></div>
-        <span class="sub">Treat yourself — cleanse, set, relax.</span>
-      </div>
-      <div class="service-item">
-        <div class="service-title"><span>✂️ LONG HAIR (PAST SHOULDERS)</span><span class="price">$35</span></div>
-        <span class="sub">Extra time & detail for longer lengths.</span>
-      </div>
-      <div class="service-item">
-        <div class="service-title"><span>🧔‍♂️ BEARD TRIM / LINE UP</span><span class="price">$25</span></div>
-        <span class="sub">Clean edges, even bulk, crisp shape.</span>
-      </div>
-      <div class="service-item">
-        <div class="service-title"><span>🧼 FACE SHAVE</span><span class="price">$25</span></div>
-        <span class="sub">Hot towel, lather, and smooth finish.</span>
-      </div>
-      <div class="service-item">
-        <div class="service-title"><span>📏 LINE UP ONLY</span><span class="price">$15</span></div>
-        <span class="sub">Edges only. <em>Beard not included.</em></span>
-      </div>
-      <div class="service-item">
-        <div class="service-title"><span>🎨 DESIGN ONLY</span><span class="price">$10</span></div>
-        <span class="sub">Add a freestyle design or bring a reference.</span>
-      </div>
-      <div class="service-item">
-        <div class="service-title"><span>🌀 PERM SERVICE</span><span class="price">$90+</span></div>
-        <span class="sub">Beachy waves to tighter curls — premium products for lasting results.</span>
-      </div>
-      <div class="service-item">
-        <div class="service-title"><span>🪒 HEAD SHAVE</span><span class="price">$35</span></div>
-        <span class="sub">Clean and polished dome with hot towel finish.</span>
+      <div class="badges-row">
+        <div class="badge-pill gradient">Locally Owned</div>
+        <div class="badge-pill">Walk-Ins Welcome</div>
+        <div class="badge-pill">Appointments Preferred</div>
       </div>
     </div>
   </section>
 
-  <section id="hours">
-    <h3 class="section-title">Business Hours</h3>
-    <ul class="hours-list">
-      <li>SUNDAY : 9:00am – 4:00pm</li>
-      <li>MONDAY : 9:00am – 4:00pm</li>
-      <li>TUESDAY : 8:30am – 5:30pm</li>
-      <li>WEDNESDAY : 8:30am – 5:30pm</li>
-      <li>THURSDAY : 8:30am – 5:30pm</li>
-      <li>FRIDAY : 8:30am – 5:30pm</li>
-      <li>SATURDAY : 8:30am – 5:30pm</li>
-    </ul>
-    <p class="after-hours-note">NO ADDITIONAL CHARGE AFTER HOURS!</p>
+  <!-- ===== BARBERS ===== -->
+  <section id="barbers">
+    <div class="wrap">
+      <h2 class="section-title">Our Barbers</h2>
+      <p class="section-lead">Book directly with your barber or call the shop. Real craft, no gimmicks.</p>
+
+      <div class="barber-grid">
+        <article class="barber-card">
+          <p class="barber-name">VINCENT (OWNER)</p>
+          <p class="barber-bio">Founder. Fader. Visionary.</p>
+          <div class="cta-row">
+            <a class="btn btn-outline" href="tel:+15055036216">📞 Call to Book</a>
+          </div>
+        </article>
+
+        <article class="barber-card">
+          <p class="barber-name">ZWALUW</p>
+          <p class="barber-bio">Precision in every pass.</p>
+          <div class="cta-row">
+            <a class="btn btn-outline" href="tel:+15055036216">📞 Call to Book</a>
+          </div>
+        </article>
+
+        <article class="barber-card">
+          <p class="barber-name">G-MO</p>
+          <p class="barber-bio">Style that speaks before you do.</p>
+          <div class="cta-row">
+            <a class="btn btn-outline" href="tel:+15055036216">📞 Call to Book</a>
+          </div>
+        </article>
+
+        <article class="barber-card">
+          <p class="barber-name">DESHAUN</p>
+          <p class="barber-bio">Sharp fades. Chill vibes.</p>
+          <div class="cta-row">
+            <a class="btn btn-outline" href="tel:+15055036216">📞 Call to Book</a>
+          </div>
+        </article>
+
+        <article class="barber-card">
+          <p class="barber-name">CA$H</p>
+          <p class="barber-bio">Quick with the clippers, real with the results.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://booksy.com/en-us/dl/show-business/1346592?utm_medium=c2c_referral" target="_blank" rel="noopener">Book w/ Ca$h</a>
+          </div>
+        </article>
+
+        <article class="barber-card">
+          <p class="barber-name">JONNY</p>
+          <p class="barber-bio">Where art meets the edge.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://linktr.ee/TBJONNY" target="_blank" rel="noopener">Book w/ Jonny</a>
+          </div>
+        </article>
+
+        <article class="barber-card">
+          <p class="barber-name">TAYLOR</p>
+          <p class="barber-bio">Clean blends, subtle structure, quiet precision.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://booksy.com/en-us/dl/show-business/1592260" target="_blank" rel="noopener">Book w/ Taylor</a>
+          </div>
+        </article>
+      </div>
+    </div>
   </section>
 
+  <!-- ===== REVIEWS / SOCIAL PROOF ===== -->
+  <section id="reviews" class="band">
+    <div class="wrap">
+      <h2 class="section-title">What People Are Saying</h2>
+      <p class="section-lead">
+        Consistent work, good energy, no nonsense. Rated over 4★ with 100+ reviews. People drive in just for the cut.
+      </p>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">“When you go in ask for Ca$h. She is on point each and every time. Highly recommended.”</p>
+          <div class="review-author">– Anthony V.</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">“Everyone in here is so chill and down to earth. They do a fantastic job. My boys are always begging to go.”</p>
+          <div class="review-author">– Stephanie A.</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">“Fantastic job for my 15-year-old son — low taper, super clean. He loves the vibe. They’re welcoming.”</p>
+          <div class="review-author">– Stacie B.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section id="services">
+    <div class="wrap">
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-lead">
+        Straightforward pricing. Detailed / trending styles may cost more depending on design and time.
+      </p>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-head"><span>💈 MILITARY / FIRST RESPONDER</span><span class="price-chip">$28</span></div>
+          <span class="service-desc">Discounted cut for active military, veterans, police, firefighters, EMTs & first responders.</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head"><span>💇‍♂️ HAIRCUT (STANDARD)</span><span class="price-chip">$35</span></div>
+          <span class="service-desc">Classic or trending — fades, tapers, or scissor work. <em>Detailed styles:</em> $40–$50+ depending on design / time.</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head"><span>🧔 HAIRCUT + BEARD</span><span class="price-chip">$40</span></div>
+          <span class="service-desc">Full cut plus beard trim / line-up for a sharp, balanced look.</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head"><span>🪒 SKIN FADE / TAPER</span><span class="price-chip">$40</span></div>
+          <span class="service-desc">Down to the skin with foil shaver or razor for a clean finish.</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head"><span>🪒🧔 SKIN FADE / TAPER + BEARD</span><span class="price-chip">$45</span></div>
+          <span class="service-desc">Skin-level fade / taper plus full beard lineup.</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head"><span>🧴 SHAMPOO SERVICE</span><span class="price-chip">$15</span></div>
+          <span class="service-desc">Treat yourself — cleanse, set, relax.</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head"><span>✂️ LONG HAIR (PAST SHOULDERS)</span><span class="price-chip">$35</span></div>
+          <span class="service-desc">Extra time & detail for longer lengths.</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head"><span>🧔‍♂️ BEARD TRIM / LINE UP</span><span class="price-chip">$25</span></div>
+          <span class="service-desc">Clean edges, even bulk, crisp shape.</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head"><span>🧼 FACE SHAVE</span><span class="price-chip">$25</span></div>
+          <span class="service-desc">Hot towel, lather, and smooth finish.</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head"><span>📏 LINE UP ONLY</span><span class="price-chip">$15</span></div>
+          <span class="service-desc">Edges only. <em>Beard not included.</em></span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head"><span>🎨 DESIGN ONLY</span><span class="price-chip">$10</span></div>
+          <span class="service-desc">Add a freestyle design or bring a reference.</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head"><span>🌀 PERM SERVICE</span><span class="price-chip">$90+</span></div>
+          <span class="service-desc">Beachy waves to tighter curls — premium products for lasting results.</span>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head"><span>🪒 HEAD SHAVE</span><span class="price-chip">$35</span></div>
+          <span class="service-desc">Clean and polished dome with hot towel finish.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOURS ===== -->
+  <section id="hours" class="band">
+    <div class="wrap">
+      <h2 class="section-title">Business Hours</h2>
+      <p class="section-lead">Walk-ins welcome. Appointments preferred. No extra charge after hours.</p>
+
+      <ul class="hours-grid">
+        <li class="hours-item">SUNDAY : 9:00am – 4:00pm</li>
+        <li class="hours-item">MONDAY : 9:00am – 4:00pm</li>
+        <li class="hours-item">TUESDAY : 8:30am – 5:30pm</li>
+        <li class="hours-item">WEDNESDAY : 8:30am – 5:30pm</li>
+        <li class="hours-item">THURSDAY : 8:30am – 5:30pm</li>
+        <li class="hours-item">FRIDAY : 8:30am – 5:30pm</li>
+        <li class="hours-item">SATURDAY : 8:30am – 5:30pm</li>
+      </ul>
+
+      <p class="after-hours">NO ADDITIONAL CHARGE AFTER HOURS!</p>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
   <section id="contact">
-    <h3 class="section-title">Contact</h3>
-    <p>📍 <a href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114" target="_blank" rel="noopener">6510 Paradise Blvd NW Unit D, Albuquerque, NM 87114</a></p>
-    <p>📞 <a href="tel:+15055036216">(505) 503-6216</a></p>
+    <div class="wrap">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-block">
+        <p>📍 <a href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114" target="_blank" rel="noopener">6510 Paradise Blvd NW Unit D, Albuquerque, NM 87114</a></p>
+        <p>📞 <a href="tel:+15055036216">(505) 503-6216</a></p>
+      </div>
+    </div>
   </section>
 
-  <section id="location">
-    <h3 class="section-title">Find Us</h3>
-    <iframe src="https://maps.google.com/maps?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="420" loading="lazy"></iframe>
+  <!-- ===== LOCATION / MAP ===== -->
+  <section id="location" class="band">
+    <div class="wrap">
+      <h2 class="section-title">Find Us</h2>
+
+      <iframe class="map-frame"
+        src="https://maps.google.com/maps?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114&t=&z=15&ie=UTF8&iwloc=&output=embed"
+        loading="lazy"
+        allowfullscreen
+        title="Map to Next Level BarberShop">
+      </iframe>
+
+      <p class="landmark-note">We’re right next to Bob’s Burgers. Plenty of parking in front.</p>
+    </div>
   </section>
 
-  <footer class="wrap" style="text-align:center;padding:28px 0;color:rgba(255,255,255,.6);border-top:1px solid var(--border)">
+  <!-- ===== FOOTER ===== -->
+  <footer>
     © 2025 Next Level BarberShop
   </footer>
 
   <script>
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target);} });
+    // Fade / slide reveal on scroll
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
     },{threshold:.15});
+
     document.querySelectorAll('section').forEach(s=>io.observe(s));
   </script>
 </body>
