@@ -2,1187 +2,1470 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Next Level Barbershop</title>
-  <meta name="description" content="Next Level Barbershop. Professional cuts, sharp fades, clean vibe. Walk-ins welcome. Appointments preferred." />
-
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Next Level Barbershop | Albuquerque, NM</title>
   <style>
+    /* ---------------------------
+       THEME TOKENS (Dark / Light)
+    ----------------------------*/
     :root {
-      --acc-start: #6c4dff;
-      --acc-end: #4dd0ff;
-      --acc-mid: #8ab4ff;
-
       --radius-lg: 20px;
       --radius-md: 14px;
-      --radius-sm: 10px;
-
-      --header-glow: 0 0 25px rgba(109,76,255,0.6), 0 0 60px rgba(77,208,255,0.25);
-      --card-glow-dark: 0 30px 80px rgba(0,0,0,0.8),0 0 60px rgba(109,76,255,0.28);
-      --card-glow-light: 0 30px 80px rgba(0,0,0,0.07),0 0 60px rgba(109,76,255,0.18);
-
-      --transition-fast: .18s ease;
-      --transition-med: .28s cubic-bezier(.16,1,.3,1);
-
-      --max-width: 1200px;
-      --section-gap: clamp(2rem,2vw,3rem);
-      --page-pad: clamp(1rem,2vw,2rem);
+      --radius-pill: 999px;
+      --header-height-mobile: 64px;
+      --header-height-desktop: 110px;
+      --transition-fast: 0.18s ease;
+      --transition-med: 0.28s ease;
+      --transition-slow: 0.45s ease;
     }
 
-    /* DARK THEME DEFAULT */
+    /* Default theme = dark */
     [data-theme="dark"] {
-      --bg-base: radial-gradient(circle at 20% 20%, rgba(108,77,255,0.18) 0%, transparent 60%), radial-gradient(circle at 80% 30%, rgba(0,180,255,0.15) 0%, transparent 70%), #0b0f18;
-      --bg-card: rgba(18,22,33,0.6);
-      --bg-card-solid: rgba(18,22,33,0.8);
-      --bg-card-border: rgba(140,160,255,0.25);
-      --text-main: #eef3ff;
-      --text-dim: rgba(238,243,255,.7);
-      --text-soft: rgba(238,243,255,.55);
-      --frost-blur: blur(20px) saturate(160%);
-      --underline-grad: linear-gradient(90deg,var(--acc-start),var(--acc-end));
-      --ticker-bg: rgba(0,0,0,0.4);
+      --bg-grad-start: #050816;
+      --bg-grad-end: #001a2e;
+
+      --text-primary: #eef8ff;
+      --text-secondary: #9db2c9;
+      --text-dim: #60718d;
+
+      --accent-purple: #7b4dff;
+      --accent-blue: #4dd2ff;
+
+      --section-glow: rgba(124, 93, 255, 0.4);
+
+      --glass-bg: rgba(10, 15, 30, 0.6);
+      --glass-border: rgba(180, 200, 255, 0.12);
+
+      --glass-card-bg: rgba(15, 20, 35, 0.55);
+      --glass-card-border: rgba(200, 220, 255, 0.14);
+
+      --pill-bg: rgba(5, 8, 20, 0.8);
+      --pill-border: rgba(255, 255, 255, 0.08);
+      --pill-text: #ffffff;
+
+      --ticker-bg: rgba(0, 0, 0, 0.45);
+      --ticker-border: rgba(255, 255, 255, 0.12);
+      --ticker-text: #fff;
+
+      --header-bg: rgba(5, 8, 20, 0.6);
+      --header-border: rgba(255, 255, 255, 0.07);
+
+      --card-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+      --ring-glow: 0 0 50px rgba(124, 93, 255, 0.6),
+                   0 0 120px rgba(77, 210, 255, 0.25);
     }
 
-    /* LIGHT THEME LOOK (we'll turn this on later once site is stable) */
+    /* Light mode for later / iOS glass look */
     [data-theme="light"] {
-      --bg-base: radial-gradient(circle at 15% 15%,rgba(108,77,255,0.06)0%,transparent60%),radial-gradient(circle at 80%30%,rgba(0,180,255,0.07)0%,transparent70%),#f8f8ff;
-      --bg-card: rgba(255,255,255,0.4);
-      --bg-card-solid: rgba(255,255,255,0.55);
-      --bg-card-border: rgba(40,40,60,0.12);
-      --text-main: #1a1d29;
-      --text-dim: rgba(26,29,41,.7);
-      --text-soft: rgba(26,29,41,.55);
-      --frost-blur: blur(24px) saturate(180%);
-      --underline-grad: linear-gradient(90deg,var(--acc-start),var(--acc-end));
-      --ticker-bg: rgba(255,255,255,0.55);
+      --bg-grad-start: #f8f9ff;
+      --bg-grad-end: #e9eeff;
+
+      --text-primary: #0f1a2e;
+      --text-secondary: #3a4a66;
+      --text-dim: rgba(15, 26, 46, 0.6);
+
+      --accent-purple: #6a4dff;
+      --accent-blue: #3bbdff;
+
+      --section-glow: rgba(106, 77, 255, 0.18);
+
+      --glass-bg: rgba(255, 255, 255, 0.6);
+      --glass-border: rgba(40, 40, 70, 0.08);
+
+      --glass-card-bg: rgba(255, 255, 255, 0.45);
+      --glass-card-border: rgba(40, 40, 70, 0.09);
+
+      --pill-bg: rgba(255, 255, 255, 0.7);
+      --pill-border: rgba(0, 0, 0, 0.08);
+      --pill-text: #0f1a2e;
+
+      --ticker-bg: rgba(255, 255, 255, 0.5);
+      --ticker-border: rgba(0, 0, 0, 0.07);
+      --ticker-text: #0f1a2e;
+
+      --header-bg: rgba(255, 255, 255, 0.45);
+      --header-border: rgba(0, 0, 0, 0.06);
+
+      --card-shadow: 0 30px 60px rgba(20, 30, 60, 0.2);
+      --ring-glow: 0 0 60px rgba(106, 77, 255, 0.3),
+                   0 0 150px rgba(59, 189, 255, 0.2);
+    }
+
+    /* ---------------------------
+       BASE LAYOUT / BODY
+    ----------------------------*/
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     body {
-      background: var(--bg-base);
-      background-attachment: fixed;
-      color: var(--text-main);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", Roboto, "Helvetica Neue", Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
       margin: 0;
-      line-height: 1.4;
-      scroll-behavior: smooth;
-    }
-
-    main {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: var(--section-gap) var(--page-pad) calc(var(--section-gap) * 2);
-    }
-
-    section {
-      margin-bottom: var(--section-gap);
-    }
-
-    .section-card {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Display", Roboto, sans-serif;
+      color: var(--text-primary);
+      background: radial-gradient(circle at 20% 20%, var(--bg-grad-start) 0%, var(--bg-grad-end) 60%, #000a16 100%);
+      min-height: 100vh;
+      background-attachment: fixed;
       position: relative;
-      background: var(--bg-card);
-      -webkit-backdrop-filter: var(--frost-blur);
-      backdrop-filter: var(--frost-blur);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--bg-card-border);
-      box-shadow: var(--card-glow-dark);
-      padding: 1.25rem 1rem 1.5rem;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      transition: box-shadow var(--transition-med), transform var(--transition-fast);
     }
 
-    [data-theme="light"] .section-card {
-      box-shadow: var(--card-glow-light);
-    }
-
-    .section-card::after {
+    /* a soft global dim/pulse aura behind everything */
+    body::before {
       content: "";
-      pointer-events: none;
-      position: absolute;
+      position: fixed;
       inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(circle at 20% 20%,rgba(108,77,255,.22)0%,transparent60%);
+      pointer-events: none;
+      background: radial-gradient(
+        circle at 50% 20%,
+        rgba(123, 77, 255, 0.18) 0%,
+        rgba(0, 0, 0, 0) 70%
+      );
       mix-blend-mode: screen;
-      opacity: .4;
-    }
-    [data-theme="light"] .section-card::after {
-      background: radial-gradient(circle at 20% 20%,rgba(108,77,255,.14)0%,transparent60%);
-      mix-blend-mode: soft-light;
-      opacity: .6;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: bgPulse 5s ease-in-out infinite;
+      z-index: 0;
     }
 
-    .tilt-card {
-      will-change: transform, box-shadow;
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    @keyframes bgPulse {
+      0%,100% { opacity: 0.35; }
+      50%     { opacity: 0.55; }
     }
 
-    .fade-section {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .5s var(--transition-med), transform .5s var(--transition-med);
-    }
-    .fade-section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .section-head {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 1rem;
+    /* overall page wrapper */
+    .page-shell {
+      position: relative;
+      z-index: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: calc(var(--header-height-mobile) + 1rem) 1rem 6rem;
     }
 
-    .section-title {
-      font-size: clamp(1.25rem,0.5vw,1.4rem);
-      font-weight: 600;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      color: var(--text-main);
-      text-shadow:
-        0 0 8px rgba(108,77,255,.6),
-        0 0 20px rgba(0,180,255,.4);
-      display: inline-block;
-    }
-
-    .title-underline {
-      width: clamp(80px,20%,160px);
-      height: 4px;
-      border-radius: 999px;
-      background: var(--underline-grad);
-      box-shadow: 0 0 12px rgba(108,77,255,.7),
-                  0 0 32px rgba(0,180,255,.5);
-      margin-top: .5rem;
-    }
-
-    .section-desc {
-      margin-top: .75rem;
-      font-size: .9rem;
-      line-height: 1.4;
-      color: var(--text-dim);
-      max-width: 60ch;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
-      margin: 1rem 0;
-    }
-    .pill {
-      font-size: .8rem;
-      font-weight: 500;
-      line-height: 1.2;
-      padding: .6rem .75rem;
-      border-radius: var(--radius-md);
-      background: var(--bg-card-solid);
-      -webkit-backdrop-filter: var(--frost-blur);
-      backdrop-filter: var(--frost-blur);
-      border: 1px solid var(--bg-card-border);
-      box-shadow: 0 10px 24px rgba(0,0,0,.6),0 0 32px rgba(108,77,255,.4);
-      color: var(--text-main);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      transition: all var(--transition-fast);
-    }
-    [data-theme="light"] .pill {
-      box-shadow: 0 20px 32px rgba(0,0,0,.08),0 0 32px rgba(108,77,255,.28);
-    }
-    .pill.gradient {
-      background: linear-gradient(90deg,var(--acc-start),var(--acc-end));
-      color: #fff;
-      text-shadow: 0 0 8px rgba(0,0,0,.6);
-      border: 0;
-    }
-    .pill.call-btn {
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .pill .icon {
-      margin-right:.5rem;
-      font-size: .9rem;
-      line-height:1;
-    }
-
-    @media (hover:hover) {
-      .pill:hover {
-        box-shadow: 0 14px 30px rgba(0,0,0,.75),
-                    0 0 40px rgba(108,77,255,.6);
-        transform: translateY(-2px) scale(1.02);
-      }
-      [data-theme="light"] .pill:hover {
-        box-shadow: 0 24px 40px rgba(0,0,0,.1),
-                    0 0 40px rgba(108,77,255,.4);
+    @media(min-width:768px){
+      .page-shell {
+        padding-top: calc(var(--header-height-desktop) + 2rem);
       }
     }
 
-    /* HEADER / NAV */
-    header#site-header {
+    /* ---------------------------
+       HEADER (sticky / 2-row desktop / burger mobile)
+    ----------------------------*/
+    .site-header {
       position: sticky;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 1000;
-      background: rgba(10,12,20,0.35);
-      -webkit-backdrop-filter: blur(16px) saturate(160%);
-      backdrop-filter: blur(16px) saturate(160%);
-      border-bottom: 1px solid rgba(140,160,255,0.2);
-      box-shadow: 0 30px 60px rgba(0,0,0,.8),0 0 60px rgba(108,77,255,.4);
-      transition: transform var(--transition-med),
-                  background var(--transition-fast),
-                  box-shadow var(--transition-fast);
+      z-index: 9999;
+
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--header-border);
+      backdrop-filter: blur(16px) saturate(140%);
+      box-shadow: 0 30px 80px rgba(0,0,0,.8);
+      will-change: transform;
+      transition: transform var(--transition-med), background var(--transition-med), box-shadow var(--transition-med);
     }
-    [data-theme="light"] header#site-header {
-      background: rgba(255,255,255,.5);
-      border-bottom: 1px solid rgba(40,40,60,.12);
-      box-shadow: 0 30px 60px rgba(0,0,0,.08),
-                  0 0 60px rgba(108,77,255,.3);
-    }
-    header#site-header.header-hidden {
+
+    .site-header.header-hidden {
       transform: translateY(-100%);
     }
 
     .header-inner {
-      max-width: var(--max-width);
+      max-width: 1280px;
       margin: 0 auto;
-      padding: .75rem var(--page-pad) 1rem;
+      padding: .75rem 1rem 1rem;
       display: flex;
       flex-direction: column;
+      gap: .5rem;
+    }
+
+    /* Brand row (top line) */
+    .brand-row {
+      display: flex;
       align-items: center;
+      justify-content: space-between;
+      min-height: 40px;
       position: relative;
     }
 
+    /* Brand text glow / pulse */
     .brand-glow {
-      font-size: clamp(1rem,1vw,1.2rem);
+      font-size: 1rem;
       font-weight: 600;
       letter-spacing: .08em;
       text-transform: uppercase;
-      text-align: center;
-      color: var(--text-main);
-      text-shadow: var(--header-glow);
-      margin-bottom: .75rem;
-      white-space: nowrap;
+      color: var(--text-primary);
+      text-align: left;
+      flex: 1 1 auto;
+
+      text-shadow:
+        0 0 6px rgba(123,77,255,.7),
+        0 0 18px rgba(77,210,255,.5),
+        0 0 42px rgba(123,77,255,.4);
+      animation: brandPulse 4s ease-in-out infinite;
     }
 
-    .desktop-nav-row {
+    @keyframes brandPulse {
+      0%,100% {
+        text-shadow:
+          0 0 6px rgba(123,77,255,.6),
+          0 0 16px rgba(77,210,255,.45),
+          0 0 36px rgba(123,77,255,.35);
+      }
+      50% {
+        text-shadow:
+          0 0 10px rgba(123,77,255,.9),
+          0 0 26px rgba(77,210,255,.7),
+          0 0 60px rgba(123,77,255,.55);
+      }
+    }
+
+    /* burger menu button - mobile only */
+    .mobile-menu-toggle {
+      appearance: none;
+      border: 0;
+      background: rgba(0,0,0,.4);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: .9rem;
+      line-height: 1;
+      padding: .6rem .75rem;
       display: flex;
+      align-items: center;
+      gap: .5rem;
+      cursor: pointer;
+      box-shadow: 0 20px 60px rgba(0,0,0,.8);
+      backdrop-filter: blur(10px) saturate(150%);
+    }
+    .mobile-menu-toggle svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      stroke: var(--text-primary);
+    }
+
+    /* nav row (pills). desktop visible, mobile hidden */
+    .nav-row {
+      display: none;
       flex-wrap: wrap;
       justify-content: center;
-      gap: .5rem .75rem;
+      gap: .5rem;
     }
 
     .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
       font-size: .8rem;
       font-weight: 500;
-      color: var(--text-main);
-      background: var(--bg-card-solid);
-      -webkit-backdrop-filter: var(--frost-blur);
-      backdrop-filter: var(--frost-blur);
-      border: 1px solid var(--bg-card-border);
+      line-height: 1.2;
+      letter-spacing: .03em;
+      color: var(--pill-text);
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
       border-radius: var(--radius-md);
       padding: .6rem .8rem;
-      line-height:1.2;
-      box-shadow: 0 10px 24px rgba(0,0,0,.6),0 0 28px rgba(108,77,255,.4);
       text-decoration: none;
-      display: inline-flex;
-      align-items:center;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,.8);
       transition: all var(--transition-fast);
     }
-    [data-theme="light"] .nav-pill {
-      box-shadow: 0 18px 32px rgba(0,0,0,.08),
-                  0 0 28px rgba(108,77,255,.3);
+    .nav-pill.call-pill {
+      background: radial-gradient(circle at 0% 0%, var(--accent-purple) 0%, var(--accent-blue) 100%);
+      color: #fff;
+      border: 0;
+      box-shadow:
+        0 15px 40px rgba(123,77,255,.6),
+        0 30px 80px rgba(0,0,0,.8);
+      font-weight: 600;
     }
-    @media (hover:hover) {
-      .nav-pill:hover {
-        box-shadow: 0 16px 30px rgba(0,0,0,.8),0 0 40px rgba(108,77,255,.6);
-        transform: translateY(-2px) scale(1.03);
+    .nav-pill:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.9),
+        0 0 30px rgba(123,77,255,.5),
+        0 0 60px rgba(77,210,255,.3);
+    }
+
+    /* desktop header layout overrides */
+    @media(min-width:768px){
+      .brand-row {
+        justify-content: center;
       }
-      [data-theme="light"] .nav-pill:hover {
-        box-shadow: 0 26px 42px rgba(0,0,0,.1),0 0 40px rgba(108,77,255,.45);
+      .brand-glow {
+        flex: 0 0 auto;
+        font-size: 1.25rem;
+        font-weight: 600;
+        letter-spacing: .12em;
+        text-align: center;
       }
-    }
-    .call-pill {
-      background: linear-gradient(90deg,var(--acc-start),var(--acc-end));
-      color:#fff;
-      font-weight:600;
-      border:0;
-      text-shadow:0 0 8px rgba(0,0,0,.6);
-    }
-    .call-pill .icon{margin-right:.5rem;font-size:.9rem;line-height:1;}
-
-    /* MOBILE HEADER */
-    .mobile-bar {
-      display: none;
-      width: 100%;
-      align-items: center;
-      justify-content: space-between;
-      gap:.5rem;
-    }
-    .mobile-brand {
-      font-size: .9rem;
-      font-weight:600;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:var(--text-main);
-      text-shadow: var(--header-glow);
-      white-space:nowrap;
-    }
-    .mobile-actions {
-      display:flex;
-      align-items:center;
-      gap:.5rem;
-    }
-    .burger-btn{
-      appearance:none;
-      border:0;
-      background:var(--bg-card-solid);
-      -webkit-backdrop-filter:var(--frost-blur);
-      backdrop-filter:var(--frost-blur);
-      border-radius:var(--radius-md);
-      border:1px solid var(--bg-card-border);
-      color:var(--text-main);
-      font-size:.8rem;
-      line-height:1;
-      padding:.6rem .7rem;
-      box-shadow:0 10px 24px rgba(0,0,0,.6),0 0 28px rgba(108,77,255,.4);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-width:2.5rem;
-    }
-    [data-theme="light"] .burger-btn{
-      box-shadow:0 18px 32px rgba(0,0,0,.08),
-                 0 0 28px rgba(108,77,255,.28);
-    }
-
-    .mobile-menu-panel{
-      position:absolute;
-      right:var(--page-pad);
-      top:100%;
-      margin-top:.5rem;
-      min-width:220px;
-      max-width:75vw;
-      background:var(--bg-card);
-      -webkit-backdrop-filter:var(--frost-blur);
-      backdrop-filter:var(--frost-blur);
-      border-radius:var(--radius-lg);
-      border:1px solid var(--bg-card-border);
-      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 60px rgba(108,77,255,.4);
-      padding:1rem;
-      display:flex;
-      flex-direction:column;
-      gap:.5rem;
-      opacity:0;
-      transform:translateY(-10px) scale(.96);
-      pointer-events:none;
-      transition:all var(--transition-med);
-    }
-    [data-theme="light"] .mobile-menu-panel{
-      box-shadow:0 30px 60px rgba(0,0,0,.08),
-                 0 0 60px rgba(108,77,255,.3);
-    }
-    .mobile-menu-panel.open{
-      opacity:1;
-      transform:translateY(0) scale(1);
-      pointer-events:auto;
-    }
-    .mobile-menu-link{
-      text-decoration:none;
-      color:var(--text-main);
-      background:var(--bg-card-solid);
-      -webkit-backdrop-filter:var(--frost-blur);
-      backdrop-filter:var(--frost-blur);
-      border:1px solid var(--bg-card-border);
-      border-radius:var(--radius-md);
-      font-size:.9rem;
-      font-weight:500;
-      line-height:1.2;
-      padding:.75rem .8rem;
-      box-shadow:0 10px 24px rgba(0,0,0,.6),0 0 24px rgba(108,77,255,.4);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-    }
-    [data-theme="light"] .mobile-menu-link{
-      box-shadow:0 20px 32px rgba(0,0,0,.08),
-                 0 0 28px rgba(108,77,255,.28);
-    }
-    .mobile-menu-call{
-      background:linear-gradient(90deg,var(--acc-start),var(--acc-end));
-      border:0;
-      color:#fff;
-      font-weight:600;
-      text-shadow:0 0 8px rgba(0,0,0,.6);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:.5rem;
-    }
-
-    @media (max-width: 768px){
-      .desktop-nav-row,
-      .brand-glow{
+      .mobile-menu-toggle{
         display:none;
       }
-      .mobile-bar{
-        display:flex;
-      }
-
-      .section-title{
-        font-size:1rem;
-      }
-      .section-desc{
-        font-size:.95rem;
-      }
-
-      .section-card{
-        border-radius:16px;
-        padding:1rem 1rem 1.25rem;
+      .nav-row {
+        display: flex;
       }
     }
 
-    /* HERO / WELCOME */
-    .hero-heading {
-      font-size: clamp(1.4rem,1vw,1.6rem);
-      line-height:1.25;
+    /* ---------------------------
+       MOBILE MENU DROPDOWN SHEET
+    ----------------------------*/
+    .mobile-menu-panel {
+      position: absolute;
+      left: auto;
+      right: 1rem;
+      top: calc(var(--header-height-mobile) - .5rem);
+      width: min(88vw,320px);
+
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--card-shadow), var(--ring-glow);
+      backdrop-filter: blur(16px) saturate(160%);
+
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px) scale(.96);
+      transition: all var(--transition-med);
+      z-index: 9999;
+    }
+
+    .mobile-menu-panel.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    .mobile-menu-title {
+      font-size:.7rem;
       font-weight:600;
+      letter-spacing:.12em;
       text-transform:uppercase;
-      letter-spacing:.04em;
-      color:var(--text-main);
-      margin-bottom:1rem;
-      text-shadow:0 0 8px rgba(108,77,255,.6),
-                  0 0 24px rgba(0,180,255,.4),
-                  0 1px 2px rgba(0,0,0,.8);
+      color:var(--text-dim);
+      margin-bottom:.25rem;
     }
-    @media (max-width:768px){
-      .hero-heading{
-        font-size:1.3rem;
+
+    .mobile-link {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background:var(--pill-bg);
+      border:1px solid var(--pill-border);
+      color:var(--pill-text);
+      border-radius:var(--radius-md);
+      padding:.8rem .9rem;
+      font-size:.9rem;
+      font-weight:500;
+      text-decoration:none;
+      line-height:1.2;
+      box-shadow:0 20px 60px rgba(0,0,0,.7);
+      transition:all var(--transition-fast);
+    }
+    .mobile-link.call {
+      background: radial-gradient(circle at 0% 0%, var(--accent-purple) 0%, var(--accent-blue) 100%);
+      border:0;
+      color:#fff;
+      font-weight:600;
+      justify-content:center;
+    }
+    .mobile-link:hover {
+      transform:translateY(-2px) scale(1.03);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.9),
+        0 0 30px rgba(123,77,255,.5),
+        0 0 60px rgba(77,210,255,.3);
+    }
+
+    @media(min-width:768px){
+      .mobile-menu-panel{
+        display:none;
       }
     }
 
-    .hero-desc {
-      color: var(--text-dim);
-      font-size: .95rem;
-      max-width: 70ch;
-      line-height:1.5;
+    /* ---------------------------
+       SECTIONS / CARDS / GLASS
+    ----------------------------*/
+    .section-block {
+      position: relative;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--card-shadow), var(--ring-glow);
+      backdrop-filter: blur(22px) saturate(160%);
+      padding: 1.25rem 1rem 1rem;
+      overflow: hidden;
+    }
+    @media(min-width:768px){
+      .section-block{
+        padding:1.5rem 1.5rem 1.25rem;
+      }
     }
 
-    .ticker-shell {
-      margin-top:1rem;
-      border-radius:var(--radius-md);
-      background:var(--ticker-bg);
-      -webkit-backdrop-filter:var(--frost-blur);
-      backdrop-filter:var(--frost-blur);
-      border:1px solid var(--bg-card-border);
-      overflow:hidden;
-      font-size:.8rem;
-      color:var(--text-main);
-      box-shadow:0 20px 40px rgba(0,0,0,.7),
-                 0 0 40px rgba(108,77,255,.4);
+    /* subtle aura ring behind each big section */
+    .section-block::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius:inherit;
+      background: radial-gradient(circle at 20% 20%,
+                  rgba(123,77,255,.22) 0%,
+                  rgba(0,0,0,0) 70%);
+      filter: blur(40px);
+      opacity:.6;
+      pointer-events:none;
     }
-    [data-theme="light"] .ticker-shell{
-      box-shadow:0 20px 40px rgba(0,0,0,.07),
-                 0 0 40px rgba(108,77,255,.3);
+
+    /* inner headline row in each section */
+    .section-headline {
+      margin-bottom: .75rem;
     }
-    .ticker-track {
-      display:flex;
-      white-space:nowrap;
-      animation: tickerMove 20s linear infinite;
+    .section-title {
+      font-size:1rem;
+      font-weight:700;
       letter-spacing:.08em;
       text-transform:uppercase;
-      font-weight:500;
-    }
-    .ticker-item {
-      padding:.6rem 1rem;
-      border-right:1px solid var(--bg-card-border);
-    }
-    @keyframes tickerMove {
-      0% {transform: translateX(0);}
-      100% {transform: translateX(-50%);}
-    }
-
-    /* BARBERS */
-    .barbers-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));
-      gap:1rem;
-      width:100%;
-    }
-    .barber-card {
-      background: var(--bg-card-solid);
-      -webkit-backdrop-filter: var(--frost-blur);
-      backdrop-filter: var(--frost-blur);
-      border-radius: var(--radius-md);
-      border:1px solid var(--bg-card-border);
-      box-shadow:0 20px 40px rgba(0,0,0,.8),
-                 0 0 40px rgba(108,77,255,.45);
-      padding:1rem;
-      color:var(--text-main);
-      display:flex;
-      flex-direction:column;
-      gap:.6rem;
-      font-size:.9rem;
-    }
-    [data-theme="light"] .barber-card{
-      box-shadow:0 24px 40px rgba(0,0,0,.08),
-                 0 0 40px rgba(108,77,255,.35);
-    }
-    .barber-name {
-      font-weight:600;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-      color:var(--text-main);
-      font-size:.9rem;
-      text-shadow:0 0 8px rgba(108,77,255,.6),
-                  0 0 20px rgba(0,180,255,.4);
-    }
-    .barber-desc {
-      color:var(--text-soft);
-      line-height:1.4;
-    }
-    .barber-actions {
+      color:var(--text-primary);
+      text-shadow:
+        0 0 6px rgba(123,77,255,.8),
+        0 0 24px rgba(77,210,255,.4),
+        0 0 50px rgba(123,77,255,.5);
+      margin:0 0 .5rem;
       display:flex;
       flex-wrap:wrap;
+      align-items:flex-end;
       gap:.5rem;
     }
 
-    /* REVIEWS */
-    .reviews-row {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));
-      gap:1rem;
-      margin-top:1rem;
+    .title-underline {
+      width:130px;
+      height:4px;
+      border-radius:2px;
+      background:linear-gradient(90deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
+      box-shadow:
+        0 0 12px rgba(123,77,255,.8),
+        0 0 30px rgba(77,210,255,.4);
     }
-    .review-card {
-      background: var(--bg-card-solid);
-      -webkit-backdrop-filter: var(--frost-blur);
-      backdrop-filter: var(--frost-blur);
-      border-radius: var(--radius-md);
-      border:1px solid var(--bg-card-border);
-      box-shadow:0 20px 40px rgba(0,0,0,.8),
-                 0 0 40px rgba(108,77,255,.45);
-      padding:1rem;
-      font-size:.85rem;
+
+    .section-desc {
+      font-size:.9rem;
+      line-height:1.5;
+      color:var(--text-secondary);
+      max-width:60ch;
+    }
+
+    /* small cards inside sections (barber cards, review cards, service rows, hours rows) */
+    .glass-card {
+      position:relative;
+      background:var(--glass-card-bg);
+      border:1px solid var(--glass-card-border);
+      border-radius:var(--radius-md);
+      box-shadow:0 20px 60px rgba(0,0,0,.8), 0 0 60px rgba(123,77,255,.4);
+      padding:1rem .9rem .9rem;
+      color:var(--text-primary);
+      font-size:.9rem;
       line-height:1.4;
-      color:var(--text-main);
+      will-change:transform;
+      transform-style:preserve-3d;
+      transition:transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
     }
-    [data-theme="light"] .review-card{
-      box-shadow:0 24px 40px rgba(0,0,0,.08),
-                 0 0 40px rgba(108,77,255,.35);
+
+    .glass-card + .glass-card {
+      margin-top:.75rem;
     }
-    .review-head {
+
+    @media(min-width:768px){
+      .glass-card{
+        padding:1rem 1rem 1rem;
+      }
+    }
+
+    /* tilt hover effect is only on desktop */
+    @media (hover:hover) and (pointer:fine){
+      .glass-card.tilt-card:hover {
+        box-shadow:
+          0 30px 80px rgba(0,0,0,.9),
+          0 0 60px rgba(123,77,255,.6),
+          0 0 120px rgba(77,210,255,.3);
+      }
+    }
+
+    /* pills (badges like "Locally Owned", payment methods, call buttons, etc.) */
+    .pill-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:.5rem .5rem;
+      margin-top:.75rem;
+    }
+
+    .pill {
+      background:var(--pill-bg);
+      border:1px solid var(--pill-border);
+      color:var(--pill-text);
+      border-radius:var(--radius-pill);
+      font-size:.7rem;
+      line-height:1.2;
+      padding:.5rem .6rem;
+      font-weight:500;
+      display:inline-flex;
+      align-items:center;
+      box-shadow:0 20px 60px rgba(0,0,0,.8);
+      white-space:nowrap;
+      text-decoration:none;
+      cursor:default;
+    }
+
+    .pill.gradient {
+      background:radial-gradient(circle at 0% 0%, var(--accent-purple) 0%, var(--accent-blue) 100%);
+      border:0;
+      color:#fff;
       font-weight:600;
+      box-shadow:
+        0 15px 40px rgba(123,77,255,.6),
+        0 30px 80px rgba(0,0,0,.8);
+    }
+
+    .pill.phone-btn {
+      background:rgba(0,0,0,.6);
+      border:1px solid rgba(255,255,255,.2);
+      color:#fff;
+      cursor:pointer;
+      text-decoration:none;
+      font-weight:500;
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+    }
+    .pill.phone-btn svg{
+      width:14px;
+      height:14px;
+      stroke:#fff;
+    }
+
+    /* call/book buttons inside barber cards */
+    .book-btn {
+      display:inline-flex;
+      margin-top:.75rem;
+      font-size:.7rem;
+      font-weight:600;
+      background:radial-gradient(circle at 0% 0%, var(--accent-purple) 0%, var(--accent-blue) 100%);
+      border:0;
+      color:#fff;
+      border-radius:var(--radius-pill);
+      line-height:1.2;
+      padding:.55rem .7rem;
+      text-decoration:none;
+      box-shadow:
+        0 15px 40px rgba(123,77,255,.6),
+        0 30px 80px rgba(0,0,0,.8);
+      transition:all var(--transition-fast);
+    }
+    .book-btn svg{
+      width:14px;
+      height:14px;
+    }
+    .book-btn:hover {
+      transform:translateY(-2px) scale(1.03);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.9),
+        0 0 30px rgba(123,77,255,.5),
+        0 0 60px rgba(77,210,255,.3);
+    }
+
+    .call-btn {
+      display:inline-flex;
+      margin-top:.75rem;
+      font-size:.7rem;
+      font-weight:500;
+      background:var(--pill-bg);
+      border:1px solid var(--pill-border);
+      color:var(--pill-text);
+      border-radius:var(--radius-pill);
+      line-height:1.2;
+      padding:.55rem .7rem;
+      text-decoration:none;
+      align-items:center;
+      gap:.4rem;
+      box-shadow:0 20px 60px rgba(0,0,0,.8);
+      transition:all var(--transition-fast);
+    }
+    .call-btn svg{
+      width:14px;
+      height:14px;
+      stroke:currentColor;
+    }
+    .call-btn:hover {
+      transform:translateY(-2px) scale(1.03);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.9),
+        0 0 30px rgba(123,77,255,.5),
+        0 0 60px rgba(77,210,255,.3);
+    }
+
+    /* layout helpers inside sections */
+    .two-col,
+    .three-col {
+      display:flex;
+      flex-direction:column;
+      gap:.75rem;
+    }
+    @media(min-width:768px){
+      .two-col {
+        flex-direction:row;
+      }
+      .two-col > .col {
+        flex:1 1 0;
+      }
+      .three-col {
+        flex-direction:row;
+        flex-wrap:wrap;
+      }
+      .three-col > .col {
+        flex:1 1 0;
+        min-width:250px;
+      }
+    }
+
+    /* ---------------------------
+       TICKER STRIP / RIBBON
+    ----------------------------*/
+    .ticker-shell {
+      position:relative;
+      margin-top:1rem;
+      background:var(--ticker-bg);
+      color:var(--ticker-text);
+      border:1px solid var(--ticker-border);
+      border-radius:var(--radius-md);
+      box-shadow:0 30px 80px rgba(0,0,0,.8), 0 0 60px rgba(123,77,255,.4);
+      overflow:hidden;
+      font-size:.7rem;
+      font-weight:600;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      line-height:1.2;
+      white-space:nowrap;
+    }
+    .ticker-track {
+      display:inline-flex;
+      animation: tickerMove 20s linear infinite;
+    }
+    .ticker-item {
+      padding:.75rem .9rem;
+      color:var(--ticker-text);
+    }
+    @keyframes tickerMove {
+      0% { transform:translateX(0); }
+      100% { transform:translateX(-50%); }
+    }
+
+    /* ---------------------------
+       REVIEWS STRIP
+    ----------------------------*/
+    .review-card {
+      background:var(--glass-card-bg);
+      border:1px solid var(--glass-card-border);
+      border-radius:var(--radius-md);
+      box-shadow:0 20px 60px rgba(0,0,0,.8), 0 0 60px rgba(123,77,255,.4);
+      padding:1rem .9rem;
       font-size:.8rem;
-      line-height:1.3;
-      color:var(--text-main);
+      line-height:1.4;
+      color:var(--text-primary);
+      will-change:transform;
+      transform-style:preserve-3d;
+      transition:transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .review-title {
+      font-size:.8rem;
+      font-weight:600;
+      color:var(--text-primary);
       display:flex;
       flex-wrap:wrap;
       align-items:center;
       gap:.5rem;
-      margin-bottom:.5rem;
-      text-shadow:0 0 8px rgba(108,77,255,.6),
-                  0 0 20px rgba(0,180,255,.4);
+      margin:0 0 .5rem;
+      text-shadow:
+        0 0 6px rgba(123,77,255,.7),
+        0 0 24px rgba(77,210,255,.4);
     }
-    .review-stars {
-      font-size:.8rem;
+    .stars {
+      font-size:.7rem;
+      font-weight:500;
+      color:var(--accent-blue);
+      text-shadow:0 0 6px rgba(77,210,255,.8);
+      white-space:nowrap;
     }
-    .review-body {
-      color:var(--text-soft);
-      font-size:.8rem;
-      line-height:1.4;
+    @media(min-width:768px){
+      .reviews-row {
+        display:flex;
+        flex-wrap:wrap;
+        gap:.75rem;
+      }
+      .review-card {
+        flex:1 1 0;
+        min-width:260px;
+      }
+    }
+    /* pop a subtle glow under the whole reviews section to grab eyes */
+    .reviews-highlight {
+      box-shadow:
+        0 40px 120px rgba(123,77,255,.4),
+        0 0 160px rgba(77,210,255,.25),
+        var(--card-shadow);
     }
 
-    /* SERVICES */
-    .services-list {
-      background:var(--bg-card-solid);
-      -webkit-backdrop-filter:var(--frost-blur);
-      backdrop-filter:var(--frost-blur);
+    /* ---------------------------
+       HOURS / CONTACT / MAP
+    ----------------------------*/
+    .hours-grid,
+    .contact-grid {
+      display:flex;
+      flex-direction:column;
+      gap:.5rem;
+      font-size:.8rem;
+      line-height:1.4;
+      color:var(--text-secondary);
+    }
+    .hours-row,
+    .contact-row {
+      background:var(--glass-card-bg);
+      border:1px solid var(--glass-card-border);
       border-radius:var(--radius-md);
-      border:1px solid var(--bg-card-border);
-      overflow:hidden;
-      box-shadow:0 20px 40px rgba(0,0,0,.8),
-                 0 0 40px rgba(108,77,255,.45);
-    }
-    [data-theme="light"] .services-list{
-      box-shadow:0 24px 40px rgba(0,0,0,.08),
-                 0 0 40px rgba(108,77,255,.35);
-    }
-    .service-row{
+      box-shadow:0 20px 60px rgba(0,0,0,.8), 0 0 60px rgba(123,77,255,.4);
+      padding:.75rem .9rem;
+      font-weight:500;
+      color:var(--text-primary);
       display:flex;
       flex-wrap:wrap;
       justify-content:space-between;
-      gap:.5rem 1rem;
-      padding:.9rem 1rem;
-      border-bottom:1px solid var(--bg-card-border);
-      font-size:.85rem;
-      line-height:1.4;
-      color:var(--text-main);
+      align-items:flex-start;
     }
-    .service-row:last-child{
-      border-bottom:0;
+    .hours-day {
+      color:var(--text-primary);
     }
-    .service-left{
-      font-weight:500;
-      color:var(--text-main);
-      text-shadow:0 0 8px rgba(108,77,255,.6),
-                  0 0 20px rgba(0,180,255,.4);
-    }
-    .service-note{
-      color:var(--text-soft);
-      font-size:.8rem;
+    .hours-time {
+      color:var(--text-secondary);
       font-weight:400;
-    }
-    .service-price{
-      font-weight:600;
-      color:var(--text-main);
-      white-space:nowrap;
+      margin-left:1rem;
     }
 
-    /* HOURS */
-    .hours-row {
+    .map-card {
+      border-radius:var(--radius-lg);
+      background:var(--glass-bg);
+      border:1px solid var(--glass-border);
+      box-shadow:var(--card-shadow), var(--ring-glow);
+      backdrop-filter:blur(22px) saturate(160%);
+      overflow:hidden;
+    }
+    .map-top {
       display:flex;
       flex-wrap:wrap;
       gap:.5rem;
-      font-size:.8rem;
-      line-height:1.4;
-      margin-top:.75rem;
+      padding:1rem 1rem .5rem;
     }
-    .hour-pill{
-      background:var(--bg-card-solid);
-      -webkit-backdrop-filter:var(--frost-blur);
-      backdrop-filter:var(--frost-blur);
-      border:1px solid var(--bg-card-border);
-      border-radius:var(--radius-sm);
-      box-shadow:0 12px 24px rgba(0,0,0,.7),
-                 0 0 32px rgba(108,77,255,.4);
-      color:var(--text-main);
-      padding:.6rem .75rem;
-      min-width:120px;
+    .map-btn {
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      border-radius:var(--radius-pill);
+      background:var(--pill-bg);
+      border:1px solid var(--pill-border);
+      color:var(--pill-text);
+      font-size:.7rem;
+      font-weight:500;
+      line-height:1.2;
+      padding:.6rem .8rem;
+      box-shadow:0 20px 60px rgba(0,0,0,.8);
+      transition:all var(--transition-fast);
     }
-    [data-theme="light"] .hour-pill{
-      box-shadow:0 20px 32px rgba(0,0,0,.08),
-                 0 0 32px rgba(108,77,255,.28);
-    }
-    .hour-pill strong{
-      display:block;
-      font-weight:600;
-      color:var(--text-main);
-      text-shadow:0 0 8px rgba(108,77,255,.6),
-                  0 0 20px rgba(0,180,255,.4);
-    }
-    .hour-time{
-      color:var(--text-soft);
+    .map-btn:hover{
+      transform:translateY(-2px) scale(1.03);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.9),
+        0 0 30px rgba(123,77,255,.5),
+        0 0 60px rgba(77,210,255,.3);
     }
 
-    /* CONTACT / MAP */
-    .contact-info {
-      font-size:.9rem;
-      line-height:1.4;
-      color:var(--text-main);
-      text-shadow:0 0 8px rgba(108,77,255,.6),
-                  0 0 20px rgba(0,180,255,.4);
+    .map-frame-wrapper {
+      width:100%;
+      height:250px;
+      border-top:1px solid var(--glass-border);
+      overflow:hidden;
     }
-    .contact-sub {
-      font-size:.85rem;
-      line-height:1.4;
-      color:var(--text-dim);
-      margin-top:.5rem;
+    .map-frame-wrapper iframe{
+      width:100%;
+      height:100%;
+      border:0;
     }
-
-    .map-shell{
-      margin-top:1rem;
-      background:var(--bg-card-solid);
-      -webkit-backdrop-filter:var(--frost-blur);
-      backdrop-filter:var(--frost-blur);
-      border-radius:var(--radius-md);
-      border:1px solid var(--bg-card-border);
-      box-shadow:0 20px 40px rgba(0,0,0,.8),
-                 0 0 40px rgba(108,77,255,.45);
-      padding:1rem;
-      color:var(--text-main);
+    .map-bottom {
+      font-size:.7rem;
+      line-height:1.4;
+      color:var(--text-secondary);
+      padding: .75rem 1rem 1rem;
       text-align:center;
     }
-    [data-theme="light"] .map-shell{
-      box-shadow:0 24px 40px rgba(0,0,0,.08),
-                 0 0 40px rgba(108,77,255,.35);
+    .map-bottom strong {
+      color:var(--text-primary);
+      font-weight:600;
     }
-    .map-buttons{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:.5rem;
-      margin-bottom:1rem;
+
+    /* ---------------------------
+       FADE-IN SECTIONS ON SCROLL
+    ----------------------------*/
+    .fade-section {
+      opacity:0;
+      transform:translateY(24px);
+      transition:opacity var(--transition-slow), transform var(--transition-slow);
+      will-change:opacity,transform;
     }
-    .map-buttons a{
+    .fade-section.visible {
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* ---------------------------
+       FOOTER NOTE
+    ----------------------------*/
+    footer {
+      text-align:center;
+      color:var(--text-dim);
+      font-size:.7rem;
+      margin-top:3rem;
+    }
+    footer a{
+      color:var(--accent-blue);
       text-decoration:none;
     }
 
-    .map-frame{
-      width:100%;
-      border:0;
-      border-radius:var(--radius-sm);
-      height:220px;
-      box-shadow:0 12px 30px rgba(0,0,0,.8),
-                 0 0 32px rgba(108,77,255,.4);
-    }
-    [data-theme="light"] .map-frame{
-      box-shadow:0 20px 32px rgba(0,0,0,.08),
-                 0 0 32px rgba(108,77,255,.28);
-    }
-
-    footer{
-      text-align:center;
-      font-size:.7rem;
-      color:var(--text-soft);
-      padding:4rem 1rem 2rem;
-    }
   </style>
 </head>
-<body>
+<body data-theme="dark">
 
-<header id="site-header">
-  <div class="header-inner">
-    <!-- Desktop branding + nav -->
-    <div class="brand-glow">NEXT LEVEL BARBERSHOP</div>
+  <!-- =========================
+       STICKY HEADER
+  ========================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
 
-    <div class="desktop-nav-row">
-      <a href="#welcome" class="nav-pill">Home</a>
-      <a href="#barbers" class="nav-pill">Our Barbers</a>
-      <a href="#reviews" class="nav-pill">Reviews</a>
-      <a href="#services" class="nav-pill">Services</a>
-      <a href="#hours" class="nav-pill">Hours</a>
-      <a href="#contact" class="nav-pill">Contact</a>
-      <a href="#location" class="nav-pill">Location</a>
-      <a class="nav-pill call-pill" href="tel:+15055036216">
-        <span class="icon">📞</span> (505) 503-6216
-      </a>
-    </div>
+      <!-- top row: brand + burger (mobile) -->
+      <div class="brand-row">
+        <div class="brand-glow">NEXT LEVEL BARBERSHOP</div>
 
-    <!-- Mobile header -->
-    <div class="mobile-bar">
-      <div class="mobile-brand">Next Level Barbershop</div>
-      <div class="mobile-actions">
-        <button class="burger-btn" id="mobileMenuBtn" aria-label="Menu">☰</button>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+          <!-- burger icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          </svg>
+        </button>
       </div>
 
+      <!-- second row: nav pills (desktop only) -->
+      <nav class="nav-row" aria-label="Main navigation">
+        <a class="nav-pill" href="#home">Home</a>
+        <a class="nav-pill" href="#barbers">Our Barbers</a>
+        <a class="nav-pill" href="#reviews">Reviews</a>
+        <a class="nav-pill" href="#services">Services</a>
+        <a class="nav-pill" href="#hours">Hours</a>
+        <a class="nav-pill" href="#contact">Contact</a>
+        <a class="nav-pill" href="#location">Location</a>
+        <a class="nav-pill call-pill" href="tel:+15055036216">
+          <!-- phone icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.16a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          (505) 503-6216
+        </a>
+      </nav>
+
+      <!-- mobile menu panel (hidden by default) -->
       <div class="mobile-menu-panel" id="mobileMenu">
-        <a href="#welcome" class="mobile-menu-link">Home</a>
-        <a href="#barbers" class="mobile-menu-link">Our Barbers</a>
-        <a href="#reviews" class="mobile-menu-link">Reviews</a>
-        <a href="#services" class="mobile-menu-link">Services</a>
-        <a href="#hours" class="mobile-menu-link">Hours</a>
-        <a href="#contact" class="mobile-menu-link">Contact</a>
-        <a href="#location" class="mobile-menu-link">Location / Directions</a>
-        <a href="tel:+15055036216" class="mobile-menu-link mobile-menu-call">
-          <span class="icon">📞</span>
-          <span>(505) 503-6216</span>
+        <div class="mobile-menu-title">Menu</div>
+        <a class="mobile-link" href="#home">Home</a>
+        <a class="mobile-link" href="#barbers">Our Barbers</a>
+        <a class="mobile-link" href="#reviews">Reviews</a>
+        <a class="mobile-link" href="#services">Services</a>
+        <a class="mobile-link" href="#hours">Hours</a>
+        <a class="mobile-link" href="#contact">Contact</a>
+        <a class="mobile-link" href="#location">Location / Directions</a>
+        <a class="mobile-link call" href="tel:+15055036216">
+          <!-- phone icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.16a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          (505) 503-6216
         </a>
       </div>
+
     </div>
-  </div>
-</header>
+  </header>
 
-<main>
+  <main class="page-shell">
 
-  <!-- WELCOME -->
-  <section id="welcome" class="section-card tilt-card fade-section">
-    <div class="section-head">
-      <div class="section-title">WELCOME TO NEXT LEVEL BARBERSHOP</div>
-      <div class="title-underline"></div>
-      <div class="section-desc hero-desc">
-        Professional cuts, sharp fades, and a clean vibe. Locally owned.
-        Walk-ins welcome. Appointments preferred.
+    <!-- =========================
+         WELCOME / HERO
+    ========================== -->
+    <section id="home" class="section-block fade-section">
+      <div class="section-headline">
+        <h2 class="section-title">
+          <span>Welcome to Next Level Barbershop</span>
+        </h2>
+        <div class="title-underline"></div>
       </div>
-    </div>
 
-    <div class="pill-row">
-      <div class="pill gradient">Locally Owned</div>
-      <div class="pill">Walk-Ins Welcome</div>
-      <div class="pill">Appointments Preferred</div>
-    </div>
+      <p class="section-desc" style="max-width:70ch;">
+        Professional cuts, sharp fades, and a clean vibe. Locally owned. Walk-ins welcome. Appointments preferred.
+        Payment method can vary by barber — just confirm when you book.
+      </p>
 
-    <div class="pill-row">
-      <div class="pill">Cash</div>
-      <div class="pill">Apple Pay</div>
-      <div class="pill">Cash App</div>
-      <div class="pill">Venmo</div>
-    </div>
-
-    <div class="section-desc" style="margin-top:.5rem;">
-      Payment method can vary by barber — just confirm when you book.
-    </div>
-
-    <div class="ticker-shell" aria-hidden="true">
-      <div class="ticker-track">
-        <div class="ticker-item">Albuquerque, NM</div>
-        <div class="ticker-item">Right next to Bob’s Burgers</div>
-        <div class="ticker-item">Walk-ins welcome</div>
-        <div class="ticker-item">Appointments preferred</div>
-
-        <div class="ticker-item">Albuquerque, NM</div>
-        <div class="ticker-item">Right next to Bob’s Burgers</div>
-        <div class="ticker-item">Walk-ins welcome</div>
-        <div class="ticker-item">Appointments preferred</div>
+      <!-- perks row -->
+      <div class="pill-row">
+        <div class="pill gradient">Locally Owned</div>
+        <div class="pill">Walk-Ins Welcome</div>
+        <div class="pill">Appointments Preferred</div>
       </div>
-    </div>
-  </section>
 
-  <!-- BARBERS -->
-  <section id="barbers" class="section-card tilt-card fade-section">
-    <div class="section-head">
-      <div class="section-title">OUR BARBERS</div>
-      <div class="title-underline"></div>
-      <div class="section-desc">
+      <!-- payment row -->
+      <div class="pill-row">
+        <div class="pill gradient">Cash</div>
+        <div class="pill">Apple Pay</div>
+        <div class="pill">Cash App</div>
+        <div class="pill">Venmo</div>
+      </div>
+
+      <!-- ticker ribbon -->
+      <div class="ticker-shell" style="margin-top:1rem;">
+        <div class="ticker-track">
+          <div class="ticker-item">ALBUQUERQUE, NM</div>
+          <div class="ticker-item">RIGHT NEXT TO BOB’S BURGERS</div>
+          <div class="ticker-item">WALK-INS WELCOME</div>
+          <div class="ticker-item">APPOINTMENTS PREFERRED</div>
+
+          <!-- repeat so it loops clean -->
+          <div class="ticker-item">ALBUQUERQUE, NM</div>
+          <div class="ticker-item">RIGHT NEXT TO BOB’S BURGERS</div>
+          <div class="ticker-item">WALK-INS WELCOME</div>
+          <div class="ticker-item">APPOINTMENTS PREFERRED</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         OUR BARBERS
+    ========================== -->
+    <section id="barbers" class="section-block fade-section">
+      <div class="section-headline">
+        <h2 class="section-title">
+          <span>Our Barbers</span>
+        </h2>
+        <div class="title-underline"></div>
+      </div>
+      <p class="section-desc">
         Book directly with your barber or call the shop. Real craft, no gimmicks.
-      </div>
-    </div>
+      </p>
 
-    <div class="barbers-grid">
-      <div class="barber-card tilt-card">
-        <div class="barber-name">VINCENT (OWNER)</div>
-        <div class="barber-desc">Founder. Fader. Visionary.</div>
-        <div class="barber-actions">
-          <a class="pill" href="tel:+15055036216"><span class="icon">📞</span> Call to Book</a>
+      <div class="three-col" style="margin-top:1rem;">
+
+        <div class="col">
+          <div class="glass-card tilt-card">
+            <div style="font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-primary);margin-bottom:.5rem;">
+              VINCENT (OWNER)
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;line-height:1.4;">
+              Founder. Fader. Visionary.
+            </div>
+            <a class="call-btn" href="tel:+15055036216">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.16a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              Call to Book
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div class="barber-card tilt-card">
-        <div class="barber-name">Z WALUW</div>
-        <div class="barber-desc">Precision in every pass.</div>
-        <div class="barber-actions">
-          <a class="pill" href="tel:+15055036216"><span class="icon">📞</span> Call to Book</a>
+        <div class="col">
+          <div class="glass-card tilt-card">
+            <div style="font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-primary);margin-bottom:.5rem;">
+              Z WALUW
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;line-height:1.4;">
+              Precision in every pass.
+            </div>
+            <a class="call-btn" href="tel:+15055036216">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.16a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              Call to Book
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div class="barber-card tilt-card">
-        <div class="barber-name">G-MO</div>
-        <div class="barber-desc">Style that speaks before you do.</div>
-        <div class="barber-actions">
-          <a class="pill" href="tel:+15055036216"><span class="icon">📞</span> Call to Book</a>
+        <div class="col">
+          <div class="glass-card tilt-card">
+            <div style="font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-primary);margin-bottom:.5rem;">
+              G-MO
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;line-height:1.4;">
+              Style that speaks before you do.
+            </div>
+            <a class="call-btn" href="tel:+15055036216">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.16a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              Call to Book
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div class="barber-card tilt-card">
-        <div class="barber-name">DESHAUN</div>
-        <div class="barber-desc">Sharp fades. Chill vibes.</div>
-        <div class="barber-actions">
-          <a class="pill" href="tel:+15055036216"><span class="icon">📞</span> Call to Book</a>
+        <div class="col">
+          <div class="glass-card tilt-card">
+            <div style="font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-primary);margin-bottom:.5rem;">
+              DESHAUN
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;line-height:1.4;">
+              Sharp fades. Chill vibes.
+            </div>
+            <a class="call-btn" href="tel:+15055036216">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.16a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              Call to Book
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div class="barber-card tilt-card">
-        <div class="barber-name">CA$H</div>
-        <div class="barber-desc">Quick with the clippers, real with the results.</div>
-        <div class="barber-actions">
-          <a class="pill gradient" href="https://booksy.com/en-us/dl/show-business/1592260" target="_blank" rel="noopener">
-            Book w/ Ca$h
-          </a>
+        <div class="col">
+          <div class="glass-card tilt-card">
+            <div style="font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-primary);margin-bottom:.5rem;">
+              CA$H
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;line-height:1.4;">
+              Quick with the clippers, real with the results.
+            </div>
+            <a class="book-btn" href="#contact">
+              Book w/ Ca$h
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div class="barber-card tilt-card">
-        <div class="barber-name">JONNY</div>
-        <div class="barber-desc">Where art meets the edge.</div>
-        <div class="barber-actions">
-          <a class="pill gradient" href="https://booksy.com/en-us/dl/show-business/1592260" target="_blank" rel="noopener">
-            Book w/ Jonny
-          </a>
+        <div class="col">
+          <div class="glass-card tilt-card">
+            <div style="font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-primary);margin-bottom:.5rem;">
+              JONNY
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;line-height:1.4;">
+              Where art meets the edge.
+            </div>
+            <a class="book-btn" href="#contact">
+              Book w/ Jonny
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div class="barber-card tilt-card">
-        <div class="barber-name">TAYLOR</div>
-        <div class="barber-desc">Clean blends. Subtle structure. Quiet precision.</div>
-        <div class="barber-actions">
-          <a class="pill gradient" href="https://booksy.com/en-us/dl/show-business/1592260" target="_blank" rel="noopener">
-            Book w/ Taylor
-          </a>
+        <div class="col">
+          <div class="glass-card tilt-card">
+            <div style="font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-primary);margin-bottom:.5rem;">
+              TAYLOR
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;line-height:1.4;">
+              Clean blends. Subtle structure. Quiet precision.
+            </div>
+            <a class="book-btn" href="#contact">
+              Book w/ Taylor
+            </a>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- REVIEWS -->
-  <section id="reviews" class="section-card tilt-card fade-section">
-    <div class="section-head">
-      <div class="section-title">WHAT PEOPLE ARE SAYING</div>
-      <div class="title-underline"></div>
-      <div class="section-desc">
+      </div>
+    </section>
+
+    <!-- =========================
+         REVIEWS
+    ========================== -->
+    <section id="reviews" class="section-block fade-section reviews-highlight">
+      <div class="section-headline">
+        <h2 class="section-title">
+          <span>What People Are Saying</span>
+        </h2>
+        <div class="title-underline"></div>
+      </div>
+      <p class="section-desc">
         Real clients. Real fades. Highlights from recent 5★ reviews.
-      </div>
-    </div>
+      </p>
 
-    <div class="reviews-row">
-      <div class="review-card tilt-card">
-        <div class="review-head">
-          <span>🔥 Cleanest fade I’ve had in years</span>
-          <span class="review-stars">⭐️⭐️⭐️⭐️⭐️</span>
+      <div class="reviews-row" style="margin-top:1rem;">
+        <div class="review-card tilt-card">
+          <div class="review-title">
+            <span>🔥 Cleanest fade I’ve had in years</span>
+            <span class="stars">5★</span>
+          </div>
+          <div style="color:var(--text-secondary);">
+            “Attention to detail is insane. Lined me up perfect, beard crispy, zero rush. If you’re picky, this is where you go.”
+          </div>
         </div>
-        <div class="review-body">
-          “Attention to detail is insane. Lined me up perfect, beard crispy, zero rush.
-          If you’re picky, this is where you go.”
-        </div>
-      </div>
 
-      <div class="review-card tilt-card">
-        <div class="review-head">
-          <span>😎 Chill vibe / professional work</span>
-          <span class="review-stars">⭐️⭐️⭐️⭐️⭐️</span>
+        <div class="review-card tilt-card">
+          <div class="review-title">
+            <span>💬 Chill vibe / professional work</span>
+            <span class="stars">5★</span>
+          </div>
+          <div style="color:var(--text-secondary);">
+            “Felt welcome soon as I walked in. Music good, convo good, cut even better. I’ll be back every week.”
+          </div>
         </div>
-        <div class="review-body">
-          “Felt welcome soon as I walked in. Music good, convo good,
-          cut even better. I’ll be back every week.”
-        </div>
-      </div>
 
-      <div class="review-card tilt-card">
-        <div class="review-head">
-          <span>✂️ Fixed my last bad haircut</span>
-          <span class="review-stars">⭐️⭐️⭐️⭐️⭐️</span>
-        </div>
-        <div class="review-body">
-          “They literally saved me. Cleaned up a messed up fade and made it
-          look intentional. This is skill.”
+        <div class="review-card tilt-card">
+          <div class="review-title">
+            <span>✂️ Fixed my last bad haircut</span>
+            <span class="stars">5★</span>
+          </div>
+          <div style="color:var(--text-secondary);">
+            “They literally saved me. Cleaned up a messed up fade and made it look intentional. This is skill.”
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- SERVICES -->
-  <section id="services" class="section-card tilt-card fade-section">
-    <div class="section-head">
-      <div class="section-title">OUR SERVICES</div>
-      <div class="title-underline"></div>
-      <div class="section-desc">
+    <!-- =========================
+         SERVICES
+    ========================== -->
+    <section id="services" class="section-block fade-section">
+      <div class="section-headline">
+        <h2 class="section-title">
+          <span>Our Services</span>
+        </h2>
+        <div class="title-underline"></div>
+      </div>
+      <p class="section-desc">
         Straight cuts, clean tapers, sharp detail. No gimmicks.
-      </div>
-    </div>
+      </p>
 
-    <div class="services-list tilt-card">
-      <div class="service-row">
-        <div class="service-left">🪖 Military / First Responder</div>
-        <div class="service-price">$25</div>
-        <div class="service-note">
-          Discounted cut rate for military, veterans, police, firefighters,
-          EMTs & first responders.
+      <div style="margin-top:1rem;" class="two-col">
+        <div class="col">
+          <div class="glass-card tilt-card">
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;font-size:.8rem;font-weight:600;">
+              <span>🪖 Military / First Responder</span>
+              <span style="color:var(--accent-blue);">$25</span>
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;margin-top:.4rem;">
+              Discounted cut for active military, veterans, police, firefighters, EMTs & first responders.
+            </div>
+          </div>
+
+          <div class="glass-card tilt-card">
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;font-size:.8rem;font-weight:600;">
+              <span>💈 Haircut (Standard)</span>
+              <span style="color:var(--accent-blue);">$35</span>
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;margin-top:.4rem;">
+              Classic or modern — fades, tapers, or scissor work. Detailed style may vary price.
+            </div>
+          </div>
+
+          <div class="glass-card tilt-card">
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;font-size:.8rem;font-weight:600;">
+              <span>✂️ Line-Up / Edge-Up</span>
+              <span style="color:var(--accent-blue);">$15</span>
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;margin-top:.4rem;">
+              Full lineup + beard edging for a sharp, balanced look.
+            </div>
+          </div>
+
+          <div class="glass-card tilt-card">
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;font-size:.8rem;font-weight:600;">
+              <span>🔥 Skin Fade / Taper</span>
+              <span style="color:var(--accent-blue);">$30+</span>
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;margin-top:.4rem;">
+              Down to the skin with a clean blend, no hard steps. Your fade, your finish.
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="glass-card tilt-card">
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;font-size:.8rem;font-weight:600;">
+              <span>🧔 Beard Trim / Line-Up</span>
+              <span style="color:var(--accent-blue);">$25</span>
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;margin-top:.4rem;">
+              Clean edges, even bulk, crisp shape.
+            </div>
+          </div>
+
+          <div class="glass-card tilt-card">
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;font-size:.8rem;font-weight:600;">
+              <span>🧼 Shampoo Service</span>
+              <span style="color:var(--accent-blue);">$15</span>
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;margin-top:.4rem;">
+              Treat yourself — rinse, cleanse, reset.
+            </div>
+          </div>
+
+          <div class="glass-card tilt-card">
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;font-size:.8rem;font-weight:600;">
+              <span>💡 Design / Custom Work</span>
+              <span style="color:var(--accent-blue);">$10+</span>
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;margin-top:.4rem;">
+              Lines, art, details. Ask first for a quote.
+            </div>
+          </div>
+
+          <div class="glass-card tilt-card">
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;font-size:.8rem;font-weight:600;">
+              <span>🪒 Head Shave</span>
+              <span style="color:var(--accent-blue);">$30</span>
+            </div>
+            <div style="color:var(--text-secondary);font-size:.8rem;margin-top:.4rem;">
+              Clean blade, smooth finish, no shortcuts.
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="service-row">
-        <div class="service-left">💈 Haircut (Standard)</div>
-        <div class="service-price">$30</div>
-        <div class="service-note">
-          Classic or modern — fades, tapers, or scissor work.
-          Detailed style may vary price.
+    <!-- =========================
+         HOURS
+    ========================== -->
+    <section id="hours" class="section-block fade-section">
+      <div class="section-headline">
+        <h2 class="section-title">
+          <span>Business Hours</span>
+        </h2>
+        <div class="title-underline"></div>
+      </div>
+      <p class="section-desc">
+        Walk-ins welcome. Appointments preferred.
+      </p>
+
+      <div class="hours-grid" style="margin-top:1rem;">
+        <div class="hours-row tilt-card">
+          <div class="hours-day">Mon – Sat</div>
+          <div class="hours-time">10:00 AM – 7:00 PM</div>
+        </div>
+        <div class="hours-row tilt-card">
+          <div class="hours-day">Sun</div>
+          <div class="hours-time">11:00 AM – 5:00 PM</div>
+        </div>
+        <div class="hours-row tilt-card">
+          <div class="hours-day">Walk-Ins</div>
+          <div class="hours-time">Welcome (wait times may vary)</div>
+        </div>
+        <div class="hours-row tilt-card">
+          <div class="hours-day">Appointments</div>
+          <div class="hours-time">Preferred for fastest service</div>
         </div>
       </div>
+    </section>
 
-      <div class="service-row">
-        <div class="service-left">🪒 Line Up / Edge-Up</div>
-        <div class="service-price">$15</div>
-        <div class="service-note">
-          Full lineup and clean edges to keep it sharp, balanced, locked in.
+    <!-- =========================
+         CONTACT
+    ========================== -->
+    <section id="contact" class="section-block fade-section">
+      <div class="section-headline">
+        <h2 class="section-title">
+          <span>Contact</span>
+        </h2>
+        <div class="title-underline"></div>
+      </div>
+      <p class="section-desc">
+        Call the shop, lock in a time, or pull up. Real barbers, real results.
+      </p>
+
+      <div class="contact-grid" style="margin-top:1rem;">
+        <div class="contact-row tilt-card">
+          <div>
+            <div style="font-weight:600;color:var(--text-primary);font-size:.8rem;">Phone</div>
+            <div style="font-size:.8rem;color:var(--text-secondary);margin-top:.25rem;">
+              (505) 503-6216
+            </div>
+          </div>
+          <a class="book-btn" href="tel:+15055036216" style="margin-top:0;">
+            Call Now
+          </a>
+        </div>
+
+        <div class="contact-row tilt-card">
+          <div style="flex:1 1 auto;">
+            <div style="font-weight:600;color:var(--text-primary);font-size:.8rem;">Address</div>
+            <div style="font-size:.8rem;color:var(--text-secondary);margin-top:.25rem;line-height:1.4;">
+              6510 Paradise Blvd NW, Unit D<br/>
+              Albuquerque, NM 87114<br/>
+              (Right next to Bob’s Burgers)
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="service-row">
-        <div class="service-left">🔥 Skin Fade / Taper</div>
-        <div class="service-price">$30+</div>
-        <div class="service-note">
-          Down to the skin with a clean blend, or hard taper.
-          Your fade, your finish.
+    <!-- =========================
+         LOCATION / MAP
+    ========================== -->
+    <section id="location" class="section-block fade-section">
+      <div class="section-headline">
+        <h2 class="section-title">
+          <span>Find Us</span>
+        </h2>
+        <div class="title-underline"></div>
+      </div>
+
+      <div class="map-card tilt-card" style="margin-top:1rem;">
+        <div class="map-top">
+          <a
+            class="map-btn"
+            href="https://www.google.com/maps?q=Next+Level+Barber+Shop+Albuquerque,+6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114"
+            target="_blank" rel="noopener noreferrer">
+            Open in Google Maps
+          </a>
+          <a
+            class="map-btn"
+            href="https://maps.apple.com/?address=6510%20Paradise%20Blvd%20NW%20Unit%20D,%20Albuquerque,%20NM%2087114&ll=35.1917307,-106.7250303&q=Next%20Level%20Barber%20Shop"
+            target="_blank" rel="noopener noreferrer">
+            Open in Apple Maps
+          </a>
+        </div>
+
+        <div class="map-frame-wrapper">
+          <iframe
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Next+Level+Barber+Shop+Albuquerque,+6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114&output=embed">
+          </iframe>
+        </div>
+
+        <div class="map-bottom">
+          <div><strong>6510 Paradise Blvd NW, Unit D</strong></div>
+          <div>Albuquerque, NM 87114</div>
+          <div style="margin-top:.5rem;">
+            Right next to Bob’s Burgers. Walk-ins welcome. Appointments preferred.
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- HOURS -->
-  <section id="hours" class="section-card tilt-card fade-section">
-    <div class="section-head">
-      <div class="section-title">BUSINESS HOURS</div>
-      <div class="title-underline"></div>
-    </div>
+    <footer>
+      <div>© <span id="year"></span> Next Level Barbershop • Albuquerque, NM</div>
+      <div>All fades, no gimmicks.</div>
+    </footer>
 
-    <div class="hours-row">
-      <div class="hour-pill">
-        <strong>Monday</strong>
-        <div class="hour-time">10AM – 6PM</div>
-      </div>
-      <div class="hour-pill">
-        <strong>Tuesday</strong>
-        <div class="hour-time">10AM – 6PM</div>
-      </div>
-      <div class="hour-pill">
-        <strong>Wednesday</strong>
-        <div class="hour-time">10AM – 6PM</div>
-      </div>
-      <div class="hour-pill">
-        <strong>Thursday</strong>
-        <div class="hour-time">10AM – 6PM</div>
-      </div>
-      <div class="hour-pill">
-        <strong>Friday</strong>
-        <div class="hour-time">10AM – 6PM</div>
-      </div>
-      <div class="hour-pill">
-        <strong>Saturday</strong>
-        <div class="hour-time">10AM – 4PM</div>
-      </div>
-      <div class="hour-pill">
-        <strong>Sunday</strong>
-        <div class="hour-time">Closed</div>
-      </div>
-    </div>
-  </section>
+  </main>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section-card tilt-card fade-section">
-    <div class="section-head">
-      <div class="section-title">CONTACT</div>
-      <div class="title-underline"></div>
-    </div>
+  <!-- =========================
+       INTERACTION / BEHAVIOR JS
+  ========================== -->
+  <script>
+    // ====== helper refs
+    const bodyEl          = document.body;
+    const headerEl        = document.getElementById('siteHeader');
+    const menuToggleBtn   = document.getElementById('mobileMenuToggle');
+    const mobileMenuPanel = document.getElementById('mobileMenu');
 
-    <div class="contact-info">
-      <div>📍 6510 Paradise Blvd NW Unit D</div>
-      <div>Albuquerque, NM 87114</div>
-      <div class="contact-sub">
-        Right next to Bob’s Burgers.
-      </div>
+    // ====== mobile menu toggle
+    if (menuToggleBtn && mobileMenuPanel) {
+      menuToggleBtn.addEventListener('click', () => {
+        mobileMenuPanel.classList.toggle('open');
+      });
 
-      <div style="margin-top:1rem;">📞 <a style="color:inherit;text-decoration:none;font-weight:600;" href="tel:+15055036216">(505) 503-6216</a></div>
-      <div class="contact-sub">Walk-ins welcome. Appointments preferred.</div>
-    </div>
-  </section>
-
-  <!-- LOCATION / MAP -->
-  <section id="location" class="section-card tilt-card fade-section">
-    <div class="section-head">
-      <div class="section-title">FIND US</div>
-      <div class="title-underline"></div>
-    </div>
-
-    <div class="map-shell tilt-card">
-      <div class="map-buttons">
-        <a class="pill gradient"
-           href="https://www.google.com/maps/place/Next+Level+Barber+Shop+Albuquerque,+6510+Paradise+Blvd+NW+unit+d,+Albuquerque,+NM+87114/@35.1917307,-106.7250303,17z"
-           target="_blank" rel="noopener">
-          Google Maps
-        </a>
-        <a class="pill gradient"
-           href="http://maps.apple.com/?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114"
-           target="_blank" rel="noopener">
-          Apple Maps
-        </a>
-      </div>
-
-      <iframe
-        class="map-frame"
-        loading="lazy"
-        allowfullscreen
-        referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3248.705430283833!2d-106.7250303!3d35.1917307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87226f7a1054dd87%3A0x7736d7f662fd5a2b!2sNext%20Level%20Barber%20Shop%20Albuquerque!5e0!3m2!1sen!2sus!4v0000000000">
-      </iframe>
-
-      <div class="contact-sub" style="margin-top:1rem;">
-        Albuquerque, NM — Right next to Bob’s Burgers.
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  ©2025 Next Level Barbershop — Albuquerque, NM
-</footer>
-
-<script>
-  /* HEADER HIDE / SHOW ON SCROLL */
-  (function(){
-    const header = document.getElementById("site-header");
-    let lastY = window.scrollY;
-    let ticking = false;
-
-    function onScroll(){
-      const currY = window.scrollY;
-      const goingDown = currY > lastY + 8;
-      const goingUp   = currY < lastY - 8;
-
-      if(goingDown){
-        header.classList.add("header-hidden");
-      } else if(goingUp){
-        header.classList.remove("header-hidden");
-      }
-      lastY = currY;
-      ticking=false;
+      // close mobile menu if user taps link
+      mobileMenuPanel.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuPanel.classList.remove('open');
+        });
+      });
     }
 
-    window.addEventListener("scroll",()=>{
-      if(!ticking){
-        window.requestAnimationFrame(onScroll);
-        ticking=true;
+    // ====== sticky header hide on scroll down / show on scroll up
+    let lastScrollY = window.scrollY;
+    function handleHeaderScroll() {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY;
+
+      // only start hiding after slight scroll so it doesn't flicker at top
+      if (currentY > 80) {
+        if (delta > 4) { // scrolling down
+          headerEl.classList.add('header-hidden');
+        } else if (delta < -4) { // scrolling up
+          headerEl.classList.remove('header-hidden');
+        }
+      } else {
+        headerEl.classList.remove('header-hidden');
       }
-    },{passive:true});
-  })();
 
-  /* MOBILE MENU */
-  (function(){
-    const btn = document.getElementById("mobileMenuBtn");
-    const panel = document.getElementById("mobileMenu");
-    if(!btn || !panel) return;
-    function toggleMenu(){
-      panel.classList.toggle("open");
+      lastScrollY = currentY;
     }
-    btn.addEventListener("click",toggleMenu);
-    panel.querySelectorAll("a").forEach(a=>{
-      a.addEventListener("click",()=>panel.classList.remove("open"));
-    });
-  })();
+    window.addEventListener('scroll', handleHeaderScroll, { passive: true });
 
-  /* FADE-UP ON SCROLL */
-  (function(){
-    const els = document.querySelectorAll(".fade-section");
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          e.target.classList.add("visible");
-          io.unobserve(e.target);
+    // ====== fade-in sections on scroll
+    const fadeSections = document.querySelectorAll('.fade-section');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
         }
       });
-    },{threshold:0.15});
-    els.forEach(el=>io.observe(el));
-  })();
+    }, { threshold: 0.15 });
+    fadeSections.forEach(sec => io.observe(sec));
 
-  /* TILT (desktop only) */
-  ;(function(){
-    const finePointer = window.matchMedia("(pointer: fine)").matches;
-    if(!finePointer) return;
-    const maxDeg = 6;
-    function handleMove(e){
-      const card = e.currentTarget;
-      const rect = card.getBoundingClientRect();
-      const cx = rect.left + rect.width/2;
-      const cy = rect.top + rect.height/2;
-      const dx = (e.clientX - cx)/(rect.width/2);
-      const dy = (e.clientY - cy)/(rect.height/2);
-      const rotX = (dy * maxDeg * -1).toFixed(2);
-      const rotY = (dx * maxDeg).toFixed(2);
-      card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02,1.02,1.02)`;
-      card.style.boxShadow = "0 40px 80px rgba(0,0,0,.9),0 0 80px rgba(108,77,255,.7)";
-    }
-    function handleLeave(e){
-      const card = e.currentTarget;
-      card.style.transform = "";
-      card.style.boxShadow = "";
-    }
-    document.querySelectorAll(".tilt-card").forEach(card=>{
-      card.addEventListener("mousemove",handleMove);
-      card.addEventListener("mouseleave",handleLeave);
+    // in case top sections are already in view on load (above threshold 0.15),
+    // push a microtask to check after paint
+    window.requestAnimationFrame(() => {
+      fadeSections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          sec.classList.add('visible');
+        }
+      });
     });
-  })();
-</script>
 
+    // ====== subtle tilt effect on desktop pointer devices
+    // only run if pointer is fine (mouse/trackpad)
+    if (window.matchMedia('(pointer: fine)').matches) {
+      const tiltCards = document.querySelectorAll('.tilt-card');
+
+      tiltCards.forEach(card => {
+        let rect;
+
+        function handleMove(e) {
+          if (!rect) rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const midX = rect.width / 2;
+          const midY = rect.height / 2;
+
+          // tilt amount
+          const rotateX = ((y - midY) / midY) * -6; // max ~6deg
+          const rotateY = ((x - midX) / midX) * 6;
+
+          card.style.transform = `perspective(800px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(0)`;
+        }
+
+        function resetTilt() {
+          rect = null;
+          card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+        }
+
+        card.addEventListener('mousemove', handleMove);
+        card.addEventListener('mouseleave', resetTilt);
+      });
+    }
+
+    // ====== auto year in footer
+    const yearEl = document.getElementById('year');
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+
+    // NOTE:
+    // - Spooky popup intentionally removed for stability like you asked.
+    // - We default to data-theme="dark". To preview light mode,
+    //   manually set <html data-theme="light"> or body.setAttribute('data-theme','light').
+  </script>
 </body>
 </html>
