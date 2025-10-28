@@ -16,7 +16,7 @@
        THEME TOKENS (DARK/LIGHT)
        ========================= */
     :root {
-      --bg: #0b0b0d;
+      --bg:#0b0b0d;
       --bg-grad-1:#1f1147;
       --bg-grad-2:#083344;
 
@@ -34,16 +34,19 @@
       --chip-bg:rgba(255,255,255,.08);
       --header-bg:rgba(12,12,16,.6);
 
+      --band-accent1:rgba(124,58,237,.18);
+      --band-accent2:rgba(34,211,238,.12);
+
+      --marquee-bg:rgba(0,0,0,.4);
+
       --shadow-card:0 24px 44px rgba(0,0,0,.6);
 
-      --band-accent1: rgba(124,58,237,.18);
-      --band-accent2: rgba(34,211,238,.12);
-
-      --glow-purple:rgba(124,58,237,.6);
-      --glow-teal:rgba(34,211,238,.4);
+      /* bobble motion vars (updated in JS) */
+      --bobble-y:0px;
+      --parallax-y:0px;
     }
 
-    @media (prefers-color-scheme: light) {
+    @media (prefers-color-scheme: light){
       :root {
         --bg:#f7f7fb;
         --bg-grad-1:#e0e7ff;
@@ -63,24 +66,21 @@
         --chip-bg:rgba(15,23,42,.07);
         --header-bg:rgba(255,255,255,.8);
 
-        --shadow-card:0 24px 44px rgba(2,6,23,.12);
+        --band-accent1:rgba(124,58,237,.08);
+        --band-accent2:rgba(6,182,212,.07);
 
-        --band-accent1: rgba(124,58,237,.08);
-        --band-accent2: rgba(6,182,212,.07);
-
-        --glow-purple:rgba(124,58,237,.35);
-        --glow-teal:rgba(6,182,212,.3);
+        --marquee-bg:rgba(15,23,42,.07);
       }
     }
 
     /* =========================
-       BASE / RESET
+       BASE
        ========================= */
     * {
       box-sizing:border-box;
       -webkit-font-smoothing:antialiased;
     }
-    html, body { height:100%; }
+    html,body { height:100%; }
     html { scroll-behavior:smooth; }
     body {
       margin:0;
@@ -103,30 +103,35 @@
       padding:0 20px;
       position:relative;
       z-index:3;
+      will-change:transform;
+      transform:translate3d(0,var(--bobble-y),0);
+      transition:transform .18s ease-out;
     }
 
     /* =========================
        BACKGROUND BRAND WATERMARK
+       (lives behind everything + parallax)
        ========================= */
     .brand-bg {
       position:fixed;
       left:50%;
-      top:45vh;
-      transform:translateX(-50%);
+      top:40vh;
+      transform:translate3d(-50%,var(--parallax-y),0);
       z-index:0;
       text-align:center;
       pointer-events:none;
       user-select:none;
-      mix-blend-mode:screen;
-      opacity:0.16;
-      filter:blur(0.5px) drop-shadow(0 0 10px rgba(124,58,237,.6)) drop-shadow(0 0 30px rgba(34,211,238,.5));
+      opacity:0.14;
+      filter:drop-shadow(0 0 8px rgba(124,58,237,.6)) drop-shadow(0 0 24px rgba(34,211,238,.4));
       padding:0 16px;
+      will-change:transform,filter;
+      transition:transform .15s linear;
     }
 
     @media (prefers-color-scheme: light){
       .brand-bg {
+        opacity:0.12;
         mix-blend-mode:multiply;
-        opacity:0.14;
       }
     }
 
@@ -142,11 +147,11 @@
       background-clip:text;
       color:transparent;
       text-shadow:
-        0 0 20px rgba(124,58,237,.8),
-        0 0 60px rgba(34,211,238,.6),
-        0 0 110px rgba(34,211,238,.4);
+        0 0 18px rgba(124,58,237,.7),
+        0 0 48px rgba(34,211,238,.5);
       animation:pulseBg 3s ease-in-out infinite;
       white-space:nowrap;
+      will-change:filter,background-position;
     }
     .brand-bg-line2 {
       display:inline-block;
@@ -164,40 +169,31 @@
     }
 
     @keyframes pulseBg {
-      0% {
-        filter:drop-shadow(0 0 6px rgba(124,58,237,.7)) drop-shadow(0 0 18px rgba(34,211,238,.4));
-        background-position:0% 0%;
-      }
-      20% {
-        filter:drop-shadow(0 0 10px rgba(124,58,237,1)) drop-shadow(0 0 30px rgba(34,211,238,.7));
-        background-position:100% 0%;
-      }
-      35% {
-        filter:drop-shadow(0 0 7px rgba(124,58,237,.8)) drop-shadow(0 0 20px rgba(34,211,238,.5));
-        background-position:50% 0%;
-      }
-      100% {
-        filter:drop-shadow(0 0 6px rgba(124,58,237,.7)) drop-shadow(0 0 18px rgba(34,211,238,.4));
-        background-position:0% 0%;
-      }
+      0%   { filter:drop-shadow(0 0 6px rgba(124,58,237,.7)) drop-shadow(0 0 18px rgba(34,211,238,.4)); background-position:0% 0%; }
+      20%  { filter:drop-shadow(0 0 10px rgba(124,58,237,1)) drop-shadow(0 0 28px rgba(34,211,238,.7)); background-position:100% 0%; }
+      35%  { filter:drop-shadow(0 0 7px rgba(124,58,237,.8)) drop-shadow(0 0 20px rgba(34,211,238,.5)); background-position:50% 0%; }
+      100% { filter:drop-shadow(0 0 6px rgba(124,58,237,.7)) drop-shadow(0 0 18px rgba(34,211,238,.4)); background-position:0% 0%; }
     }
 
     /* =========================
        SECTION ANIMATION / LAYOUT
+       (fast, sharp, GPU-friendly)
        ========================= */
     section {
       max-width:1120px;
       margin:0 auto;
       padding:72px 20px;
       opacity:0;
-      transform:translateY(24px) scale(.98);
-      filter:blur(8px);
-      transition:opacity .7s cubic-bezier(.16,1,.3,1),
-                 transform .7s cubic-bezier(.16,1,.3,1),
-                 filter .7s cubic-bezier(.16,1,.3,1);
+      transform:translate3d(0,20px,0) scale(.99);
+      filter:blur(2px);
+      transition:
+        opacity .4s ease-out,
+        transform .4s ease-out,
+        filter .4s ease-out;
       scroll-margin-top:90px;
       position:relative;
       z-index:2;
+      will-change:opacity,transform,filter;
     }
     section.visible {
       opacity:1;
@@ -205,7 +201,6 @@
       filter:none;
     }
 
-    /* subtle band background behind some sections */
     section.band {
       background:
         radial-gradient(800px 400px at 20% 0%,var(--band-accent1) 0%,transparent 70%),
@@ -215,7 +210,7 @@
     }
 
     /* =========================
-       HEADER / NAV / BRANDING
+       HEADER / NAV
        ========================= */
     header.site-header {
       position:sticky;
@@ -224,13 +219,12 @@
       background:var(--header-bg);
       backdrop-filter:saturate(1.2) blur(8px);
       border-bottom:1px solid var(--border);
-      transition:transform .3s ease;
+      transition:transform .28s ease;
+      will-change:transform;
     }
-
     header.site-header.hide {
       transform:translateY(-100%);
     }
-
     header.site-header.collapsed {
       transform:translateY(-100%);
     }
@@ -243,7 +237,6 @@
       gap:16px;
     }
 
-    /* BRAND (animated pulse every 3s) */
     .brand {
       display:flex;
       align-items:center;
@@ -267,42 +260,29 @@
         0 0 20px rgba(34,211,238,.35);
 
       filter:drop-shadow(0 0 5px rgba(124,58,237,.5));
+      will-change:filter;
 
       animation:brandPulse 3s ease-in-out infinite;
     }
 
     @keyframes brandPulse {
       0% {
-        text-shadow:
-          0 0 10px rgba(124,58,237,.5),
-          0 0 20px rgba(34,211,238,.35);
+        text-shadow:0 0 10px rgba(124,58,237,.5),0 0 20px rgba(34,211,238,.35);
         filter:drop-shadow(0 0 5px rgba(124,58,237,.5));
         background-position:0% 0%;
       }
       20% {
-        text-shadow:
-          0 0 14px rgba(124,58,237,.9),
-          0 0 32px rgba(34,211,238,.6),
-          0 0 64px rgba(34,211,238,.4);
-        filter:
-          drop-shadow(0 0 7px rgba(124,58,237,.8))
-          drop-shadow(0 0 16px rgba(34,211,238,.55));
+        text-shadow:0 0 14px rgba(124,58,237,.9),0 0 32px rgba(34,211,238,.6),0 0 64px rgba(34,211,238,.4);
+        filter:drop-shadow(0 0 7px rgba(124,58,237,.8)) drop-shadow(0 0 16px rgba(34,211,238,.55));
         background-position:100% 0%;
       }
       35% {
-        text-shadow:
-          0 0 12px rgba(124,58,237,.7),
-          0 0 26px rgba(34,211,238,.45),
-          0 0 48px rgba(34,211,238,.3);
-        filter:
-          drop-shadow(0 0 5px rgba(124,58,237,.6))
-          drop-shadow(0 0 12px rgba(34,211,238,.45));
+        text-shadow:0 0 12px rgba(124,58,237,.7),0 0 26px rgba(34,211,238,.45),0 0 48px rgba(34,211,238,.3);
+        filter:drop-shadow(0 0 5px rgba(124,58,237,.6)) drop-shadow(0 0 12px rgba(34,211,238,.45));
         background-position:50% 0%;
       }
       100% {
-        text-shadow:
-          0 0 10px rgba(124,58,237,.5),
-          0 0 20px rgba(34,211,238,.35);
+        text-shadow:0 0 10px rgba(124,58,237,.5),0 0 20px rgba(34,211,238,.35);
         filter:drop-shadow(0 0 5px rgba(124,58,237,.5));
         background-position:0% 0%;
       }
@@ -316,8 +296,8 @@
       justify-content:flex-end;
     }
 
+    /* call button (always visible) */
     .call-mobile {
-      display:none;
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
       color:#fff;
       font-size:14px;
@@ -327,14 +307,15 @@
       line-height:1.2;
       white-space:nowrap;
       box-shadow:0 10px 20px rgba(0,0,0,.6);
+      border:0;
     }
 
+    /* desktop nav tabs */
     nav.primary-nav {
       display:flex;
       flex-wrap:wrap;
       gap:10px;
     }
-
     nav.primary-nav a {
       font-size:14px;
       line-height:1.2;
@@ -346,18 +327,26 @@
       border:1px solid var(--border);
       box-shadow:0 10px 20px rgba(0,0,0,.5);
       transition:all .18s ease;
+      will-change:transform,box-shadow;
     }
-
     nav.primary-nav a:hover,
     nav.primary-nav a:focus {
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
       box-shadow:0 20px 40px rgba(0,0,0,.8),0 0 24px rgba(124,58,237,.5);
       color:#fff;
       border-color:transparent;
+      transform:translate3d(0,-1px,0) scale(1.03);
     }
 
-    /* hide button */
-    .hide-header-btn {
+    /* header controls (menu + collapse) */
+    .header-controls {
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+    }
+
+    .hide-header-btn,
+    .mobile-menu-btn {
       appearance:none;
       border:1px solid var(--border);
       background:var(--panel);
@@ -369,29 +358,83 @@
       padding:10px 12px;
       cursor:pointer;
       box-shadow:0 10px 20px rgba(0,0,0,.5);
+      transition:all .18s ease;
+      will-change:transform,box-shadow;
     }
-    .hide-header-btn:hover {
+    .hide-header-btn:hover,
+    .mobile-menu-btn:hover {
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
       border-color:transparent;
       color:#fff;
       box-shadow:0 20px 40px rgba(0,0,0,.8),0 0 24px rgba(124,58,237,.5);
+      transform:translate3d(0,-1px,0) scale(1.03);
     }
 
+    /* mobile dropdown nav panel */
+    .mobile-nav-panel {
+      position:fixed;
+      top:60px;
+      right:16px;
+      z-index:100;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:14px;
+      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
+      padding:12px;
+      min-width:180px;
+      display:none;
+      flex-direction:column;
+      transform-origin:top right;
+      animation:panelFade .18s ease-out forwards;
+      will-change:transform,opacity;
+    }
+    .mobile-nav-panel.open {
+      display:flex;
+    }
+
+    @keyframes panelFade {
+      from { opacity:0; transform:translate3d(0,-6px,0) scale(.98); }
+      to   { opacity:1; transform:translate3d(0,0,0) scale(1); }
+    }
+
+    .mobile-nav-panel a {
+      display:block;
+      font-size:14px;
+      font-weight:600;
+      color:var(--text-primary);
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid transparent;
+      background:var(--chip-bg);
+      margin-bottom:8px;
+      box-shadow:0 8px 20px rgba(0,0,0,.5);
+      transition:all .18s ease;
+      will-change:transform,box-shadow;
+    }
+    .mobile-nav-panel a:last-child { margin-bottom:0; }
+    .mobile-nav-panel a:hover,
+    .mobile-nav-panel a:active {
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 20px 40px rgba(0,0,0,.8),0 0 24px rgba(124,58,237,.5);
+      transform:translate3d(0,-1px,0) scale(1.03);
+    }
+
+    /* hide desktop nav on small screens, keep mobile menu button */
+    @media (min-width:641px){
+      .mobile-menu-btn { display:none; }
+    }
     @media (max-width:640px){
       nav.primary-nav { display:none; }
-      .call-mobile { display:inline-flex; }
       .brand-text {
         font-size:17px;
         letter-spacing:.16em;
       }
-      .hide-header-btn {
-        font-size:13px;
-        padding:8px 10px;
-      }
     }
 
     /* =========================
-       TITLES / HEADERS
+       SECTION TITLES / TEXT
        ========================= */
     .section-title {
       margin:0 0 28px;
@@ -406,14 +449,12 @@
       row-gap:.4em;
       column-gap:.4em;
     }
-
     .gradient-accent {
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
     }
-
     .section-lead {
       max-width:740px;
       margin:0 0 16px;
@@ -452,18 +493,52 @@
       box-shadow:0 15px 30px rgba(0,0,0,.6);
     }
 
+    /* PROMO STRIP / MARQUEE */
+    .hero-marquee-wrapper {
+      overflow:hidden;
+      width:100%;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:var(--marquee-bg);
+      box-shadow:0 20px 40px rgba(0,0,0,.7);
+      margin-top:28px;
+    }
+    .hero-marquee-track {
+      display:flex;
+      white-space:nowrap;
+      animation:marqueeSlide 12s linear infinite;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      color:var(--text-primary);
+      padding:10px 0;
+      will-change:transform;
+    }
+    .hero-marquee-track span {
+      padding:0 24px;
+      display:flex;
+      align-items:center;
+    }
+    @keyframes marqueeSlide {
+      0%   { transform:translate3d(0,0,0); }
+      100% { transform:translate3d(-50%,0,0); }
+    }
+
     /* =========================
-       REVEAL GROUPS + STAGGERED ITEMS
+       REVEAL GROUP ITEMS
        ========================= */
     .reveal-group {}
 
     .reveal {
       opacity:0;
-      transform:translateY(24px) scale(.98);
-      filter:blur(8px);
-      transition:opacity .7s cubic-bezier(.16,1,.3,1),
-                 transform .7s cubic-bezier(.16,1,.3,1),
-                 filter .7s cubic-bezier(.16,1,.3,1);
+      transform:translate3d(0,20px,0) scale(.99);
+      filter:blur(2px);
+      transition:
+        opacity .4s ease-out,
+        transform .4s ease-out,
+        filter .4s ease-out;
+      will-change:opacity,transform,filter;
     }
     .reveal.show {
       opacity:1;
@@ -472,15 +547,27 @@
     }
 
     /* =========================
-       BARBER CARDS
+       CARDS (barbers, reviews, services)
+       bobble-ready + hover tilt
        ========================= */
-    .barber-grid {
+    .barber-grid,
+    .reviews-grid,
+    .services-grid {
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
       gap:16px;
+      will-change:transform;
+      transform:translate3d(0,var(--bobble-y),0);
+      transition:transform .18s ease-out;
+    }
+    /* services grid is wider cards, so reset minmax for that section */
+    .services-grid {
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
     }
 
-    .barber-card {
+    .barber-card,
+    .review-card,
+    .service-card {
       position:relative;
       overflow:hidden;
       background:var(--panel);
@@ -491,26 +578,43 @@
       flex-direction:column;
       gap:8px;
       box-shadow:0 8px 28px rgba(0,0,0,.45);
-      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      will-change:transform,box-shadow,border-color;
     }
-    .barber-card::before {
+
+    .service-card {
+      background:var(--panel-alt);
+      border-radius:16px;
+      padding:16px 16px 18px;
+    }
+
+    /* glow overlay on hover (desktop) */
+    .barber-card::before,
+    .review-card::before,
+    .service-card::before {
       content:"";
       position:absolute;
       inset:0;
       background:radial-gradient(circle at 20% 20%,rgba(124,58,237,.28),transparent 60%);
       opacity:0;
-      transition:opacity .22s ease;
+      transition:opacity .2s ease;
       pointer-events:none;
     }
-    .barber-card:hover {
-      transform:translateY(-4px) scale(1.02) rotateX(1deg) rotateY(-1deg);
+
+    .barber-card:hover,
+    .review-card:hover,
+    .service-card:hover {
+      transform:translate3d(0,-3px,0) scale(1.015);
       border-color:var(--accent-1);
       box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
     }
-    .barber-card:hover::before {
+    .barber-card:hover::before,
+    .review-card:hover::before,
+    .service-card:hover::before {
       opacity:.4;
     }
 
+    /* barber card text */
     .barber-name {
       font-weight:800;
       font-size:14px;
@@ -518,7 +622,6 @@
       color:var(--text-primary);
       margin:2px 0 2px;
     }
-
     .barber-bio {
       color:var(--text-dim);
       font-size:14px;
@@ -532,6 +635,7 @@
       margin-top:10px;
     }
 
+    /* buttons */
     .btn {
       display:inline-flex;
       align-items:center;
@@ -546,8 +650,8 @@
       min-width:max-content;
       border:1px solid transparent;
       transition:all .18s ease;
+      will-change:transform,box-shadow;
     }
-
     .btn-primary {
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
       color:#fff;
@@ -555,9 +659,8 @@
     }
     .btn-primary:hover {
       box-shadow:0 20px 40px rgba(0,0,0,.8),0 0 24px rgba(124,58,237,.5);
-      transform:translateY(-1px) scale(1.02);
+      transform:translate3d(0,-1px,0) scale(1.02);
     }
-
     .btn-outline {
       background:transparent;
       color:var(--text-primary);
@@ -565,30 +668,7 @@
       background-color:rgba(0,0,0,.15);
     }
 
-    /* =========================
-       REVIEWS / SOCIAL PROOF
-       ========================= */
-    .reviews-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:16px;
-    }
-
-    .review-card {
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:16px 18px 18px;
-      box-shadow:0 8px 28px rgba(0,0,0,.45);
-      position:relative;
-      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-    }
-    .review-card:hover {
-      transform:translateY(-3px) scale(1.02);
-      border-color:var(--accent-1);
-      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
-    }
-
+    /* review-specific text */
     .review-stars {
       font-size:13px;
       font-weight:700;
@@ -607,29 +687,7 @@
       color:var(--text-dim);
     }
 
-    /* =========================
-       SERVICES GRID
-       ========================= */
-    .services-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:16px;
-    }
-
-    .service-card {
-      background:var(--panel-alt);
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:16px 16px 18px;
-      box-shadow:0 8px 28px rgba(0,0,0,.45);
-      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-    }
-    .service-card:hover {
-      transform:translateY(-3px) scale(1.02);
-      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
-      border-color:var(--accent-1);
-    }
-
+    /* services-specific layout */
     .service-head {
       display:flex;
       justify-content:space-between;
@@ -642,7 +700,6 @@
       line-height:1.4;
       letter-spacing:.03em;
     }
-
     .price-chip {
       background:var(--chip-bg);
       border-radius:999px;
@@ -654,7 +711,6 @@
       border:1px solid var(--border);
       white-space:nowrap;
     }
-
     .service-desc {
       display:block;
       margin-top:8px;
@@ -663,9 +719,7 @@
       line-height:1.5;
     }
 
-    /* =========================
-       HOURS GRID
-       ========================= */
+    /* HOURS */
     .hours-grid {
       list-style:none;
       margin:0;
@@ -674,7 +728,6 @@
       grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
       gap:10px;
     }
-
     .hours-item {
       background:var(--panel);
       border:1px solid var(--border);
@@ -683,511 +736,4 @@
       font-size:13px;
       font-weight:500;
       color:var(--text-primary);
-      line-height:1.4;
-      display:flex;
-      align-items:center;
-      min-height:44px;
-    }
-
-    .after-hours {
-      margin-top:14px;
-      font-size:13px;
-      font-weight:600;
-      color:var(--text-dim);
-    }
-
-    /* =========================
-       CONTACT / MAP LINKS
-       ========================= */
-    .contact-block {
-      font-size:14px;
-      line-height:1.5;
-      color:var(--text-primary);
-    }
-    .contact-block a {
-      text-decoration:underline;
-    }
-
-    .map-links {
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin:8px 0 16px;
-    }
-
-    .map-btn {
-      font-size:13px;
-      font-weight:600;
-      line-height:1.2;
-      border-radius:10px;
-      padding:8px 12px;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border:1px solid var(--border);
-      background-color:rgba(0,0,0,.15);
-      color:var(--text-primary);
-      transition:all .18s ease;
-    }
-    .map-btn.google {
-      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-      color:#fff;
-      border:none;
-      box-shadow:0 10px 20px rgba(0,0,0,.6);
-    }
-    .map-btn.google:hover {
-      box-shadow:0 20px 40px rgba(0,0,0,.8),0 0 24px rgba(124,58,237,.5);
-      transform:translateY(-1px) scale(1.02);
-    }
-    .map-btn.apple:hover {
-      background-color:rgba(255,255,255,.07);
-      box-shadow:0 15px 30px rgba(0,0,0,.6);
-    }
-
-    .map-frame {
-      width:100%;
-      height:400px;
-      border-radius:16px;
-      border:1px solid var(--border);
-    }
-
-    .landmark-note {
-      margin-top:12px;
-      font-size:13px;
-      font-weight:600;
-      color:var(--text-dim);
-    }
-
-    /* =========================
-       FOOTER
-       ========================= */
-    footer {
-      border-top:1px solid var(--border);
-      color:var(--text-dim);
-      font-size:13px;
-      text-align:center;
-      padding:32px 20px;
-      margin-top:48px;
-      position:relative;
-      z-index:2;
-    }
-
-    /* =========================
-       RESPONSIVE TWEAKS
-       ========================= */
-    @media (max-width:640px){
-      section {
-        padding:60px 20px;
-      }
-      .barber-grid { grid-template-columns:1fr; }
-      .services-grid { grid-template-columns:1fr; }
-      .reviews-grid { grid-template-columns:1fr; }
-      .section-lead { font-size:14px; }
-      .nav-row { padding-left:16px; padding-right:16px; }
-      .badges-row { gap:8px; }
-      .badge-pill { font-size:12px; padding:8px 12px; }
-
-      /* calm hover on touch */
-      .barber-card:hover,
-      .review-card:hover,
-      .service-card:hover {
-        transform:none;
-        box-shadow:0 8px 28px rgba(0,0,0,.45);
-      }
-      .barber-card:hover::before { opacity:0; }
-    }
-
-    /* =========================
-       REDUCED MOTION
-       ========================= */
-    @media (prefers-reduced-motion:reduce){
-      section,
-      .reveal {
-        opacity:1;
-        transform:none;
-        filter:none;
-        transition:none;
-      }
-      .barber-card,.service-card,.review-card,
-      .btn-primary {
-        transition:none;
-      }
-      .brand-text,
-      .brand-bg-line1 {
-        animation:none;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- fixed glowing brand watermark in background -->
-  <div class="brand-bg">
-    <div class="brand-bg-line1">NEXT LEVEL BARBERSHOP</div>
-    <div class="brand-bg-line2">ALBUQUERQUE, NM</div>
-  </div>
-
-  <!-- ===== HEADER ===== -->
-  <header class="site-header" id="siteHeader">
-    <div class="wrap nav-row">
-      <div class="brand">
-        <span class="brand-text">NEXT LEVEL BARBERSHOP</span>
-      </div>
-
-      <div class="header-cta">
-        <a class="call-mobile" href="tel:+15055036216">📞 (505) 503-6216</a>
-
-        <nav class="primary-nav" aria-label="Main">
-          <a href="#home">HOME</a>
-          <a href="#barbers">OUR BARBERS</a>
-          <a href="#reviews">REVIEWS</a>
-          <a href="#services">SERVICES</a>
-          <a href="#hours">HOURS</a>
-          <a href="#contact">CONTACT</a>
-          <a href="#location">LOCATION</a>
-        </nav>
-
-        <button class="hide-header-btn" id="toggleHeaderBtn" title="Hide / Show menu">
-          ⇕
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- ===== HERO ===== -->
-  <section id="home" class="band">
-    <div class="wrap">
-      <h2 class="section-title">
-        <span class="gradient-accent">Welcome</span>
-        to Next Level BarberShop
-      </h2>
-
-      <p class="section-lead">
-        Professional cuts, sharp fades, and a clean vibe. Locally owned. Walk-ins welcome. Appointments preferred.
-      </p>
-
-      <div class="badges-row">
-        <div class="badge-pill gradient">Locally Owned</div>
-        <div class="badge-pill">Walk-Ins Welcome</div>
-        <div class="badge-pill">Appointments Preferred</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== BARBERS ===== -->
-  <section id="barbers">
-    <div class="wrap">
-      <h2 class="section-title">Our Barbers</h2>
-      <p class="section-lead">Book directly with your barber or call the shop. Real craft, no gimmicks.</p>
-
-      <div class="barber-grid reveal-group">
-        <article class="barber-card reveal">
-          <p class="barber-name">VINCENT (OWNER)</p>
-          <p class="barber-bio">Founder. Fader. Visionary.</p>
-          <div class="cta-row">
-            <a class="btn btn-outline" href="tel:+15055036216">📞 Call to Book</a>
-          </div>
-        </article>
-
-        <article class="barber-card reveal">
-          <p class="barber-name">ZWALUW</p>
-          <p class="barber-bio">Precision in every pass.</p>
-          <div class="cta-row">
-            <a class="btn btn-outline" href="tel:+15055036216">📞 Call to Book</a>
-          </div>
-        </article>
-
-        <article class="barber-card reveal">
-          <p class="barber-name">G-MO</p>
-          <p class="barber-bio">Style that speaks before you do.</p>
-          <div class="cta-row">
-            <a class="btn btn-outline" href="tel:+15055036216">📞 Call to Book</a>
-          </div>
-        </article>
-
-        <article class="barber-card reveal">
-          <p class="barber-name">DESHAUN</p>
-          <p class="barber-bio">Sharp fades. Chill vibes.</p>
-          <div class="cta-row">
-            <a class="btn btn-outline" href="tel:+15055036216">📞 Call to Book</a>
-          </div>
-        </article>
-
-        <article class="barber-card reveal">
-          <p class="barber-name">CA$H</p>
-          <p class="barber-bio">Quick with the clippers, real with the results.</p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="https://booksy.com/en-us/dl/show-business/1346592?utm_medium=c2c_referral" target="_blank" rel="noopener">Book w/ Ca$h</a>
-          </div>
-        </article>
-
-        <article class="barber-card reveal">
-          <p class="barber-name">JONNY</p>
-          <p class="barber-bio">Where art meets the edge.</p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="https://linktr.ee/TBJONNY" target="_blank" rel="noopener">Book w/ Jonny</a>
-          </div>
-        </article>
-
-        <article class="barber-card reveal">
-          <p class="barber-name">TAYLOR</p>
-          <p class="barber-bio">Clean blends, subtle structure, quiet precision.</p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="https://booksy.com/en-us/dl/show-business/1592260" target="_blank" rel="noopener">Book w/ Taylor</a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== REVIEWS ===== -->
-  <section id="reviews" class="band">
-    <div class="wrap">
-      <h2 class="section-title">What People Are Saying</h2>
-      <p class="section-lead">
-        Consistent work, good energy, no nonsense. Rated over 4★ with 100+ reviews. People drive in just for the cut.
-      </p>
-
-      <div class="reviews-grid reveal-group">
-        <div class="review-card reveal">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">“When you go in ask for Ca$h. She is on point each and every time. Highly recommended.”</p>
-          <div class="review-author">– Anthony V.</div>
-        </div>
-
-        <div class="review-card reveal">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">“Everyone in here is so chill and down to earth. They do a fantastic job. My boys are always begging to go.”</p>
-          <div class="review-author">– Stephanie A.</div>
-        </div>
-
-        <div class="review-card reveal">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">“Fantastic job for my 15-year-old son — low taper, super clean. He loves the vibe. They’re welcoming.”</p>
-          <div class="review-author">– Stacie B.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SERVICES ===== -->
-  <section id="services">
-    <div class="wrap">
-      <h2 class="section-title">Our Services</h2>
-      <p class="section-lead">
-        Straightforward pricing. Detailed / trending styles may cost more depending on design and time.
-      </p>
-
-      <div class="services-grid reveal-group">
-        <div class="service-card reveal">
-          <div class="service-head"><span>💈 MILITARY / FIRST RESPONDER</span><span class="price-chip">$28</span></div>
-          <span class="service-desc">Discounted cut for active military, veterans, police, firefighters, EMTs & first responders.</span>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-head"><span>💇‍♂️ HAIRCUT (STANDARD)</span><span class="price-chip">$35</span></div>
-          <span class="service-desc">Classic or trending — fades, tapers, or scissor work. <em>Detailed styles:</em> $40–$50+ depending on design / time.</span>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-head"><span>🧔 HAIRCUT + BEARD</span><span class="price-chip">$40</span></div>
-          <span class="service-desc">Full cut plus beard trim / line-up for a sharp, balanced look.</span>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-head"><span>🪒 SKIN FADE / TAPER</span><span class="price-chip">$40</span></div>
-          <span class="service-desc">Down to the skin with foil shaver or razor for a clean finish.</span>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-head"><span>🪒🧔 SKIN FADE / TAPER + BEARD</span><span class="price-chip">$45</span></div>
-          <span class="service-desc">Skin-level fade / taper plus full beard lineup.</span>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-head"><span>🧴 SHAMPOO SERVICE</span><span class="price-chip">$15</span></div>
-          <span class="service-desc">Treat yourself — cleanse, set, relax.</span>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-head"><span>✂️ LONG HAIR (PAST SHOULDERS)</span><span class="price-chip">$35</span></div>
-          <span class="service-desc">Extra time & detail for longer lengths.</span>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-head"><span>🧔‍♂️ BEARD TRIM / LINE UP</span><span class="price-chip">$25</span></div>
-          <span class="service-desc">Clean edges, even bulk, crisp shape.</span>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-head"><span>🧼 FACE SHAVE</span><span class="price-chip">$25</span></div>
-          <span class="service-desc">Hot towel, lather, and smooth finish.</span>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-head"><span>📏 LINE UP ONLY</span><span class="price-chip">$15</span></div>
-          <span class="service-desc">Edges only. <em>Beard not included.</em></span>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-head"><span>🎨 DESIGN ONLY</span><span class="price-chip">$10</span></div>
-          <span class="service-desc">Add a freestyle design or bring a reference.</span>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-head"><span>🌀 PERM SERVICE</span><span class="price-chip">$90+</span></div>
-          <span class="service-desc">Beachy waves to tighter curls — premium products for lasting results.</span>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-head"><span>🪒 HEAD SHAVE</span><span class="price-chip">$35</span></div>
-          <span class="service-desc">Clean and polished dome with hot towel finish.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== HOURS ===== -->
-  <section id="hours" class="band">
-    <div class="wrap">
-      <h2 class="section-title">Business Hours</h2>
-      <p class="section-lead">Walk-ins welcome. Appointments preferred. No extra charge after hours.</p>
-
-      <ul class="hours-grid">
-        <li class="hours-item">SUNDAY : 9:00am – 4:00pm</li>
-        <li class="hours-item">MONDAY : 9:00am – 4:00pm</li>
-        <li class="hours-item">TUESDAY : 8:30am – 5:30pm</li>
-        <li class="hours-item">WEDNESDAY : 8:30am – 5:30pm</li>
-        <li class="hours-item">THURSDAY : 8:30am – 5:30pm</li>
-        <li class="hours-item">FRIDAY : 8:30am – 5:30pm</li>
-        <li class="hours-item">SATURDAY : 8:30am – 5:30pm</li>
-      </ul>
-
-      <p class="after-hours">NO ADDITIONAL CHARGE AFTER HOURS!</p>
-    </div>
-  </section>
-
-  <!-- ===== CONTACT ===== -->
-  <section id="contact">
-    <div class="wrap">
-      <h2 class="section-title">Contact</h2>
-      <div class="contact-block">
-        <p>
-          📍 Our Address:<br />
-          6510 Paradise Blvd NW Unit D, Albuquerque, NM 87114
-        </p>
-
-        <div class="map-links">
-          <a
-            class="map-btn google"
-            href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114"
-            target="_blank"
-            rel="noopener"
-          >
-            Open in Google Maps
-          </a>
-
-          <a
-            class="map-btn apple"
-            href="https://maps.apple.com/?address=6510%20Paradise%20Blvd%20NW%20Unit%20D,%20Albuquerque,%20NM%2087114"
-            target="_blank"
-            rel="noopener"
-          >
-            Open in Apple Maps
-          </a>
-        </div>
-
-        <p>📞 <a href="tel:+15055036216">(505) 503-6216</a></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== LOCATION / MAP ===== -->
-  <section id="location" class="band">
-    <div class="wrap">
-      <h2 class="section-title">Find Us</h2>
-
-      <iframe class="map-frame"
-        src="https://maps.google.com/maps?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114&t=&z=15&ie=UTF8&iwloc=&output=embed"
-        loading="lazy"
-        allowfullscreen
-        title="Map to Next Level BarberShop">
-      </iframe>
-
-      <p class="landmark-note">We’re right next to Bob’s Burgers. Plenty of parking in front.</p>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer>
-    © 2025 Next Level BarberShop
-  </footer>
-
-  <script>
-    // ===== Scroll reveal for sections =====
-    const sectionObserver=new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          e.target.classList.add('visible');
-          sectionObserver.unobserve(e.target);
-        }
-      });
-    },{threshold:.15});
-    document.querySelectorAll('section').forEach(s=>sectionObserver.observe(s));
-
-    // ===== Staggered card reveal (barbers/services/reviews) =====
-    const groupObserver=new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          const kids=[...entry.target.querySelectorAll('.reveal')];
-          kids.forEach((el,i)=>{
-            setTimeout(()=>{
-              el.classList.add('show');
-            }, i*80);
-          });
-          groupObserver.unobserve(entry.target);
-        }
-      });
-    },{threshold:.2});
-    document.querySelectorAll('.reveal-group').forEach(g=>groupObserver.observe(g));
-
-    // ===== Hide header on scroll down / show on scroll up =====
-    const header = document.getElementById('siteHeader');
-    const toggleBtn = document.getElementById('toggleHeaderBtn');
-
-    let lastScrollY = window.scrollY;
-    let manualCollapse = false;
-
-    window.addEventListener('scroll', () => {
-      const currentY = window.scrollY;
-
-      if (manualCollapse) {
-        // if user manually collapsed, don't auto-show/hide
-        lastScrollY = currentY;
-        return;
-      }
-
-      // scrolling down, past 80px -> hide
-      if (currentY > lastScrollY && currentY > 80){
-        header.classList.add('hide');
-      } else {
-        // scrolling up -> show
-        header.classList.remove('hide');
-      }
-
-      lastScrollY = currentY;
-    });
-
-    // manual toggle button
-    toggleBtn.addEventListener('click', () => {
-      manualCollapse = !manualCollapse;
-      if (manualCollapse){
-        header.classList.add('collapsed');
-      } else {
-        header.classList.remove('collapsed');
-      }
-    });
-  </script>
-</body>
-</html>
+  
