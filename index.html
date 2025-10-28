@@ -37,7 +37,6 @@
       --parallax-y:0px;
       --parallax-y-half:0px;
 
-      /* rim light + lift to separate from bg */
       --rim-color:rgba(255,255,255,.12);
       --rim-shadow:0 1px 2px rgba(255,255,255,.18);
       --lift-shadow:0 16px 32px rgba(0,0,0,.7);
@@ -100,10 +99,8 @@
       box-sizing:border-box;
       -webkit-font-smoothing:antialiased;
     }
-
     html,body { height:100%; }
     html { scroll-behavior:smooth; }
-
     body {
       margin:0;
       font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
@@ -116,7 +113,6 @@
       position:relative;
       overflow-x:hidden;
     }
-
     img { display:block; max-width:100%; }
     a   { color:inherit; text-decoration:none; }
 
@@ -128,7 +124,7 @@
       z-index:3;
     }
 
-    /* ========= BACKGROUND BRAND / PARALLAX ========= */
+    /* ========= BACKGROUND SIGNATURE ========= */
     .brand-bg {
       position:fixed;
       left:50%;
@@ -157,7 +153,6 @@
     @media (prefers-color-scheme: light){
       .brand-bg { opacity:0.12; mix-blend-mode:multiply; }
     }
-
     .brand-bg-line1 {
       font-weight:800;
       letter-spacing:.25em;
@@ -243,7 +238,6 @@
       flex-wrap:nowrap;
       gap:12px;
     }
-
     .brand-text {
       font-weight:800;
       letter-spacing:.14em;
@@ -268,7 +262,6 @@
       35%  { filter:drop-shadow(0 0 7px rgba(124,58,237,.8)) drop-shadow(0 0 12px rgba(34,211,238,.5)); background-position:50% 0%; }
       100% { filter:drop-shadow(0 0 6px rgba(124,58,237,.6)); background-position:0% 0%; }
     }
-
     .call-now-mini {
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
       color:#fff;
@@ -294,11 +287,7 @@
       display:flex;
       flex-direction:column;
     }
-
-    /* MOBILE NAV BUTTONS:
-       - no dark pill background anymore
-       - subtle glow text / underline on hover
-    */
+    /* MOBILE NAV LINKS (no pill background) */
     nav.primary-nav-mobile {
       display:flex;
       flex-wrap:nowrap;
@@ -309,7 +298,6 @@
       width:100%;
     }
     nav.primary-nav-mobile::-webkit-scrollbar { display:none; }
-
     nav.primary-nav-mobile a {
       flex:0 0 auto;
       font-size:14px;
@@ -327,6 +315,7 @@
       border-bottom:2px solid transparent;
       transition:all .18s ease;
       will-change:color, text-shadow, border-color;
+      text-decoration:none;
     }
     nav.primary-nav-mobile a:hover,
     nav.primary-nav-mobile a:focus {
@@ -345,7 +334,6 @@
       gap:10px;
       padding:16px 20px 18px;
     }
-
     .desktop-brand-row {
       display:flex;
       width:100%;
@@ -355,7 +343,6 @@
       row-gap:8px;
       text-align:center;
     }
-
     .brand-desktop {
       font-weight:800;
       letter-spacing:.14em;
@@ -376,7 +363,6 @@
       animation:brandPulse 3s ease-in-out infinite;
       white-space:nowrap;
     }
-
     .desktop-nav-row {
       display:flex;
       width:100%;
@@ -385,7 +371,6 @@
       flex-wrap:wrap;
       row-gap:10px;
     }
-
     nav.primary-nav-desktop {
       display:flex;
       flex-wrap:wrap;
@@ -393,7 +378,6 @@
       justify-content:center;
       gap:10px 14px;
     }
-
     nav.primary-nav-desktop a.nav-link {
       font-size:14px;
       line-height:1.2;
@@ -419,7 +403,6 @@
       box-shadow:var(--spotlight-glow);
       transform:translate3d(0,-1px,0) scale(1.03);
     }
-
     a.nav-call {
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
       color:#fff;
@@ -442,25 +425,28 @@
     a.nav-call:hover {
       transform:translate3d(0,-1px,0) scale(1.02);
     }
-
     @media(min-width:768px){
       .header-mobile { display:none; }
       .header-desktop { display:flex; }
     }
 
-    /* ========= FROST PANELS (glass sections) ========= */
+    /* ========= LAYOUT / SECTION PANELS ========= */
     section {
       position:relative;
       z-index:2;
       padding:48px 20px;
-      scroll-margin-top:120px;
+      scroll-margin-top:140px; /* desktop default */
     }
     @media(min-width:768px){
+      section { padding:64px 20px; }
+    }
+    @media(max-width:767px){
       section {
-        padding:64px 20px;
+        scroll-margin-top:180px; /* mobile: gives nicer landing when tapping nav */
       }
     }
 
+    /* Frosted glass main wrapper for each section */
     .frost-panel {
       position:relative;
       max-width:1120px;
@@ -468,13 +454,26 @@
       background:rgba(15,15,25,.35);
       backdrop-filter:blur(14px) saturate(1.2);
       -webkit-backdrop-filter:blur(14px) saturate(1.2);
+
       border:1px solid var(--border);
       border-radius:24px;
       padding:32px 20px 40px;
+
+      /* desktop interactive tilt vars */
+      --tiltX:0deg;
+      --tiltY:0deg;
+      --spotX:50%;
+      --spotY:50%;
+
+      transform-style:preserve-3d;
+      transform:translateY(0) scale(1) perspective(800px)
+        rotateX(var(--tiltX)) rotateY(var(--tiltY));
+
       box-shadow:
         var(--rim-shadow),
         var(--lift-shadow),
         var(--color-glow-shadow);
+
       transition:
         box-shadow .22s ease,
         border-color .22s ease,
@@ -484,20 +483,62 @@
     @media(min-width:768px){
       .frost-panel {
         padding:48px 32px 56px;
+        background:
+          radial-gradient(circle at 15% 20%,rgba(124,58,237,.07) 0%,rgba(0,0,0,0) 60%),
+          rgba(15,15,25,.35);
       }
     }
     @media(prefers-color-scheme: light){
       .frost-panel {
         background:rgba(255,255,255,.45);
       }
+      @media(min-width:768px){
+        .frost-panel {
+          background:
+            radial-gradient(circle at 15% 20%,rgba(124,58,237,.07) 0%,rgba(0,0,0,0) 60%),
+            rgba(255,255,255,.45);
+        }
+      }
     }
+
+    /* glowing follow-spot that we animate w/ mouse on desktop */
+    .frost-panel::before {
+      content:"";
+      position:absolute;
+      inset:-40px;
+      border-radius:32px;
+      background:
+        radial-gradient(circle at var(--spotX) var(--spotY),
+          rgba(124,58,237,.28) 0%,
+          rgba(34,211,238,.18) 30%,
+          transparent 70%);
+      filter:blur(60px);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .18s ease;
+    }
+
     .frost-panel.in-view {
       box-shadow:var(--spotlight-glow);
       border-color:var(--accent-1);
-      transform:translateY(-1px) scale(1.01);
+      transform:translateY(-1px) scale(1.01) perspective(800px)
+        rotateX(var(--tiltX)) rotateY(var(--tiltY));
+    }
+    .frost-panel.in-view::before {
+      opacity:.7;
     }
 
-    /* ========= SECTION HEADERS ========= */
+    @media(max-width:767px){
+      /* mobile keeps it simple: no tilt math transform scaling beyond .in-view lift */
+      .frost-panel,
+      .frost-panel.in-view {
+        transform:translateY(0) scale(1);
+        perspective:none;
+        rotate:0;
+      }
+    }
+
+    /* ========= SECTION HEADINGS ========= */
     .section-title {
       position:relative;
       margin:0 0 28px;
@@ -538,7 +579,6 @@
       50%  { filter:blur(40px); opacity:.55; }
       100% { filter:blur(32px); opacity:.32; }
     }
-
     .section-title::after {
       content:"";
       position:absolute;
@@ -552,7 +592,6 @@
         0 0 20px rgba(124,58,237,.8),
         0 0 40px rgba(34,211,238,.6);
     }
-
     .section-title.in-view {
       text-shadow:
         0 0 12px rgba(255,255,255,.6),
@@ -693,7 +732,6 @@
           var(--panel);
       }
     }
-
     .card-unit::before {
       content:"";
       position:absolute;
@@ -709,10 +747,9 @@
       pointer-events:none;
       will-change:opacity,filter;
       transition:opacity .22s ease,filter .22s ease;
-      /* no scroll offset (fixes mobile glow offset) */
     }
 
-    /* Desktop hover glow (cards only on desktop) */
+    /* Desktop hover glow for cards */
     @media (hover:hover){
       .card-unit:hover {
         transform:translateY(-2px) scale(1.01);
@@ -725,7 +762,7 @@
       }
     }
 
-    /* Mobile spotlight state / and also used when IO says "in-view" */
+    /* Mobile spotlight / IO spotlight */
     .card-unit.in-view {
       transform:translateY(-2px) scale(1.01);
       border-color:var(--accent-1);
@@ -941,7 +978,6 @@
       border-color:var(--accent-1);
       box-shadow:var(--spotlight-glow);
     }
-
     .after-hours {
       margin-top:14px;
       font-size:13px;
@@ -969,7 +1005,6 @@
       gap:10px;
       margin:8px 0 16px;
     }
-
     .map-btn {
       font-size:13px;
       font-weight:600;
@@ -1029,7 +1064,6 @@
       border-color:var(--accent-1);
       box-shadow:var(--spotlight-glow);
     }
-
     .landmark-note {
       margin-top:12px;
       font-size:13px;
@@ -1048,6 +1082,52 @@
       text-shadow:
         0 0 12px rgba(124,58,237,.8),
         0 0 24px rgba(34,211,238,.6);
+    }
+
+    /* PAYMENT SECTION styles (badge row vibe) */
+    .payment-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:20px;
+    }
+    .pay-pill {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      font-size:14px;
+      font-weight:600;
+      line-height:1.2;
+      border-radius:12px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      color:var(--text-primary);
+      box-shadow:
+        var(--rim-shadow),
+        var(--lift-shadow),
+        var(--color-glow-shadow);
+    }
+    .pay-pill.gradient {
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      border:0;
+      color:#fff;
+      box-shadow:
+        var(--rim-shadow),
+        var(--spotlight-glow);
+    }
+    @media(max-width:640px){
+      .pay-pill { font-size:13px; padding:8px 12px; }
+    }
+
+    .payment-note {
+      max-width:740px;
+      margin-top:16px;
+      font-size:13px;
+      line-height:1.5;
+      color:var(--text-dim);
+      text-shadow:var(--rim-shadow);
+      font-weight:500;
     }
 
     /* FOOTER */
@@ -1075,7 +1155,7 @@
         0 0 24px rgba(34,211,238,.6);
     }
 
-    /* REDUCED MOTION */
+    /* REDUCED MOTION SAFETY */
     @media (prefers-reduced-motion:reduce){
       .brand-text,
       .brand-desktop,
@@ -1091,7 +1171,8 @@
       .map-btn,
       .map-frame,
       .landmark-note,
-      footer {
+      footer,
+      .frost-panel {
         opacity:1 !important;
         transform:none !important;
         animation:none !important;
@@ -1121,6 +1202,7 @@
           <a href="#home">HOME</a>
           <a href="#barbers">OUR BARBERS</a>
           <a href="#reviews">REVIEWS</a>
+          <a href="#payments">PAYMENT</a>
           <a href="#services">SERVICES</a>
           <a href="#hours">HOURS</a>
           <a href="#contact">CONTACT</a>
@@ -1140,6 +1222,7 @@
           <a class="nav-link" href="#home">HOME</a>
           <a class="nav-link" href="#barbers">OUR BARBERS</a>
           <a class="nav-link" href="#reviews">REVIEWS</a>
+          <a class="nav-link" href="#payments">PAYMENT</a>
           <a class="nav-link" href="#services">SERVICES</a>
           <a class="nav-link" href="#hours">HOURS</a>
           <a class="nav-link" href="#contact">CONTACT</a>
@@ -1156,7 +1239,8 @@
       <h2 class="section-title glow-animate">Welcome to Next Level BarberShop</h2>
 
       <p class="section-lead">
-        Professional cuts, sharp fades, and a clean vibe. Locally owned. Walk-ins welcome. Appointments preferred.
+        Professional cuts, sharp fades, and a clean vibe. Locally owned.
+        Walk-ins welcome. Appointments preferred.
       </p>
 
       <div class="badges-row">
@@ -1253,7 +1337,8 @@
     <div class="frost-panel glow-animate">
       <h2 class="section-title glow-animate">What People Are Saying</h2>
       <p class="section-lead">
-        Consistent work, good energy, no nonsense. Rated over 4★ with 100+ reviews. People drive in just for the cut.
+        Consistent work, good energy, no nonsense. Rated over 4★ with 100+ reviews.
+        People drive in just for the cut.
       </p>
 
       <div class="reviews-grid">
@@ -1268,7 +1353,8 @@
         <div class="review-card card-unit glow-animate">
           <div class="review-stars">★★★★★</div>
           <p class="review-text">
-            “Everyone in here is so chill and down to earth. They do a fantastic job. My boys are always begging to go.”
+            “Everyone in here is so chill and down to earth. They do a fantastic job.
+            My boys are always begging to go.”
           </p>
           <div class="review-author">– Stephanie A.</div>
         </div>
@@ -1276,10 +1362,34 @@
         <div class="review-card card-unit glow-animate">
           <div class="review-stars">★★★★★</div>
           <p class="review-text">
-            “Fantastic job for my 15-year-old son — low taper, super clean. He loves the vibe. They’re welcoming.”
+            “Fantastic job for my 15-year-old son — low taper, super clean.
+            He loves the vibe. They’re welcoming.”
           </p>
           <div class="review-author">– Stacie B.</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAYMENT & BOOKING -->
+  <section id="payments">
+    <div class="frost-panel glow-animate">
+      <h2 class="section-title glow-animate">Payment & Booking</h2>
+      <p class="section-lead">
+        No stress at checkout. Most of our barbers accept digital or cash — just confirm
+        your barber’s preferred method when you book.
+      </p>
+
+      <div class="payment-row">
+        <div class="pay-pill gradient">Cash</div>
+        <div class="pay-pill">Apple&nbsp;Pay</div>
+        <div class="pay-pill">Cash&nbsp;App</div>
+        <div class="pay-pill">Venmo</div>
+      </div>
+
+      <div class="payment-note">
+        Payment methods can vary by barber.
+        If you’re not sure, call the shop or DM the barber when you book.
       </div>
     </div>
   </section>
@@ -1289,139 +1399,141 @@
     <div class="frost-panel glow-animate">
       <h2 class="section-title glow-animate">Our Services</h2>
       <p class="section-lead">
-        Straightforward pricing. Detailed / trending styles may cost more depending on design and time.
+        Straightforward pricing. Detailed / trending styles may cost more depending
+        on design and time.
       </p>
 
       <div class="services-grid">
         <div class="service-card glow-animate">
-            <div class="service-head">
-              <span>💈 MILITARY / FIRST RESPONDER</span>
-              <span class="price-chip">$28</span>
-            </div>
-            <span class="service-desc">
-              Discounted cut for active military, veterans, police, firefighters, EMTs & first responders.
-            </span>
+          <div class="service-head">
+            <span>💈 MILITARY / FIRST RESPONDER</span>
+            <span class="price-chip">$28</span>
+          </div>
+          <span class="service-desc">
+            Discounted cut for active military, veterans, police, firefighters,
+            EMTs & first responders.
+          </span>
         </div>
 
         <div class="service-card glow-animate">
-            <div class="service-head">
-              <span>💇‍♂️ HAIRCUT (STANDARD)</span>
-              <span class="price-chip">$35</span>
-            </div>
-            <span class="service-desc">
-              Classic or trending — fades, tapers, or scissor work.
-              <em>Detailed styles:</em> $40–$50+ depending on design / time.
-            </span>
+          <div class="service-head">
+            <span>💇‍♂️ HAIRCUT (STANDARD)</span>
+            <span class="price-chip">$35</span>
+          </div>
+          <span class="service-desc">
+            Classic or trending — fades, tapers, or scissor work.
+            <em>Detailed styles:</em> $40–$50+ depending on design / time.
+          </span>
         </div>
 
         <div class="service-card glow-animate">
-            <div class="service-head">
-              <span>🧔 HAIRCUT + BEARD</span>
-              <span class="price-chip">$40</span>
-            </div>
-            <span class="service-desc">
-              Full cut plus beard trim / line-up for a sharp, balanced look.
-            </span>
+          <div class="service-head">
+            <span>🧔 HAIRCUT + BEARD</span>
+            <span class="price-chip">$40</span>
+          </div>
+          <span class="service-desc">
+            Full cut plus beard trim / line-up for a sharp, balanced look.
+          </span>
         </div>
 
         <div class="service-card glow-animate">
-            <div class="service-head">
-              <span>🪒 SKIN FADE / TAPER</span>
-              <span class="price-chip">$40</span>
-            </div>
-            <span class="service-desc">
-              Down to the skin with foil shaver or razor for a clean finish.
-            </span>
+          <div class="service-head">
+            <span>🪒 SKIN FADE / TAPER</span>
+            <span class="price-chip">$40</span>
+          </div>
+          <span class="service-desc">
+            Down to the skin with foil shaver or razor for a clean finish.
+          </span>
         </div>
 
         <div class="service-card glow-animate">
-            <div class="service-head">
-              <span>🪒🧔 SKIN FADE / TAPER + BEARD</span>
-              <span class="price-chip">$45</span>
-            </div>
-            <span class="service-desc">
-              Skin-level fade / taper plus full beard lineup.
-            </span>
+          <div class="service-head">
+            <span>🪒🧔 SKIN FADE / TAPER + BEARD</span>
+            <span class="price-chip">$45</span>
+          </div>
+          <span class="service-desc">
+            Skin-level fade / taper plus full beard lineup.
+          </span>
         </div>
 
         <div class="service-card glow-animate">
-            <div class="service-head">
-              <span>🧴 SHAMPOO SERVICE</span>
-              <span class="price-chip">$15</span>
-            </div>
-            <span class="service-desc">
-              Treat yourself — cleanse, set, relax.
-            </span>
+          <div class="service-head">
+            <span>🧴 SHAMPOO SERVICE</span>
+            <span class="price-chip">$15</span>
+          </div>
+          <span class="service-desc">
+            Treat yourself — cleanse, set, relax.
+          </span>
         </div>
 
         <div class="service-card glow-animate">
-            <div class="service-head">
-              <span>✂️ LONG HAIR (PAST SHOULDERS)</span>
-              <span class="price-chip">$35</span>
-            </div>
-            <span class="service-desc">
-              Extra time & detail for longer lengths.
-            </span>
+          <div class="service-head">
+            <span>✂️ LONG HAIR (PAST SHOULDERS)</span>
+            <span class="price-chip">$35</span>
+          </div>
+          <span class="service-desc">
+            Extra time & detail for longer lengths.
+          </span>
         </div>
 
         <div class="service-card glow-animate">
-            <div class="service-head">
-              <span>🧔‍♂️ BEARD TRIM / LINE UP</span>
-              <span class="price-chip">$25</span>
-            </div>
-            <span class="service-desc">
-              Clean edges, even bulk, crisp shape.
-            </span>
+          <div class="service-head">
+            <span>🧔‍♂️ BEARD TRIM / LINE UP</span>
+            <span class="price-chip">$25</span>
+          </div>
+          <span class="service-desc">
+            Clean edges, even bulk, crisp shape.
+          </span>
         </div>
 
         <div class="service-card glow-animate">
-            <div class="service-head">
-              <span>🧼 FACE SHAVE</span>
-              <span class="price-chip">$25</span>
-            </div>
-            <span class="service-desc">
-              Hot towel, lather, and smooth finish.
-            </span>
+          <div class="service-head">
+            <span>🧼 FACE SHAVE</span>
+            <span class="price-chip">$25</span>
+          </div>
+          <span class="service-desc">
+            Hot towel, lather, and smooth finish.
+          </span>
         </div>
 
         <div class="service-card glow-animate">
-            <div class="service-head">
-              <span>📏 LINE UP ONLY</span>
-              <span class="price-chip">$15</span>
-            </div>
-            <span class="service-desc">
-              Edges only. <em>Beard not included.</em>
-            </span>
+          <div class="service-head">
+            <span>📏 LINE UP ONLY</span>
+            <span class="price-chip">$15</span>
+          </div>
+          <span class="service-desc">
+            Edges only. <em>Beard not included.</em>
+          </span>
         </div>
 
         <div class="service-card glow-animate">
-            <div class="service-head">
-              <span>🎨 DESIGN ONLY</span>
-              <span class="price-chip">$10</span>
-            </div>
-            <span class="service-desc">
-              Add a freestyle design or bring a reference.
-            </span>
+          <div class="service-head">
+            <span>🎨 DESIGN ONLY</span>
+            <span class="price-chip">$10</span>
+          </div>
+          <span class="service-desc">
+            Add a freestyle design or bring a reference.
+          </span>
         </div>
 
         <div class="service-card glow-animate">
-            <div class="service-head">
-              <span>🌀 PERM SERVICE</span>
-              <span class="price-chip">$90+</span>
-            </div>
-            <span class="service-desc">
-              Beachy waves to tighter curls — premium products for lasting results.
-            </span>
+          <div class="service-head">
+            <span>🌀 PERM SERVICE</span>
+            <span class="price-chip">$90+</span>
+          </div>
+          <span class="service-desc">
+            Beachy waves to tighter curls — premium products for lasting results.
+          </span>
         </div>
 
         <div class="service-card glow-animate">
-            <div class="service-head">
-              <span>🪒 HEAD SHAVE</span>
-              <span class="price-chip">$35</span>
-            </div>
-            <span class="service-desc">
-              Clean and polished dome with hot towel finish.
-            </span>
+          <div class="service-head">
+            <span>🪒 HEAD SHAVE</span>
+            <span class="price-chip">$35</span>
+          </div>
+          <span class="service-desc">
+            Clean and polished dome with hot towel finish.
+          </span>
         </div>
       </div>
     </div>
@@ -1512,41 +1624,52 @@
 
   <!-- ========= JS ========= -->
   <script>
-    // ===== Sticky header hide / show =====
+    /* ===== HEADER SHOW/HIDE with smarter trigger =====
+       - hide when scrolling down
+       - show again after you scroll up ~30px (not only all the way up)
+    */
     const headerEl = document.getElementById('siteHeader');
-    let lastScrollY = window.scrollY;
+    let lastY = window.scrollY;
+    let lastHideY = 0;
     let tickingHeader = false;
 
     function handleScrollHeader(){
-      const currentY = window.scrollY;
+      const y = window.scrollY;
+      const delta = y - lastY;
 
-      // subtle drop/glow when you scroll down a bit
-      if (currentY > 20){
+      // add glow drop-shadow when not at very top
+      if (y > 20){
         headerEl.classList.add('scrolled');
       } else {
         headerEl.classList.remove('scrolled');
       }
 
-      // hide header when scrolling down (after a little distance)
-      if (currentY > lastScrollY && currentY > 120){
+      // scrolling down
+      if (delta > 0 && y > 80){
         headerEl.classList.add('hide');
-      } else {
-        headerEl.classList.remove('hide');
+        lastHideY = y;
       }
 
-      lastScrollY = currentY;
+      // scrolling up: if you came up ~30px OR you're near the top again
+      if (delta < 0){
+        if ((lastHideY - y) > 30 || y < 80){
+          headerEl.classList.remove('hide');
+        }
+      }
+
+      lastY = y;
       tickingHeader = false;
     }
 
-    window.addEventListener('scroll',()=>{
+    window.addEventListener('scroll', ()=>{
       if(!tickingHeader){
         window.requestAnimationFrame(handleScrollHeader);
-        tickingHeader=true;
+        tickingHeader = true;
       }
     }, {passive:true});
 
 
-    // ===== Parallax drift for background sig + title halos =====
+    /* ===== PARALLAX DRIFT for background sig + title halos ===== */
     const rootStyle = document.documentElement.style;
     let tickingParallax = false;
     function updateParallax(){
@@ -1567,18 +1690,23 @@
     updateParallax();
 
 
-    // ===== Glow / spotlight on scroll =====
-    // We light one card at a time on mobile, but NOT on desktop (desktop = hover).
-    // Frost panels, section titles, map, footer, hours rows still get in-view glow.
-
+    /* ===== GLOW / SPOTLIGHT on scroll =====
+       - Frost panels + titles + hours rows + map buttons etc get in-view glow.
+       - Cards/services: on mobile, only one feature at a time glows (performance);
+         on desktop, cards just glow on hover instead.
+    */
     const isMobileScreen = () => window.matchMedia('(max-width:767px)').matches;
 
     const allGlowTargets = Array.from(document.querySelectorAll(
       '.glow-animate, .hours-item, .map-btn, .map-frame, .landmark-note, footer, .section-title, .frost-panel'
     ));
 
-    const cardTargets = allGlowTargets.filter(el => el.classList.contains('card-unit') || el.classList.contains('service-card'));
-    const nonCardTargets = allGlowTargets.filter(el => !(el.classList.contains('card-unit') || el.classList.contains('service-card')));
+    const cardTargets = allGlowTargets.filter(el =>
+      el.classList.contains('card-unit') || el.classList.contains('service-card')
+    );
+    const nonCardTargets = allGlowTargets.filter(el =>
+      !(el.classList.contains('card-unit') || el.classList.contains('service-card'))
+    );
 
     let currentMobileFeature = null;
 
@@ -1601,19 +1729,21 @@
 
       if(visibleNow.length === 0) return;
 
-      // non-card stuff always glows in-view
+      // non-card stuff: always glow in-view
       visibleNow.forEach(({el})=>{
         if(!(el.classList.contains('card-unit') || el.classList.contains('service-card'))){
           el.classList.add('in-view');
         }
       });
 
-      // mobile card spotlight logic
+      // mobile spotlight just for cards
       const mobile = isMobileScreen();
-      const visibleCards = visibleNow.filter(v => v.el.classList.contains('card-unit') || v.el.classList.contains('service-card'));
+      const visibleCards = visibleNow.filter(v =>
+        v.el.classList.contains('card-unit') || v.el.classList.contains('service-card')
+      );
 
       if(mobile && visibleCards.length){
-        // pick most-visible card
+        // choose card w/ highest intersection ratio
         let best = visibleCards[0];
         for (const v of visibleCards){
           if(v.ratio > best.ratio){
@@ -1626,7 +1756,7 @@
         best.el.classList.add('in-view');
         currentMobileFeature = best.el;
       } else if(!mobile){
-        // desktop: don't auto glow cards, remove any in-view class
+        // desktop: let hover handle card glow, not scroll
         visibleCards.forEach(v=>{
           v.el.classList.remove('in-view');
         });
@@ -1634,7 +1764,8 @@
       }
     },{
       root:null,
-      rootMargin:"-30% 0px -30% 0px", // spotlight ~center of viewport
+      // spotlight closer to actual viewport center now:
+      rootMargin:"-35% 0px -35% 0px",
       threshold:[0.5,0.75]
     });
 
@@ -1653,6 +1784,60 @@
           card.classList.remove('in-view');
         });
         currentMobileFeature = null;
+      }
+    });
+
+
+    /* ===== DESKTOP PANEL TILT / CURSOR GLOW =====
+       Each frost-panel tilts slightly and moves its glow toward the cursor.
+       Runs only on desktop (>=768px) for performance.
+    */
+    function enablePanelTilt(panel){
+      function onMove(e){
+        const rect = panel.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // % of panel
+        const px = x / rect.width;
+        const py = y / rect.height;
+
+        // tilt range
+        const rotY = (px - 0.5) * 4;    // left/right
+        const rotX = (0.5 - py) * 4;    // up/down
+
+        panel.style.setProperty('--tiltX', rotX.toFixed(2)+'deg');
+        panel.style.setProperty('--tiltY', rotY.toFixed(2)+'deg');
+
+        panel.style.setProperty('--spotX', (px*100).toFixed(1)+'%');
+        panel.style.setProperty('--spotY', (py*100).toFixed(1)+'%');
+      }
+
+      function onLeave(){
+        panel.style.setProperty('--tiltX','0deg');
+        panel.style.setProperty('--tiltY','0deg');
+        panel.style.setProperty('--spotX','50%');
+        panel.style.setProperty('--spotY','50%');
+      }
+
+      panel.addEventListener('mousemove',onMove);
+      panel.addEventListener('mouseleave',onLeave);
+    }
+
+    const frostPanels = document.querySelectorAll('.frost-panel');
+    if(window.matchMedia('(min-width:768px)').matches){
+      frostPanels.forEach(enablePanelTilt);
+    }
+    // if user resizes from mobile -> desktop, activate tilt then
+    window.addEventListener('resize',()=>{
+      if(window.matchMedia('(min-width:768px)').matches){
+        frostPanels.forEach(panel=>{
+          // avoid double-binding by checking a flag
+          if(!panel.__tiltBound){
+            enablePanelTilt(panel);
+            panel.__tiltBound = true;
+          }
+        });
       }
     });
   </script>
