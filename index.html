@@ -28,14 +28,16 @@ body {
   line-height: 1.4;
 }
 
-/* ---------- THEME TOKENS (DARK = default) ---------- */
+/* ---------- THEME TOKENS (DARK DEFAULT) ---------- */
 :root {
   --page-bg-start: #070b16;
   --page-bg-end: #0f1c2a;
 
+  /* glow colors */
   --glow-primary: rgba(130,110,255,.45);
   --glow-secondary: rgba(0,200,255,.30);
 
+  /* card glass bg base, we’ll tint more later */
   --card-bg: rgba(10,13,22,0.22);
   --card-border: rgba(255,255,255,0.12);
   --card-text-main: #dbe4f7;
@@ -73,6 +75,11 @@ body {
 
   --lift-translate-y: 16px;
   --lift-scale: 0.99;
+
+  /* extra tint overlays for “vibrant glass” */
+  --tint-purple: rgba(120, 90, 255, 0.20);
+  --tint-blue: rgba(60,150,255,0.18);
+  --tint-lightEdge: rgba(255,255,255,.45);
 }
 
 /* ---------- LIGHT MODE ---------- */
@@ -113,6 +120,10 @@ body {
     --subcard-bg: rgba(255,255,255,0.3);
     --subcard-border: rgba(0,0,0,0.08);
     --subcard-text: #1a1b23;
+
+    --tint-purple: rgba(120, 90, 255, 0.14);
+    --tint-blue: rgba(60,150,255,0.12);
+    --tint-lightEdge: rgba(255,255,255,.6);
   }
 }
 
@@ -179,7 +190,6 @@ body {
   position:relative;
 }
 
-/* top row */
 .site-header-top {
   display:flex;
   align-items:flex-start;
@@ -189,7 +199,6 @@ body {
   column-gap:.75rem;
 }
 
-/* left side: shop name */
 .shop-left {
   display:flex;
   flex-direction:column;
@@ -204,7 +213,6 @@ body {
   white-space:nowrap;
 }
 
-/* right side: burger */
 .shop-right {
   display:flex;
   align-items:flex-start;
@@ -214,7 +222,7 @@ body {
   max-width:100%;
 }
 
-/* burger button */
+/* burger button (menu icon only now) */
 .mobile-menu-button {
   background: var(--pill-bg);
   border:1px solid var(--pill-border);
@@ -247,7 +255,6 @@ body {
   margin-inline:auto;
 }
 
-/* pill link desktop */
 .nav-pill {
   background: var(--pill-bg);
   border:1px solid var(--pill-border);
@@ -274,7 +281,6 @@ body {
   top:100%;
   right: clamp(1rem,2vw,2rem);
   left:auto;
-
   width:min(90%,360px);
   max-height:70vh;
   overflow-y:auto;
@@ -369,12 +375,18 @@ body {
   }
 }
 
-/* ---------- GLASS CARDS / SECTIONS ---------- */
+/* ---------- VIBRANT GLASS CARDS / SECTIONS ---------- */
 .section-card {
   position: relative;
-  background: var(--card-bg);
+
+  /* new: mix frosted bg + color tint */
+  background:
+    radial-gradient(circle at 20% 20%, var(--tint-purple) 0%, transparent 60%),
+    radial-gradient(circle at 80% 50%, var(--tint-blue) 0%, transparent 60%),
+    var(--card-bg);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   backdrop-filter: blur(20px) saturate(160%);
+
   border:1px solid var(--card-border);
   border-radius: var(--radius-xl);
   color: var(--card-text-main);
@@ -387,18 +399,68 @@ body {
     0 0 64px var(--glow-secondary);
 }
 .section-card::before{
+  /* glossy highlight edge */
   content:"";
   position:absolute;
   inset:0;
   pointer-events:none;
   border-radius:inherit;
-  background: radial-gradient(circle at 10% 0%, rgba(255,255,255,.45) 0%, rgba(255,255,255,0) 60%);
+  background: radial-gradient(
+    circle at 10% 0%,
+    var(--tint-lightEdge) 0%,
+    rgba(255,255,255,0) 60%
+  );
   mix-blend-mode:screen;
   opacity:.4;
 }
 .section-card-content {
   position:relative;
   z-index:2;
+}
+
+/* inner “sub cards” like hours/contact/map boxes or barber cards etc. */
+.inner-glass,
+.barber-card,
+.review-card,
+.service-card,
+.hours-card,
+.contact-card,
+.map-card,
+.ticker-box {
+  background:
+    radial-gradient(circle at 20% 20%, var(--tint-purple) 0%, transparent 60%),
+    radial-gradient(circle at 80% 50%, var(--tint-blue) 0%, transparent 60%),
+    var(--card-bg);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border:1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  color:var(--card-text-main);
+  position:relative;
+  box-shadow:
+    0 0 24px var(--glow-primary),
+    0 0 48px var(--glow-secondary);
+}
+.inner-glass::before,
+.barber-card::before,
+.review-card::before,
+.service-card::before,
+.hours-card::before,
+.contact-card::before,
+.map-card::before,
+.ticker-box::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background: radial-gradient(
+    circle at 10% 0%,
+    var(--tint-lightEdge) 0%,
+    rgba(255,255,255,0) 60%
+  );
+  mix-blend-mode:screen;
+  opacity:.4;
 }
 
 /* ---------- HEADLINES ---------- */
@@ -452,6 +514,18 @@ body {
   .section-subtext{font-size:1.1rem;}
 }
 
+/* mini headline used inside Visit Us blocks */
+.subheadline {
+  font-weight:600;
+  color:var(--headline-color);
+  text-shadow:var(--headline-shadow);
+  letter-spacing:.03em;
+  font-size:1rem;
+  margin-bottom:.5rem;
+  position:relative;
+  z-index:2;
+}
+
 /* ---------- BADGES / TICKER ---------- */
 .badge-row {
   display:flex;
@@ -474,13 +548,12 @@ body {
   box-shadow:
     0 0 16px var(--glow-primary),
     0 0 32px var(--glow-secondary);
+  position:relative;
+  z-index:2;
 }
 
+/* ticker box (location summary) */
 .ticker-box {
-  background: var(--subcard-bg);
-  border:1px solid var(--subcard-border);
-  color:var(--subcard-text);
-  border-radius:var(--radius-lg);
   padding:1rem;
   max-width:700px;
   margin-inline:auto;
@@ -491,20 +564,7 @@ body {
   font-size:.95rem;
   font-weight:500;
   text-align:center;
-  box-shadow:
-    0 0 24px var(--glow-primary),
-    0 0 48px var(--glow-secondary);
-  position:relative;
-}
-.ticker-box::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  pointer-events:none;
-  background: radial-gradient(circle at 10% 0%, rgba(255,255,255,.45) 0%, rgba(255,255,255,0) 60%);
-  mix-blend-mode:screen;
-  opacity:.4;
+  color:var(--card-text-main);
 }
 .ticker-line {
   display:flex;
@@ -535,30 +595,11 @@ body {
 }
 
 .barber-card {
-  background: var(--card-bg);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  backdrop-filter: blur(20px) saturate(160%);
-  border:1px solid var(--card-border);
-  border-radius: var(--radius-xl);
-  color:var(--card-text-main);
   padding:1rem 1rem 1.25rem;
   display:flex;
   flex-direction:column;
   gap:.75rem;
   position:relative;
-  box-shadow:
-    0 0 24px var(--glow-primary),
-    0 0 48px var(--glow-secondary);
-}
-.barber-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  pointer-events:none;
-  background: radial-gradient(circle at 10% 0%, rgba(255,255,255,.45) 0%, rgba(255,255,255,0) 60%);
-  mix-blend-mode:screen;
-  opacity:.4;
 }
 
 .barber-name {
@@ -616,29 +657,10 @@ body {
 }
 
 .review-card {
-  background: var(--card-bg);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  backdrop-filter: blur(20px) saturate(160%);
-  border:1px solid var(--card-border);
-  border-radius: var(--radius-xl);
   padding:1rem 1rem 1.25rem;
-  color:var(--card-text-main);
   font-size:.9rem;
   line-height:1.45;
   position:relative;
-  box-shadow:
-    0 0 24px var(--glow-primary),
-    0 0 48px var(--glow-secondary);
-}
-.review-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  pointer-events:none;
-  background: radial-gradient(circle at 10% 0%, rgba(255,255,255,.45) 0%, rgba(255,255,255,0) 60%);
-  mix-blend-mode:screen;
-  opacity:.4;
 }
 
 .review-headline-row {
@@ -647,7 +669,7 @@ body {
   align-items:baseline;
   justify-content:space-between;
   gap:.5rem;
-  margin-bottom:.25rem;
+  margin-bottom:.5rem;
   position:relative;
   z-index:2;
 }
@@ -663,7 +685,7 @@ body {
   color:var(--headline-color);
   text-shadow:var(--headline-shadow);
   letter-spacing:.03em;
-  font-size:.9rem;
+  font-size:.95rem;
 }
 
 .review-stars {
@@ -682,7 +704,7 @@ body {
 }
 
 .review-date {
-  font-size:.75rem;
+  font-size:.8rem;
   color:var(--card-text-dim);
   line-height:1.2;
 }
@@ -717,34 +739,15 @@ body {
 }
 
 .service-card {
-  background: var(--card-bg);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  backdrop-filter: blur(20px) saturate(160%);
-  border:1px solid var(--card-border);
-  border-radius: var(--radius-xl);
   padding:1rem 1rem 1.25rem;
   display:flex;
   flex-direction:row;
   justify-content:space-between;
   align-items:flex-start;
   gap:.75rem;
-  color:var(--card-text-main);
   font-size:.9rem;
   line-height:1.4;
   position:relative;
-  box-shadow:
-    0 0 24px var(--glow-primary),
-    0 0 48px var(--glow-secondary);
-}
-.service-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  pointer-events:none;
-  background: radial-gradient(circle at 10% 0%, rgba(255,255,255,.45) 0%, rgba(255,255,255,0) 60%);
-  mix-blend-mode:screen;
-  opacity:.4;
 }
 
 .service-left {max-width:75%; position:relative; z-index:2;}
@@ -773,13 +776,13 @@ body {
 
 .service-price {
   font-size:.8rem;
-  font-weight:500;
+  font-weight:600;
   white-space:nowrap;
   background:var(--chip-bg);
   border:1px solid var(--chip-border);
   border-radius:var(--radius-pill);
   color:var(--chip-text);
-  padding:.5rem .75rem;
+  padding:.6rem .8rem;
   position:relative;
   z-index:2;
   box-shadow:
@@ -788,82 +791,98 @@ body {
 }
 
 /* ---------- HOURS / CONTACT / MAP ---------- */
+
+/* big header for this full block */
+.visit-head-eyebrow {
+  font-size:.9rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  text-align:center;
+  color:var(--card-text-dim);
+  margin-bottom:.4rem;
+}
+
+.visit-headline {
+  text-align:center;
+  color:var(--headline-color);
+  text-shadow:var(--headline-shadow);
+  font-size:clamp(1.4rem,1vw + 1.2rem,2rem);
+  line-height:1.25;
+  font-weight:700;
+  letter-spacing:.04em;
+  margin-bottom:.75rem;
+}
+.visit-underline {
+  width: clamp(140px,20vw,220px);
+  height:4px;
+  border-radius:var(--radius-pill);
+  background: linear-gradient(90deg,var(--accent-left) 0%,var(--accent-right) 100%);
+  margin-inline:auto;
+  margin-bottom:1.5rem;
+  box-shadow:
+    0 0 16px var(--glow-primary),
+    0 0 32px var(--glow-secondary);
+}
+
 .info-flex {
   display:flex;
   flex-direction:column;
   gap:1rem;
-  margin-top:1.5rem;
+  margin-top:1rem;
 }
 @media(min-width:800px){
   .info-flex {
     flex-direction:row;
     align-items:flex-start;
     justify-content:space-between;
+    flex-wrap:wrap;
   }
 }
 
 .hours-card,
 .contact-card,
 .map-card {
-  flex:1;
-  background: var(--card-bg);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  backdrop-filter: blur(20px) saturate(160%);
-  border:1px solid var(--card-border);
-  border-radius: var(--radius-xl);
-  color:var(--card-text-main);
-  font-size:.9rem;
-  line-height:1.45;
+  flex:1 1 320px;
   min-width:0;
   padding:1rem 1rem 1.25rem;
+  line-height:1.5;
   position:relative;
-  box-shadow:
-    0 0 24px var(--glow-primary),
-    0 0 48px var(--glow-secondary);
-}
-.hours-card::before,
-.contact-card::before,
-.map-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  pointer-events:none;
-  background: radial-gradient(circle at 10% 0%, rgba(255,255,255,.45) 0%, rgba(255,255,255,0) 60%);
-  mix-blend-mode:screen;
-  opacity:.4;
-}
-
-.subheadline {
-  font-weight:600;
-  color:var(--headline-color);
-  text-shadow:var(--headline-shadow);
-  letter-spacing:.03em;
-  font-size:.9rem;
-  margin-bottom:.5rem;
-  position:relative;
-  z-index:2;
 }
 
 .hours-list {
-  font-size:.85rem;
-  line-height:1.5;
+  font-size:.95rem;
+  line-height:1.6;
   color:var(--card-text-main);
   position:relative;
   z-index:2;
+  font-weight:500;
+}
+.hours-list .note {
+  opacity:.7;
+  font-size:.8rem;
+  font-weight:400;
+  margin-top:.5rem;
+  line-height:1.4;
 }
 
 .contact-line {
-  font-size:.85rem;
-  line-height:1.5;
+  font-size:.95rem;
+  line-height:1.6;
   margin-bottom:.5rem;
   color:var(--card-text-main);
   word-break:break-word;
   position:relative;
   z-index:2;
+  font-weight:500;
+}
+.contact-line a {
+  color:inherit;
+  text-decoration:none;
+  font-weight:600;
 }
 
-/* Map card */
+/* Map section */
 .map-frame-wrapper {
   border-radius: var(--radius-lg);
   overflow:hidden;
@@ -899,10 +918,10 @@ body {
   border-radius:var(--radius-lg);
   padding:.75rem 1rem;
   font-size:.9rem;
+  font-weight:500;
   line-height:1.2;
   color:var(--pill-text);
   text-decoration:none;
-  font-weight:500;
   display:flex;
   align-items:center;
   gap:.5rem;
@@ -960,7 +979,7 @@ body {
         <div class="shop-name">NEXT LEVEL BARBERSHOP</div>
       </div>
 
-      <!-- right: burger only -->
+      <!-- right: burger -->
       <div class="shop-right">
         <button class="mobile-menu-button" id="menuToggle" aria-label="Open navigation" aria-expanded="false">
           <span style="font-size:1.1rem;line-height:1;">☰</span>
@@ -974,9 +993,9 @@ body {
       <a class="nav-pill" href="#barbers">Our Barbers</a>
       <a class="nav-pill" href="#reviews">Reviews</a>
       <a class="nav-pill" href="#services">Services</a>
-      <a class="nav-pill" href="#hours">Hours</a>
-      <a class="nav-pill" href="#contact">Contact</a>
-      <a class="nav-pill" href="#location">Location</a>
+      <a class="nav-pill" href="#visit">Hours</a>
+      <a class="nav-pill" href="#visit">Contact</a>
+      <a class="nav-pill" href="#visit">Location</a>
     </nav>
 
     <!-- MOBILE FLOAT POPOVER -->
@@ -986,9 +1005,9 @@ body {
         <a class="mobile-menu-link" href="#barbers">Our Barbers</a>
         <a class="mobile-menu-link" href="#reviews">Reviews</a>
         <a class="mobile-menu-link" href="#services">Services</a>
-        <a class="mobile-menu-link" href="#hours">Hours</a>
-        <a class="mobile-menu-link" href="#contact">Contact</a>
-        <a class="mobile-menu-link" href="#location">Location</a>
+        <a class="mobile-menu-link" href="#visit">Hours</a>
+        <a class="mobile-menu-link" href="#visit">Contact</a>
+        <a class="mobile-menu-link" href="#visit">Location</a>
 
         <div class="mobile-call-block">
           <a class="call-button" href="tel:+15055036216">
@@ -1123,7 +1142,7 @@ body {
     </div>
   </section>
 
-  <!-- ===== REVIEWS (updated w/ screenshots info) ===== -->
+  <!-- ===== REVIEWS ===== -->
   <section id="reviews" class="page-section reveal-section section-card" data-depth="0.08">
     <div class="section-card-content">
 
@@ -1162,7 +1181,7 @@ body {
           </div>
         </div>
 
-        <!-- Jennifer Lopez (about Cash) -->
+        <!-- Jennifer Lopez (Cash) -->
         <div class="review-card">
           <div class="review-headline-row">
             <div class="review-left">
@@ -1187,7 +1206,7 @@ body {
           </div>
         </div>
 
-        <!-- Francesca Tafoya (about Taylor) -->
+        <!-- Francesca Tafoya (Taylor) -->
         <div class="review-card">
           <div class="review-headline-row">
             <div class="review-left">
@@ -1217,7 +1236,7 @@ body {
     </div>
   </section>
 
-  <!-- ===== SERVICES (updated prices from board + EMT) ===== -->
+  <!-- ===== SERVICES ===== -->
   <section id="services" class="page-section reveal-section section-card" data-depth="0.06">
     <div class="section-card-content">
 
@@ -1438,34 +1457,31 @@ body {
   </section>
 
   <!-- ===== HOURS / CONTACT / LOCATION ===== -->
-  <section id="hours" class="page-section reveal-section section-card" data-depth="0.04">
+  <section id="visit" class="page-section reveal-section section-card" data-depth="0.04">
     <div class="section-card-content">
 
-      <div class="section-eyebrow">VISIT US</div>
-      <div class="section-headline">Hours • Contact • Directions</div>
-      <div class="headline-underline"></div>
+      <div class="visit-head-eyebrow">VISIT US</div>
+      <div class="visit-headline">Hours • Contact • Directions</div>
+      <div class="visit-underline"></div>
 
       <div class="info-flex">
 
-        <div class="hours-card" id="contact">
+        <div class="hours-card" id="hours">
           <div class="subheadline">Hours</div>
           <div class="hours-list">
             <div>Mon – Thu: 10:00 AM – 7:00 PM</div>
             <div>Fri – Sat: 10:00 AM – 8:00 PM</div>
             <div>Sun: 11:00 AM – 5:00 PM</div>
-            <div style="opacity:.7;font-size:.8rem;margin-top:.5rem;">
+            <div class="note">
               (Hours can vary by barber. Call or DM to confirm.)
             </div>
           </div>
         </div>
 
-        <div class="contact-card">
+        <div class="contact-card" id="contact">
           <div class="subheadline">Contact</div>
           <div class="contact-line">
-            <a href="tel:+15055036216"
-               style="color:inherit;text-decoration:none;font-weight:500;">
-              (505) 503-6216
-            </a>
+            <a href="tel:+15055036216">(505) 503-6216</a>
           </div>
           <div class="contact-line">
             6510 Paradise Blvd NW<br/>
@@ -1493,13 +1509,13 @@ body {
             <a class="map-btn"
                href="https://maps.apple.com/?address=6510%20Paradise%20Blvd%20NW,%20Unit%20D,%20Albuquerque,%20NM%2087114"
                target="_blank" rel="noopener">
-              <span>Apple Maps</span>
+              <span>🍎 Apple Maps</span>
             </a>
 
             <a class="map-btn"
                href="https://www.google.com/maps/place/Next+Level+Barber+Shop+Albuquerque"
                target="_blank" rel="noopener">
-              <span>Google Maps</span>
+              <span>📍 Google Maps</span>
             </a>
           </div>
 
