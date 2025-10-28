@@ -347,21 +347,24 @@
       font-weight:800;
       letter-spacing:.14em;
       text-transform:uppercase;
-      font-size:18px;
       line-height:1.2;
+      white-space:nowrap;
+
+      /* 2x bigger brand for desktop */
+      font-size:clamp(28px,1.6vw + 16px,40px);
+
       background:linear-gradient(90deg,#7c3aed 0%,#22d3ee 100%);
       background-size:200% 100%;
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
       text-shadow:
-        0 0 10px rgba(124,58,237,.8),
-        0 0 24px rgba(34,211,238,.5);
+        0 0 12px rgba(124,58,237,.8),
+        0 0 28px rgba(34,211,238,.5);
       filter:
-        drop-shadow(0 0 6px rgba(124,58,237,.9))
-        drop-shadow(0 0 18px rgba(34,211,238,.6));
+        drop-shadow(0 0 8px rgba(124,58,237,.9))
+        drop-shadow(0 0 20px rgba(34,211,238,.6));
       animation:brandPulse 3s ease-in-out infinite;
-      white-space:nowrap;
     }
     .desktop-nav-row {
       display:flex;
@@ -430,23 +433,23 @@
       .header-desktop { display:flex; }
     }
 
-    /* ========= LAYOUT / SECTION PANELS ========= */
+    /* ========= SECTIONS LAYOUT ========= */
     section {
       position:relative;
       z-index:2;
       padding:48px 20px;
-      scroll-margin-top:140px; /* desktop default */
+      scroll-margin-top:140px; /* desktop default anchor offset */
     }
     @media(min-width:768px){
       section { padding:64px 20px; }
     }
     @media(max-width:767px){
       section {
-        scroll-margin-top:180px; /* mobile: gives nicer landing when tapping nav */
+        scroll-margin-top:180px; /* mobile click-to-nav offset fix */
       }
     }
 
-    /* Frosted glass main wrapper for each section */
+    /* Frosted panel (wrapper for each big section) */
     .frost-panel {
       position:relative;
       max-width:1120px;
@@ -459,7 +462,7 @@
       border-radius:24px;
       padding:32px 20px 40px;
 
-      /* desktop interactive tilt vars */
+      /* desktop tilt vars */
       --tiltX:0deg;
       --tiltY:0deg;
       --spotX:50%;
@@ -501,7 +504,6 @@
       }
     }
 
-    /* glowing follow-spot that we animate w/ mouse on desktop */
     .frost-panel::before {
       content:"";
       position:absolute;
@@ -529,7 +531,6 @@
     }
 
     @media(max-width:767px){
-      /* mobile keeps it simple: no tilt math transform scaling beyond .in-view lift */
       .frost-panel,
       .frost-panel.in-view {
         transform:translateY(0) scale(1);
@@ -538,7 +539,7 @@
       }
     }
 
-    /* ========= SECTION HEADINGS ========= */
+    /* ========= SECTION TITLES ========= */
     .section-title {
       position:relative;
       margin:0 0 28px;
@@ -611,7 +612,7 @@
       .section-lead { font-size:14px; }
     }
 
-    /* ========= HERO BADGES / MARQUEE ========= */
+    /* ========= HERO BADGES / PAYMENT PREVIEW ========= */
     .badges-row {
       display:flex;
       flex-wrap:wrap;
@@ -647,6 +648,24 @@
       .badge-pill { font-size:13px; padding:8px 12px; }
     }
 
+    /* mini payment row IN HERO */
+    .hero-pay-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:20px;
+      align-items:center;
+    }
+    .hero-pay-note {
+      flex-basis:100%;
+      color:var(--text-dim);
+      font-size:12px;
+      line-height:1.4;
+      font-weight:500;
+      text-shadow:var(--rim-shadow);
+    }
+
+    /* marquee */
     .hero-marquee-wrapper {
       overflow:hidden;
       width:100%;
@@ -697,7 +716,7 @@
       .services-grid { grid-template-columns:1fr; }
     }
 
-    /* ========= CARD BASE ========= */
+    /* ========= CARD BASE (barbers / reviews) ========= */
     .card-unit {
       position:relative;
       background:var(--panel);
@@ -707,16 +726,13 @@
       display:flex;
       flex-direction:column;
       gap:8px;
-
       box-shadow:
         var(--rim-shadow),
         var(--lift-shadow),
         var(--color-glow-shadow);
-
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out forwards;
-
       transition:
         box-shadow .22s ease,
         border-color .22s ease,
@@ -732,6 +748,7 @@
           var(--panel);
       }
     }
+
     .card-unit::before {
       content:"";
       position:absolute;
@@ -762,7 +779,7 @@
       }
     }
 
-    /* Mobile spotlight / IO spotlight */
+    /* Mobile/scroll spotlight */
     .card-unit.in-view {
       transform:translateY(-2px) scale(1.01);
       border-color:var(--accent-1);
@@ -841,7 +858,7 @@
     }
     .btn-outline:active { transform:scale(.98); }
 
-    /* REVIEWS */
+    /* REVIEWS text */
     .review-stars {
       font-size:13px;
       font-weight:700;
@@ -863,13 +880,13 @@
       text-shadow:var(--rim-shadow);
     }
 
-    /* SERVICES */
+    /* ========= SERVICE CARDS ========= */
     .service-card {
+      position:relative;
       background:var(--panel-alt);
       border:1px solid var(--border);
       border-radius:18px;
       padding:16px 16px 18px;
-
       box-shadow:
         var(--rim-shadow),
         var(--lift-shadow),
@@ -884,6 +901,14 @@
         border-color .22s ease,
         transform .22s ease;
       will-change:transform,box-shadow,border-color;
+
+      /* desktop tilt vars per service */
+      --sTiltX:0deg;
+      --sTiltY:0deg;
+      --sSpotX:50%;
+      --sSpotY:50%;
+
+      transform-style:preserve-3d;
     }
     @media(min-width:768px){
       .service-card {
@@ -892,12 +917,49 @@
             rgba(124,58,237,.05) 0%,
             rgba(0,0,0,0) 60%),
           var(--panel-alt);
+
+        /* apply tilt perspective on desktop only */
+        transform:translateY(0) scale(1) perspective(600px)
+          rotateX(var(--sTiltX)) rotateY(var(--sTiltY));
       }
     }
+
+    /* glow layer follow cursor for services (desktop only) */
+    .service-card::before {
+      content:"";
+      position:absolute;
+      inset:-24px;
+      border-radius:24px;
+      background:
+        radial-gradient(circle at var(--sSpotX) var(--sSpotY),
+          rgba(124,58,237,.28) 0%,
+          rgba(34,211,238,.18) 30%,
+          transparent 70%);
+      filter:blur(48px);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .18s ease;
+    }
+
+    /* scroll/mobile spotlight */
     .service-card.in-view {
       transform:translateY(-2px) scale(1.01);
       border-color:var(--accent-1);
       box-shadow:var(--spotlight-glow);
+    }
+    .service-card.in-view::before {
+      opacity:.8;
+    }
+
+    /* desktop hover behavior for services */
+    @media(hover:hover){
+      .service-card:hover {
+        border-color:var(--accent-1);
+        box-shadow:var(--spotlight-glow);
+      }
+      .service-card:hover::before {
+        opacity:.9;
+      }
     }
 
     .service-head {
@@ -937,7 +999,7 @@
       text-shadow:var(--rim-shadow);
     }
 
-    /* HOURS */
+    /* ========= HOURS ========= */
     .hours-grid {
       list-style:none;
       margin:0;
@@ -958,6 +1020,10 @@
       min-height:44px;
       display:flex;
       align-items:center;
+      box-shadow:
+        var(--rim-shadow),
+        var(--lift-shadow),
+        var(--color-glow-shadow);
 
       opacity:0;
       transform:translateY(14px) scale(.98);
@@ -967,11 +1033,6 @@
         border-color .22s ease,
         transform .22s ease;
       will-change:transform,box-shadow,border-color;
-
-      box-shadow:
-        var(--rim-shadow),
-        var(--lift-shadow),
-        var(--color-glow-shadow);
     }
     .hours-item.in-view {
       transform:translateY(-2px) scale(1.01);
@@ -983,14 +1044,21 @@
       font-size:13px;
       font-weight:600;
       color:var(--text-dim);
+      text-shadow:var(--rim-shadow);
 
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out .28s forwards;
-      text-shadow:var(--rim-shadow);
+      transition:text-shadow .22s ease,transform .22s ease;
+    }
+    .after-hours.in-view {
+      transform:translateY(-2px) scale(1.01);
+      text-shadow:
+        0 0 12px rgba(124,58,237,.8),
+        0 0 24px rgba(34,211,238,.6);
     }
 
-    /* CONTACT / MAP */
+    /* ========= CONTACT / MAP ========= */
     .contact-block {
       font-size:14px;
       line-height:1.5;
@@ -1069,13 +1137,12 @@
       font-size:13px;
       font-weight:600;
       color:var(--text-dim);
+      text-shadow:var(--rim-shadow);
 
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out .22s forwards;
-
       transition:text-shadow .22s ease,transform .22s ease;
-      text-shadow:var(--rim-shadow);
     }
     .landmark-note.in-view {
       transform:translateY(-2px) scale(1.01);
@@ -1084,7 +1151,7 @@
         0 0 24px rgba(34,211,238,.6);
     }
 
-    /* PAYMENT SECTION styles (badge row vibe) */
+    /* ========= PAYMENT SECTION (full section, not hero mini) ========= */
     .payment-row {
       display:flex;
       flex-wrap:wrap;
@@ -1130,7 +1197,7 @@
       font-weight:500;
     }
 
-    /* FOOTER */
+    /* ========= FOOTER ========= */
     footer {
       border-top:1px solid var(--border);
       color:var(--text-dim);
@@ -1155,7 +1222,7 @@
         0 0 24px rgba(34,211,238,.6);
     }
 
-    /* REDUCED MOTION SAFETY */
+    /* REDUCED MOTION */
     @media (prefers-reduced-motion:reduce){
       .brand-text,
       .brand-desktop,
@@ -1247,6 +1314,17 @@
         <div class="badge-pill gradient">Locally Owned</div>
         <div class="badge-pill">Walk-Ins Welcome</div>
         <div class="badge-pill">Appointments Preferred</div>
+      </div>
+
+      <!-- Payment preview (right up front for new clients) -->
+      <div class="hero-pay-row">
+        <div class="badge-pill gradient">Cash</div>
+        <div class="badge-pill">Apple&nbsp;Pay</div>
+        <div class="badge-pill">Cash&nbsp;App</div>
+        <div class="badge-pill">Venmo</div>
+        <div class="hero-pay-note">
+          Payment method can vary by barber — just confirm when you book.
+        </div>
       </div>
 
       <div class="hero-marquee-wrapper">
@@ -1371,7 +1449,7 @@
     </div>
   </section>
 
-  <!-- PAYMENT & BOOKING -->
+  <!-- PAYMENT & BOOKING SECTION -->
   <section id="payments">
     <div class="frost-panel glow-animate">
       <h2 class="section-title glow-animate">Payment & Booking</h2>
@@ -1557,7 +1635,7 @@
         <li class="hours-item glow-animate">SATURDAY : 8:30am – 5:30pm</li>
       </ul>
 
-      <p class="after-hours">NO ADDITIONAL CHARGE AFTER HOURS!</p>
+      <p class="after-hours glow-animate">NO ADDITIONAL CHARGE AFTER HOURS!</p>
     </div>
   </section>
 
@@ -1624,40 +1702,36 @@
 
   <!-- ========= JS ========= -->
   <script>
-    /* ===== HEADER SHOW/HIDE with smarter trigger =====
-       - hide when scrolling down
-       - show again after you scroll up ~30px (not only all the way up)
+    /* ===== HEADER SHOW/HIDE (more sensitive now) =====
+       - Hides on scroll down.
+       - Shows again as soon as you scroll UP even a little (doesn't force you to scroll a lot).
     */
     const headerEl = document.getElementById('siteHeader');
-    let lastY = window.scrollY;
-    let lastHideY = 0;
+    let lastScrollY = window.scrollY;
     let tickingHeader = false;
 
     function handleScrollHeader(){
       const y = window.scrollY;
-      const delta = y - lastY;
+      const diff = y - lastScrollY;
 
-      // add glow drop-shadow when not at very top
+      // Glow state when not at very top
       if (y > 20){
         headerEl.classList.add('scrolled');
       } else {
         headerEl.classList.remove('scrolled');
       }
 
-      // scrolling down
-      if (delta > 0 && y > 80){
+      // Scrolling DOWN -> hide header once you're past hero
+      if (diff > 0 && y > 80){
         headerEl.classList.add('hide');
-        lastHideY = y;
       }
 
-      // scrolling up: if you came up ~30px OR you're near the top again
-      if (delta < 0){
-        if ((lastHideY - y) > 30 || y < 80){
-          headerEl.classList.remove('hide');
-        }
+      // Scrolling UP -> immediately show header
+      if (diff < 0){
+        headerEl.classList.remove('hide');
       }
 
-      lastY = y;
+      lastScrollY = y;
       tickingHeader = false;
     }
 
@@ -1690,15 +1764,15 @@
     updateParallax();
 
 
-    /* ===== GLOW / SPOTLIGHT on scroll =====
-       - Frost panels + titles + hours rows + map buttons etc get in-view glow.
-       - Cards/services: on mobile, only one feature at a time glows (performance);
-         on desktop, cards just glow on hover instead.
+    /* ===== MOBILE/SCROLL SPOTLIGHT + DESKTOP GLOW =====
+       We watch what's in the center area of the viewport.
+       On mobile: only one "feature" card (barber/service/etc) glows at a time.
+       On desktop: cards mostly glow on hover, not scroll, to keep it clean.
     */
     const isMobileScreen = () => window.matchMedia('(max-width:767px)').matches;
 
     const allGlowTargets = Array.from(document.querySelectorAll(
-      '.glow-animate, .hours-item, .map-btn, .map-frame, .landmark-note, footer, .section-title, .frost-panel'
+      '.glow-animate, .hours-item, .after-hours, .map-btn, .map-frame, .landmark-note, footer, .section-title, .frost-panel, .service-card, .card-unit'
     ));
 
     const cardTargets = allGlowTargets.filter(el =>
@@ -1729,34 +1803,36 @@
 
       if(visibleNow.length === 0) return;
 
-      // non-card stuff: always glow in-view
+      // Non-card items: if they're in view at all, give them in-view glow
       visibleNow.forEach(({el})=>{
         if(!(el.classList.contains('card-unit') || el.classList.contains('service-card'))){
           el.classList.add('in-view');
         }
       });
 
-      // mobile spotlight just for cards
+      // MOBILE spotlight logic, more center-accurate
       const mobile = isMobileScreen();
       const visibleCards = visibleNow.filter(v =>
         v.el.classList.contains('card-unit') || v.el.classList.contains('service-card')
       );
 
       if(mobile && visibleCards.length){
-        // choose card w/ highest intersection ratio
+        // pick card with highest ratio
         let best = visibleCards[0];
         for (const v of visibleCards){
           if(v.ratio > best.ratio){
             best = v;
           }
         }
+        // turn off old
         if(currentMobileFeature && currentMobileFeature !== best.el){
           currentMobileFeature.classList.remove('in-view');
         }
+        // turn on current
         best.el.classList.add('in-view');
         currentMobileFeature = best.el;
       } else if(!mobile){
-        // desktop: let hover handle card glow, not scroll
+        // desktop still uses hover for cards, so don't permanently light them from scroll
         visibleCards.forEach(v=>{
           v.el.classList.remove('in-view');
         });
@@ -1764,22 +1840,25 @@
       }
     },{
       root:null,
-      // spotlight closer to actual viewport center now:
-      rootMargin:"-35% 0px -35% 0px",
-      threshold:[0.5,0.75]
+      // bring trigger zone closer to TRUE middle vertically:
+      // we "crop" 45% top / 45% bottom, so ~10% tall sweet spot in the center
+      rootMargin:"-45% 0px -45% 0px",
+      threshold:[0.6,0.8]
     });
 
     allGlowTargets.forEach(el=>io.observe(el));
 
-    // cleanup when resizing between mobile/desktop
+    // keep logic in sync if orientation / width changes
     window.addEventListener('resize',()=>{
       if(isMobileScreen()){
+        // mobile keeps one card glowing at a time
         cardTargets.forEach(card=>{
           if(card !== currentMobileFeature){
             card.classList.remove('in-view');
           }
         });
       } else {
+        // desktop -> no scroll-glow lock on cards
         cardTargets.forEach(card=>{
           card.classList.remove('in-view');
         });
@@ -1788,58 +1867,84 @@
     });
 
 
-    /* ===== DESKTOP PANEL TILT / CURSOR GLOW =====
-       Each frost-panel tilts slightly and moves its glow toward the cursor.
-       Runs only on desktop (>=768px) for performance.
-    */
+    /* ===== DESKTOP PANEL TILT / CURSOR GLOW (sections) ===== */
     function enablePanelTilt(panel){
-      function onMove(e){
+      panel.__tiltBound = true;
+      panel.addEventListener('mousemove', e=>{
         const rect = panel.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-
-        // % of panel
         const px = x / rect.width;
         const py = y / rect.height;
 
-        // tilt range
-        const rotY = (px - 0.5) * 4;    // left/right
-        const rotX = (0.5 - py) * 4;    // up/down
+        const rotY = (px - 0.5) * 4;
+        const rotX = (0.5 - py) * 4;
 
         panel.style.setProperty('--tiltX', rotX.toFixed(2)+'deg');
         panel.style.setProperty('--tiltY', rotY.toFixed(2)+'deg');
-
         panel.style.setProperty('--spotX', (px*100).toFixed(1)+'%');
         panel.style.setProperty('--spotY', (py*100).toFixed(1)+'%');
-      }
+      });
 
-      function onLeave(){
+      panel.addEventListener('mouseleave', ()=>{
         panel.style.setProperty('--tiltX','0deg');
         panel.style.setProperty('--tiltY','0deg');
         panel.style.setProperty('--spotX','50%');
         panel.style.setProperty('--spotY','50%');
-      }
+      });
+    }
 
-      panel.addEventListener('mousemove',onMove);
-      panel.addEventListener('mouseleave',onLeave);
+    /* ===== DESKTOP SERVICE TILT / CURSOR GLOW (each service card) ===== */
+    function enableServiceTilt(card){
+      card.__tiltBound = true;
+      card.addEventListener('mousemove', e=>{
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const px = x / rect.width;
+        const py = y / rect.height;
+
+        const rotY = (px - 0.5) * 4;
+        const rotX = (0.5 - py) * 4;
+
+        card.style.setProperty('--sTiltX', rotX.toFixed(2)+'deg');
+        card.style.setProperty('--sTiltY', rotY.toFixed(2)+'deg');
+        card.style.setProperty('--sSpotX', (px*100).toFixed(1)+'%');
+        card.style.setProperty('--sSpotY', (py*100).toFixed(1)+'%');
+
+        // apply transform only on desktop screens:
+        if(window.matchMedia('(min-width:768px)').matches){
+          card.style.transform =
+            `perspective(600px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale(1.01)`;
+        }
+      });
+
+      card.addEventListener('mouseleave', ()=>{
+        card.style.setProperty('--sTiltX','0deg');
+        card.style.setProperty('--sTiltY','0deg');
+        card.style.setProperty('--sSpotX','50%');
+        card.style.setProperty('--sSpotY','50%');
+        if(window.matchMedia('(min-width:768px)').matches){
+          card.style.transform = `perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)`;
+        }
+      });
     }
 
     const frostPanels = document.querySelectorAll('.frost-panel');
-    if(window.matchMedia('(min-width:768px)').matches){
-      frostPanels.forEach(enablePanelTilt);
-    }
-    // if user resizes from mobile -> desktop, activate tilt then
-    window.addEventListener('resize',()=>{
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    function bindDesktopTiltIfNeeded(){
       if(window.matchMedia('(min-width:768px)').matches){
         frostPanels.forEach(panel=>{
-          // avoid double-binding by checking a flag
-          if(!panel.__tiltBound){
-            enablePanelTilt(panel);
-            panel.__tiltBound = true;
-          }
+          if(!panel.__tiltBound) enablePanelTilt(panel);
+        });
+        serviceCards.forEach(card=>{
+          if(!card.__tiltBound) enableServiceTilt(card);
         });
       }
-    });
+    }
+    bindDesktopTiltIfNeeded();
+    window.addEventListener('resize', bindDesktopTiltIfNeeded);
   </script>
 </body>
 </html>
