@@ -18,8 +18,6 @@
 :root {
   --bg-deep:#0b0c10;
   --bg-card:#11121a;
-  --bg-card-glow1:rgba(93,79,255,0.4);
-  --bg-card-glow2:rgba(41,181,255,0.3);
   --text-main:#fff;
   --text-dim:rgba(255,255,255,0.8);
   --text-soft:rgba(255,255,255,0.6);
@@ -41,6 +39,7 @@
 
   --nav-height-desktop:110px;
   --nav-height-mobile:64px;
+
   --shadow-card:
     0 30px 80px rgba(0,0,0,.9),
     0 0 30px rgba(108,108,255,.4),
@@ -163,13 +162,12 @@ body {
   display:flex;
   align-items:center;
   justify-content:space-between;
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
 }
 
 .brand-stack{
   display:flex;
   align-items:center;
-  gap:.5rem;
   min-width:0;
 }
 .brand-name{
@@ -180,6 +178,7 @@ body {
   text-shadow:0 0 12px rgba(108,108,255,.9),0 0 32px rgba(41,181,255,.6);
   animation:glowPulse 3s ease-in-out infinite;
   white-space:nowrap;
+  text-transform:uppercase;
 }
 @media(min-width:768px){
   .brand-name{
@@ -194,41 +193,42 @@ body {
   flex-shrink:0;
   background:var(--chip-grad);
   color:#fff;
-  font-size:.8rem;
+  font-size:.75rem;
   font-weight:600;
   border-radius:var(--radius-md);
-  padding:.5rem .75rem;
+  padding:.45rem .6rem;
   display:flex;
   align-items:center;
+  line-height:1.2;
+  text-decoration:none;
   box-shadow:0 10px 30px rgba(0,0,0,.8),
              0 0 20px rgba(108,108,255,.7),
              0 0 40px rgba(41,181,255,.5);
-  text-decoration:none;
-  line-height:1.2;
 }
 .call-chip span{
   display:inline-block;
-  margin-left:.5rem;
+  margin-left:.4rem;
 }
 @media(min-width:768px){
   .call-chip{
     font-size:.85rem;
+    padding:.5rem .75rem;
   }
 }
 
-/* mobile burger */
+/* burger only mobile */
 .burger-btn{
   background:rgba(255,255,255,.05);
   color:var(--text-main);
   border:1px solid var(--border-soft);
   border-radius:var(--radius-md);
-  padding:.6rem .75rem;
-  font-size:.9rem;
+  padding:.55rem .7rem;
+  font-size:.8rem;
   line-height:1;
   font-weight:500;
   display:flex;
   align-items:center;
-  gap:.5rem;
+  gap:.4rem;
   box-shadow:0 12px 30px rgba(0,0,0,.8);
 }
 .burger-btn span{
@@ -239,25 +239,29 @@ body {
   .burger-btn{display:none;}
 }
 
-/* desktop-only layout for call chip */
 .header-right{
   display:flex;
   align-items:center;
-  gap:.75rem;
+  gap:.5rem;
 }
-@media(max-width:767px){
+@media(min-width:768px){
   .header-right{
-    gap:.5rem;
+    gap:.75rem;
   }
 }
 
 /* nav row */
 .nav-row{
-  display:flex;
+  display:none;
   flex-wrap:wrap;
   align-items:center;
   justify-content:center;
   gap:.5rem;
+}
+@media(min-width:768px){
+  .nav-row{
+    display:flex;
+  }
 }
 .nav-link{
   background:rgba(255,255,255,.03);
@@ -346,6 +350,7 @@ body {
   box-shadow:0 12px 30px rgba(0,0,0,.8),
              0 0 20px rgba(108,108,255,.7),
              0 0 40px rgba(41,181,255,.5);
+  text-align:center;
 }
 .drawer-note{
   font-size:.75rem;
@@ -353,7 +358,7 @@ body {
   line-height:1.3;
 }
 
-/* ------------- MAIN LAYOUT CONTAINER ------------- */
+/* ------------- MAIN LAYOUT ------------- */
 main{
   position:relative;
   z-index:1;
@@ -367,7 +372,7 @@ main{
   }
 }
 
-/* section wrapper for spacing */
+/* section wrapper */
 .section-block{
   position:relative;
   margin:3rem 0 4rem;
@@ -416,9 +421,10 @@ main{
 /* ------------- CARDS / GLOW BOXES ------------- */
 .section-card{
   position:relative;
-  background:radial-gradient(circle at 20% 20%,rgba(108,108,255,.12) 0%,rgba(0,0,0,0) 60%),
-             radial-gradient(circle at 80% 30%,rgba(41,181,255,.12) 0%,rgba(0,0,0,0) 60%),
-             var(--bg-card);
+  background:
+    radial-gradient(circle at 20% 20%,rgba(108,108,255,.12) 0%,rgba(0,0,0,0) 60%),
+    radial-gradient(circle at 80% 30%,rgba(41,181,255,.12) 0%,rgba(0,0,0,0) 60%),
+    var(--bg-card);
   border:1px solid var(--border-soft);
   border-radius:var(--radius-xl);
   box-shadow:var(--shadow-card);
@@ -440,14 +446,15 @@ main{
   box-shadow:var(--shadow-card-active);
 }
 
-/* parallax ring glow "aura" behind each card */
+/* aura behind each card */
 .section-card::before{
   content:"";
   position:absolute;
   inset:-3px;
   border-radius:inherit;
-  background:radial-gradient(circle at 20% 20%,rgba(108,108,255,.18) 0%,transparent 60%),
-             radial-gradient(circle at 80% 30%,rgba(41,181,255,.18) 0%,transparent 60%);
+  background:
+    radial-gradient(circle at 20% 20%,rgba(108,108,255,.18) 0%,transparent 60%),
+    radial-gradient(circle at 80% 30%,rgba(41,181,255,.18) 0%,transparent 60%);
   filter:blur(30px);
   z-index:-1;
   opacity:.7;
@@ -458,7 +465,7 @@ main{
   opacity:1;
 }
 
-/* HERO CARD SPECIAL CENTERING */
+/* HERO CARD */
 .hero-card{
   max-width:900px;
   margin:0 auto;
@@ -474,6 +481,7 @@ main{
   color:var(--text-main);
   text-shadow:0 0 12px rgba(108,108,255,.6),0 0 32px rgba(41,181,255,.4);
   margin-bottom:.75rem;
+  text-align:center;
 }
 @media(min-width:768px){
   .hero-title{
@@ -490,7 +498,7 @@ main{
   background:var(--line-grad);
   box-shadow:0 0 20px rgba(108,108,255,.6),
              0 0 40px rgba(41,181,255,.4);
-  margin-bottom:1rem;
+  margin:0 auto 1rem;
 }
 
 /* hero body text */
@@ -498,8 +506,9 @@ main{
   color:var(--text-dim);
   font-size:1rem;
   line-height:1.5;
-  margin-bottom:1rem;
+  margin:0 auto 1rem;
   max-width:60ch;
+  text-align:center;
 }
 @media(min-width:768px){
   .hero-desc{
@@ -513,6 +522,7 @@ main{
   flex-wrap:wrap;
   gap:.75rem;
   margin-bottom:1rem;
+  justify-content:center;
 }
 .chip{
   display:inline-flex;
@@ -526,6 +536,7 @@ main{
   border:1px solid var(--border-soft);
   color:var(--text-main);
   box-shadow:0 12px 30px rgba(0,0,0,.8);
+  white-space:nowrap;
 }
 .chip.primary{
   background:var(--chip-grad);
@@ -541,11 +552,12 @@ main{
   font-size:.85rem;
   color:var(--text-soft);
   line-height:1.4;
-  margin: .5rem 0 1.25rem;
+  margin:.5rem auto 1.25rem;
   max-width:60ch;
+  text-align:center;
 }
 
-/* hero location / quick facts bar */
+/* hero quick facts bar */
 .quick-facts{
   display:flex;
   flex-wrap:wrap;
@@ -556,6 +568,8 @@ main{
   border-radius:var(--radius-md);
   box-shadow:0 15px 40px rgba(0,0,0,.9);
   overflow:hidden;
+  max-width:100%;
+  margin:0 auto;
 }
 @media (prefers-color-scheme: light){
   .quick-facts{
@@ -587,6 +601,7 @@ main{
   .quick-facts{
     display:grid;
     grid-template-columns:repeat(4,1fr);
+    max-width:800px;
   }
   .fact-pill{
     min-width:0;
@@ -604,7 +619,7 @@ main{
 /* BARBERS GRID */
 .barbers-grid{
   display:grid;
-  gap:1.5rem;
+  gap:1.25rem;
 }
 @media(min-width:768px){
   .barbers-grid{
@@ -612,10 +627,10 @@ main{
   }
 }
 .barber-card{
-  background:var(--bg-card);
-  background:radial-gradient(circle at 20% 20%,rgba(108,108,255,.08) 0%,transparent 60%),
-             radial-gradient(circle at 80% 30%,rgba(41,181,255,.08) 0%,transparent 60%),
-             var(--bg-card);
+  background:
+    radial-gradient(circle at 20% 20%,rgba(108,108,255,.08) 0%,transparent 60%),
+    radial-gradient(circle at 80% 30%,rgba(41,181,255,.08) 0%,transparent 60%),
+    var(--bg-card);
   border:1px solid var(--border-soft);
   border-radius:var(--radius-lg);
   box-shadow:var(--shadow-card);
@@ -634,6 +649,7 @@ main{
   font-weight:600;
   letter-spacing:.05em;
   margin-bottom:.5rem;
+  text-transform:uppercase;
 }
 .barber-desc{
   color:var(--text-soft);
@@ -661,11 +677,7 @@ main{
   color:var(--text-main);
   text-decoration:none;
   box-shadow:0 12px 30px rgba(0,0,0,.8);
-}
-.call-btn .icon-phone,
-.book-btn .icon-phone{
-  font-size:.8rem;
-  line-height:1;
+  white-space:nowrap;
 }
 .book-btn.gradient{
   background:var(--chip-grad);
@@ -676,7 +688,7 @@ main{
              0 0 40px rgba(41,181,255,.5);
 }
 
-/* REVIEWS STRIP */
+/* REVIEWS */
 .reviews-row{
   display:grid;
   gap:1rem;
@@ -687,10 +699,10 @@ main{
   }
 }
 .review-card{
-  background:var(--bg-card);
-  background:radial-gradient(circle at 20% 20%,rgba(108,108,255,.07) 0%,transparent 60%),
-             radial-gradient(circle at 80% 30%,rgba(41,181,255,.07) 0%,transparent 60%),
-             var(--bg-card);
+  background:
+    radial-gradient(circle at 20% 20%,rgba(108,108,255,.07) 0%,transparent 60%),
+    radial-gradient(circle at 80% 30%,rgba(41,181,255,.07) 0%,transparent 60%),
+    var(--bg-card);
   border:1px solid var(--border-soft);
   border-radius:var(--radius-lg);
   box-shadow:var(--shadow-card);
@@ -714,6 +726,7 @@ main{
   margin-bottom:.5rem;
   font-size:.8rem;
   letter-spacing:.03em;
+  text-transform:none;
 }
 .review-badge{
   background:rgba(255,255,255,.07);
@@ -724,8 +737,13 @@ main{
   font-weight:600;
   color:var(--text-main);
 }
+.review-body p{
+  font-size:.8rem;
+  color:var(--text-soft);
+  line-height:1.4;
+}
 
-/* SERVICES GRID */
+/* SERVICES */
 .services-grid{
   display:grid;
   gap:1rem;
@@ -736,10 +754,10 @@ main{
   }
 }
 .service-card{
-  background:var(--bg-card);
-  background:radial-gradient(circle at 20% 20%,rgba(108,108,255,.07) 0%,transparent 60%),
-             radial-gradient(circle at 80% 30%,rgba(41,181,255,.07) 0%,transparent 60%),
-             var(--bg-card);
+  background:
+    radial-gradient(circle at 20% 20%,rgba(108,108,255,.07) 0%,transparent 60%),
+    radial-gradient(circle at 80% 30%,rgba(41,181,255,.07) 0%,transparent 60%),
+    var(--bg-card);
   border:1px solid var(--border-soft);
   border-radius:var(--radius-lg);
   box-shadow:var(--shadow-card);
@@ -764,6 +782,7 @@ main{
   font-weight:600;
   letter-spacing:.05em;
   color:var(--text-main);
+  text-transform:uppercase;
 }
 .service-price{
   font-size:.8rem;
@@ -780,7 +799,7 @@ main{
   color:var(--text-soft);
 }
 
-/* HOURS / CONTACT / LOCATION */
+/* HOURS / CONTACT */
 .hours-grid{
   display:flex;
   flex-wrap:wrap;
@@ -801,6 +820,9 @@ main{
   line-height:1.4;
   color:var(--text-soft);
   margin-top:.5rem;
+  font-weight:600;
+  letter-spacing:.05em;
+  text-transform:uppercase;
 }
 .contact-block{
   margin-top:2rem;
@@ -824,9 +846,8 @@ main{
   text-decoration-color:rgba(255,255,255,.3);
 }
 
-/* map container */
+/* LOCATION / MAP */
 .map-shell{
-  margin-top:2rem;
   border-radius:var(--radius-lg);
   overflow:hidden;
   border:1px solid var(--border-soft);
@@ -837,6 +858,63 @@ main{
   height:300px;
   border:0;
   display:block;
+}
+
+/* map footer with buttons */
+.map-info-footer{
+  padding:1rem;
+  border-top:1px solid var(--border-soft);
+  background:rgba(0,0,0,.4);
+  color:var(--text-main);
+  font-size:.8rem;
+  line-height:1.4;
+}
+@media (prefers-color-scheme: light){
+  .map-info-footer{
+    background:rgba(255,255,255,.4);
+  }
+}
+.map-info-footer-title{
+  font-weight:600;
+  margin-bottom:.5rem;
+  text-align:center;
+}
+.map-actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.5rem;
+}
+.map-btn-primary{
+  text-decoration:none;
+  background:var(--chip-grad);
+  color:#fff;
+  border-radius:var(--radius-md);
+  padding:.5rem .7rem;
+  font-size:.8rem;
+  font-weight:600;
+  box-shadow:0 12px 30px rgba(0,0,0,.8),
+             0 0 20px rgba(108,108,255,.7),
+             0 0 40px rgba(41,181,255,.5);
+}
+.map-btn-secondary{
+  text-decoration:none;
+  background:rgba(255,255,255,.07);
+  border:1px solid var(--border-soft);
+  border-radius:var(--radius-md);
+  padding:.5rem .7rem;
+  font-size:.8rem;
+  font-weight:600;
+  color:var(--text-main);
+  box-shadow:0 12px 30px rgba(0,0,0,.8);
+}
+
+/* FOOTER */
+.site-footer{
+  text-align:center;
+  color:var(--text-soft);
+  font-size:.75rem;
+  margin-top:2rem;
 }
 
 /* ------------- SPOOK POPUP ------------- */
@@ -895,12 +973,23 @@ main{
 }
 
 @keyframes glowPulse{
-  0%,100%{text-shadow:0 0 8px rgba(108,108,255,.5),0 0 24px rgba(41,181,255,.4);}
-  50%{text-shadow:0 0 12px rgba(108,108,255,.9),0 0 32px rgba(41,181,255,.7);}
+  0%,100%{
+    text-shadow:
+      0 0 8px rgba(108,108,255,.5),
+      0 0 24px rgba(41,181,255,.4);
+  }
+  50%{
+    text-shadow:
+      0 0 12px rgba(108,108,255,.9),
+      0 0 32px rgba(41,181,255,.7);
+  }
 }
 
-/* make sure links can't hijack focus outline color */
-a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
+/* focus outline */
+a:focus{
+  outline:2px solid rgba(108,108,255,.6);
+  outline-offset:2px;
+}
 </style>
 </head>
 <body>
@@ -931,8 +1020,7 @@ a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
   </div>
 
   <div class="drawer-note">
-    Walk-ins welcome. Appointments preferred.
-    Right next to Bob’s Burgers.
+    Walk-ins welcome. Appointments preferred. Right next to Bob’s Burgers.
   </div>
 </aside>
 
@@ -942,17 +1030,15 @@ a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
 
     <div class="header-top">
       <div class="brand-stack">
-        <div class="brand-name" style="text-transform:uppercase;">NEXT LEVEL BARBERSHOP</div>
+        <div class="brand-name">NEXT LEVEL BARBERSHOP</div>
       </div>
 
       <div class="header-right">
-        <!-- call chip always -->
         <a class="call-chip" href="tel:+15055036216">
           <span>📞</span>
           <span>(505) 503-6216</span>
         </a>
 
-        <!-- burger only mobile -->
         <button class="burger-btn hide-on-desktop" id="burgerBtn">
           <span>☰</span>
           <span style="font-weight:600;font-size:.8rem;">Menu</span>
@@ -960,7 +1046,7 @@ a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
       </div>
     </div>
 
-    <!-- nav row -->
+    <!-- desktop nav row -->
     <nav class="nav-row" id="mainNav">
       <a class="nav-link" href="#" data-target="home">Home</a>
       <a class="nav-link" href="#" data-target="barbers">Our Barbers</a>
@@ -994,18 +1080,17 @@ a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
         <div class="chip">Appointments Preferred</div>
       </div>
 
-      <!-- payments row -->
       <div class="chip-row">
         <div class="chip primary">Cash</div>
         <div class="chip">Apple Pay</div>
         <div class="chip">Cash App</div>
         <div class="chip">Venmo</div>
       </div>
+
       <div class="payment-note">
         Payment method can vary by barber — just confirm when you book.
       </div>
 
-      <!-- quick facts bar -->
       <div class="quick-facts">
         <div class="fact-pill">Albuquerque, NM</div>
         <div class="fact-pill">Right next to Bob’s Burgers</div>
@@ -1030,7 +1115,7 @@ a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
         <div class="barber-desc">Founder. Fader. Visionary.</div>
         <div class="book-row">
           <a class="call-btn" href="tel:+15055036216">
-            <span class="icon-phone">📞</span>
+            <span>📞</span>
             <span>Call to Book</span>
           </a>
         </div>
@@ -1041,7 +1126,7 @@ a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
         <div class="barber-desc">Precision in every pass.</div>
         <div class="book-row">
           <a class="call-btn" href="tel:+15055036216">
-            <span class="icon-phone">📞</span>
+            <span>📞</span>
             <span>Call to Book</span>
           </a>
         </div>
@@ -1052,7 +1137,7 @@ a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
         <div class="barber-desc">Style that speaks before you do.</div>
         <div class="book-row">
           <a class="call-btn" href="tel:+15055036216">
-            <span class="icon-phone">📞</span>
+            <span>📞</span>
             <span>Call to Book</span>
           </a>
         </div>
@@ -1063,7 +1148,7 @@ a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
         <div class="barber-desc">Sharp fades. Chill vibes.</div>
         <div class="book-row">
           <a class="call-btn" href="tel:+15055036216">
-            <span class="icon-phone">📞</span>
+            <span>📞</span>
             <span>Call to Book</span>
           </a>
         </div>
@@ -1119,7 +1204,7 @@ a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
           <span class="review-badge">5★</span>
         </div>
         <div class="review-body">
-          <p style="font-size:.8rem;color:var(--text-soft);">
+          <p>
             "Attention to detail is insane. Lined me up perfect, beard crispy, zero rush.
             If you're picky, this is where you go."
           </p>
@@ -1132,7 +1217,7 @@ a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
           <span class="review-badge">5★</span>
         </div>
         <div class="review-body">
-          <p style="font-size:.8rem;color:var(--text-soft);">
+          <p>
             "Felt welcome as soon as I walked in.
             Music good, convo good, cut even better.
             I'll be back every week."
@@ -1146,7 +1231,7 @@ a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
           <span class="review-badge">5★</span>
         </div>
         <div class="review-body">
-          <p style="font-size:.8rem;color:var(--text-soft);">
+          <p>
             "They literally saved me. Cleaned up a messed up fade
             and made it look intentional. This is skill."
           </p>
@@ -1306,6 +1391,7 @@ a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
         <div class="hours-pill">FRIDAY : 8:30am – 5:30pm</div>
         <div class="hours-pill">SATURDAY : 8:30am – 5:30pm</div>
       </div>
+
       <div class="no-after-hours">
         NO ADDITIONAL CHARGE AFTER HOURS!
       </div>
@@ -1334,35 +1420,36 @@ a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
       <div class="heading-underline"></div>
     </div>
 
-    <div class="map-shell watch-card section-card" style="padding:0;">
-      <!-- Keep Google Maps embed -->
-      <iframe
-        loading="lazy"
-        allowfullscreen
-        referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.969928172266!2d-106.701!3d35.1867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s6510%20Paradise%20Blvd%20NW%20Unit%20D%2C%20Albuquerque%2C%20NM%2087114!5e0!3m2!1sen!2sus!4v9999999999">
-      </iframe>
-      <!-- choose maps row -->
-      <div style="padding:1rem;border-top:1px solid var(--border-soft);background:rgba(0,0,0,.4);color:var(--text-main);font-size:.8rem;line-height:1.4;">
-        <div style="font-weight:600;margin-bottom:.5rem;">
+    <div class="section-card watch-card" style="padding:0;">
+      <div class="map-shell">
+        <iframe
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.969928172266!2d-106.701!3d35.1867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s6510%20Paradise%20Blvd%20NW%20Unit%20D%2C%20Albuquerque%2C%20NM%2087114!5e0!3m2!1sen!2sus!4v9999999999">
+        </iframe>
+      </div>
+
+      <div class="map-info-footer">
+        <div class="map-info-footer-title">
           Get Directions:
         </div>
-        <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
-          <a href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D+Albuquerque+NM+87114"
-             target="_blank" rel="noopener"
-             style="text-decoration:none;background:var(--chip-grad);color:#fff;border-radius:var(--radius-md);padding:.5rem .7rem;font-size:.8rem;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.8),0 0 20px rgba(108,108,255,.7),0 0 40px rgba(41,181,255,.5);">
+        <div class="map-actions">
+          <a class="map-btn-primary"
+             href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D+Albuquerque+NM+87114"
+             target="_blank" rel="noopener">
             Google Maps
           </a>
-          <a href="https://maps.apple.com/?address=6510%20Paradise%20Blvd%20NW%20Unit%20D,%20Albuquerque,%20NM%2087114"
-             target="_blank" rel="noopener"
-             style="text-decoration:none;background:rgba(255,255,255,.07);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:.5rem .7rem;font-size:.8rem;font-weight:600;color:var(--text-main);box-shadow:0 12px 30px rgba(0,0,0,.8);">
+          <a class="map-btn-secondary"
+             href="https://maps.apple.com/?address=6510%20Paradise%20Blvd%20NW%20Unit%20D,%20Albuquerque,%20NM%2087114"
+             target="_blank" rel="noopener">
             Apple Maps
           </a>
         </div>
       </div>
     </div>
 
-    <div style="text-align:center;color:var(--text-soft);font-size:.75rem;margin-top:2rem;">
+    <div class="site-footer">
       © 2025 Next Level BarberShop
     </div>
   </section>
@@ -1400,7 +1487,6 @@ function handleScrollHeader() {
   const currentY = window.scrollY;
   const goingDown = currentY > lastScrollY;
 
-  // how far down before we start hiding?
   if (currentY > 80) {
     if (goingDown && !headerHidden) {
       headerEl.classList.add('hide');
@@ -1410,7 +1496,6 @@ function handleScrollHeader() {
       headerHidden = false;
     }
   } else {
-    // near top: always show header
     headerEl.classList.remove('hide');
     headerHidden = false;
   }
@@ -1442,15 +1527,12 @@ drawer.querySelectorAll('[data-target]').forEach(a=>{
 
 /* ==========================
    SMOOTH SCROLL WITH OFFSET
-   (We center the section better so it’s not jumping weird)
 ========================== */
 function smoothJump(id){
   const sec = document.getElementById(id);
   if(!sec) return;
   const rect = sec.getBoundingClientRect();
   const absoluteY = window.scrollY + rect.top;
-
-  // offset: put section ~80px below top for comfort
   const offset = 80;
   window.scrollTo({
     top:absoluteY - offset,
@@ -1475,7 +1557,6 @@ const observer = new IntersectionObserver(
   (entries)=>{
     entries.forEach(entry=>{
       if(entry.isIntersecting){
-        // remove .active from others
         watchCards.forEach(c=>c.classList.remove('active'));
         entry.target.classList.add('active');
       }
@@ -1483,26 +1564,20 @@ const observer = new IntersectionObserver(
   },
   {
     root:null,
-    rootMargin:"-30% 0px -40% 0px", // center-ish bias
+    rootMargin:"-30% 0px -40% 0px",
     threshold:0.1
   }
 );
-
-watchCards.forEach(card=>{
-  observer.observe(card);
-});
+watchCards.forEach(card=>observer.observe(card));
 
 /* ==========================
-   SIMPLE PARALLAX FOR GLOW BLOBS
-   (tiny drift for vibe)
+   PARALLAX BACKGROUND DRIFT
 ========================== */
 const bgBlobs = document.querySelector('.background-blobs');
 let latestScrollY = window.scrollY;
 function parallaxLoop(){
   const y = window.scrollY;
-  const diff = (y - latestScrollY)*0.04;
   latestScrollY = y;
-  // tiny translate for that floating club-light feel
   bgBlobs.style.transform = `translateY(${-(y*0.03).toFixed(2)}px)`;
   requestAnimationFrame(parallaxLoop);
 }
@@ -1511,19 +1586,11 @@ requestAnimationFrame(parallaxLoop);
 /* ==========================
    SPOOK POPUP
 ========================== */
-/*
-How it works:
- - shows ~1.8s after load
- - stays ~4s or until tapped "lol ok"
- - then hides
- If you ever want to turn spooky OFF:
-   - just comment out `showSpook()` call below.
-*/
 function showSpook(){
   spookPop.classList.add('show');
   const timer = setTimeout(()=>{
     hideSpook();
-  },4000); // 4 sec visible
+  },4000); // ~4 sec visible
   closeSpookBtn.addEventListener('click',()=>{
     clearTimeout(timer);
     hideSpook();
@@ -1534,10 +1601,9 @@ function hideSpook(){
 }
 
 window.addEventListener('load',()=>{
-  // enable Halloween gag:
+  // fun halloween popup
   showSpook();
 });
-
 </script>
 </body>
 </html>
