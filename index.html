@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Next Level BarberShop</title>
 
-  <meta name="description" content="Real cuts, sharp fades, and a clean vibe. Book with Vincent, Ca$h, Jonny, Taylor & more." />
+  <meta name="description" content="Real cuts, sharp fades, and a clean vibe. Book with Vincent, Ca$h, Jonny, Taylor & more. Walk-ins welcome." />
   <meta property="og:title" content="Next Level BarberShop" />
   <meta property="og:description" content="Locally owned. Walk-ins welcome. Appointments preferred. Right next to Bob's Burgers." />
   <meta property="og:type" content="website" />
@@ -38,6 +38,26 @@
       --marquee-bg:rgba(0,0,0,.4);
 
       --parallax-y:0px;
+
+      /* halo softness + rim pop in dark mode */
+      --rim-color:rgba(255,255,255,.12);
+      --rim-shadow:0 1px 2px rgba(255,255,255,.18);
+      --lift-shadow:
+        0 16px 32px rgba(0,0,0,.7);
+
+      /* subtle color glow to match brand */
+      --color-glow-shadow:
+        0 0 24px rgba(124,58,237,.45),
+        0 0 48px rgba(34,211,238,.35);
+
+      /* “featured” spotlight (mobile active card) */
+      --spotlight-glow:
+        0 24px 44px rgba(0,0,0,.8),
+        0 0 40px rgba(124,58,237,.8),
+        0 0 80px rgba(34,211,238,.6);
+
+      --section-halo-start:rgba(124,58,237,.45);
+      --section-halo-mid:rgba(34,211,238,.28);
     }
 
     @media (prefers-color-scheme: light){
@@ -64,6 +84,24 @@
         --band-accent2:rgba(6,182,212,.07);
 
         --marquee-bg:rgba(15,23,42,.07);
+
+        /* in light mode we want a darker rim so stuff doesn't look washed out */
+        --rim-color:rgba(0,0,0,.14);
+        --rim-shadow:0 1px 2px rgba(0,0,0,.18);
+        --lift-shadow:
+          0 16px 32px rgba(15,23,42,.17);
+
+        --color-glow-shadow:
+          0 0 24px rgba(124,58,237,.35),
+          0 0 48px rgba(6,182,212,.28);
+
+        --spotlight-glow:
+          0 24px 44px rgba(15,23,42,.3),
+          0 0 32px rgba(124,58,237,.6),
+          0 0 64px rgba(6,182,212,.45);
+
+        --section-halo-start:rgba(124,58,237,.3);
+        --section-halo-mid:rgba(6,182,212,.24);
       }
     }
 
@@ -100,7 +138,7 @@
       z-index:3;
     }
 
-    /* ========= BACKGROUND SIGNATURE ========= */
+    /* ========= BACKGROUND SIGNATURE / PARALLAX ========= */
     .brand-bg {
       position:fixed;
       left:50%;
@@ -181,29 +219,29 @@
       background:var(--header-bg);
       backdrop-filter:saturate(1.2) blur(8px);
       border-bottom:1px solid var(--border);
-      transition:
-        transform .28s ease,
-        box-shadow .28s ease,
-        background .28s ease;
+      transition:transform .28s ease, box-shadow .28s ease, background .28s ease;
       will-change:transform,box-shadow;
     }
     header.site-header.hide {
       transform:translateY(-100%);
     }
     header.site-header.scrolled {
+      /* brighter but still subtle */
       box-shadow:
+        var(--rim-shadow),
         0 20px 40px rgba(0,0,0,.8),
-        0 0 30px rgba(124,58,237,.4);
+        0 0 30px rgba(124,58,237,.35);
     }
     @media (prefers-color-scheme: light){
       header.site-header.scrolled {
         box-shadow:
-          0 20px 40px rgba(15,23,42,.2),
+          var(--rim-shadow),
+          0 20px 40px rgba(15,23,42,.25),
           0 0 30px rgba(124,58,237,.25);
       }
     }
 
-    /* --- mobile header layout --- */
+    /* MOBILE HEADER LAYOUT */
     .nav-shell {
       display:flex;
       flex-direction:column;
@@ -255,14 +293,15 @@
       border-radius:10px;
       line-height:1.2;
       white-space:nowrap;
-      box-shadow:0 10px 20px rgba(0,0,0,.6),
-                 0 0 16px rgba(124,58,237,.6),
-                 0 0 32px rgba(34,211,238,.4);
-      border:0;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       min-width:max-content;
+      border:0;
+      box-shadow:
+        var(--rim-shadow),
+        var(--lift-shadow),
+        var(--color-glow-shadow);
     }
     .call-now-mini:active { transform:scale(.98); }
 
@@ -288,9 +327,9 @@
       background:var(--chip-bg);
       border:1px solid var(--border);
       box-shadow:
-        0 10px 20px rgba(0,0,0,.5),
-        0 0 16px rgba(124,58,237,.4),
-        0 0 32px rgba(34,211,238,.3);
+        var(--rim-shadow),
+        var(--lift-shadow),
+        var(--color-glow-shadow);
       transition:all .18s ease;
       will-change:transform,box-shadow;
     }
@@ -300,13 +339,11 @@
       color:#fff;
       border-color:transparent;
       box-shadow:
-        0 24px 40px rgba(0,0,0,.85),
-        0 0 32px rgba(124,58,237,.7),
-        0 0 64px rgba(34,211,238,.5);
+        var(--spotlight-glow);
       transform:translate3d(0,-1px,0) scale(1.03);
     }
 
-    /* --- desktop header layout fix --- */
+    /* DESKTOP HEADER LAYOUT */
     @media(min-width:768px){
       .nav-shell {
         flex-direction:row;
@@ -316,26 +353,13 @@
         gap:16px;
       }
 
-      /* left: brand */
+      .header-top { display:none; }
+
       .header-left {
         display:flex;
         align-items:center;
         gap:16px;
         min-width:max-content;
-      }
-
-      /* center/right: nav */
-      .header-center {
-        display:flex;
-        flex:1;
-        justify-content:flex-end;
-        align-items:center;
-        gap:16px;
-        flex-wrap:nowrap;
-      }
-
-      .header-top {
-        display:none; /* we replace with the desktop row below */
       }
 
       .brand-desktop {
@@ -359,6 +383,15 @@
         white-space:nowrap;
       }
 
+      .header-center {
+        display:flex;
+        flex:1;
+        justify-content:flex-end;
+        align-items:center;
+        gap:16px;
+        flex-wrap:nowrap;
+      }
+
       nav.primary-nav {
         flex:0 0 auto;
         overflow-x:visible;
@@ -372,7 +405,7 @@
       }
     }
 
-    /* ========= SECTION WRAPPER ========= */
+    /* ========= SECTIONS ========= */
     section {
       max-width:1120px;
       margin:0 auto;
@@ -390,7 +423,7 @@
       border-bottom:1px solid var(--border-subtle);
     }
 
-    /* ========= SECTION TITLE W/ GLOW ========= */
+    /* ========= SECTION TITLE ========= */
     .section-title {
       position:relative;
       margin:0 0 28px;
@@ -405,6 +438,10 @@
       row-gap:.4em;
       column-gap:.4em;
       z-index:2;
+      text-shadow:
+        var(--rim-shadow),
+        0 0 16px rgba(124,58,237,.4),
+        0 0 32px rgba(34,211,238,.25);
     }
 
     .section-title::before {
@@ -415,18 +452,19 @@
       top:-12px;
       bottom:-8px;
       background:radial-gradient(circle at 20% 30%,
-        rgba(124,58,237,.45) 0%,
-        rgba(34,211,238,.28) 30%,
+        var(--section-halo-start) 0%,
+        var(--section-halo-mid) 30%,
         transparent 70%);
       filter:blur(32px);
       opacity:.45;
       z-index:-1;
       animation:titleHalo 4s ease-in-out infinite;
+      will-change:filter,opacity;
     }
     @keyframes titleHalo {
-      0%   { filter:blur(32px); opacity:.35; }
-      50%  { filter:blur(40px); opacity:.6; }
-      100% { filter:blur(32px); opacity:.35; }
+      0%   { filter:blur(32px); opacity:.32; }
+      50%  { filter:blur(40px); opacity:.55; }
+      100% { filter:blur(32px); opacity:.32; }
     }
 
     .section-title::after {
@@ -456,9 +494,10 @@
       color:var(--text-dim);
       font-size:15px;
       line-height:1.5;
+      text-shadow:var(--rim-shadow);
     }
 
-    /* ========= HERO DETAILS ========= */
+    /* ========= HERO BADGES / MARQUEE ========= */
     .badges-row {
       display:flex;
       flex-wrap:wrap;
@@ -479,9 +518,9 @@
       border:1px solid var(--border);
       color:var(--text-primary);
       box-shadow:
-        0 10px 20px rgba(0,0,0,.4),
-        0 0 16px rgba(124,58,237,.4),
-        0 0 32px rgba(34,211,238,.3);
+        var(--rim-shadow),
+        var(--lift-shadow),
+        var(--color-glow-shadow);
     }
 
     .badge-pill.gradient {
@@ -489,9 +528,8 @@
       border:0;
       color:#fff;
       box-shadow:
-        0 15px 30px rgba(0,0,0,.6),
-        0 0 20px rgba(124,58,237,.7),
-        0 0 40px rgba(34,211,238,.5);
+        var(--rim-shadow),
+        var(--spotlight-glow);
     }
 
     .hero-marquee-wrapper {
@@ -501,9 +539,9 @@
       border:1px solid var(--border);
       background:var(--marquee-bg);
       box-shadow:
-        0 20px 40px rgba(0,0,0,.7),
-        0 0 24px rgba(124,58,237,.4),
-        0 0 48px rgba(34,211,238,.3);
+        var(--rim-shadow),
+        var(--lift-shadow),
+        var(--color-glow-shadow);
       margin-top:28px;
     }
     .hero-marquee-track {
@@ -550,12 +588,14 @@
       display:flex;
       flex-direction:column;
       gap:8px;
-      box-shadow:
-        0 8px 28px rgba(0,0,0,.5),
-        0 0 24px rgba(124,58,237,.4),
-        0 0 48px rgba(34,211,238,.25);
 
-      /* entrance */
+      /* “rim” so card doesn't disappear on dark background */
+      box-shadow:
+        var(--rim-shadow),
+        var(--lift-shadow),
+        var(--color-glow-shadow);
+
+      /* entrance anim */
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out forwards;
@@ -567,38 +607,22 @@
       will-change:transform,box-shadow,border-color;
     }
 
-    /* brighter inner ring on desktop */
+    /* subtle radial tint in desktop only */
     @media(min-width:768px){
       .card-unit {
         background:
           radial-gradient(circle at 20% 20%,
-            rgba(124,58,237,.12) 0%,
-            rgba(0,0,0,0) 60%)
-          ,
+            rgba(124,58,237,.07) 0%,
+            rgba(0,0,0,0) 60%),
           var(--panel);
-        border-image:linear-gradient(
-          90deg,
-          rgba(124,58,237,.6),
-          rgba(34,211,238,.4)
-        ) 1;
       }
-    }
-
-    /* "soft ray" halo */
-    .card-unit::before {
-      content:"";
-      position:absolute;
-      inset:-20px;
-      border-radius:24px;
-      background:
-        radial-gradient(circle at 20% 20%,
-          rgba(124,58,237,.5) 0%,
-          rgba(34,211,238,.3) 30%,
-          transparent 70%);
-      filter:blur(38px);
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .22s ease,filter .22s ease;
+      .service-card {
+        background:
+          radial-gradient(circle at 20% 20%,
+            rgba(124,58,237,.05) 0%,
+            rgba(0,0,0,0) 60%),
+          var(--panel-alt);
+      }
     }
 
     .service-card {
@@ -607,26 +631,31 @@
       padding:16px 16px 18px;
     }
 
-    @media(min-width:768px){
-      .service-card {
-        background:
-          radial-gradient(circle at 20% 20%,
-            rgba(124,58,237,.08) 0%,
-            rgba(0,0,0,0) 60%)
-          ,
-          var(--panel-alt);
-      }
+    /* halo "behind" card, parallax-shifted slightly with scroll */
+    .card-unit::before {
+      content:"";
+      position:absolute;
+      inset:-24px;
+      border-radius:24px;
+      background:
+        radial-gradient(circle at 20% 20%,
+          rgba(124,58,237,.35) 0%,
+          rgba(34,211,238,.22) 30%,
+          transparent 70%);
+      filter:blur(36px);
+      opacity:0;
+      pointer-events:none;
+      will-change:opacity,filter,transform;
+      transition:opacity .22s ease,filter .22s ease,transform .22s ease;
+      transform:translate3d(0,var(--parallax-y),0);
     }
 
-    /* desktop hover = intense glow neon */
+    /* desktop hover = brighter pop */
     @media (hover:hover){
       .card-unit:hover {
-        transform:translateY(-2px) scale(1.015);
+        transform:translateY(-2px) scale(1.01);
         border-color:var(--accent-1);
-        box-shadow:
-          0 28px 44px rgba(0,0,0,.8),
-          0 0 40px rgba(124,58,237,.8),
-          0 0 80px rgba(34,211,238,.6);
+        box-shadow:var(--spotlight-glow);
       }
       .card-unit:hover::before {
         opacity:.8;
@@ -634,21 +663,18 @@
       }
     }
 
-    /* in-view state (mobile + desktop scroll pop) */
+    /* in-view spotlight (used for desktop AND for the "one at a time" mobile glow) */
     .card-unit.in-view {
       transform:translateY(-2px) scale(1.01);
       border-color:var(--accent-1);
-      box-shadow:
-        0 28px 44px rgba(0,0,0,.75),
-        0 0 40px rgba(124,58,237,.7),
-        0 0 80px rgba(34,211,238,.5);
+      box-shadow:var(--spotlight-glow);
     }
     .card-unit.in-view::before {
-      opacity:.7;
+      opacity:.8;
       filter:blur(48px);
     }
 
-    /* stagger timing */
+    /* stagger entrance */
     .barber-grid .barber-card:nth-child(1) { animation-delay:.05s; }
     .barber-grid .barber-card:nth-child(2) { animation-delay:.10s; }
     .barber-grid .barber-card:nth-child(3) { animation-delay:.15s; }
@@ -680,18 +706,20 @@
       100% { opacity:1; transform:none; }
     }
 
-    /* barber text */
+    /* Barber text */
     .barber-name {
       font-weight:800;
       font-size:14px;
       letter-spacing:.06em;
       color:var(--text-primary);
       margin:2px 0 2px;
+      text-shadow:var(--rim-shadow);
     }
     .barber-bio {
       color:var(--text-dim);
       font-size:14px;
       line-height:1.4;
+      text-shadow:var(--rim-shadow);
     }
 
     /* CTA row */
@@ -702,7 +730,7 @@
       margin-top:10px;
     }
 
-    /* buttons */
+    /* Buttons */
     .btn {
       display:inline-flex;
       align-items:center;
@@ -713,27 +741,23 @@
       border-radius:12px;
       padding:10px 14px;
       font-size:14px;
-      line-height:1.25;        /* fix vertical center */
+      line-height:1.25;
       min-width:max-content;
       border:1px solid transparent;
       transition:all .18s ease;
       will-change:transform,box-shadow;
     }
+
     .btn-primary {
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
       color:#fff;
       box-shadow:
-        0 10px 20px rgba(0,0,0,.6),
-        0 0 16px rgba(124,58,237,.7),
-        0 0 32px rgba(34,211,238,.55);
+        var(--rim-shadow),
+        var(--spotlight-glow);
       border:0;
     }
     .btn-primary:active { transform:scale(.98); }
     .btn-primary:hover {
-      box-shadow:
-        0 24px 40px rgba(0,0,0,.9),
-        0 0 32px rgba(124,58,237,1),
-        0 0 64px rgba(34,211,238,.8);
       transform:translate3d(0,-1px,0) scale(1.02);
     }
 
@@ -743,32 +767,35 @@
       border:1px solid var(--border);
       background-color:rgba(0,0,0,.15);
       box-shadow:
-        0 10px 20px rgba(0,0,0,.6),
-        0 0 16px rgba(124,58,237,.5),
-        0 0 32px rgba(34,211,238,.4);
+        var(--rim-shadow),
+        var(--lift-shadow),
+        var(--color-glow-shadow);
     }
     .btn-outline:active { transform:scale(.98); }
 
-    /* reviews */
+    /* Reviews */
     .review-stars {
       font-size:13px;
       font-weight:700;
       color:#ffd95a;
       margin-bottom:8px;
+      text-shadow:var(--rim-shadow);
     }
     .review-text {
       color:var(--text-primary);
       font-size:14px;
       line-height:1.5;
       margin:0 0 10px;
+      text-shadow:var(--rim-shadow);
     }
     .review-author {
       font-size:12px;
       font-weight:600;
       color:var(--text-dim);
+      text-shadow:var(--rim-shadow);
     }
 
-    /* services */
+    /* Services */
     .service-head {
       display:flex;
       justify-content:space-between;
@@ -780,6 +807,7 @@
       font-size:14px;
       line-height:1.4;
       letter-spacing:.03em;
+      text-shadow:var(--rim-shadow);
     }
     .price-chip {
       background:var(--chip-bg);
@@ -792,9 +820,9 @@
       border:1px solid var(--border);
       white-space:nowrap;
       box-shadow:
-        0 10px 20px rgba(0,0,0,.6),
-        0 0 12px rgba(124,58,237,.6),
-        0 0 24px rgba(34,211,238,.45);
+        var(--rim-shadow),
+        var(--lift-shadow),
+        var(--color-glow-shadow);
     }
     .service-desc {
       display:block;
@@ -802,6 +830,7 @@
       color:var(--text-dim);
       font-size:14px;
       line-height:1.5;
+      text-shadow:var(--rim-shadow);
     }
 
     /* HOURS */
@@ -835,10 +864,11 @@
         border-color .22s ease,
         transform .22s ease;
       will-change:transform,box-shadow,border-color;
+
       box-shadow:
-        0 8px 24px rgba(0,0,0,.55),
-        0 0 16px rgba(124,58,237,.45),
-        0 0 32px rgba(34,211,238,.35);
+        var(--rim-shadow),
+        var(--lift-shadow),
+        var(--color-glow-shadow);
     }
     .hours-grid .hours-item:nth-child(1){animation-delay:.05s;}
     .hours-grid .hours-item:nth-child(2){animation-delay:.08s;}
@@ -851,10 +881,7 @@
     .hours-item.in-view {
       transform:translateY(-2px) scale(1.01);
       border-color:var(--accent-1);
-      box-shadow:
-        0 28px 44px rgba(0,0,0,.8),
-        0 0 40px rgba(124,58,237,.8),
-        0 0 80px rgba(34,211,238,.6);
+      box-shadow:var(--spotlight-glow);
     }
 
     .after-hours {
@@ -866,6 +893,7 @@
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out .28s forwards;
+      text-shadow:var(--rim-shadow);
     }
 
     /* CONTACT / MAP */
@@ -873,6 +901,7 @@
       font-size:14px;
       line-height:1.5;
       color:var(--text-primary);
+      text-shadow:var(--rim-shadow);
     }
     .contact-block a { text-decoration:underline; }
 
@@ -897,26 +926,23 @@
       background-color:rgba(0,0,0,.15);
       color:var(--text-primary);
       box-shadow:
-        0 10px 20px rgba(0,0,0,.6),
-        0 0 16px rgba(124,58,237,.5),
-        0 0 32px rgba(34,211,238,.4);
+        var(--rim-shadow),
+        var(--lift-shadow),
+        var(--color-glow-shadow);
 
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out forwards;
-      transition:
-        box-shadow .22s ease,
-        border-color .22s ease,
-        transform .22s ease;
+      transition:box-shadow .22s ease,border-color .22s ease,transform .22s ease;
+      will-change:transform,box-shadow,border-color;
     }
     .map-btn.google {
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
       color:#fff;
       border:none;
       box-shadow:
-        0 10px 20px rgba(0,0,0,.7),
-        0 0 16px rgba(124,58,237,.8),
-        0 0 32px rgba(34,211,238,.6);
+        var(--rim-shadow),
+        var(--spotlight-glow);
     }
     .map-links .map-btn:nth-child(1){animation-delay:.05s;}
     .map-links .map-btn:nth-child(2){animation-delay:.1s;}
@@ -924,10 +950,7 @@
     .map-btn.in-view {
       transform:translateY(-2px) scale(1.01);
       border-color:var(--accent-1);
-      box-shadow:
-        0 28px 44px rgba(0,0,0,.8),
-        0 0 40px rgba(124,58,237,.8),
-        0 0 80px rgba(34,211,238,.6);
+      box-shadow:var(--spotlight-glow);
     }
 
     .map-frame {
@@ -936,25 +959,20 @@
       border-radius:16px;
       border:1px solid var(--border);
       box-shadow:
-        0 20px 40px rgba(0,0,0,.7),
-        0 0 24px rgba(124,58,237,.6),
-        0 0 48px rgba(34,211,238,.5);
+        var(--rim-shadow),
+        var(--lift-shadow),
+        var(--color-glow-shadow);
 
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out .15s forwards;
-      transition:
-        box-shadow .22s ease,
-        border-color .22s ease,
-        transform .22s ease;
+      transition:box-shadow .22s ease,border-color .22s ease,transform .22s ease;
+      will-change:transform,box-shadow,border-color;
     }
     .map-frame.in-view {
       transform:translateY(-2px) scale(1.01);
       border-color:var(--accent-1);
-      box-shadow:
-        0 28px 44px rgba(0,0,0,.8),
-        0 0 40px rgba(124,58,237,.8),
-        0 0 80px rgba(34,211,238,.6);
+      box-shadow:var(--spotlight-glow);
     }
 
     .landmark-note {
@@ -967,9 +985,8 @@
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out .22s forwards;
 
-      transition:
-        text-shadow .22s ease,
-        transform .22s ease;
+      transition:text-shadow .22s ease,transform .22s ease;
+      text-shadow:var(--rim-shadow);
     }
     .landmark-note.in-view {
       transform:translateY(-2px) scale(1.01);
@@ -993,9 +1010,8 @@
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out .3s forwards;
 
-      transition:
-        text-shadow .22s ease,
-        transform .22s ease;
+      transition:text-shadow .22s ease,transform .22s ease;
+      text-shadow:var(--rim-shadow);
     }
     footer.in-view {
       transform:translateY(-2px) scale(1.01);
@@ -1049,7 +1065,7 @@
   <!-- HEADER -->
   <header class="site-header" id="siteHeader">
     <div class="wrap nav-shell">
-      <!-- mobile header-top -->
+      <!-- mobile stack -->
       <div class="header-top">
         <div class="brand-text">NEXT LEVEL BARBERSHOP</div>
         <a class="call-now-mini" href="tel:+15055036216">📞 (505) 503-6216</a>
@@ -1440,13 +1456,12 @@
 
   <!-- ========= JS ========= -->
   <script>
-    // desktop/mobile header logic:
-    // - if screen >=768px, show desktop row and hide mobile row
+    // --- responsive header layout (mobile vs desktop row) ---
     function configureHeaderLayout(){
       const isDesktop = window.matchMedia('(min-width:768px)').matches;
-      const headerTop      = document.querySelector('.header-top');
-      const headerLeft     = document.querySelector('.header-left');
-      const headerCenter   = document.querySelector('.header-center');
+      const headerTop    = document.querySelector('.header-top');
+      const headerLeft   = document.querySelector('.header-left');
+      const headerCenter = document.querySelector('.header-center');
 
       if(isDesktop){
         headerTop.style.display    = 'none';
@@ -1461,26 +1476,26 @@
     configureHeaderLayout();
     window.addEventListener('resize', configureHeaderLayout);
 
-    // smooth sticky header hide / show + glow after scroll
-    const header = document.getElementById('siteHeader');
+    // --- sticky header hide / show + shadow when scrolling ---
+    const headerEl = document.getElementById('siteHeader');
     let lastScrollY = window.scrollY;
     let tickingHeader = false;
 
     function handleScrollHeader(){
       const currentY = window.scrollY;
 
-      // glow / shadow when scrolled
+      // add subtle glow shadow when scrolled
       if (currentY > 20){
-        header.classList.add('scrolled');
+        headerEl.classList.add('scrolled');
       } else {
-        header.classList.remove('scrolled');
+        headerEl.classList.remove('scrolled');
       }
 
-      // hide/show only after you've left the very top a bit
+      // hide header only if scrolling down past a bit
       if (currentY > lastScrollY && currentY > 120){
-        header.classList.add('hide');   // scrolling down
+        headerEl.classList.add('hide');
       } else {
-        header.classList.remove('hide'); // scrolling up
+        headerEl.classList.remove('hide');
       }
 
       lastScrollY = currentY;
@@ -1494,12 +1509,12 @@
       }
     }, {passive:true});
 
-    // Parallax drift for background signature (cheap)
+    // --- Parallax drift for background signature and halo glow ---
     const rootStyle = document.documentElement.style;
     let tickingParallax = false;
     function updateParallax(){
       const y = window.scrollY || 0;
-      const parallax = (y * -0.05);
+      const parallax = (y * -0.05); // super subtle
       rootStyle.setProperty('--parallax-y', parallax.toFixed(2)+'px');
       tickingParallax = false;
     }
@@ -1512,25 +1527,90 @@
     window.addEventListener('scroll', onScrollParallax, {passive:true});
     updateParallax();
 
-    // Glow-on-scroll observer
-    const glowTargets = document.querySelectorAll(
+    // --- Glow-on-scroll spotlight logic ---
+    // Goal:
+    //   Desktop: multiple cards can glow when in-view.
+    //   Mobile: only ONE at a time glows to save GPU.
+    //
+    // Strategy:
+    //   1. We'll use IntersectionObserver to mark what's "visible".
+    //   2. If we're on mobile (<768px), we remove "in-view" class
+    //      from all other cards and only keep it on the most recent entry.
+
+    const isMobileScreen = () => window.matchMedia('(max-width:767px)').matches;
+
+    const glowTargets = Array.from(document.querySelectorAll(
       '.glow-animate, .card-unit, .hours-item, .map-btn, .map-frame, .landmark-note, footer'
-    );
+    ));
+
+    // Track currently "featured" element on mobile so we can turn others off
+    let currentMobileFeature = null;
 
     const io = new IntersectionObserver((entries)=>{
+      // we’ll collect visible entries this tick:
+      const visibleNow = [];
+
       entries.forEach(entry=>{
         if(entry.isIntersecting){
-          entry.target.classList.add('in-view');
+          visibleNow.push(entry.target);
         } else {
+          // if leaving view, remove "in-view"
           entry.target.classList.remove('in-view');
+          if(currentMobileFeature === entry.target){
+            currentMobileFeature = null;
+          }
         }
       });
+
+      // If nothing became visible, done.
+      if(visibleNow.length === 0){
+        return;
+      }
+
+      if(isMobileScreen()){
+        // mobile spotlight mode:
+        // pick the one with greatest intersection ratio from visibleNow
+        let best = visibleNow[0];
+        for (const el of visibleNow){
+          const ratio = entries.find(e=>e.target===el)?.intersectionRatio || 0;
+          const bestRatio = entries.find(e=>e.target===best)?.intersectionRatio || 0;
+          if(ratio > bestRatio){
+            best = el;
+          }
+        }
+        // remove glow from previous
+        if(currentMobileFeature && currentMobileFeature !== best){
+          currentMobileFeature.classList.remove('in-view');
+        }
+        // set new
+        best.classList.add('in-view');
+        currentMobileFeature = best;
+      } else {
+        // desktop / tablet mode:
+        // any card that popped into view just gets in-view
+        visibleNow.forEach(el=>{
+          el.classList.add('in-view');
+        });
+      }
     },{
       root:null,
-      threshold:0.35
+      threshold:[0.35,0.6] // use 0.6 to know "most visible" on mobile
     });
 
     glowTargets.forEach(el=>io.observe(el));
+
+    // Also listen for resize: if you resize from desktop -> mobile,
+    // clear multi-glow and re-spotlight.
+    window.addEventListener('resize',()=>{
+      if(isMobileScreen()){
+        // clear all but currentMobileFeature
+        glowTargets.forEach(el=>{
+          if(el !== currentMobileFeature){
+            el.classList.remove('in-view');
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>
