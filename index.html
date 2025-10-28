@@ -30,59 +30,47 @@ body {
 
 /* ---------- THEME TOKENS (DARK = default) ---------- */
 :root {
-  /* background gradient */
   --page-bg-start: #070b16;
   --page-bg-end: #0f1c2a;
 
-  /* glow colors */
-  --glow-primary: rgba(130,110,255,.45);   /* purple */
-  --glow-secondary: rgba(0,200,255,.30);   /* aqua */
+  --glow-primary: rgba(130,110,255,.45);
+  --glow-secondary: rgba(0,200,255,.30);
 
-  /* frosted glass cards (DARK) */
   --card-bg: rgba(10,13,22,0.22);
   --card-border: rgba(255,255,255,0.12);
   --card-text-main: #dbe4f7;
   --card-text-dim: #9aa3b6;
 
-  /* pills/buttons */
   --pill-bg: rgba(15,15,25,0.28);
   --pill-border: rgba(255,255,255,0.18);
   --pill-text: #ffffff;
 
-  /* headline */
   --headline-color: #ffffff;
   --headline-shadow: 0 0 20px rgba(140,120,255,.4);
 
-  /* accent underline */
   --accent-left: #8b6bff;
   --accent-right: #49c9ff;
 
-  /* sticky header glass (now extra transparent) */
   --header-bg: rgba(10,10,20,0.22);
   --header-border: rgba(255,255,255,0.16);
   --header-text: #fff;
 
-  /* mobile dropdown popover */
   --mobilemenu-bg: rgba(10,10,20,0.22);
   --mobilemenu-border: rgba(255,255,255,0.18);
 
-  /* info chips / service price bubbles */
   --chip-bg: rgba(15,15,25,0.28);
   --chip-border: rgba(255,255,255,0.18);
   --chip-text: #fff;
 
-  /* subcard/ticker boxes */
   --subcard-bg: rgba(0,0,0,0.28);
   --subcard-border: rgba(255,255,255,0.14);
   --subcard-text: #fff;
 
-  /* spacing + radius */
   --section-gap: clamp(2.5rem, 2vw + 2rem, 3.5rem);
   --radius-xl: 1.25rem;
   --radius-lg: 1rem;
   --radius-pill: 999px;
 
-  /* scroll-reveal defaults */
   --lift-translate-y: 16px;
   --lift-scale: 0.99;
 }
@@ -96,7 +84,6 @@ body {
     --glow-primary: rgba(130,110,255,.22);
     --glow-secondary: rgba(0,200,255,.18);
 
-    /* way softer glass in light mode */
     --card-bg: rgba(255,255,255,0.22);
     --card-border: rgba(0,0,30,0.10);
     --card-text-main: #1a1b23;
@@ -168,8 +155,6 @@ body {
   backdrop-filter: blur(20px) saturate(160%);
   border-bottom: 1px solid var(--header-border);
   overflow: visible;
-
-  /* neon glow ring instead of heavy drop shadow */
   box-shadow:
     0 0 24px var(--glow-primary),
     0 0 48px var(--glow-secondary);
@@ -191,10 +176,10 @@ body {
   display:flex;
   flex-direction:column;
   gap:.6rem;
-  position:relative; /* anchor for dropdown */
+  position:relative;
 }
 
-/* top row of header */
+/* top row */
 .site-header-top {
   display:flex;
   align-items:flex-start;
@@ -219,7 +204,7 @@ body {
   white-space:nowrap;
 }
 
-/* right side: burger button only */
+/* right side: burger */
 .shop-right {
   display:flex;
   align-items:flex-start;
@@ -246,7 +231,6 @@ body {
   align-items:center;
   justify-content:center;
   cursor:pointer;
-
   box-shadow:
     0 0 16px var(--glow-primary),
     0 0 32px var(--glow-secondary);
@@ -317,7 +301,6 @@ body {
   gap:1rem;
 }
 
-/* menu link row */
 .mobile-menu-link {
   background: var(--pill-bg);
   border:1px solid var(--pill-border);
@@ -334,7 +317,7 @@ body {
     0 0 32px var(--glow-secondary);
 }
 
-/* call block at bottom of dropdown */
+/* bottom block inside popover */
 .mobile-call-block {
   display:flex;
   flex-direction:column;
@@ -344,7 +327,7 @@ body {
   align-items:center;
 }
 
-/* gradient call button style */
+/* gradient call button */
 .call-button {
   width:100%;
   background: linear-gradient(90deg,#5a3cff 0%,#4ccaff 100%);
@@ -364,7 +347,6 @@ body {
 }
 
 @media(min-width:768px){
-  /* desktop: show nav row, hide burger/dropdown */
   .nav-row { display:flex; }
   .mobile-menu-button { display:none; }
   .mobile-menu-panel { display:none !important; }
@@ -405,7 +387,6 @@ body {
     0 0 64px var(--glow-secondary);
 }
 .section-card::before{
-  /* soft highlight / reflection at the top area */
   content:"";
   position:absolute;
   inset:0;
@@ -513,6 +494,7 @@ body {
   box-shadow:
     0 0 24px var(--glow-primary),
     0 0 48px var(--glow-secondary);
+  position:relative;
 }
 .ticker-box::before{
   content:"";
@@ -524,10 +506,6 @@ body {
   mix-blend-mode:screen;
   opacity:.4;
 }
-.ticker-box{
-  position:relative;
-}
-
 .ticker-line {
   display:flex;
   flex-wrap:wrap;
@@ -885,7 +863,7 @@ body {
   z-index:2;
 }
 
-/* Map card internals */
+/* Map card */
 .map-frame-wrapper {
   border-radius: var(--radius-lg);
   overflow:hidden;
@@ -982,7 +960,7 @@ body {
         <div class="shop-name">NEXT LEVEL BARBERSHOP</div>
       </div>
 
-      <!-- right: burger button ONLY (no phone, no "Menu" text) -->
+      <!-- right: burger only -->
       <div class="shop-right">
         <button class="mobile-menu-button" id="menuToggle" aria-label="Open navigation" aria-expanded="false">
           <span style="font-size:1.1rem;line-height:1;">☰</span>
@@ -1001,7 +979,7 @@ body {
       <a class="nav-pill" href="#location">Location</a>
     </nav>
 
-    <!-- MOBILE DROPDOWN POPOVER -->
+    <!-- MOBILE FLOAT POPOVER -->
     <nav class="mobile-menu-panel" id="mobileMenu">
       <div class="mobile-menu-inner">
         <a class="mobile-menu-link" href="#welcome">Home</a>
@@ -1040,14 +1018,14 @@ body {
         Payment method can vary by barber — just confirm when you book.
       </p>
 
-      <!-- core shop info -->
+      <!-- shop badges -->
       <div class="badge-row">
         <div class="badge-chip">Locally Owned</div>
         <div class="badge-chip">Walk-Ins Welcome</div>
         <div class="badge-chip">Appointments Preferred</div>
       </div>
 
-      <!-- payment chips with emojis -->
+      <!-- payment w/ emojis -->
       <div class="badge-row">
         <div class="badge-chip">💵 Cash</div>
         <div class="badge-chip">🍎 Apple&nbsp;Pay</div>
@@ -1055,7 +1033,7 @@ body {
         <div class="badge-chip">📲 Venmo</div>
       </div>
 
-      <!-- quick location / vibe info -->
+      <!-- quick location line -->
       <div class="ticker-box">
         <div class="ticker-line">
           <div class="ticker-item">📍 Albuquerque, NM</div>
@@ -1145,7 +1123,7 @@ body {
     </div>
   </section>
 
-  <!-- ===== REVIEWS ===== -->
+  <!-- ===== REVIEWS (updated w/ screenshots info) ===== -->
   <section id="reviews" class="page-section reveal-section section-card" data-depth="0.08">
     <div class="section-card-content">
 
@@ -1154,83 +1132,92 @@ body {
       <div class="headline-underline"></div>
 
       <p class="section-subtext" style="max-width:60ch;">
-        Pulled from recent 5★ Google Reviews.
-        Real people, real results.
+        Recent 5★ Google reviews — real people talking about real cuts.
       </p>
 
       <div class="reviews-grid">
 
-        <!-- Review 1 -->
+        <!-- Keely Struck -->
         <div class="review-card">
           <div class="review-headline-row">
             <div class="review-left">
-              <div class="review-name-main">Alex R.</div>
+              <div class="review-name-main">Keely Struck</div>
               <div class="review-stars">
                 <span class="stars">⭐️⭐️⭐️⭐️⭐️</span>
                 <span>5.0</span>
               </div>
             </div>
-            <div class="review-date">Posted Feb 2025</div>
+            <div class="review-date">a month ago</div>
           </div>
 
           <div class="review-body">
-            “Attention to detail is insane. Vincent lined me up perfect —
-            beard crispy, fade super clean, zero rush. If you’re picky,
-            this is the spot. I won’t let anyone else touch my cut now.”
+            “They did a great job on my son’s hair! It was his
+            first haircut and I wanted kinda like a baby mullet —
+            they are really good with kids and very patient. I love
+            the way it turned out!!”
           </div>
 
-          <div class="review-source">Google review</div>
+          <div class="review-source">
+            Service: Haircut • Google review
+          </div>
         </div>
 
-        <!-- Review 2 -->
+        <!-- Jennifer Lopez (about Cash) -->
         <div class="review-card">
           <div class="review-headline-row">
             <div class="review-left">
-              <div class="review-name-main">Jasmine M.</div>
+              <div class="review-name-main">Jennifer Lopez</div>
               <div class="review-stars">
                 <span class="stars">⭐️⭐️⭐️⭐️⭐️</span>
                 <span>5.0</span>
               </div>
             </div>
-            <div class="review-date">Posted Jan 2025</div>
+            <div class="review-date">a month ago</div>
           </div>
 
           <div class="review-body">
-            “Cash had my son looking clean. Chill vibe, music good,
-            convo good, and the fade hit first try. We tried other
-            places — this is where we’re coming every week now.”
+            “I take my toddler here to get a haircut from Cash and
+            she does an amazing job every time. She’s very good with
+            kids and is pretty fast. We will be going back with
+            barber Cash!”
           </div>
 
-          <div class="review-source">Google review</div>
+          <div class="review-source">
+            Service: Haircut • Google review
+          </div>
         </div>
 
-        <!-- Review 3 -->
+        <!-- Francesca Tafoya (about Taylor) -->
         <div class="review-card">
           <div class="review-headline-row">
             <div class="review-left">
-              <div class="review-name-main">Daniel P.</div>
+              <div class="review-name-main">Francesca Tafoya</div>
               <div class="review-stars">
                 <span class="stars">⭐️⭐️⭐️⭐️⭐️</span>
                 <span>5.0</span>
               </div>
             </div>
-            <div class="review-date">Posted Oct 2024</div>
+            <div class="review-date">3 weeks ago</div>
           </div>
 
           <div class="review-body">
-            “Jonny saved me. I came in with a messed-up cut from
-            somewhere else and he flipped it so it looked intentional.
-            That blend was crazy. People legit thought it was on purpose.”
+            “If I could give a million stars I would! Taylor was so
+            amazing and I have a great cut for my new job tomorrow!
+            We had a great conversation and she was fast, gentle and
+            efficient. I’ll be back next week. And always remember,
+            kindness is free 🙏🏽💕”
           </div>
 
-          <div class="review-source">Google review</div>
+          <div class="review-source">
+            Service: Haircut • Google review
+          </div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ===== SERVICES ===== -->
+  <!-- ===== SERVICES (updated prices from board + EMT) ===== -->
   <section id="services" class="page-section reveal-section section-card" data-depth="0.06">
     <div class="section-card-content">
 
@@ -1239,148 +1226,211 @@ body {
       <div class="headline-underline"></div>
 
       <p class="section-subtext" style="max-width:60ch;">
-        No nonsense. Just quality work.
-        Prices can vary by barber or length — ask when you book.
+        Real barbershop work. Ask your barber for exact pricing if it’s not listed.
       </p>
 
       <div class="services-grid">
 
-        <div class="service-card">
-          <div class="service-left">
-            <div class="service-topline">
-              <span class="emoji">🎖️</span>
-              <span>Military / First Responder</span>
-            </div>
-            <div class="service-desc">
-              Discounted cuts for military, veterans, police,
-              firefighters, EMTs & first responders.
-            </div>
-          </div>
-          <div class="service-price">$25</div>
-        </div>
-
+        <!-- Reg Haircut -->
         <div class="service-card">
           <div class="service-left">
             <div class="service-topline">
               <span class="emoji">💇‍♂️</span>
-              <span>Haircut (Standard)</span>
+              <span>Regular Haircut</span>
             </div>
             <div class="service-desc">
-              Classic or modern — fades, tapers, or scissor work.
-              Detailed style, blended right.
+              Clean classic or fresh modern. Taper, blend, shape — your style.
+              + Beard lineup available.
             </div>
           </div>
-          <div class="service-price">$30</div>
+          <div class="service-price">$35</div>
         </div>
 
-        <div class="service-card">
-          <div class="service-left">
-            <div class="service-topline">
-              <span class="emoji">✂️</span>
-              <span>Line Up / Edge-Up</span>
-            </div>
-            <div class="service-desc">
-              Crisp lineup around the edges to keep it sharp
-              between full cuts.
-            </div>
-          </div>
-          <div class="service-price">$15</div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-left">
-            <div class="service-topline">
-              <span class="emoji">🔥</span>
-              <span>Skin Fade / Taper</span>
-            </div>
-            <div class="service-desc">
-              Down to the skin with a clean blend, or hard taper.
-              Your fade. Your finish.
-            </div>
-          </div>
-          <div class="service-price">$30+</div>
-        </div>
-
+        <!-- Beard add-on -->
         <div class="service-card">
           <div class="service-left">
             <div class="service-topline">
               <span class="emoji">🧔</span>
-              <span>Beard Trim / Line-Up</span>
+              <span>Beard Add-On (with cut)</span>
             </div>
             <div class="service-desc">
-              Beard shape, cleanup, razor work.
-              Keep it lined and intentional.
+              Add a beard cleanup / line-up to your haircut.
+              Sharp outline, clean finish.
             </div>
           </div>
-          <div class="service-price">$15</div>
+          <div class="service-price">+ $5</div>
         </div>
 
+        <!-- Razor Fade -->
         <div class="service-card">
           <div class="service-left">
             <div class="service-topline">
-              <span class="emoji">💈</span>
-              <span>Skin Fade / Taper + Beard</span>
+              <span class="emoji">🔥</span>
+              <span>Razor Fade</span>
             </div>
             <div class="service-desc">
-              Full fade plus beard detail.
-              Total reset. Walk out photo-ready.
+              Down to skin with a tight, smooth fade and detail work.
+              Can add beard detail.
+            </div>
+          </div>
+          <div class="service-price">$40</div>
+        </div>
+
+        <!-- Style Cut -->
+        <div class="service-card">
+          <div class="service-left">
+            <div class="service-topline">
+              <span class="emoji">✂️</span>
+              <span>Style Cut</span>
+            </div>
+            <div class="service-desc">
+              Custom look, texture work, extra time and detail.
             </div>
           </div>
           <div class="service-price">$45</div>
         </div>
 
+        <!-- Blowout Taper -->
         <div class="service-card">
           <div class="service-left">
             <div class="service-topline">
-              <span class="emoji">🧴</span>
-              <span>Shampoo / Rinse</span>
+              <span class="emoji">💨</span>
+              <span>Blowout Taper</span>
             </div>
             <div class="service-desc">
-              Rinse, clean, refresh. Add it to the cut or beard service.
+              Volume on top, clean burst/neck taper. Ask your barber.
             </div>
           </div>
-          <div class="service-price">$15</div>
+          <div class="service-price">Ask</div>
         </div>
 
+        <!-- Burst Fade -->
         <div class="service-card">
           <div class="service-left">
             <div class="service-topline">
-              <span class="emoji">🧑‍🎓</span>
-              <span>Kids Cut (Under 12)</span>
+              <span class="emoji">💥</span>
+              <span>Burst Fade</span>
             </div>
             <div class="service-desc">
-              Clean, comfortable, patient.
-              Keep ‘em looking sharp.
+              Open around the ear, tight and curved. Signature look.
             </div>
           </div>
-          <div class="service-price">$25</div>
+          <div class="service-price">Ask</div>
         </div>
 
+        <!-- Flat Top -->
         <div class="service-card">
           <div class="service-left">
             <div class="service-topline">
               <span class="emoji">🧼</span>
-              <span>Hot Towel / Razor Shave</span>
+              <span>Flat Top</span>
             </div>
             <div class="service-desc">
-              Classic barbershop treatment. Towel, steam, blade.
+              Classic high shape. Clean lines. Military sharp.
             </div>
           </div>
-          <div class="service-price">$30</div>
+          <div class="service-price">Ask</div>
         </div>
 
+        <!-- Mullet -->
         <div class="service-card">
           <div class="service-left">
             <div class="service-topline">
-              <span class="emoji">💇‍♀️</span>
-              <span>Long Hair / Past Shoulders</span>
+              <span class="emoji">🐍</span>
+              <span>Mullet</span>
             </div>
             <div class="service-desc">
-              Shaping & style for longer lengths.
-              Balanced look, no bulk lines.
+              Business in the front, party in the back.
+              Baby mullet for first cuts too.
             </div>
           </div>
-          <div class="service-price">$35</div>
+          <div class="service-price">Ask</div>
+        </div>
+
+        <!-- Designs -->
+        <div class="service-card">
+          <div class="service-left">
+            <div class="service-topline">
+              <span class="emoji">🎨</span>
+              <span>Designs</span>
+            </div>
+            <div class="service-desc">
+              Custom line work / designs.
+            </div>
+          </div>
+          <div class="service-price">$10+</div>
+        </div>
+
+        <!-- Beard Only -->
+        <div class="service-card">
+          <div class="service-left">
+            <div class="service-topline">
+              <span class="emoji">🪒</span>
+              <span>Beard Cleanup / Line-Up</span>
+            </div>
+            <div class="service-desc">
+              Beard shape, razor detail, edge control.
+            </div>
+          </div>
+          <div class="service-price">$20</div>
+        </div>
+
+        <!-- Perm -->
+        <div class="service-card">
+          <div class="service-left">
+            <div class="service-topline">
+              <span class="emoji">🔄</span>
+              <span>Perm</span>
+            </div>
+            <div class="service-desc">
+              Texture / curl work. Long-lasting wave.
+            </div>
+          </div>
+          <div class="service-price">$100</div>
+        </div>
+
+        <!-- Color -->
+        <div class="service-card">
+          <div class="service-left">
+            <div class="service-topline">
+              <span class="emoji">🎯</span>
+              <span>Color</span>
+            </div>
+            <div class="service-desc">
+              Custom color work, tone, blend.
+            </div>
+          </div>
+          <div class="service-price">Starting at $30</div>
+        </div>
+
+        <!-- Military / First Responder / EMT -->
+        <div class="service-card">
+          <div class="service-left">
+            <div class="service-topline">
+              <span class="emoji">🎖️</span>
+              <span>Military / First Responder / EMT</span>
+            </div>
+            <div class="service-desc">
+              Discounted rate for military, first responders, EMT.
+              Respect.
+            </div>
+          </div>
+          <div class="service-price">$28</div>
+        </div>
+
+        <!-- Kids / First Cut -->
+        <div class="service-card">
+          <div class="service-left">
+            <div class="service-topline">
+              <span class="emoji">🍼</span>
+              <span>Kids / First Cut</span>
+            </div>
+            <div class="service-desc">
+              Patient, calm, and clean. Baby mullet? We got you.
+              Ask for details.
+            </div>
+          </div>
+          <div class="service-price">Ask</div>
         </div>
 
       </div>
@@ -1431,7 +1481,6 @@ body {
           <div class="subheadline">Find Us</div>
 
           <div class="map-frame-wrapper">
-            <!-- replace src with your real embed link if needed -->
             <iframe
               loading="lazy"
               allowfullscreen
@@ -1468,9 +1517,9 @@ body {
 
 </main>
 
-<!-- ===== JS: header shrink, burger menu popover, scroll reveal, parallax ===== -->
+<!-- ===== JS ===== -->
 <script>
-// shrink header padding slightly on scroll
+// shrink header slightly on scroll
 const siteHeader = document.getElementById('siteHeader');
 function handleHeaderShrink() {
   if (window.scrollY > 24) {
@@ -1481,7 +1530,7 @@ function handleHeaderShrink() {
 }
 window.addEventListener('scroll', handleHeaderShrink, { passive: true });
 
-// mobile menu toggle (popover)
+// mobile menu toggle
 const menuToggleBtn = document.getElementById('menuToggle');
 const mobileMenu = document.getElementById('mobileMenu');
 
@@ -1490,7 +1539,7 @@ menuToggleBtn.addEventListener('click', () => {
   menuToggleBtn.setAttribute('aria-expanded', open ? "true" : "false");
 });
 
-// close popover when a link is tapped
+// close menu after tap
 mobileMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     mobileMenu.classList.remove('open');
@@ -1498,7 +1547,7 @@ mobileMenu.querySelectorAll('a').forEach(link => {
   });
 });
 
-// scroll reveal (section pops in when in view, relaxes when out)
+// scroll reveal
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -1516,7 +1565,7 @@ document.querySelectorAll('.reveal-section').forEach((section) => {
   observer.observe(section);
 });
 
-// parallax depth on each section-card
+// subtle parallax
 function parallaxUpdate() {
   const scrollY = window.scrollY;
   document.querySelectorAll('.section-card').forEach(card => {
