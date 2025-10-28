@@ -30,40 +30,41 @@ body {
 
 /* ---------- THEME TOKENS (DARK DEFAULT) ---------- */
 :root {
-  /* page bg gradient */
+  /* background gradient */
   --page-bg-start: #070b16;
   --page-bg-end: #0f1c2a;
 
+  /* neon glow colors */
+  --glow-primary: rgba(130,110,255,.45);   /* purple glow */
+  --glow-secondary: rgba(0,200,255,.30);   /* aqua glow */
+
   /* glass cards */
   --card-bg: rgba(10, 13, 22, 0.6);
-  --card-border: rgba(255,255,255,0.07);
-  --card-shadow: 0 20px 40px rgba(0,0,0,.8);
+  --card-border: rgba(255,255,255,0.08);
   --card-text-main: #dbe4f7;
   --card-text-dim: #9aa3b6;
 
   /* nav / pills / buttons */
-  --pill-bg: rgba(15,15,20,0.6);
-  --pill-border: rgba(255,255,255,0.12);
+  --pill-bg: rgba(15,15,25,0.6);
+  --pill-border: rgba(255,255,255,0.14);
   --pill-text: #ffffff;
-  --pill-hover-shadow: 0 16px 32px rgba(0,0,0,.6);
 
   /* headline */
-  --headline-color: #fff;
+  --headline-color: #ffffff;
   --headline-shadow: 0 0 20px rgba(140,120,255,.4);
 
   /* underline gradient */
   --accent-left: #8b6bff;
   --accent-right: #49c9ff;
 
-  /* header bar glass */
-  --header-bg: rgba(10,10,20,0.7);
+  /* sticky header glass */
+  --header-bg: rgba(10,10,20,0.6);
   --header-border: rgba(255,255,255,0.08);
-  --header-shadow: 0 20px 40px rgba(0,0,0,.8);
   --header-text: #fff;
 
-  /* little chips */
-  --chip-bg: rgba(15,15,20,0.6);
-  --chip-border: rgba(255,255,255,0.15);
+  /* chips / info badges */
+  --chip-bg: rgba(15,15,25,0.6);
+  --chip-border: rgba(255,255,255,0.14);
   --chip-text: #fff;
 
   /* subcard/ticker box */
@@ -77,10 +78,9 @@ body {
   --radius-lg: 1rem;
   --radius-pill: 999px;
 
-  /* scroll reveal lift */
+  /* scroll-reveal defaults */
   --lift-translate-y: 16px;
   --lift-scale: 0.99;
-  --lift-shadow: 0 24px 48px rgba(0,0,0,.6);
 }
 
 /* ---------- LIGHT MODE ---------- */
@@ -89,16 +89,17 @@ body {
     --page-bg-start: #f9f8ff;
     --page-bg-end: #e8ecff;
 
+    --glow-primary: rgba(130,110,255,.28);
+    --glow-secondary: rgba(0,200,255,.22);
+
     --card-bg: rgba(255,255,255,0.6);
     --card-border: rgba(0,0,30,0.08);
-    --card-shadow: 0 16px 32px rgba(0,0,0,.08);
     --card-text-main: #1a1b23;
     --card-text-dim: #4a4d5c;
 
     --pill-bg: rgba(255,255,255,0.75);
     --pill-border: rgba(0,0,0,0.08);
     --pill-text: #1a1b23;
-    --pill-hover-shadow: 0 16px 24px rgba(0,0,0,.15);
 
     --headline-color: #1a1b23;
     --headline-shadow: 0 0 16px rgba(140,120,255,.3);
@@ -106,12 +107,11 @@ body {
     --accent-left: #7f6dff;
     --accent-right: #4fc3ff;
 
-    --header-bg: rgba(255,255,255,0.6);
+    --header-bg: rgba(255,255,255,0.55);
     --header-border: rgba(0,0,30,0.07);
-    --header-shadow: 0 16px 32px rgba(0,0,0,.15);
     --header-text: #1a1b23;
 
-    --chip-bg: rgba(255,255,255,0.75);
+    --chip-bg: rgba(255,255,255,0.8);
     --chip-border: rgba(0,0,0,0.08);
     --chip-text: #1a1b23;
 
@@ -121,8 +121,9 @@ body {
   }
 }
 
-/* ---------- PAGE BACKGROUND ---------- */
+/* ---------- PAGE BG ---------- */
 body {
+  /* soft radial glows + gradient */
   background:
     radial-gradient(circle at 20% 20%, rgba(90,60,255,0.18) 0%, transparent 60%),
     radial-gradient(circle at 80% 40%, rgba(0,160,255,0.15) 0%, transparent 60%),
@@ -144,19 +145,22 @@ body {
   padding-inline: clamp(1rem,2vw,2rem);
 }
 
-/* ---------- EASY UTILS ---------- */
+/* ---------- UTILS ---------- */
 .page-section { margin-top: var(--section-gap); }
-
+.center { text-align:center; }
 .flex { display:flex; }
 .flex-col { flex-direction:column; }
 .flex-wrap { flex-wrap:wrap; }
 .items-center { align-items:center; }
+.justify-between { justify-content:space-between; }
 .justify-center { justify-content:center; }
+.gap-xs { gap:.4rem; }
 .gap-sm { gap:.5rem; }
 .gap-md { gap:1rem; }
-.center { text-align:center; }
+.gap-lg { gap:1.5rem; }
 
 /* ---------- STICKY HEADER ---------- */
+/* mobile-friendly: small height, menu button */
 .site-header-wrapper {
   position: sticky;
   top: 0;
@@ -164,70 +168,109 @@ body {
   background: var(--header-bg);
   backdrop-filter: blur(16px) saturate(140%);
   border-bottom: 1px solid var(--header-border);
-  box-shadow: var(--header-shadow);
-  transition: all .2s ease;
+
+  /* glow instead of heavy shadow */
+  box-shadow:
+    0 0 24px var(--glow-primary),
+    0 0 48px var(--glow-secondary);
+  transition: all .18s ease;
 }
 
 .site-header {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
   color:var(--header-text);
-  text-align:center;
-  padding-block: .75rem 1rem;
-  gap:.75rem;
-}
-
-.site-header-wrapper.shrink {
-  padding-block: .4rem .6rem;
-}
-
-.header-topline {
+  padding-block: .6rem .7rem;
   display:flex;
   flex-direction:column;
-  align-items:center;
-  gap:.5rem;
+  gap:.6rem;
 }
 
+.site-header-top {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  row-gap:.5rem;
+}
+
+/* left: shop name */
+.shop-left {
+  display:flex;
+  flex-direction:column;
+}
 .shop-name {
-  font-size: clamp(1.3rem, 1vw + 1rem, 1.75rem);
+  font-size: clamp(1.1rem,1vw + 1rem,1.4rem);
   font-weight:600;
   line-height:1.15;
   letter-spacing:.07em;
   color:var(--headline-color);
   text-shadow: var(--headline-shadow);
-  transition: font-size .2s ease;
-}
-.site-header-wrapper.shrink .shop-name {
-  font-size:clamp(1.15rem,.5vw + .9rem,1.4rem);
+  white-space:nowrap;
 }
 
+/* right: call + menu button row */
+.shop-right {
+  display:flex;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:.5rem;
+  max-width:100%;
+}
+
+/* call button */
 .call-button {
   background: linear-gradient(90deg,#5a3cff 0%,#4ccaff 100%);
   border-radius: var(--radius-lg);
-  border:1px solid rgba(255,255,255,.2);
+  border:1px solid rgba(255,255,255,.25);
   color:#fff;
   font-size:.9rem;
   font-weight:500;
   line-height:1.2;
-  min-width:200px;
-  padding:.6rem .9rem;
+  padding:.55rem .8rem;
   text-decoration:none;
   text-align:center;
-  box-shadow:0 16px 32px rgba(0,0,0,.7);
+  min-width:150px;
+
+  box-shadow:
+    0 0 24px var(--glow-primary),
+    0 0 48px var(--glow-secondary);
 }
 
-.nav-row {
+/* hamburger / menu trigger pill for mobile */
+.mobile-menu-button {
+  background: var(--pill-bg);
+  border:1px solid var(--pill-border);
+  color:var(--pill-text);
+  border-radius: var(--radius-lg);
+  font-size:.9rem;
+  line-height:1.2;
+  font-weight:500;
+  padding:.6rem .8rem;
+  min-width:72px;
+  text-align:center;
   display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  cursor:pointer;
+
+  box-shadow:
+    0 0 24px var(--glow-primary),
+    0 0 48px var(--glow-secondary);
+}
+
+/* desktop nav row */
+.nav-row {
+  display:none;
   flex-wrap:wrap;
   justify-content:center;
-  row-gap:.5rem;
   column-gap:.5rem;
+  row-gap:.5rem;
   max-width:1000px;
   margin-inline:auto;
 }
 
+/* pill link */
 .nav-pill {
   background: var(--pill-bg);
   border:1px solid var(--pill-border);
@@ -238,13 +281,72 @@ body {
   line-height:1.2;
   color:var(--pill-text);
   text-decoration:none;
-  box-shadow:0 8px 16px rgba(0,0,0,.4);
+  box-shadow:
+    0 0 16px var(--glow-primary),
+    0 0 32px var(--glow-secondary);
   transition:all .15s ease;
 }
 .nav-pill:hover,
 .nav-pill:focus {
-  box-shadow: var(--pill-hover-shadow);
   transform: translateY(-2px) scale(1.03);
+}
+
+/* mobile dropdown panel */
+.mobile-menu-panel {
+  display:none;
+  flex-direction:column;
+  background: var(--header-bg);
+  backdrop-filter: blur(16px) saturate(140%);
+  border-top:1px solid var(--header-border);
+  padding: .75rem 0 1rem;
+  border-radius:0 0 var(--radius-lg) var(--radius-lg);
+
+  box-shadow:
+    0 0 24px var(--glow-primary),
+    0 0 48px var(--glow-secondary);
+}
+.mobile-menu-panel.open {
+  display:flex;
+}
+.mobile-menu-link {
+  background: var(--pill-bg);
+  border:1px solid var(--pill-border);
+  border-radius: var(--radius-lg);
+  color:var(--pill-text);
+  text-decoration:none;
+  font-size:.95rem;
+  font-weight:500;
+  line-height:1.2;
+  padding:.8rem 1rem;
+  margin:.4rem 1rem;
+  text-align:center;
+
+  box-shadow:
+    0 0 16px var(--glow-primary),
+    0 0 32px var(--glow-secondary);
+}
+
+@media(min-width:768px){
+  /* desktop: show full nav row under header top, hide burger panel/button */
+  .nav-row { display:flex; }
+  .mobile-menu-button { display:none; }
+  .mobile-menu-panel { display:none !important; }
+  .site-header {
+    align-items:center;
+    text-align:center;
+  }
+  .site-header-top {
+    justify-content:center;
+    flex-direction:column;
+    align-items:center;
+    gap:.5rem;
+  }
+  .shop-right{
+    justify-content:center;
+  }
+  .shop-name{
+    font-size:clamp(1.4rem,1vw + 1.2rem,1.75rem);
+  }
 }
 
 /* ---------- CARD SHELL ---------- */
@@ -253,13 +355,18 @@ body {
   background: var(--card-bg);
   border:1px solid var(--card-border);
   border-radius: var(--radius-xl);
-  box-shadow: var(--card-shadow);
   color: var(--card-text-main);
   padding: clamp(1.25rem,2vw,2rem);
   max-width:1200px;
   margin-inline:auto;
   overflow:hidden;
+
+  /* glow ring, not dark box-shadow */
+  box-shadow:
+    0 0 32px var(--glow-primary),
+    0 0 64px var(--glow-secondary);
 }
+
 .section-card-content {
   position:relative;
   z-index:2;
@@ -297,8 +404,9 @@ body {
   background: linear-gradient(90deg,var(--accent-left) 0%,var(--accent-right) 100%);
   margin-inline:auto;
   margin-bottom:1.5rem;
-  box-shadow:0 0 16px rgba(120,100,255,.4),
-             0 0 24px rgba(0,200,255,.4);
+  box-shadow:
+    0 0 16px var(--glow-primary),
+    0 0 32px var(--glow-secondary);
 }
 
 .section-subtext {
@@ -333,8 +441,10 @@ body {
   line-height:1.2;
   padding:.75rem 1rem;
   border-radius:var(--radius-lg);
-  box-shadow:0 12px 24px rgba(0,0,0,.6);
   white-space:nowrap;
+  box-shadow:
+    0 0 16px var(--glow-primary),
+    0 0 32px var(--glow-secondary);
 }
 
 .ticker-box {
@@ -342,7 +452,6 @@ body {
   border:1px solid var(--subcard-border);
   color:var(--subcard-text);
   border-radius:var(--radius-lg);
-  box-shadow:0 16px 32px rgba(0,0,0,.7);
   padding:1rem;
   max-width:700px;
   margin-inline:auto;
@@ -353,6 +462,9 @@ body {
   font-size:.95rem;
   font-weight:500;
   text-align:center;
+  box-shadow:
+    0 0 24px var(--glow-primary),
+    0 0 48px var(--glow-secondary);
 }
 
 .ticker-line {
@@ -389,10 +501,12 @@ body {
   border-radius: var(--radius-xl);
   color:var(--card-text-main);
   padding:1rem 1rem 1.25rem;
-  box-shadow:var(--card-shadow);
   display:flex;
   flex-direction:column;
   gap:.75rem;
+  box-shadow:
+    0 0 24px var(--glow-primary),
+    0 0 48px var(--glow-secondary);
 }
 
 .barber-name {
@@ -422,12 +536,13 @@ body {
   padding:.75rem 1rem;
   text-decoration:none;
   font-weight:500;
-  box-shadow:0 8px 16px rgba(0,0,0,.6);
+  box-shadow:
+    0 0 16px var(--glow-primary),
+    0 0 32px var(--glow-secondary);
   transition:all .15s ease;
 }
 .call-btn:hover,
 .call-btn:focus {
-  box-shadow: var(--pill-hover-shadow);
   transform: translateY(-2px) scale(1.03);
 }
 
@@ -446,11 +561,13 @@ body {
   background: var(--card-bg);
   border:1px solid var(--card-border);
   border-radius: var(--radius-xl);
-  box-shadow:var(--card-shadow);
   padding:1rem 1rem 1.25rem;
   color:var(--card-text-main);
   font-size:.9rem;
   line-height:1.45;
+  box-shadow:
+    0 0 24px var(--glow-primary),
+    0 0 48px var(--glow-secondary);
 }
 
 .review-headline-row {
@@ -526,7 +643,6 @@ body {
   background: var(--card-bg);
   border:1px solid var(--card-border);
   border-radius: var(--radius-xl);
-  box-shadow:var(--card-shadow);
   padding:1rem 1rem 1.25rem;
   display:flex;
   flex-direction:row;
@@ -536,6 +652,9 @@ body {
   color:var(--card-text-main);
   font-size:.9rem;
   line-height:1.4;
+  box-shadow:
+    0 0 24px var(--glow-primary),
+    0 0 48px var(--glow-secondary);
 }
 
 .service-left {max-width:75%;}
@@ -571,7 +690,9 @@ body {
   border-radius:var(--radius-pill);
   color:var(--chip-text);
   padding:.5rem .75rem;
-  box-shadow:0 8px 16px rgba(0,0,0,.6);
+  box-shadow:
+    0 0 16px var(--glow-primary),
+    0 0 32px var(--glow-secondary);
 }
 
 /* ---------- HOURS / CONTACT / LOCATION ---------- */
@@ -595,12 +716,14 @@ body {
   background: var(--card-bg);
   border:1px solid var(--card-border);
   border-radius: var(--radius-xl);
-  box-shadow:var(--card-shadow);
-  padding:1rem 1rem 1.25rem;
   color:var(--card-text-main);
   font-size:.9rem;
   line-height:1.45;
   min-width:0;
+  padding:1rem 1rem 1.25rem;
+  box-shadow:
+    0 0 24px var(--glow-primary),
+    0 0 48px var(--glow-secondary);
 }
 
 .subheadline {
@@ -631,18 +754,22 @@ body {
   background: var(--card-bg);
   border:1px solid var(--card-border);
   border-radius: var(--radius-xl);
-  box-shadow:var(--card-shadow);
   padding:1rem;
   min-width:0;
+  box-shadow:
+    0 0 24px var(--glow-primary),
+    0 0 48px var(--glow-secondary);
 }
 
 .map-frame-wrapper {
   border-radius: var(--radius-lg);
   overflow:hidden;
   border:1px solid var(--card-border);
-  box-shadow:0 12px 24px rgba(0,0,0,.7);
   background:#000;
-  aspect-ratio: 16/11; /* squarer than super-wide */
+  aspect-ratio: 16/11; /* squarer rectangle like you asked */
+  box-shadow:
+    0 0 24px var(--glow-primary),
+    0 0 48px var(--glow-secondary);
 }
 .map-frame-wrapper iframe {
   width:100%;
@@ -669,15 +796,16 @@ body {
   color:var(--pill-text);
   text-decoration:none;
   font-weight:500;
-  box-shadow:0 8px 16px rgba(0,0,0,.6);
-  transition:.15s ease;
   display:flex;
   align-items:center;
   gap:.5rem;
+  box-shadow:
+    0 0 16px var(--glow-primary),
+    0 0 32px var(--glow-secondary);
+  transition:.15s ease;
 }
 .map-btn:hover,
 .map-btn:focus {
-  box-shadow: var(--pill-hover-shadow);
   transform:translateY(-2px) scale(1.03);
 }
 
@@ -690,46 +818,59 @@ body {
   margin-top:var(--section-gap);
 }
 
-/* ---------- SCROLL REVEAL ---------- */
+/* ---------- SCROLL REVEAL + PARALLAX ---------- */
 .reveal-section {
   opacity:0;
   transform: translateY(var(--lift-translate-y)) scale(var(--lift-scale));
   filter: brightness(.9);
   transition:
-    opacity .35s ease,
-    transform .35s ease,
-    filter .35s ease,
-    box-shadow .35s ease;
-  will-change: opacity, transform, filter, box-shadow;
+    opacity .4s ease,
+    transform .4s ease,
+    filter .4s ease;
+  will-change: opacity, transform, filter;
 }
 .reveal-section.revealed {
   opacity:1;
   transform:translateY(0) scale(1);
   filter:brightness(1);
-  box-shadow: var(--lift-shadow);
 }
 
-/* anchor offset so sticky header doesn't cover anchor targets */
-[id] { scroll-margin-top: 6rem; }
-.first-section-fix { scroll-margin-top: 6rem; }
+/* anchor offset so sticky header doesn't cover the section you jump to */
+[id] { scroll-margin-top: 5.5rem; }
+.first-section-fix { scroll-margin-top: 5.5rem; }
 </style>
 </head>
 
 <body>
 
-<!-- ===== HEADER / NAV ===== -->
+<!-- ===== STICKY HEADER ===== -->
 <header class="site-header-wrapper" id="siteHeader">
   <div class="wrapper site-header">
 
-    <div class="header-topline">
-      <div class="shop-name">NEXT LEVEL BARBERSHOP</div>
+    <div class="site-header-top">
 
-      <a class="call-button" href="tel:+15055036216">
-        (505) 503-6216
-      </a>
+      <!-- left: shop name -->
+      <div class="shop-left">
+        <div class="shop-name">NEXT LEVEL BARBERSHOP</div>
+      </div>
+
+      <!-- right: call + menu -->
+      <div class="shop-right">
+        <a class="call-button" href="tel:+15055036216">
+          (505) 503-6216
+        </a>
+
+        <!-- mobile menu trigger -->
+        <button class="mobile-menu-button" id="menuToggle" aria-expanded="false">
+          <span style="font-weight:500;">Menu</span>
+          <span style="font-size:1rem;line-height:1;">☰</span>
+        </button>
+      </div>
+
     </div>
 
-    <nav class="nav-row">
+    <!-- desktop nav row -->
+    <nav class="nav-row" id="desktopNav">
       <a class="nav-pill" href="#welcome">Home</a>
       <a class="nav-pill" href="#barbers">Our Barbers</a>
       <a class="nav-pill" href="#reviews">Reviews</a>
@@ -739,13 +880,24 @@ body {
       <a class="nav-pill" href="#location">Location</a>
     </nav>
 
+    <!-- mobile dropdown menu -->
+    <nav class="mobile-menu-panel" id="mobileMenu">
+      <a class="mobile-menu-link" href="#welcome">Home</a>
+      <a class="mobile-menu-link" href="#barbers">Our Barbers</a>
+      <a class="mobile-menu-link" href="#reviews">Reviews</a>
+      <a class="mobile-menu-link" href="#services">Services</a>
+      <a class="mobile-menu-link" href="#hours">Hours</a>
+      <a class="mobile-menu-link" href="#contact">Contact</a>
+      <a class="mobile-menu-link" href="#location">Location</a>
+    </nav>
+
   </div>
 </header>
 
 <main class="wrapper">
 
   <!-- ===== WELCOME / HERO ===== -->
-  <section id="welcome" class="page-section first-section-fix reveal-section section-card">
+  <section id="welcome" class="page-section first-section-fix reveal-section section-card" data-depth="0.15">
     <div class="section-card-content">
 
       <div class="section-eyebrow">WELCOME TO</div>
@@ -759,14 +911,14 @@ body {
         Payment method can vary by barber — just confirm when you book.
       </p>
 
-      <!-- badges row 1 -->
+      <!-- main info chips -->
       <div class="badge-row">
         <div class="badge-chip">Locally Owned</div>
         <div class="badge-chip">Walk-Ins Welcome</div>
         <div class="badge-chip">Appointments Preferred</div>
       </div>
 
-      <!-- badges row 2 — payment methods WITH emojis (your request) -->
+      <!-- payment chips WITH emojis -->
       <div class="badge-row">
         <div class="badge-chip">💵 Cash</div>
         <div class="badge-chip">🍎 Apple&nbsp;Pay</div>
@@ -774,7 +926,7 @@ body {
         <div class="badge-chip">📲 Venmo</div>
       </div>
 
-      <!-- location / info ticker -->
+      <!-- location / quick facts -->
       <div class="ticker-box">
         <div class="ticker-line">
           <div class="ticker-item">📍 Albuquerque, NM</div>
@@ -790,7 +942,7 @@ body {
   </section>
 
   <!-- ===== BARBERS ===== -->
-  <section id="barbers" class="page-section reveal-section section-card">
+  <section id="barbers" class="page-section reveal-section section-card" data-depth="0.1">
     <div class="section-card-content">
 
       <div class="section-eyebrow">OUR BARBERS</div>
@@ -865,7 +1017,7 @@ body {
   </section>
 
   <!-- ===== REVIEWS ===== -->
-  <section id="reviews" class="page-section reveal-section section-card">
+  <section id="reviews" class="page-section reveal-section section-card" data-depth="0.08">
     <div class="section-card-content">
 
       <div class="section-eyebrow">WHAT PEOPLE ARE SAYING</div>
@@ -950,7 +1102,7 @@ body {
   </section>
 
   <!-- ===== SERVICES ===== -->
-  <section id="services" class="page-section reveal-section section-card">
+  <section id="services" class="page-section reveal-section section-card" data-depth="0.06">
     <div class="section-card-content">
 
       <div class="section-eyebrow">OUR SERVICES</div>
@@ -1107,7 +1259,7 @@ body {
   </section>
 
   <!-- ===== HOURS / CONTACT / LOCATION ===== -->
-  <section id="hours" class="page-section reveal-section section-card">
+  <section id="hours" class="page-section reveal-section section-card" data-depth="0.04">
     <div class="section-card-content">
 
       <div class="section-eyebrow">VISIT US</div>
@@ -1150,7 +1302,7 @@ body {
           <div class="subheadline">Find Us</div>
 
           <div class="map-frame-wrapper">
-            <!-- replace src with your live embed if needed -->
+            <!-- you can swap this src with your live google maps embed -->
             <iframe
               loading="lazy"
               allowfullscreen
@@ -1187,27 +1339,44 @@ body {
 
 </main>
 
-<!-- ===== JS: SHRINK HEADER + SECTION POP-IN ===== -->
+<!-- ===== JS: header shrink, mobile menu, reveal, parallax ===== -->
 <script>
-// shrink header on scroll
-const headerEl = document.getElementById('siteHeader');
-function handleHeader() {
-  if (window.scrollY > 30) {
-    headerEl.classList.add('shrink');
+// ===== shrink header on scroll (compress padding / feel tighter)
+const siteHeader = document.getElementById('siteHeader');
+function handleHeaderShrink() {
+  if (window.scrollY > 24) {
+    siteHeader.style.paddingBlock = ".3rem .4rem";
   } else {
-    headerEl.classList.remove('shrink');
+    siteHeader.style.paddingBlock = "";
   }
 }
-window.addEventListener('scroll', handleHeader, { passive: true });
+window.addEventListener('scroll', handleHeaderShrink, { passive: true });
 
-// scroll reveal per section
+// ===== mobile menu toggle
+const menuToggleBtn = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+
+menuToggleBtn.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  menuToggleBtn.setAttribute('aria-expanded', open ? "true" : "false");
+});
+
+// close mobile menu when you tap a link
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    menuToggleBtn.setAttribute('aria-expanded', "false");
+  });
+});
+
+// ===== scroll reveal (pop in, then pop again when you leave/come back)
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
       } else {
-        // remove so it can "pop" again next time you scroll back
+        // remove to allow re-pop animation on revisit
         entry.target.classList.remove('revealed');
       }
     });
@@ -1218,6 +1387,22 @@ const observer = new IntersectionObserver(
 document.querySelectorAll('.reveal-section').forEach((section) => {
   observer.observe(section);
 });
+
+// ===== parallax depth effect per section-card
+// Each .section-card has data-depth="0.xx"
+// We'll shift it a tiny bit based on scrollY
+function parallaxUpdate() {
+  const scrollY = window.scrollY;
+  document.querySelectorAll('.section-card').forEach(card => {
+    const depth = parseFloat(card.getAttribute('data-depth') || '0');
+    // translateY moves opposite scroll a little for depth feel
+    const offset = -(scrollY * depth * 0.15); // tuned to stay smooth
+    card.style.transform = `translateY(${offset}px)`;
+  });
+  requestAnimationFrame(parallaxUpdate);
+}
+// kick off parallax loop once
+requestAnimationFrame(parallaxUpdate);
 </script>
 
 </body>
