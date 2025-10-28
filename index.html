@@ -57,10 +57,14 @@ body {
   --accent-left: #8b6bff;
   --accent-right: #49c9ff;
 
-  /* sticky header glass */
-  --header-bg: rgba(10,10,20,0.6);
-  --header-border: rgba(255,255,255,0.08);
+  /* sticky header glass (more transparent now) */
+  --header-bg: rgba(10,10,20,0.35);
+  --header-border: rgba(255,255,255,0.12);
   --header-text: #fff;
+
+  /* mobile dropdown background glass */
+  --mobilemenu-bg: rgba(10,10,20,0.45);
+  --mobilemenu-border: rgba(255,255,255,0.16);
 
   /* chips / info badges */
   --chip-bg: rgba(15,15,25,0.6);
@@ -107,9 +111,13 @@ body {
     --accent-left: #7f6dff;
     --accent-right: #4fc3ff;
 
-    --header-bg: rgba(255,255,255,0.55);
-    --header-border: rgba(0,0,30,0.07);
+    /* lighter header glass in light mode */
+    --header-bg: rgba(255,255,255,0.4);
+    --header-border: rgba(0,0,30,0.10);
     --header-text: #1a1b23;
+
+    --mobilemenu-bg: rgba(255,255,255,0.5);
+    --mobilemenu-border: rgba(0,0,30,0.12);
 
     --chip-bg: rgba(255,255,255,0.8);
     --chip-border: rgba(0,0,0,0.08);
@@ -123,7 +131,6 @@ body {
 
 /* ---------- PAGE BG ---------- */
 body {
-  /* soft radial glows + gradient */
   background:
     radial-gradient(circle at 20% 20%, rgba(90,60,255,0.18) 0%, transparent 60%),
     radial-gradient(circle at 80% 40%, rgba(0,160,255,0.15) 0%, transparent 60%),
@@ -150,29 +157,23 @@ body {
 .center { text-align:center; }
 .flex { display:flex; }
 .flex-col { flex-direction:column; }
-.flex-wrap { flex-wrap:wrap; }
 .items-center { align-items:center; }
 .justify-between { justify-content:space-between; }
-.justify-center { justify-content:center; }
-.gap-xs { gap:.4rem; }
-.gap-sm { gap:.5rem; }
-.gap-md { gap:1rem; }
-.gap-lg { gap:1.5rem; }
 
 /* ---------- STICKY HEADER ---------- */
-/* mobile-friendly: small height, menu button */
 .site-header-wrapper {
   position: sticky;
   top: 0;
   z-index: 999;
   background: var(--header-bg);
-  backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(20px) saturate(160%);
   border-bottom: 1px solid var(--header-border);
 
-  /* glow instead of heavy shadow */
+  /* neon glow ring instead of heavy shadow */
   box-shadow:
     0 0 24px var(--glow-primary),
     0 0 48px var(--glow-secondary);
+
   transition: all .18s ease;
 }
 
@@ -190,6 +191,7 @@ body {
   justify-content:space-between;
   flex-wrap:wrap;
   row-gap:.5rem;
+  column-gap:.75rem;
 }
 
 /* left: shop name */
@@ -207,7 +209,7 @@ body {
   white-space:nowrap;
 }
 
-/* right: call + menu button row */
+/* right: menu trigger only now */
 .shop-right {
   display:flex;
   align-items:flex-start;
@@ -217,7 +219,8 @@ body {
   max-width:100%;
 }
 
-/* call button */
+/* call-button is NOT shown in header anymore,
+   but we keep styles so we can reuse it inside the dropdown menu */
 .call-button {
   background: linear-gradient(90deg,#5a3cff 0%,#4ccaff 100%);
   border-radius: var(--radius-lg);
@@ -226,17 +229,17 @@ body {
   font-size:.9rem;
   font-weight:500;
   line-height:1.2;
-  padding:.55rem .8rem;
+  padding:.75rem 1rem;
   text-decoration:none;
   text-align:center;
-  min-width:150px;
+  min-width:170px;
 
   box-shadow:
     0 0 24px var(--glow-primary),
     0 0 48px var(--glow-secondary);
 }
 
-/* hamburger / menu trigger pill for mobile */
+/* hamburger / menu trigger pill */
 .mobile-menu-button {
   background: var(--pill-bg);
   border:1px solid var(--pill-border);
@@ -246,7 +249,7 @@ body {
   line-height:1.2;
   font-weight:500;
   padding:.6rem .8rem;
-  min-width:72px;
+  min-width:88px;
   text-align:center;
   display:flex;
   align-items:center;
@@ -295,11 +298,12 @@ body {
 .mobile-menu-panel {
   display:none;
   flex-direction:column;
-  background: var(--header-bg);
-  backdrop-filter: blur(16px) saturate(140%);
-  border-top:1px solid var(--header-border);
-  padding: .75rem 0 1rem;
+  background: var(--mobilemenu-bg);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-top:1px solid var(--mobilemenu-border);
+  border-bottom:1px solid var(--mobilemenu-border);
   border-radius:0 0 var(--radius-lg) var(--radius-lg);
+  padding: 1rem 0 1.25rem;
 
   box-shadow:
     0 0 24px var(--glow-primary),
@@ -308,29 +312,55 @@ body {
 .mobile-menu-panel.open {
   display:flex;
 }
+
+.mobile-menu-inner {
+  max-width:1200px;
+  margin-inline:auto;
+  width:100%;
+  padding-inline: clamp(1rem,2vw,2rem);
+
+  background: var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    0 0 24px var(--glow-primary),
+    0 0 48px var(--glow-secondary);
+  display:flex;
+  flex-direction:column;
+  padding:1rem;
+  gap:1rem;
+}
+
+/* menu links */
 .mobile-menu-link {
   background: var(--pill-bg);
   border:1px solid var(--pill-border);
   border-radius: var(--radius-lg);
   color:var(--pill-text);
   text-decoration:none;
-  font-size:.95rem;
+  font-size:1rem;
   font-weight:500;
   line-height:1.2;
-  padding:.8rem 1rem;
-  margin:.4rem 1rem;
+  padding:1rem 1rem;
   text-align:center;
-
   box-shadow:
     0 0 16px var(--glow-primary),
     0 0 32px var(--glow-secondary);
 }
 
+/* call block at bottom of dropdown */
+.mobile-call-block {
+  display:flex;
+  justify-content:center;
+  padding-top:.5rem;
+  border-top:1px solid var(--mobilemenu-border);
+}
 @media(min-width:768px){
-  /* desktop: show full nav row under header top, hide burger panel/button */
+  /* desktop: show full nav row, hide burger panel/button */
   .nav-row { display:flex; }
   .mobile-menu-button { display:none; }
   .mobile-menu-panel { display:none !important; }
+
   .site-header {
     align-items:center;
     text-align:center;
@@ -361,7 +391,6 @@ body {
   margin-inline:auto;
   overflow:hidden;
 
-  /* glow ring, not dark box-shadow */
   box-shadow:
     0 0 32px var(--glow-primary),
     0 0 64px var(--glow-secondary);
@@ -766,7 +795,7 @@ body {
   overflow:hidden;
   border:1px solid var(--card-border);
   background:#000;
-  aspect-ratio: 16/11; /* squarer rectangle like you asked */
+  aspect-ratio: 16/11;
   box-shadow:
     0 0 24px var(--glow-primary),
     0 0 48px var(--glow-secondary);
@@ -835,7 +864,7 @@ body {
   filter:brightness(1);
 }
 
-/* anchor offset so sticky header doesn't cover the section you jump to */
+/* anchor offset so sticky header doesn't cover section on jump */
 [id] { scroll-margin-top: 5.5rem; }
 .first-section-fix { scroll-margin-top: 5.5rem; }
 </style>
@@ -848,25 +877,18 @@ body {
   <div class="wrapper site-header">
 
     <div class="site-header-top">
-
       <!-- left: shop name -->
       <div class="shop-left">
         <div class="shop-name">NEXT LEVEL BARBERSHOP</div>
       </div>
 
-      <!-- right: call + menu -->
+      <!-- right: ONLY the menu button now -->
       <div class="shop-right">
-        <a class="call-button" href="tel:+15055036216">
-          (505) 503-6216
-        </a>
-
-        <!-- mobile menu trigger -->
         <button class="mobile-menu-button" id="menuToggle" aria-expanded="false">
           <span style="font-weight:500;">Menu</span>
           <span style="font-size:1rem;line-height:1;">☰</span>
         </button>
       </div>
-
     </div>
 
     <!-- desktop nav row -->
@@ -880,15 +902,23 @@ body {
       <a class="nav-pill" href="#location">Location</a>
     </nav>
 
-    <!-- mobile dropdown menu -->
+    <!-- mobile dropdown menu (now includes call button at the bottom) -->
     <nav class="mobile-menu-panel" id="mobileMenu">
-      <a class="mobile-menu-link" href="#welcome">Home</a>
-      <a class="mobile-menu-link" href="#barbers">Our Barbers</a>
-      <a class="mobile-menu-link" href="#reviews">Reviews</a>
-      <a class="mobile-menu-link" href="#services">Services</a>
-      <a class="mobile-menu-link" href="#hours">Hours</a>
-      <a class="mobile-menu-link" href="#contact">Contact</a>
-      <a class="mobile-menu-link" href="#location">Location</a>
+      <div class="mobile-menu-inner">
+        <a class="mobile-menu-link" href="#welcome">Home</a>
+        <a class="mobile-menu-link" href="#barbers">Our Barbers</a>
+        <a class="mobile-menu-link" href="#reviews">Reviews</a>
+        <a class="mobile-menu-link" href="#services">Services</a>
+        <a class="mobile-menu-link" href="#hours">Hours</a>
+        <a class="mobile-menu-link" href="#contact">Contact</a>
+        <a class="mobile-menu-link" href="#location">Location</a>
+
+        <div class="mobile-call-block">
+          <a class="call-button" href="tel:+15055036216">
+            (505) 503-6216
+          </a>
+        </div>
+      </div>
     </nav>
 
   </div>
@@ -1031,7 +1061,7 @@ body {
 
       <div class="reviews-grid">
 
-        <!-- Review 1 (2025, mentions Vincent) -->
+        <!-- Review 1 -->
         <div class="review-card">
           <div class="review-headline-row">
             <div class="review-left">
@@ -1053,7 +1083,7 @@ body {
           <div class="review-source">Google review</div>
         </div>
 
-        <!-- Review 2 (2025, mentions Cash / vibe) -->
+        <!-- Review 2 -->
         <div class="review-card">
           <div class="review-headline-row">
             <div class="review-left">
@@ -1075,7 +1105,7 @@ body {
           <div class="review-source">Google review</div>
         </div>
 
-        <!-- Review 3 (2024, mentions Jonny fix) -->
+        <!-- Review 3 -->
         <div class="review-card">
           <div class="review-headline-row">
             <div class="review-left">
@@ -1302,7 +1332,7 @@ body {
           <div class="subheadline">Find Us</div>
 
           <div class="map-frame-wrapper">
-            <!-- you can swap this src with your live google maps embed -->
+            <!-- update this src with your real embed if needed -->
             <iframe
               loading="lazy"
               allowfullscreen
@@ -1341,7 +1371,7 @@ body {
 
 <!-- ===== JS: header shrink, mobile menu, reveal, parallax ===== -->
 <script>
-// ===== shrink header on scroll (compress padding / feel tighter)
+// shrink header padding slightly on scroll
 const siteHeader = document.getElementById('siteHeader');
 function handleHeaderShrink() {
   if (window.scrollY > 24) {
@@ -1352,7 +1382,7 @@ function handleHeaderShrink() {
 }
 window.addEventListener('scroll', handleHeaderShrink, { passive: true });
 
-// ===== mobile menu toggle
+// mobile menu toggle
 const menuToggleBtn = document.getElementById('menuToggle');
 const mobileMenu = document.getElementById('mobileMenu');
 
@@ -1361,7 +1391,7 @@ menuToggleBtn.addEventListener('click', () => {
   menuToggleBtn.setAttribute('aria-expanded', open ? "true" : "false");
 });
 
-// close mobile menu when you tap a link
+// close mobile menu when link tapped
 mobileMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     mobileMenu.classList.remove('open');
@@ -1369,14 +1399,13 @@ mobileMenu.querySelectorAll('a').forEach(link => {
   });
 });
 
-// ===== scroll reveal (pop in, then pop again when you leave/come back)
+// scroll reveal (entry animation each time you scroll away/back)
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
       } else {
-        // remove to allow re-pop animation on revisit
         entry.target.classList.remove('revealed');
       }
     });
@@ -1388,20 +1417,16 @@ document.querySelectorAll('.reveal-section').forEach((section) => {
   observer.observe(section);
 });
 
-// ===== parallax depth effect per section-card
-// Each .section-card has data-depth="0.xx"
-// We'll shift it a tiny bit based on scrollY
+// parallax depth on each section-card
 function parallaxUpdate() {
   const scrollY = window.scrollY;
   document.querySelectorAll('.section-card').forEach(card => {
     const depth = parseFloat(card.getAttribute('data-depth') || '0');
-    // translateY moves opposite scroll a little for depth feel
-    const offset = -(scrollY * depth * 0.15); // tuned to stay smooth
+    const offset = -(scrollY * depth * 0.15);
     card.style.transform = `translateY(${offset}px)`;
   });
   requestAnimationFrame(parallaxUpdate);
 }
-// kick off parallax loop once
 requestAnimationFrame(parallaxUpdate);
 </script>
 
