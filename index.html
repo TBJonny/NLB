@@ -1,632 +1,608 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<meta name="color-scheme" content="dark light" />
-<title>Next Level BarberShop | Albuquerque, NM</title>
-
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Next Level BarberShop</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
 </head>
+
 <body>
-
-<!-- global background glow -->
-<div class="bg-glow-layer" id="bgGlow"></div>
-
-<!-- SPOOK POPUP -->
-<div class="spook-overlay" id="spookOverlay">
-  <div class="spook-card">
-    <h2>BOO 👻</h2>
-    <div>
-      You flinched, huh? Don’t worry — we only line up hair, not souls.
+  <!-- =====================  SPOOK MODAL  ===================== -->
+  <div id="spook-overlay" class="spook-overlay hidden">
+    <div class="spook-card">
+      <div class="spook-header">BOO 👻</div>
+      <div class="spook-body">
+        You flinched, huh? Don’t worry — we only line up hair, not souls.
+        <br /><br />
+        Happy spooky season from Next Level BarberShop. 💈🎃
+      </div>
+      <button id="spook-close" class="spook-btn">LET’S GET IT</button>
     </div>
-    <div style="margin-top:8px; font-size:.8rem; color:rgba(255,255,255,.7);">
-      Happy spooky season from Next Level BarberShop. 💈🎃
-    </div>
-    <button class="spook-btn" id="spookCloseBtn">LET’S GET IT</button>
   </div>
-</div>
 
-<!-- HEADER -->
-<header class="site-header" id="siteHeader">
-  <div class="header-inner">
-    <div class="brand-and-nav">
+  <!-- =====================  HEADER / NAV  ===================== -->
+  <header id="site-header" class="site-header">
+    <div class="header-inner">
       <div class="brand-block">
+        <div class="brand-glow"></div>
         <div class="brand-name">NEXT LEVEL BARBERSHOP</div>
+
+        <!-- mobile menu button -->
+        <button class="burger-btn" id="burgerBtn" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
 
-      <!-- Desktop nav -->
-      <nav class="desktop-nav" id="desktopNav">
-        <a href="#home"      data-section="home">Home</a>
-        <a href="#barbers"   data-section="barbers">Our Barbers</a>
-        <a href="#reviews"   data-section="reviews">Reviews</a>
-        <a href="#services"  data-section="services">Services</a>
-        <a href="#hours"     data-section="hours">Hours</a>
-        <a href="#contact"   data-section="contact">Contact</a>
-        <a href="#location"  data-section="location">Location</a>
+      <!-- desktop nav -->
+      <nav class="main-nav" id="mainNav">
+        <a href="#home" class="nav-pill">Home</a>
+        <a href="#barbers" class="nav-pill">Our Barbers</a>
+        <a href="#reviews" class="nav-pill">Reviews</a>
+        <a href="#services" class="nav-pill">Services</a>
+        <a href="#hours" class="nav-pill">Hours</a>
+        <a href="#contact" class="nav-pill">Contact</a>
+        <a href="#findus" class="nav-pill">Location</a>
+        <a class="call-pill" href="tel:+15055036216">
+          <span class="call-ico">📞</span>
+          (505) 503-6216
+        </a>
       </nav>
     </div>
 
-    <div class="header-actions">
-      <button class="hamburger-btn" id="menuBtn">☰ Menu</button>
-
-      <a class="call-pill" href="tel:+15055036216">
-        <span class="icon">📞</span>
-        <span>(505) 503-6216</span>
-      </a>
-    </div>
-  </div>
-</header>
-
-<!-- MOBILE DRAWER -->
-<div class="mobile-drawer-overlay" id="drawerOverlay">
-  <aside class="mobile-drawer" id="mobileDrawer">
-    <div class="drawer-top">
-      <div class="drawer-title">Menu</div>
-      <button class="drawer-close-btn" id="drawerCloseBtn">Close ✕</button>
-    </div>
-
-    <nav class="drawer-nav">
-      <a href="#home"      data-section="home"     class="drawer-link">Home</a>
-      <a href="#barbers"   data-section="barbers"  class="drawer-link">Our Barbers</a>
-      <a href="#reviews"   data-section="reviews"  class="drawer-link">Reviews</a>
-      <a href="#services"  data-section="services" class="drawer-link">Services</a>
-      <a href="#hours"     data-section="hours"    class="drawer-link">Hours</a>
-      <a href="#contact"   data-section="contact"  class="drawer-link">Contact</a>
-      <a href="#location"  data-section="location" class="drawer-link">Location / Directions</a>
-    </nav>
-  </aside>
-</div>
-
-<main>
-
-  <!-- HERO / HOME -->
-  <section id="home" class="section-wrap">
-    <div class="section-halo"></div>
-
-    <div class="glass-card">
-      <h1 class="card-heading-xl">WELCOME TO NEXT LEVEL BARBERSHOP</h1>
-      <div class="card-underline"></div>
-
-      <p class="section-desc">
-        Professional cuts, sharp fades, and a clean vibe. Locally owned.
-        Walk-ins welcome. Appointments preferred.
-      </p>
-
-      <div class="badge-row">
-        <div class="badge accent">Locally Owned</div>
-        <div class="badge">Walk-Ins Welcome</div>
-        <div class="badge">Appointments Preferred</div>
-      </div>
-
-      <div class="badge-row" style="margin-top:20px;">
-        <div class="badge accent">Cash</div>
-        <div class="badge">Apple&nbsp;Pay</div>
-        <div class="badge">Cash&nbsp;App</div>
-        <div class="badge">Venmo</div>
-      </div>
-
-      <div class="payment-note">
-        Payment method can vary by barber — just confirm when you book.
-      </div>
-
-      <div class="location-row">
-        <div class="location-chip">Albuquerque, NM</div>
-        <div class="location-chip">Right next to Bob's Burgers</div>
-        <div class="location-chip">Walk-ins Welcome</div>
-        <div class="location-chip">Appointments Preferred</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BARBERS -->
-  <section id="barbers" class="section-wrap">
-    <div class="section-halo"></div>
-
-    <div class="section-title-block">
-      <h2 class="section-headline">Our Barbers</h2>
-      <div class="section-underline"></div>
-      <div class="section-subtext">
-        Book directly with your barber or call the shop. Real craft, no gimmicks.
-      </div>
-    </div>
-
-    <div class="barber-grid">
-
-      <div class="barber-card">
-        <div class="barber-name">Vincent (Owner)</div>
-        <div class="barber-desc">Founder. Fader. Visionary.</div>
-        <a class="call-btn" href="tel:+15055036216">📞 Call to Book</a>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Zwaluw</div>
-        <div class="barber-desc">Precision in every pass.</div>
-        <a class="call-btn" href="tel:+15055036216">📞 Call to Book</a>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">G-Mo</div>
-        <div class="barber-desc">Style that speaks before you do.</div>
-        <a class="call-btn" href="tel:+15055036216">📞 Call to Book</a>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Deshaun</div>
-        <div class="barber-desc">Sharp fades. Chill vibes.</div>
-        <a class="call-btn" href="tel:+15055036216">📞 Call to Book</a>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Ca$h</div>
-        <div class="barber-desc">
-          Quick with the clippers, real with the results.
+    <!-- slide-out mobile drawer -->
+    <aside id="mobileDrawer" class="mobile-drawer">
+      <div class="drawer-glass">
+        <div class="drawer-head">
+          <div class="drawer-title">MENU</div>
+          <button id="drawerClose" class="drawer-close">Close ✕</button>
         </div>
-        <a class="book-btn accent" href="https://booksy.com/" target="_blank" rel="noopener">
-          Book w/ Ca$h
-        </a>
-      </div>
 
-      <div class="barber-card">
-        <div class="barber-name">Jonny</div>
-        <div class="barber-desc">
-          Where art meets the edge.
-        </div>
-        <a class="book-btn accent" href="https://booksy.com/" target="_blank" rel="noopener">
-          Book w/ Jonny
-        </a>
-      </div>
+        <a class="drawer-link" href="#home">Home</a>
+        <a class="drawer-link" href="#barbers">Our Barbers</a>
+        <a class="drawer-link" href="#reviews">Reviews</a>
+        <a class="drawer-link" href="#services">Services</a>
+        <a class="drawer-link" href="#hours">Hours</a>
+        <a class="drawer-link" href="#contact">Contact</a>
+        <a class="drawer-link" href="#findus">Location / Directions</a>
 
-      <div class="barber-card">
-        <div class="barber-name">Taylor</div>
-        <div class="barber-desc">
-          Clean blends. Subtle structure. Quiet precision.
-        </div>
-        <a class="book-btn accent"
-           href="https://booksy.com/en-us/dl/show-business/1592260"
-           target="_blank" rel="noopener">
-          Book w/ Taylor
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- REVIEWS -->
-  <section id="reviews" class="section-wrap">
-    <div class="section-halo"></div>
-
-    <div class="section-title-block">
-      <h2 class="section-headline">What People Are Saying</h2>
-      <div class="section-underline"></div>
-      <div class="section-subtext">
-        Real clients. Real fades. Highlights from recent 5★ reviews.
-      </div>
-    </div>
-
-    <div class="reviews-row">
-
-      <div class="review-card">
-        <div class="review-head">
-          <span>🔥 Cleanest fade I've had in years</span>
-          <span class="review-stars">5★</span>
-        </div>
-        <div>
-          "Attention to detail is insane. Lined me up perfect, beard crispy, zero rush.
-          If you're picky, this is where you go."
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-head">
-          <span>🎧 Chill vibe / professional work</span>
-          <span class="review-stars">5★</span>
-        </div>
-        <div>
-          "Felt welcome soon as I walked in. Music good, convo good, cut even better.
-          I'll be back every week."
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-head">
-          <span>✂️ Fixed my last bad haircut</span>
-          <span class="review-stars">5★</span>
-        </div>
-        <div>
-          "They literally saved me. Cleaned up a messed up fade and made it look
-          intentional. This is skill."
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services" class="section-wrap">
-    <div class="section-halo"></div>
-
-    <div class="section-title-block">
-      <h2 class="section-headline">Our Services</h2>
-      <div class="section-underline"></div>
-      <div class="section-subtext">
-        Clean cuts, detailed fades, beard work, tapers, shaves, perms &amp; more.
-      </div>
-    </div>
-
-    <div class="barber-grid">
-
-      <div class="barber-card">
-        <div class="barber-name">Military / First Responder — $28</div>
-        <div class="barber-desc">
-          Discounted cut for active military, veterans, police, firefighters,
-          EMTs, first responders.
-        </div>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Haircut (Standard) — $35</div>
-        <div class="barber-desc">
-          Classic or trending — fades, tapers, or scissor work.
-        </div>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Haircut + Beard — $40</div>
-        <div class="barber-desc">
-          Full cut plus beard trim/line-up for a sharp all-around look.
-        </div>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Skin Fade / Taper — $40</div>
-        <div class="barber-desc">
-          Down to the skin with foil shaver or razor for a clean finish.
-        </div>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Skin Fade / Taper + Beard — $45</div>
-        <div class="barber-desc">
-          Skin-level fade/taper plus full beard lineup.
-        </div>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Shampoo Service — $15</div>
-        <div class="barber-desc">
-          Cleanse, set, relax.
-        </div>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Long Hair (Past Shoulders) — $35</div>
-        <div class="barber-desc">
-          Extra time &amp; detail for longer lengths.
-        </div>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Beard Trim / Line Up — $25</div>
-        <div class="barber-desc">
-          Clean edges, even bulk, crisp shape.
-        </div>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Face Shave — $25</div>
-        <div class="barber-desc">
-          Hot towel, lather, and a smooth finish.
-        </div>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Line Up Only — $15</div>
-        <div class="barber-desc">
-          Edges only. Beard not included.
-        </div>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Design Only — $10</div>
-        <div class="barber-desc">
-          Add a freestyle design or bring a reference.
-        </div>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Head Shave — $35</div>
-        <div class="barber-desc">
-          Clean and polished dome with hot towel finish.
-        </div>
-      </div>
-
-      <div class="barber-card">
-        <div class="barber-name">Perm Service — $90+</div>
-        <div class="barber-desc">
-          Beachy waves to tighter curls. Premium products, confidence guaranteed.
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- HOURS -->
-  <section id="hours" class="section-wrap">
-    <div class="section-halo"></div>
-
-    <div class="section-title-block">
-      <h2 class="section-headline">Business Hours</h2>
-      <div class="section-underline"></div>
-    </div>
-
-    <div class="glass-card">
-      <div class="hours-grid">
-        <div class="hour-chip">Sunday: 9:00am – 4:00pm</div>
-        <div class="hour-chip">Monday: 9:00am – 4:00pm</div>
-        <div class="hour-chip">Tuesday: 8:30am – 5:30pm</div>
-        <div class="hour-chip">Wednesday: 8:30am – 5:30pm</div>
-        <div class="hour-chip">Thursday: 8:30am – 5:30pm</div>
-        <div class="hour-chip">Friday: 8:30am – 5:30pm</div>
-        <div class="hour-chip">Saturday: 8:30am – 5:30pm</div>
-      </div>
-      <div style="margin-top:16px; font-size:.8rem; color:var(--text-dim);">
-        No additional charge after hours.
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="section-wrap">
-    <div class="section-halo"></div>
-
-    <div class="section-title-block">
-      <h2 class="section-headline">Contact</h2>
-      <div class="section-underline"></div>
-    </div>
-
-    <div class="glass-card">
-      <div style="color:var(--text-primary); font-size:.9rem; line-height:1.4;">
-        <div style="margin-bottom:8px;">
-          📍 6510 Paradise Blvd NW Unit D, Albuquerque, NM 87114
-        </div>
-        <div>
-          📞
-          <a href="tel:+15055036216"
-             style="color:var(--text-primary); text-decoration:none;">
-            (505) 503-6216
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LOCATION -->
-  <section id="location" class="section-wrap">
-    <div class="section-halo"></div>
-
-    <div class="section-title-block">
-      <h2 class="section-headline">Find Us</h2>
-      <div class="section-underline"></div>
-    </div>
-
-    <div class="map-card">
-      <div class="map-buttons">
-        <a class="map-btn"
-           href="https://maps.apple.com/?address=6510%20Paradise%20Blvd%20NW%20Unit%20D%2C%20Albuquerque%2C%20NM%2087114&ll=35.1917307,-106.7250303&q=Next%20Level%20BarberShop"
-           target="_blank" rel="noopener">
-           Apple Maps
-        </a>
-        <a class="map-btn"
-           href="https://www.google.com/maps/search/?api=1&query=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114"
-           target="_blank" rel="noopener">
-          📍 Google Maps
-        </a>
-      </div>
-
-      <div class="map-embed">
-        <!-- fallback embed uses your address -->
-        <iframe
-          src="https://www.google.com/maps?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          allowfullscreen
-          aria-label="Map to Next Level BarberShop"
-        ></iframe>
-      </div>
-
-      <div class="address-block">
-        <div class="addr-line">
-          6510 Paradise Blvd NW Unit D
-        </div>
-        <div class="addr-line">
-          Albuquerque, NM 87114
-        </div>
-        <a class="phone-inline" href="tel:+15055036216">
+        <a class="drawer-call" href="tel:+15055036216">
+          <span class="call-ico">📞</span>
           (505) 503-6216
         </a>
+
+        <div class="drawer-foot">
+          Walk-ins welcome. Appointments preferred.
+          Right next to Bob’s Burgers.
+        </div>
       </div>
-    </div>
-  </section>
+      <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    </aside>
+  </header>
 
-</main>
+  <!-- big floating radial glows in the background -->
+  <div class="bg-glow bg-glow-a"></div>
+  <div class="bg-glow bg-glow-b"></div>
 
-<footer>
-  © 2025 Next Level BarberShop
-</footer>
+  <!-- =====================  MAIN CONTENT  ===================== -->
+  <main>
 
-<script>
-(function(){
-  const header      = document.getElementById('siteHeader');
-  const bgGlow      = document.getElementById('bgGlow');
+    <!-- ********** HERO / HOME ********** -->
+    <section id="home" class="section-wrap hero-section observe-section">
+      <div class="section-card hero-card">
+        <h1 class="hero-title">
+          WELCOME TO NEXT LEVEL BARBERSHOP
+        </h1>
 
-  // === MOBILE DRAWER ===
-  const drawerOverlay  = document.getElementById('drawerOverlay');
-  const menuBtn        = document.getElementById('menuBtn');
-  const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+        <div class="hero-underline"></div>
 
-  function openDrawer(){
-    drawerOverlay.classList.add('show');
-    document.body.style.overflow='hidden';
-  }
-  function closeDrawer(){
-    drawerOverlay.classList.remove('show');
-    document.body.style.overflow='';
-  }
+        <p class="hero-desc">
+          Professional cuts, sharp fades, and a clean vibe. Locally owned.
+          Walk-ins welcome. Appointments preferred.
+        </p>
 
-  if(menuBtn)        menuBtn.addEventListener('click', openDrawer);
-  if(drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
+        <div class="hero-tags-row">
+          <span class="hero-chip gradient-chip">Locally Owned</span>
+          <span class="hero-chip dark-chip">Walk-Ins Welcome</span>
+          <span class="hero-chip dark-chip">Appointments Preferred</span>
+        </div>
 
-  drawerOverlay.addEventListener('click',(e)=>{
-    // click backdrop closes
-    if(e.target === drawerOverlay){
-      closeDrawer();
+        <div class="hero-pay-row">
+          <span class="pay-chip gradient-chip">Cash</span>
+          <span class="pay-chip dark-chip">Apple Pay</span>
+          <span class="pay-chip dark-chip">Cash App</span>
+          <span class="pay-chip dark-chip">Venmo</span>
+        </div>
+
+        <div class="pay-note">
+          Payment method can vary by barber — just confirm when you book.
+        </div>
+
+        <!-- marquee ribbon -->
+        <div class="hero-marquee-shell">
+          <div class="hero-marquee-track">
+            <div class="hero-marquee-item">
+              ALBUQUERQUE, NM • RIGHT NEXT TO BOB’S BURGERS • WALK-INS WELCOME •
+              APPOINTMENTS PREFERRED •
+            </div>
+            <div class="hero-marquee-item">
+              ALBUQUERQUE, NM • RIGHT NEXT TO BOB’S BURGERS • WALK-INS WELCOME •
+              APPOINTMENTS PREFERRED •
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ********** BARBERS ********** -->
+    <section id="barbers" class="section-wrap observe-section">
+      <header class="section-head">
+        <h2 class="section-title">OUR BARBERS</h2>
+        <div class="section-underline"></div>
+        <p class="section-blurb">
+          Book directly with your barber or call the shop. Real craft, no gimmicks.
+        </p>
+      </header>
+
+      <div class="barber-grid">
+        <!-- barber card template -->
+        <article class="barber-card glass-card">
+          <div class="barber-name">VINCENT (OWNER)</div>
+          <div class="barber-line">
+            Founder. Fader. Visionary.
+          </div>
+          <a class="call-mini dark-chip"
+             href="tel:+15055036216">
+            <span class="call-ico">📞</span> Call to Book
+          </a>
+        </article>
+
+        <article class="barber-card glass-card">
+          <div class="barber-name">ZWALUW</div>
+          <div class="barber-line">
+            Precision in every pass.
+          </div>
+          <a class="call-mini dark-chip"
+             href="tel:+15055036216">
+            <span class="call-ico">📞</span> Call to Book
+          </a>
+        </article>
+
+        <article class="barber-card glass-card">
+          <div class="barber-name">G-MO</div>
+          <div class="barber-line">
+            Style that speaks before you do.
+          </div>
+          <a class="call-mini dark-chip"
+             href="tel:+15055036216">
+            <span class="call-ico">📞</span> Call to Book
+          </a>
+        </article>
+
+        <article class="barber-card glass-card">
+          <div class="barber-name">DESHAUN</div>
+          <div class="barber-line">
+            Sharp fades. Chill vibes.
+          </div>
+          <a class="call-mini dark-chip"
+             href="tel:+15055036216">
+            <span class="call-ico">📞</span> Call to Book
+          </a>
+        </article>
+
+        <article class="barber-card glass-card">
+          <div class="barber-name">CA$H</div>
+          <div class="barber-line">
+            Quick with the clippers, real with the results.
+          </div>
+          <a class="book-mini gradient-chip"
+             href="https://booksy.com/en-us/dl/show-business/1592260"
+             target="_blank" rel="noopener">
+            Book w/ Ca$h
+          </a>
+        </article>
+
+        <article class="barber-card glass-card">
+          <div class="barber-name">JONNY</div>
+          <div class="barber-line">
+            Where art meets the edge.
+          </div>
+          <a class="book-mini gradient-chip"
+             href="https://booksy.com/en-us/dl/show-business/1592260"
+             target="_blank" rel="noopener">
+            Book w/ Jonny
+          </a>
+        </article>
+
+        <article class="barber-card glass-card">
+          <div class="barber-name">TAYLOR</div>
+          <div class="barber-line">
+            Clean blends. Subtle structure. Quiet precision.
+          </div>
+          <a class="book-mini gradient-chip"
+             href="https://booksy.com/en-us/dl/show-business/1592260"
+             target="_blank" rel="noopener">
+            Book w/ Taylor
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ********** REVIEWS ********** -->
+    <section id="reviews" class="section-wrap observe-section">
+      <header class="section-head">
+        <h2 class="section-title">
+          WHAT PEOPLE ARE SAYING
+        </h2>
+        <div class="section-underline"></div>
+
+        <div class="reviews-meta">
+          ⭐ 5.0 • REAL CLIENT FEEDBACK
+        </div>
+
+        <p class="section-blurb brighter">
+          Real clients. Real fades. Highlights from recent 5★ reviews.
+        </p>
+      </header>
+
+      <div class="reviews-grid">
+        <article class="review-card glow-card">
+          <div class="review-topline">
+            <span class="review-head-emoji">🔥</span>
+            <span class="review-head-text">Cleanest fade I’ve had in years</span>
+            <span class="star-pill">★★★★★</span>
+          </div>
+          <p class="review-body">
+            “Attention to detail is insane. Lined me up perfect, beard crispy,
+            zero rush. If you’re picky, this is where you go.”
+          </p>
+        </article>
+
+        <article class="review-card glow-card">
+          <div class="review-topline">
+            <span class="review-head-emoji">🎶</span>
+            <span class="review-head-text">Chill vibe / professional work</span>
+            <span class="star-pill">★★★★★</span>
+          </div>
+          <p class="review-body">
+            “Felt welcome soon as I walked in. Music good, convo good, cut even
+            better. I’ll be back every week.”
+          </p>
+        </article>
+
+        <article class="review-card glow-card">
+          <div class="review-topline">
+            <span class="review-head-emoji">✂️</span>
+            <span class="review-head-text">Fixed my last bad haircut</span>
+            <span class="star-pill">★★★★★</span>
+          </div>
+          <p class="review-body">
+            “They literally saved me. Cleaned up a messed up fade and made it
+            look intentional. This is skill.”
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ********** SERVICES ********** -->
+    <section id="services" class="section-wrap observe-section">
+      <header class="section-head">
+        <h2 class="section-title">OUR SERVICES</h2>
+        <div class="section-underline"></div>
+        <p class="section-blurb">
+          Quality, detail, time. Every cut gets full focus — no rush, real work.
+        </p>
+      </header>
+
+      <div class="services-grid">
+
+        <article class="service-card glass-card">
+          <div class="service-top">
+            <div class="service-name">💈 MILITARY / FIRST RESPONDER</div>
+            <div class="service-price">$28</div>
+          </div>
+          <p class="service-desc">
+            Discounted cut for active military, veterans, police, firefighters,
+            EMTs, and first responders.
+          </p>
+        </article>
+
+        <article class="service-card glass-card">
+          <div class="service-top">
+            <div class="service-name">💇 HAIRCUT (STANDARD)</div>
+            <div class="service-price">$35</div>
+          </div>
+          <p class="service-desc">
+            Classic or trending — fades, tapers, or scissor work.
+          </p>
+        </article>
+
+        <article class="service-card glass-card">
+          <div class="service-top">
+            <div class="service-name">🧔 HAIRCUT + BEARD</div>
+            <div class="service-price">$40</div>
+          </div>
+          <p class="service-desc">
+            Full cut plus beard trim / line-up for a balanced look.
+          </p>
+        </article>
+
+        <article class="service-card glass-card">
+          <div class="service-top">
+            <div class="service-name">✂️ SKIN FADE / TAPER</div>
+            <div class="service-price">$40</div>
+          </div>
+          <p class="service-desc">
+            Down to the skin with foil shaver or razor for a clean finish.
+          </p>
+        </article>
+
+        <article class="service-card glass-card">
+          <div class="service-top">
+            <div class="service-name">🧔✂️ SKIN FADE / TAPER + BEARD</div>
+            <div class="service-price">$45</div>
+          </div>
+          <p class="service-desc">
+            Skin-level fade/taper plus full beard lineup.
+          </p>
+        </article>
+
+        <article class="service-card glass-card">
+          <div class="service-top">
+            <div class="service-name">🧼 SHAMPOO SERVICE</div>
+            <div class="service-price">$15</div>
+          </div>
+          <p class="service-desc">
+            Cleanse, set, relax. Hot towel + shampoo.
+          </p>
+        </article>
+
+        <article class="service-card glass-card">
+          <div class="service-top">
+            <div class="service-name">💇‍♂️ LONG HAIR (PAST SHOULDERS)</div>
+            <div class="service-price">$35</div>
+          </div>
+          <p class="service-desc">
+            Extra time & detail for longer lengths.
+          </p>
+        </article>
+
+        <article class="service-card glass-card">
+          <div class="service-top">
+            <div class="service-name">🧔 BEARD TRIM / LINE UP</div>
+            <div class="service-price">$25</div>
+          </div>
+          <p class="service-desc">
+            Clean edges, even bulk, crisp shape.
+          </p>
+        </article>
+
+        <article class="service-card glass-card">
+          <div class="service-top">
+            <div class="service-name">🪒 FACE SHAVE</div>
+            <div class="service-price">$25</div>
+          </div>
+          <p class="service-desc">
+            Hot towel, lather, and smooth finish.
+          </p>
+        </article>
+
+        <article class="service-card glass-card">
+          <div class="service-top">
+            <div class="service-name">✏️ DESIGN ONLY</div>
+            <div class="service-price">$10</div>
+          </div>
+          <p class="service-desc">
+            Add a freestyle design or bring a reference.
+          </p>
+        </article>
+
+        <article class="service-card glass-card">
+          <div class="service-top">
+            <div class="service-name">💀 PERM SERVICE</div>
+            <div class="service-price">$90+</div>
+          </div>
+          <p class="service-desc">
+            Beachy waves to tighter curls — premium products for lasting results.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ********** HOURS ********** -->
+    <section id="hours" class="section-wrap observe-section">
+      <header class="section-head">
+        <h2 class="section-title">BUSINESS HOURS</h2>
+        <div class="section-underline"></div>
+      </header>
+
+      <div class="hours-grid glass-card">
+        <div class="hour-item"><strong>SUN</strong> 9:00am – 4:00pm</div>
+        <div class="hour-item"><strong>MON</strong> 9:00am – 4:00pm</div>
+        <div class="hour-item"><strong>TUE</strong> 8:30am – 5:30pm</div>
+        <div class="hour-item"><strong>WED</strong> 8:30am – 5:30pm</div>
+        <div class="hour-item"><strong>THU</strong> 8:30am – 5:30pm</div>
+        <div class="hour-item"><strong>FRI</strong> 8:30am – 5:30pm</div>
+        <div class="hour-item"><strong>SAT</strong> 8:30am – 5:30pm</div>
+      </div>
+
+      <div class="no-fee-note">
+        NO ADDITIONAL CHARGE AFTER HOURS!
+      </div>
+    </section>
+
+    <!-- ********** CONTACT ********** -->
+    <section id="contact" class="section-wrap observe-section">
+      <header class="section-head">
+        <h2 class="section-title">CONTACT</h2>
+        <div class="section-underline"></div>
+      </header>
+
+      <div class="contact-card glass-card">
+        <div class="contact-line">
+          📍
+          <a
+            href="https://www.google.com/maps/place/Next+Level+Barber+Shop+Albuquerque,+6510+Paradise+Blvd+NW+unit+d,+Albuquerque,+NM+87114"
+            target="_blank"
+            rel="noopener"
+          >
+            6510 Paradise Blvd NW Unit D, Albuquerque, NM 87114
+          </a>
+        </div>
+
+        <div class="contact-line">
+          📞
+          <a href="tel:+15055036216">(505) 503-6216</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ********** FIND US / MAP ********** -->
+    <section id="findus" class="section-wrap observe-section">
+      <header class="section-head">
+        <h2 class="section-title">FIND US</h2>
+        <div class="section-underline"></div>
+      </header>
+
+      <div class="map-wrap glass-card">
+        <div class="map-buttons-row">
+          <a
+            class="map-btn gradient-chip"
+            target="_blank"
+            rel="noopener"
+            href="https://www.google.com/maps/dir/?api=1&destination=Next+Level+BarberShop,6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114"
+          >
+            Google Maps
+          </a>
+          <a
+            class="map-btn gradient-chip"
+            target="_blank"
+            rel="noopener"
+            href="https://maps.apple.com/?address=6510%20Paradise%20Blvd%20NW%20Unit%20D,%20Albuquerque,%20NM%2087114,%20United%20States&ll=35.1917307,-106.7250303&q=Next%20Level%20BarberShop"
+          >
+            Apple Maps
+          </a>
+        </div>
+
+        <div class="map-embed-shell">
+          <iframe
+            class="map-embed"
+            style="border:0;"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDUMMY-REPLACE-WITH-REAL-KEY&q=6510+Paradise+Blvd+NW+unit+d,+Albuquerque,+NM+87114">
+          </iframe>
+        </div>
+
+        <div class="map-footnote">
+          Albuquerque, NM • Right next to Bob’s Burgers
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ********** FOOTER ********** -->
+  <footer class="site-footer">
+    © 2025 Next Level BarberShop
+  </footer>
+
+  <!-- =====================  JS ===================== -->
+  <script>
+    // -------- theme helpers --------
+    function setThemeFromSystem() {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
     }
-  });
+    setThemeFromSystem();
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setThemeFromSystem);
 
-  drawerOverlay.querySelectorAll('.drawer-link').forEach(link=>{
-    link.addEventListener('click', closeDrawer);
-  });
+    // -------- SPOOK POPUP --------
+    (function spookyInit() {
+      const params = new URLSearchParams(window.location.search);
+      const spookOff = params.get('spook');
+      if (spookOff === 'off') return; // kill popup completely
 
-  // === HEADER SHOW/HIDE ON SCROLL ===
-  let lastY = window.scrollY;
-  let ticking = false;
+      const overlay = document.getElementById('spook-overlay');
+      const closeBtn = document.getElementById('spook-close');
 
-  function onScroll(){
-    const y = window.scrollY;
-    const goingDown = y > lastY;
+      // show after slight delay
+      setTimeout(() => {
+        overlay.classList.remove('hidden');
+      }, 1800); // ~2s after load so it feels playful
 
-    if(goingDown && y > 80){
-      header.classList.add('hide');
-    } else {
-      if(y < lastY - 10 || y < 80){
-        header.classList.remove('hide');
-      }
-    }
-
-    lastY = y;
-  }
-
-  window.addEventListener('scroll',()=>{
-    if(!ticking){
-      window.requestAnimationFrame(()=>{
-        onScroll();
-        ticking=false;
+      closeBtn.addEventListener('click', () => {
+        overlay.classList.add('hidden');
       });
-      ticking=true;
+    })();
+
+    // -------- MOBILE DRAWER --------
+    const burgerBtn = document.getElementById('burgerBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const drawerClose = document.getElementById('drawerClose');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+
+    function openDrawer() {
+      mobileDrawer.classList.add('drawer-open');
     }
-  });
+    function closeDrawer() {
+      mobileDrawer.classList.remove('drawer-open');
+    }
+    burgerBtn.addEventListener('click', openDrawer);
+    drawerClose.addEventListener('click', closeDrawer);
+    drawerBackdrop.addEventListener('click', closeDrawer);
 
-  // === SECTION OBSERVER / IN-VIEW GLOW ===
-  const sectionWraps = Array.from(document.querySelectorAll('.section-wrap'));
-  const titleBlocks  = Array.from(document.querySelectorAll('.section-title-block'));
-
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('in-view');
-      }
-    });
-  },{
-    root:null,
-    rootMargin:'-20% 0px -20% 0px',
-    threshold:0.2
-  });
-
-  sectionWraps.forEach(sec=>io.observe(sec));
-  titleBlocks.forEach(tb=>io.observe(tb));
-
-  // === PARALLAX HALOS + GLOBAL BACKGROUND FLOAT ===
-  function parallaxTick(){
-    const scrollY = window.scrollY || 0;
-    // float bg glow subtle
-    const offsetX = (scrollY * 0.02);
-    const offsetY = (scrollY * 0.04);
-    bgGlow.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
-
-    // float halo for each section
-    sectionWraps.forEach(sec=>{
-      const halo = sec.querySelector('.section-halo');
-      if(!halo) return;
-      const rect = sec.getBoundingClientRect();
-      const viewportH = window.innerHeight;
-      const centerDist = (rect.top + rect.height/2) - (viewportH/2);
-      const moveY = Math.max(-30, Math.min(30, centerDist*0.05));
-      halo.style.transform = `translate3d(0, ${moveY}px, 0) scale(1.02)`;
+    // close drawer when tapping a link
+    mobileDrawer.querySelectorAll('a.drawer-link').forEach(link => {
+      link.addEventListener('click', closeDrawer);
     });
 
-    requestAnimationFrame(parallaxTick);
-  }
-  requestAnimationFrame(parallaxTick);
-
-  // === ACTIVE NAV HIGHLIGHT ===
-  const allNavLinks = [
-    ...document.querySelectorAll('.desktop-nav a'),
-    ...document.querySelectorAll('.drawer-nav a')
-  ];
-
-  function updateActiveLink(){
-    let currentId = 'home';
-    let midpoint = window.scrollY + (window.innerHeight * 0.4);
-
-    sectionWraps.forEach(sec=>{
-      const id = sec.id;
-      const top = sec.offsetTop;
-      const bottom = top + sec.offsetHeight;
-      if(midpoint >= top && midpoint < bottom){
-        currentId = id;
-      }
-    });
-
-    allNavLinks.forEach(a=>{
-      const match = a.getAttribute('data-section') === currentId;
-      if(match){
-        a.classList.add('active');
+    // -------- STICKY HEADER SHOW/HIDE ON SCROLL --------
+    let lastScrollY = window.scrollY;
+    const headerEl = document.getElementById('site-header');
+    function handleScrollHeader() {
+      const current = window.scrollY;
+      if (current > lastScrollY && current > 80) {
+        // scrolling down -> hide
+        headerEl.classList.add('header-hide');
       } else {
-        a.classList.remove('active');
+        // scrolling up -> show
+        headerEl.classList.remove('header-hide');
       }
-    });
-  }
-
-  window.addEventListener('scroll',()=>{
-    window.requestAnimationFrame(updateActiveLink);
-  });
-  window.addEventListener('resize',updateActiveLink);
-  updateActiveLink();
-
-  // === SPOOK POPUP ===
-  const spookOverlay  = document.getElementById('spookOverlay');
-  const spookCloseBtn = document.getElementById('spookCloseBtn');
-
-  function getQueryParam(name){
-    const url = new URL(window.location.href);
-    return url.searchParams.get(name);
-  }
-
-  const spookOff = getQueryParam('spook'); // ?spook=off to disable entirely
-
-  if(spookOverlay && spookCloseBtn){
-    if(spookOff === 'off'){
-      spookOverlay.remove();
-    } else {
-      // show after a short delay
-      setTimeout(()=>{
-        spookOverlay.classList.add('show');
-
-        // auto hide after ~4s
-        setTimeout(()=>{
-          spookOverlay.classList.remove('show');
-        },4000);
-
-      },800);
-
-      spookCloseBtn.addEventListener('click',()=>{
-        spookOverlay.classList.remove('show');
-      });
+      lastScrollY = current;
     }
-  }
-})();
-</script>
+    window.addEventListener('scroll', handleScrollHeader, { passive: true });
 
+    // -------- INTERSECTION / GLOW ON SECTION IN VIEW --------
+    const observedSections = document.querySelectorAll('.observe-section');
+    const io = new IntersectionObserver(
+      (entries) => {
+        // highlight the one that's most in view
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active-section');
+          } else {
+            entry.target.classList.remove('active-section');
+          }
+        });
+      },
+      {
+        threshold: 0.4,
+      }
+    );
+    observedSections.forEach((sec) => io.observe(sec));
+
+    // -------- HERO MARQUEE LOOP SPEED --------
+    // nothing needed here, pure CSS handles it
+
+  </script>
 </body>
 </html>
