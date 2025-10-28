@@ -3,1538 +3,1541 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Next Level BarberShop</title>
+<meta name="color-scheme" content="dark light" />
+<title>Next Level BarberShop | Albuquerque, NM</title>
 
 <style>
-/* -------------------------------------------------
-   CORE THEME
-------------------------------------------------- */
+/* ------------- RESET / BASE ------------- */
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+  padding: 0;
+}
 :root {
-  --bg-page: #0b0b12;
-  --bg-grad-1: radial-gradient(circle at 20% 20%, rgba(100,0,255,.25) 0%, rgba(0,0,0,0)60%);
-  --bg-grad-2: radial-gradient(circle at 80% 15%, rgba(0,130,170,.25) 0%, rgba(0,0,0,0)60%);
-  --bg-grad-3: radial-gradient(circle at 50% 80%, rgba(40,0,90,.4)0%, rgba(0,0,0,0)70%);
-
-  --panel-bg: rgba(15,15,24,.6);
-  --panel-border: rgba(150,120,255,.5);
-  --panel-shadow:
-    0 0 28px rgba(120,80,255,.55),
-    0 0 80px rgba(0,180,255,.4),
-    0 30px 70px rgba(0,0,0,.9);
-
-  --frost-bg: rgba(20,20,30,.7);
-  --frost-border: rgba(255,255,255,.12);
-  --frost-shadow:
-    0 24px 60px rgba(0,0,0,.9),
-    0 6px 16px rgba(0,0,0,.7);
-
-  --pill-bg: rgba(15,15,20,.75);
-  --pill-border: rgba(255,255,255,.18);
-  --pill-shadow: 0 16px 36px rgba(0,0,0,.9);
-
-  --accent-grad: linear-gradient(90deg,#633bff 0%,#40d9ff 100%);
-  --accent-text-shadow:
-    0 0 6px rgba(120,120,255,.8),
-    0 0 18px rgba(0,200,255,.6),
-    0 0 42px rgba(0,200,255,.4);
-
-  --headline-shadow:
-    0 0 8px rgba(255,255,255,.3),
-    0 0 32px rgba(120,80,255,.5),
-    0 0 64px rgba(0,200,255,.3);
-
-  --underline-shadow:
-    0 0 12px rgba(120,80,255,.7),
-    0 0 32px rgba(0,200,255,.4);
-
+  --bg-deep:#0b0c10;
+  --bg-card:#11121a;
+  --bg-card-glow1:rgba(93,79,255,0.4);
+  --bg-card-glow2:rgba(41,181,255,0.3);
   --text-main:#fff;
-  --text-dim:#bac2d8;
+  --text-dim:rgba(255,255,255,0.8);
+  --text-soft:rgba(255,255,255,0.6);
+  --border-soft:rgba(255,255,255,0.08);
 
-  --radius-xl:20px;
-  --radius-lg:16px;
-  --radius-md:12px;
-  --radius-sm:8px;
+  --accent-start:#6c6cff;
+  --accent-end:#4dd0ff;
+  --accent-solid:#8fa5ff;
 
-  --header-height-desktop:140px;
-  --header-height-mobile:72px;
-}
+  --radius-xl:1.25rem;
+  --radius-lg:1rem;
+  --radius-md:.75rem;
+  --radius-sm:.5rem;
 
-*{
-  box-sizing:border-box;
-  -webkit-font-smoothing:antialiased;
-}
-body{
-  margin:0;
-  background:var(--bg-page);
-  background-image:var(--bg-grad-1),var(--bg-grad-2),var(--bg-grad-3);
-  background-repeat:no-repeat;
-  background-size:1400px 1400px,1200px 1200px,1600px 1600px;
-  background-attachment:fixed;
-  color:var(--text-main);
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Inter","Roboto","Helvetica Neue",Arial,sans-serif;
-  line-height:1.45;
-  scroll-behavior:smooth;
-}
-a{text-decoration:none;color:inherit;display:inline-block;}
-img{max-width:100%;display:block;}
+  --header-bg:rgba(15,16,24,0.8);
+  --header-border:rgba(255,255,255,0.07);
+  --frost-bg:rgba(16,18,26,0.6);
+  --frost-border:rgba(255,255,255,0.07);
 
-.neon-glow{
-  text-shadow:var(--accent-text-shadow);
-}
-.underline-bar{
-  height:4px;
-  background:var(--accent-grad);
-  border-radius:3px;
-  box-shadow:var(--underline-shadow);
-}
-.pill{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--pill-bg);
-  border:1px solid var(--pill-border);
-  border-radius:var(--radius-md);
-  box-shadow:var(--pill-shadow);
-  padding:.6rem .8rem;
-  font-size:.8rem;
-  font-weight:600;
-  line-height:1.2;
-  color:var(--text-main);
-  white-space:nowrap;
-}
-.pill.primary{
-  background:var(--accent-grad);
-  border:0;
-  color:#fff;
-  box-shadow:
-    0 0 16px rgba(120,80,255,.7),
-    0 0 48px rgba(0,200,255,.5),
-    0 28px 60px rgba(0,0,0,.9);
+  --nav-height-desktop:110px;
+  --nav-height-mobile:64px;
+  --shadow-card:
+    0 30px 80px rgba(0,0,0,.9),
+    0 0 30px rgba(108,108,255,.4),
+    0 0 80px rgba(41,181,255,.3);
+  --shadow-card-active:
+    0 40px 100px rgba(0,0,0,1),
+    0 0 40px rgba(108,108,255,.6),
+    0 0 120px rgba(41,181,255,.5);
+
+  --shadow-header:
+    0 18px 60px rgba(0,0,0,.9),
+    0 0 30px rgba(108,108,255,.5),
+    0 0 80px rgba(41,181,255,.4);
+
+  --line-grad:linear-gradient(90deg,#6c6cff 0%,#4dd0ff 100%);
+  --chip-grad:linear-gradient(90deg,#6c6cff 0%,#4dd0ff 100%);
 }
 
-/* Glow-card = hero, barbers, services, reviews */
-.glow-card{
-  position:relative;
-  border-radius:var(--radius-xl);
-  background:var(--panel-bg);
-  border:1px solid var(--panel-border);
-  box-shadow:var(--panel-shadow);
-  -webkit-backdrop-filter:blur(16px) saturate(160%);
-  backdrop-filter:blur(16px) saturate(160%);
-  color:var(--text-main);
+/* prefers light mode tweaks */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-deep:#f9f9ff;
+    --bg-card:rgba(255,255,255,0.9);
+    --text-main:#0a0a12;
+    --text-dim:rgba(0,0,0,0.8);
+    --text-soft:rgba(0,0,0,0.6);
+    --border-soft:rgba(0,0,0,0.08);
+    --header-bg:rgba(255,255,255,0.7);
+    --header-border:rgba(0,0,0,0.08);
+    --frost-bg:rgba(255,255,255,0.55);
+    --frost-border:rgba(0,0,0,0.08);
+
+    --shadow-card:
+      0 18px 50px rgba(0,0,0,.25),
+      0 0 20px rgba(108,108,255,.3),
+      0 0 40px rgba(41,181,255,.2);
+    --shadow-card-active:
+      0 24px 60px rgba(0,0,0,.3),
+      0 0 30px rgba(108,108,255,.45),
+      0 0 70px rgba(41,181,255,.35);
+
+    --shadow-header:
+      0 18px 50px rgba(0,0,0,.25),
+      0 0 30px rgba(108,108,255,.4),
+      0 0 60px rgba(41,181,255,.3);
+  }
 }
 
-/* Frost-card = hours/contact/map */
-.frost-card{
-  background:var(--frost-bg);
-  border:1px solid var(--frost-border);
-  border-radius:var(--radius-lg);
-  box-shadow:var(--frost-shadow);
-  -webkit-backdrop-filter:blur(16px) saturate(160%);
-  backdrop-filter:blur(16px) saturate(160%);
-  color:var(--text-main);
+body {
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,"Inter","Roboto","Segoe UI",sans-serif;
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.45;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-/* -------------------------------------------------
-   HEADER (always visible now)
-------------------------------------------------- */
-header{
+/* subtle radial “studio light” blobs behind everything */
+.background-blobs {
+  pointer-events:none;
   position:fixed;
-  top:0;left:0;right:0;
-  z-index:9999;
-  background:rgba(10,10,16,.55);
-  -webkit-backdrop-filter:blur(12px) saturate(160%);
-  backdrop-filter:blur(12px) saturate(160%);
-  border-bottom:1px solid rgba(255,255,255,.08);
-  box-shadow:0 24px 50px rgba(0,0,0,.9);
+  inset:0;
+  z-index:0;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(108,0,255,.25) 0%,transparent 60%),
+    radial-gradient(circle at 80% 30%,rgba(0,180,255,.18) 0%,transparent 60%),
+    radial-gradient(circle at 50% 80%,rgba(0,0,0,.9) 0%,transparent 70%);
+  filter:blur(60px);
+  mix-blend-mode:screen;
 }
-.header-inner{
-  max-width:1300px;
-  margin:0 auto;
-  padding:.75rem 1rem 1rem;
-  display:flex;
-  flex-direction:column;
-  gap:.75rem;
+@media (prefers-color-scheme: light){
+  .background-blobs{
+    mix-blend-mode:normal;
+    opacity:.6;
+  }
 }
 
-/* Desktop header layout */
-.desktop-header-block{
+/* ------------- HEADER / NAV ------------- */
+.site-header {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:9999;
+  backdrop-filter:blur(16px);
+  background:var(--header-bg);
+  border-bottom:1px solid var(--header-border);
+  box-shadow:var(--shadow-header);
+  transition:transform .25s ease;
+  will-change:transform;
+}
+.site-header.hide {
+  transform:translateY(calc(-1 * var(--nav-height-mobile)));
+}
+@media(min-width:768px){
+  .site-header.hide {
+    transform:translateY(calc(-1 * var(--nav-height-desktop)));
+  }
+}
+
+/* header inner layout */
+.header-inner{
+  max-width:1280px;
+  margin:0 auto;
   display:flex;
   flex-direction:column;
-  gap:.75rem;
+  padding:.75rem 1rem 1rem;
+  gap:.5rem;
 }
-.brand-row{
+@media(min-width:768px){
+  .header-inner{
+    padding:1rem 1rem 1.25rem;
+    gap:.75rem;
+  }
+}
+
+/* top row: brand + call + burger (mobile) / brand big (desktop) */
+.header-top{
   display:flex;
   align-items:center;
-  justify-content:center;
-  position:relative;
+  justify-content:space-between;
   flex-wrap:wrap;
-  row-gap:.5rem;
+}
+
+.brand-stack{
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  min-width:0;
 }
 .brand-name{
-  font-size:1.6rem;
+  font-size:1rem;
   font-weight:600;
-  line-height:1.2;
-  letter-spacing:.15em;
-  text-transform:uppercase;
+  letter-spacing:.09em;
   color:var(--text-main);
-  text-align:center;
-  text-shadow:var(--accent-text-shadow);
+  text-shadow:0 0 12px rgba(108,108,255,.9),0 0 32px rgba(41,181,255,.6);
+  animation:glowPulse 3s ease-in-out infinite;
   white-space:nowrap;
 }
+@media(min-width:768px){
+  .brand-name{
+    font-size:1.25rem;
+    font-weight:700;
+    letter-spacing:.12em;
+  }
+}
+
+/* call chip */
 .call-chip{
+  flex-shrink:0;
+  background:var(--chip-grad);
+  color:#fff;
+  font-size:.8rem;
+  font-weight:600;
+  border-radius:var(--radius-md);
+  padding:.5rem .75rem;
   display:flex;
   align-items:center;
-  gap:.4rem;
-  background:var(--accent-grad);
-  color:#fff;
-  font-size:.9rem;
-  font-weight:500;
-  padding:.6rem .8rem;
-  border-radius:var(--radius-md);
-  box-shadow:
-    0 0 16px rgba(120,80,255,.7),
-    0 0 48px rgba(0,200,255,.5),
-    0 28px 60px rgba(0,0,0,.9);
-  white-space:nowrap;
-  border:0;
-  position:absolute;
-  right:0;
+  box-shadow:0 10px 30px rgba(0,0,0,.8),
+             0 0 20px rgba(108,108,255,.7),
+             0 0 40px rgba(41,181,255,.5);
+  text-decoration:none;
+  line-height:1.2;
 }
-.call-chip .emoji{font-size:1rem;line-height:1;}
+.call-chip span{
+  display:inline-block;
+  margin-left:.5rem;
+}
+@media(min-width:768px){
+  .call-chip{
+    font-size:.85rem;
+  }
+}
 
+/* mobile burger */
+.burger-btn{
+  background:rgba(255,255,255,.05);
+  color:var(--text-main);
+  border:1px solid var(--border-soft);
+  border-radius:var(--radius-md);
+  padding:.6rem .75rem;
+  font-size:.9rem;
+  line-height:1;
+  font-weight:500;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  box-shadow:0 12px 30px rgba(0,0,0,.8);
+}
+.burger-btn span{
+  font-size:1rem;
+  line-height:1;
+}
+@media(min-width:768px){
+  .burger-btn{display:none;}
+}
+
+/* desktop-only layout for call chip */
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+}
+@media(max-width:767px){
+  .header-right{
+    gap:.5rem;
+  }
+}
+
+/* nav row */
 .nav-row{
   display:flex;
   flex-wrap:wrap;
-  justify-content:center;
   align-items:center;
-  gap:.5rem .75rem;
-  row-gap:.5rem;
+  justify-content:center;
+  gap:.5rem;
 }
 .nav-link{
-  background:rgba(20,20,30,.7);
-  border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border-soft);
   border-radius:var(--radius-md);
-  font-size:.9rem;
-  line-height:1;
-  font-weight:500;
-  color:var(--text-main);
-  padding:.6rem .8rem;
-  box-shadow:0 16px 36px rgba(0,0,0,.9);
-  transition:all .18s cubic-bezier(.25,.4,.45,1);
-}
-.nav-link:hover{
-  box-shadow:
-    0 0 16px rgba(120,80,255,.7),
-    0 0 48px rgba(0,200,255,.5),
-    0 28px 60px rgba(0,0,0,.9);
-}
-
-/* Mobile header layout */
-.mobile-head-extras{
-  display:none;
-  align-items:center;
-  justify-content:space-between;
-  gap:.5rem;
-  flex-wrap:wrap;
-  width:100%;
-}
-.mobile-brand-mini{
-  font-size:1rem;
-  font-weight:600;
-  line-height:1.2;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  text-shadow:var(--accent-text-shadow);
-  color:var(--text-main);
-  white-space:nowrap;
-}
-.mobile-call-chip{
-  background:var(--accent-grad);
-  color:#fff;
+  padding:.6rem .9rem;
   font-size:.8rem;
+  line-height:1.2;
   font-weight:500;
-  padding:.5rem .6rem;
-  border-radius:var(--radius-md);
-  box-shadow:
-    0 0 16px rgba(120,80,255,.7),
-    0 0 48px rgba(0,200,255,.5),
-    0 28px 60px rgba(0,0,0,.9);
-  white-space:nowrap;
-  display:flex;
-  align-items:center;
-  gap:.4rem;
-}
-.burger-btn{
-  background:rgba(20,20,30,.7);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:var(--radius-md);
   color:var(--text-main);
-  box-shadow:0 16px 36px rgba(0,0,0,.9);
-  width:40px;
-  height:40px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:1rem;
-  line-height:1;
-  cursor:pointer;
-  user-select:none;
+  text-decoration:none;
+  box-shadow:0 10px 30px rgba(0,0,0,.75);
+  transition:all .16s ease;
+  white-space:nowrap;
+}
+.nav-link:hover,
+.nav-link:focus{
+  background:rgba(255,255,255,.07);
+  box-shadow:0 15px 40px rgba(0,0,0,.9),
+             0 0 20px rgba(108,108,255,.6),
+             0 0 40px rgba(41,181,255,.4);
+  outline:none;
 }
 
-/* when under 768px wide, hide desktop header block and show mobile */
-@media(max-width:768px){
-  .desktop-header-block{display:none;}
-  .mobile-head-extras{display:flex;}
-}
-
-/* mobile drawer */
+/* mobile slideout drawer */
 .mobile-drawer{
   position:fixed;
-  top:0;right:0;bottom:0;
+  top:0;
+  right:0;
+  bottom:0;
   width:80%;
   max-width:320px;
-  background:rgba(10,10,20,.9);
-  -webkit-backdrop-filter:blur(16px) saturate(180%);
-  backdrop-filter:blur(16px) saturate(180%);
-  border-left:1px solid rgba(255,255,255,.15);
-  box-shadow:-24px 0 60px rgba(0,0,0,.9);
+  background:var(--bg-card);
+  border-left:1px solid var(--border-soft);
+  box-shadow:-30px 0 80px rgba(0,0,0,.9);
   transform:translateX(100%);
-  transition:transform .28s cubic-bezier(.25,.4,.45,1);
-  z-index:10000;
-  color:#fff;
+  transition:transform .25s ease;
+  z-index:99999;
+  padding:1rem;
   display:flex;
   flex-direction:column;
-  padding:1rem 1rem 2rem;
+  gap:1rem;
 }
 .mobile-drawer.open{
   transform:translateX(0);
 }
 .drawer-head{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  margin-bottom:1rem;
-}
-.drawer-title{
-  font-size:.8rem;
-  font-weight:600;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  text-shadow:var(--accent-text-shadow);
+  align-items:center;
 }
 .drawer-close{
-  background:none;
-  border:0;
-  color:#fff;
-  font-size:1.4rem;
-  line-height:1;
-  padding:.25rem .5rem;
+  background:rgba(255,255,255,.05);
+  color:var(--text-main);
+  border:1px solid var(--border-soft);
   border-radius:var(--radius-md);
-  cursor:pointer;
+  padding:.5rem .75rem;
+  font-size:.8rem;
+  line-height:1;
+  box-shadow:0 12px 30px rgba(0,0,0,.8);
 }
-.drawer-links{
+.drawer-nav{
   display:flex;
   flex-direction:column;
-  gap:.75rem;
-  flex:1;
+  gap:.5rem;
 }
-.drawer-links a{
-  background:rgba(20,20,30,.7);
-  border:1px solid rgba(255,255,255,.15);
+.drawer-nav a{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border-soft);
   border-radius:var(--radius-md);
-  padding:.8rem .9rem;
-  font-size:1rem;
+  padding:.75rem 1rem;
+  font-size:.9rem;
   font-weight:500;
-  color:#fff;
-  box-shadow:0 16px 36px rgba(0,0,0,.9);
+  color:var(--text-main);
+  text-decoration:none;
+  box-shadow:0 10px 30px rgba(0,0,0,.75);
 }
-.drawer-call{
-  background:var(--accent-grad);
-  color:#fff;
-  border-radius:var(--radius-md);
-  font-weight:600;
-  font-size:1rem;
-  padding:.9rem .9rem;
-  box-shadow:
-    0 0 16px rgba(120,80,255,.7),
-    0 0 48px rgba(0,200,255,.5),
-    0 28px 60px rgba(0,0,0,.9);
-  text-align:center;
+.drawer-phone{
   margin-top:1rem;
+  background:var(--chip-grad);
+  border-radius:var(--radius-md);
+  padding:.75rem 1rem;
+  color:#fff;
+  font-size:.9rem;
+  font-weight:600;
+  box-shadow:0 12px 30px rgba(0,0,0,.8),
+             0 0 20px rgba(108,108,255,.7),
+             0 0 40px rgba(41,181,255,.5);
+}
+.drawer-note{
+  font-size:.75rem;
+  color:var(--text-soft);
+  line-height:1.3;
 }
 
-/* -------------------------------------------------
-   MAIN LAYOUT / SECTIONS
-------------------------------------------------- */
+/* ------------- MAIN LAYOUT CONTAINER ------------- */
 main{
-  padding-top:var(--header-height-desktop);
-}
-@media(max-width:768px){
-  main{padding-top:var(--header-height-mobile);}
-}
-
-.section{
   position:relative;
-  scroll-margin-top:var(--header-height-desktop);
-}
-@media(max-width:768px){
-  .section{scroll-margin-top:var(--header-height-mobile);}
-}
-.section-shell{
-  max-width:1200px;
-  margin-inline:auto;
-  padding:3rem 1rem 4rem;
-  position:relative;
+  z-index:1;
+  max-width:1280px;
+  margin:0 auto;
+  padding:calc(var(--nav-height-mobile) + 1rem) 1rem 6rem;
 }
 @media(min-width:768px){
-  .section-shell{
-    padding:4rem 2rem 5rem;
+  main{
+    padding:calc(var(--nav-height-desktop) + 1rem) 1rem 8rem;
   }
 }
 
-/* halo behind active section */
-.section-focus-ring{
-  position:absolute;
-  inset:-16px;
-  border-radius:calc(var(--radius-xl) + 16px);
-  background:radial-gradient(circle at 50% 30%,rgba(120,80,255,.55)0%,rgba(0,0,0,0)70%);
-  box-shadow:0 0 120px 40px rgba(0,200,255,.35);
-  opacity:0;
-  pointer-events:none;
-  filter:blur(24px);
-  transition:opacity .18s cubic-bezier(.25,.4,.45,1);
-  z-index:-1;
-}
-.section.active .section-focus-ring{opacity:1;}
-@media(min-width:900px){
-  /* desktop = glow on hover instead of locking always */
-  .section.active .section-focus-ring{opacity:0;}
-  .section:hover .section-focus-ring{opacity:1;}
-}
-
-/* -------------------------------------------------
-   HERO / HOME
-------------------------------------------------- */
-.hero-card{
-  max-width:1000px;
-  margin:0 auto;
-  padding:2rem 1.25rem 2.5rem;
-  text-align:center; /* centered per request */
+/* section wrapper for spacing */
+.section-block{
+  position:relative;
+  margin:3rem 0 4rem;
 }
 @media(min-width:768px){
-  .hero-card{padding:2.5rem 2rem 3rem;}
+  .section-block{
+    margin:4rem 0 5rem;
+  }
 }
-.hero-headline{
-  font-size:1.6rem;
-  line-height:1.3;
+
+/* heading */
+.section-heading-wrap{
+  margin-bottom:1.5rem;
+}
+.section-heading{
+  font-size:1.4rem;
   font-weight:700;
+  letter-spacing:.08em;
   text-transform:uppercase;
-  letter-spacing:.07em;
-  text-shadow:var(--headline-shadow);
-  color:#fff;
-  margin:0;
+  color:var(--text-main);
+  text-shadow:0 0 12px rgba(108,108,255,.7),0 0 32px rgba(41,181,255,.5);
+  display:inline-block;
 }
-@media(min-width:600px){
-  .hero-headline{font-size:2rem;}
+@media(min-width:768px){
+  .section-heading{
+    font-size:1.6rem;
+    letter-spacing:.1em;
+  }
+}
+.heading-underline{
+  width:180px;
+  max-width:70%;
+  height:4px;
+  border-radius:999px;
+  background:var(--line-grad);
+  margin-top:.6rem;
+  box-shadow:0 0 20px rgba(108,108,255,.6),
+             0 0 40px rgba(41,181,255,.4);
+}
+@media(min-width:768px){
+  .heading-underline{
+    width:220px;
+  }
+}
+
+/* ------------- CARDS / GLOW BOXES ------------- */
+.section-card{
+  position:relative;
+  background:radial-gradient(circle at 20% 20%,rgba(108,108,255,.12) 0%,rgba(0,0,0,0) 60%),
+             radial-gradient(circle at 80% 30%,rgba(41,181,255,.12) 0%,rgba(0,0,0,0) 60%),
+             var(--bg-card);
+  border:1px solid var(--border-soft);
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow-card);
+  padding:1.25rem 1rem 1.5rem;
+  color:var(--text-main);
+  transition:box-shadow .18s ease, transform .18s ease;
+  will-change:box-shadow,transform;
+}
+@media(min-width:768px){
+  .section-card{
+    padding:2rem 1.5rem 2rem;
+  }
+}
+.section-card:hover{
+  box-shadow:var(--shadow-card-active);
+  transform:translateY(-2px);
+}
+.section-card.active{
+  box-shadow:var(--shadow-card-active);
+}
+
+/* parallax ring glow "aura" behind each card */
+.section-card::before{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:inherit;
+  background:radial-gradient(circle at 20% 20%,rgba(108,108,255,.18) 0%,transparent 60%),
+             radial-gradient(circle at 80% 30%,rgba(41,181,255,.18) 0%,transparent 60%);
+  filter:blur(30px);
+  z-index:-1;
+  opacity:.7;
+  transition:opacity .18s ease;
+}
+.section-card:hover::before,
+.section-card.active::before{
+  opacity:1;
+}
+
+/* HERO CARD SPECIAL CENTERING */
+.hero-card{
+  max-width:900px;
+  margin:0 auto;
+}
+
+/* hero headline */
+.hero-title{
+  font-size:1.4rem;
+  font-weight:700;
+  line-height:1.3;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--text-main);
+  text-shadow:0 0 12px rgba(108,108,255,.6),0 0 32px rgba(41,181,255,.4);
+  margin-bottom:.75rem;
+}
+@media(min-width:768px){
+  .hero-title{
+    font-size:1.6rem;
+    line-height:1.4;
+    letter-spacing:.1em;
+  }
 }
 .hero-underline{
-  width:100%;
-  max-width:600px;
-  margin:.75rem auto 1.5rem;
+  width:220px;
+  max-width:90%;
+  height:4px;
+  border-radius:999px;
+  background:var(--line-grad);
+  box-shadow:0 0 20px rgba(108,108,255,.6),
+             0 0 40px rgba(41,181,255,.4);
+  margin-bottom:1rem;
 }
+
+/* hero body text */
 .hero-desc{
   color:var(--text-dim);
   font-size:1rem;
   line-height:1.5;
-  max-width:800px;
-  margin:0 auto 1.5rem;
+  margin-bottom:1rem;
+  max-width:60ch;
 }
-.pill-row{
+@media(min-width:768px){
+  .hero-desc{
+    font-size:1.05rem;
+  }
+}
+
+/* chips row */
+.chip-row{
   display:flex;
   flex-wrap:wrap;
-  justify-content:center;
   gap:.75rem;
   margin-bottom:1rem;
 }
+.chip{
+  display:inline-flex;
+  align-items:center;
+  padding:.6rem .8rem;
+  border-radius:var(--radius-md);
+  font-size:.8rem;
+  font-weight:600;
+  line-height:1.2;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border-soft);
+  color:var(--text-main);
+  box-shadow:0 12px 30px rgba(0,0,0,.8);
+}
+.chip.primary{
+  background:var(--chip-grad);
+  color:#fff;
+  box-shadow:0 12px 30px rgba(0,0,0,.8),
+             0 0 20px rgba(108,108,255,.7),
+             0 0 40px rgba(41,181,255,.5);
+  border:none;
+}
+
+/* little note under payment chips */
 .payment-note{
   font-size:.85rem;
+  color:var(--text-soft);
   line-height:1.4;
-  color:var(--text-dim);
-  margin-top:.4rem;
-  max-width:800px;
-  margin-left:auto;
-  margin-right:auto;
+  margin: .5rem 0 1.25rem;
+  max-width:60ch;
 }
-.location-row{
-  margin-top:1.5rem;
+
+/* hero location / quick facts bar */
+.quick-facts{
   display:flex;
   flex-wrap:wrap;
-  justify-content:center;
+  row-gap:.75rem;
+  column-gap:0;
+  background:rgba(0,0,0,.4);
+  border:1px solid var(--border-soft);
+  border-radius:var(--radius-md);
+  box-shadow:0 15px 40px rgba(0,0,0,.9);
+  overflow:hidden;
+}
+@media (prefers-color-scheme: light){
+  .quick-facts{
+    background:rgba(255,255,255,.4);
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+  }
+}
+.fact-pill{
+  flex:1 1 50%;
+  min-width:50%;
   font-size:.7rem;
   font-weight:600;
-  text-transform:uppercase;
   letter-spacing:.08em;
-  background:rgba(0,0,0,.4);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:var(--radius-md);
-  box-shadow:0 16px 40px rgba(0,0,0,.9);
-  overflow:hidden;
-  color:#fff;
-  max-width:1000px;
-  margin-left:auto;
-  margin-right:auto;
-}
-.location-chip{
-  padding:.8rem .9rem;
-  white-space:nowrap;
-  border-right:1px solid rgba(255,255,255,.12);
-}
-.location-chip:last-child{border-right:0;}
-
-/* -------------------------------------------------
-   SECTION HEADERS
-------------------------------------------------- */
-.section-header{
-  max-width:1000px;
-  margin:0 auto 2rem;
-  color:#fff;
-}
-.section-title{
-  font-size:1.6rem;
-  line-height:1.2;
-  font-weight:700;
+  line-height:1.4;
   text-transform:uppercase;
-  letter-spacing:.08em;
-  text-shadow:var(--headline-shadow);
-  color:#fff;
-  margin:0 0 .75rem;
+  color:var(--text-main);
+  text-align:center;
+  padding:.9rem .75rem;
+  border-right:1px solid var(--border-soft);
+  border-bottom:1px solid var(--border-soft);
+}
+.fact-pill:nth-child(2n){
+  border-right:none;
+}
+.fact-pill:nth-last-child(-n+2){
+  border-bottom:none;
 }
 @media(min-width:600px){
-  .section-title{font-size:2rem;}
-}
-.section-underline{
-  width:220px;
-  max-width:60%;
-  margin-bottom:1.25rem;
-}
-.section-blurb{
-  color:var(--text-dim);
-  line-height:1.5;
-  font-size:1rem;
-  max-width:900px;
+  .quick-facts{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+  }
+  .fact-pill{
+    min-width:0;
+    border-bottom:none;
+    border-right:1px solid var(--border-soft);
+  }
+  .fact-pill:last-child{
+    border-right:none;
+  }
+  .fact-pill:nth-child(2n){
+    border-right:1px solid var(--border-soft);
+  }
 }
 
-/* -------------------------------------------------
-   BARBERS
-------------------------------------------------- */
+/* BARBERS GRID */
 .barbers-grid{
-  max-width:1000px;
-  margin:0 auto;
   display:grid;
-  grid-template-columns:1fr;
-  gap:1.25rem;
+  gap:1.5rem;
 }
-@media(min-width:700px){
-  .barbers-grid{grid-template-columns:1fr 1fr;}
-}
-@media(min-width:1024px){
-  .barbers-grid{grid-template-columns:1fr 1fr 1fr;}
+@media(min-width:768px){
+  .barbers-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 .barber-card{
-  background:var(--panel-bg);
-  border:1px solid var(--panel-border);
+  background:var(--bg-card);
+  background:radial-gradient(circle at 20% 20%,rgba(108,108,255,.08) 0%,transparent 60%),
+             radial-gradient(circle at 80% 30%,rgba(41,181,255,.08) 0%,transparent 60%),
+             var(--bg-card);
+  border:1px solid var(--border-soft);
   border-radius:var(--radius-lg);
-  box-shadow:var(--panel-shadow);
-  -webkit-backdrop-filter:blur(16px) saturate(160%);
-  backdrop-filter:blur(16px) saturate(160%);
-  padding:1.25rem 1rem 1.5rem;
-  min-height:180px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  transition:transform .18s cubic-bezier(.25,.4,.45,1),box-shadow .18s cubic-bezier(.25,.4,.45,1);
+  box-shadow:var(--shadow-card);
+  padding:1rem 1rem 1.25rem;
+  color:var(--text-main);
+  transition:box-shadow .18s ease,transform .18s ease;
+  position:relative;
 }
 .barber-card:hover{
+  box-shadow:var(--shadow-card-active);
   transform:translateY(-2px);
-  box-shadow:
-    0 0 24px rgba(120,80,255,.6),
-    0 0 64px rgba(0,200,255,.45),
-    0 32px 70px rgba(0,0,0,.9);
 }
-.barber-top{margin-bottom:1rem;}
 .barber-name{
-  font-weight:600;
+  color:var(--text-main);
   font-size:1rem;
-  line-height:1.3;
-  color:#fff;
-  text-transform:uppercase;
-  letter-spacing:.07em;
-  margin-bottom:.75rem;
+  font-weight:600;
+  letter-spacing:.05em;
+  margin-bottom:.5rem;
 }
 .barber-desc{
-  font-size:.95rem;
+  color:var(--text-soft);
+  font-size:.9rem;
   line-height:1.4;
-  color:var(--text-dim);
+  margin-bottom:1rem;
 }
-.barber-actions{
+.book-row{
   display:flex;
   flex-wrap:wrap;
   gap:.75rem;
 }
-.call-btn{
-  background:var(--pill-bg);
-  border:1px solid var(--pill-border);
-  border-radius:var(--radius-md);
-  color:#fff;
-  font-size:.9rem;
-  font-weight:500;
-  padding:.7rem .9rem;
-  line-height:1.2;
-  box-shadow:var(--pill-shadow);
+.call-btn,
+.book-btn{
   display:inline-flex;
   align-items:center;
   gap:.5rem;
-  white-space:nowrap;
-}
-.call-btn .emoji{font-size:1rem;line-height:1;}
-.book-btn{
-  background:var(--accent-grad);
-  color:#fff;
-  font-weight:600;
-  font-size:.9rem;
-  line-height:1.2;
+  background:rgba(0,0,0,.4);
+  border:1px solid var(--border-soft);
   border-radius:var(--radius-md);
-  padding:.7rem .9rem;
-  box-shadow:
-    0 0 16px rgba(120,80,255,.7),
-    0 0 48px rgba(0,200,255,.5),
-    0 28px 60px rgba(0,0,0,.9);
-  white-space:nowrap;
-  display:inline-block;
-  transition:transform .18s cubic-bezier(.25,.4,.45,1),box-shadow .18s cubic-bezier(.25,.4,.45,1);
-}
-.book-btn:hover{
-  transform:translateY(-1px) scale(1.03);
-  box-shadow:
-    0 0 20px rgba(120,80,255,.8),
-    0 0 60px rgba(0,200,255,.6),
-    0 32px 70px rgba(0,0,0,.9);
-}
-
-/* -------------------------------------------------
-   REVIEWS
-------------------------------------------------- */
-.reviews-grid{
-  max-width:1000px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:1fr;
-  gap:1.25rem;
-}
-@media(min-width:900px){
-  .reviews-grid{grid-template-columns:1fr 1fr 1fr;}
-}
-.review-card{
-  background:var(--panel-bg);
-  border:1px solid var(--panel-border);
-  border-radius:var(--radius-lg);
-  box-shadow:var(--panel-shadow);
-  -webkit-backdrop-filter:blur(16px) saturate(160%);
-  backdrop-filter:blur(16px) saturate(160%);
-  padding:1rem 1rem 1.25rem;
-  min-height:160px;
-  transition:transform .18s cubic-bezier(.25,.4,.45,1),box-shadow .18s cubic-bezier(.25,.4,.45,1);
-}
-.review-card:hover{
-  transform:translateY(-2px);
-  box-shadow:
-    0 0 24px rgba(120,80,255,.6),
-    0 0 64px rgba(0,200,255,.45),
-    0 32px 70px rgba(0,0,0,.9);
-}
-.review-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  flex-wrap:wrap;
-  gap:.5rem;
-  margin-bottom:.75rem;
-}
-.review-title{
-  color:#fff;
-  font-size:.9rem;
-  font-weight:600;
-  line-height:1.3;
-  display:flex;
-  gap:.5rem;
-  flex-wrap:wrap;
-}
-.review-stars{
+  padding:.6rem .8rem;
   font-size:.8rem;
   font-weight:600;
-  background:rgba(20,20,30,.7);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:var(--radius-sm);
-  padding:.4rem .5rem;
-  box-shadow:0 16px 36px rgba(0,0,0,.9);
-  white-space:nowrap;
-  color:#fff;
+  line-height:1.2;
+  color:var(--text-main);
+  text-decoration:none;
+  box-shadow:0 12px 30px rgba(0,0,0,.8);
 }
-.review-body{
-  color:var(--text-dim);
-  font-size:.9rem;
-  line-height:1.4;
+.call-btn .icon-phone,
+.book-btn .icon-phone{
+  font-size:.8rem;
+  line-height:1;
+}
+.book-btn.gradient{
+  background:var(--chip-grad);
+  border:none;
+  color:#fff;
+  box-shadow:0 12px 30px rgba(0,0,0,.8),
+             0 0 20px rgba(108,108,255,.7),
+             0 0 40px rgba(41,181,255,.5);
 }
 
-/* -------------------------------------------------
-   SERVICES
-------------------------------------------------- */
-.services-grid{
-  max-width:1100px;
-  margin:0 auto;
+/* REVIEWS STRIP */
+.reviews-row{
   display:grid;
-  grid-template-columns:1fr;
   gap:1rem;
 }
-@media(min-width:800px){
-  .services-grid{grid-template-columns:1fr 1fr 1fr;}
+@media(min-width:768px){
+  .reviews-row{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+.review-card{
+  background:var(--bg-card);
+  background:radial-gradient(circle at 20% 20%,rgba(108,108,255,.07) 0%,transparent 60%),
+             radial-gradient(circle at 80% 30%,rgba(41,181,255,.07) 0%,transparent 60%),
+             var(--bg-card);
+  border:1px solid var(--border-soft);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+  padding:1rem;
+  font-size:.8rem;
+  line-height:1.4;
+  color:var(--text-main);
+  transition:box-shadow .18s ease,transform .18s ease;
+}
+.review-card:hover{
+  box-shadow:var(--shadow-card-active);
+  transform:translateY(-2px);
+}
+.review-head{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:.5rem;
+  font-weight:600;
+  color:var(--text-main);
+  margin-bottom:.5rem;
+  font-size:.8rem;
+  letter-spacing:.03em;
+}
+.review-badge{
+  background:rgba(255,255,255,.07);
+  border:1px solid var(--border-soft);
+  border-radius:var(--radius-sm);
+  padding:.25rem .4rem;
+  font-size:.7rem;
+  font-weight:600;
+  color:var(--text-main);
+}
+
+/* SERVICES GRID */
+.services-grid{
+  display:grid;
+  gap:1rem;
+}
+@media(min-width:768px){
+  .services-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
 }
 .service-card{
-  background:var(--panel-bg);
-  border:1px solid var(--panel-border);
+  background:var(--bg-card);
+  background:radial-gradient(circle at 20% 20%,rgba(108,108,255,.07) 0%,transparent 60%),
+             radial-gradient(circle at 80% 30%,rgba(41,181,255,.07) 0%,transparent 60%),
+             var(--bg-card);
+  border:1px solid var(--border-soft);
   border-radius:var(--radius-lg);
-  box-shadow:var(--panel-shadow);
-  -webkit-backdrop-filter:blur(16px) saturate(160%);
-  backdrop-filter:blur(16px) saturate(160%);
-  min-height:150px;
+  box-shadow:var(--shadow-card);
   padding:1rem 1rem 1.25rem;
-  transition:transform .18s cubic-bezier(.25,.4,.45,1),box-shadow .18s cubic-bezier(.25,.4,.45,1);
+  transition:box-shadow .18s ease, transform .18s ease;
+  cursor:default;
 }
 .service-card:hover{
+  box-shadow:var(--shadow-card-active);
   transform:translateY(-2px);
-  box-shadow:
-    0 0 24px rgba(120,80,255,.6),
-    0 0 64px rgba(0,200,255,.45),
-    0 32px 70px rgba(0,0,0,.9);
 }
-.service-top-row{
+.service-top{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
   flex-wrap:wrap;
-  gap:.5rem;
-  margin-bottom:.75rem;
+  margin-bottom:.5rem;
 }
 .service-name{
-  color:#fff;
   font-size:.9rem;
-  font-weight:600;
   line-height:1.3;
-  text-transform:uppercase;
-  letter-spacing:.07em;
-  display:flex;
-  flex-wrap:wrap;
-  gap:.5rem;
+  font-weight:600;
+  letter-spacing:.05em;
+  color:var(--text-main);
 }
 .service-price{
   font-size:.8rem;
-  font-weight:600;
-  background:rgba(20,20,30,.7);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:var(--radius-sm);
-  padding:.4rem .5rem;
-  box-shadow:0 16px 36px rgba(0,0,0,.9);
-  color:#fff;
+  font-weight:700;
+  background:rgba(255,255,255,.07);
+  border:1px solid var(--border-soft);
+  border-radius:var(--radius-md);
+  padding:.4rem .6rem;
+  color:var(--text-main);
 }
 .service-desc{
-  font-size:.9rem;
+  font-size:.8rem;
   line-height:1.4;
-  color:var(--text-dim);
+  color:var(--text-soft);
 }
 
-/* -------------------------------------------------
-   HOURS / CONTACT
-------------------------------------------------- */
-.hours-flex{
-  max-width:1100px;
-  margin:0 auto;
-  display:flex;
-  flex-direction:column;
-  gap:2rem;
-}
-@media(min-width:900px){
-  .hours-flex{
-    flex-direction:row;
-    align-items:flex-start;
-  }
-}
-.hours-box{
-  flex:2;
-  padding:1rem 1rem 1.5rem;
-}
+/* HOURS / CONTACT / LOCATION */
 .hours-grid{
   display:flex;
   flex-wrap:wrap;
-  gap:.5rem;
-}
-.hour-chip{
-  background:rgba(20,20,30,.7);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:var(--radius-md);
-  box-shadow:0 16px 36px rgba(0,0,0,.9);
-  color:#fff;
-  font-size:.8rem;
-  line-height:1.4;
-  font-weight:500;
-  padding:.6rem .8rem;
-  white-space:nowrap;
-}
-.note-nocharge{
-  font-size:.8rem;
-  color:var(--text-dim);
-  margin-top:1rem;
-  font-weight:500;
-  letter-spacing:.03em;
-}
-.contact-box{
-  flex:1.3;
-  padding:1rem 1rem 1.25rem;
-  display:flex;
-  flex-direction:column;
-  gap:1rem;
-}
-.contact-item{
-  color:#fff;
-  font-size:.9rem;
-  font-weight:500;
-  line-height:1.4;
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:.5rem;
-  text-decoration:none;
-}
-.contact-item .emoji{font-size:1rem;}
-
-/* -------------------------------------------------
-   MAP / LOCATION
-------------------------------------------------- */
-.map-card{
-  max-width:1100px;
-  margin:0 auto;
-  padding:1rem;
-}
-.map-embed{
-  width:100%;
-  border-radius:var(--radius-md);
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.15);
-  box-shadow:0 20px 60px rgba(0,0,0,.9);
-}
-.map-links{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
   gap:.75rem;
-  margin-top:1rem;
 }
-.map-btn{
-  background:var(--pill-bg);
-  border:1px solid var(--pill-border);
+.hours-pill{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border-soft);
   border-radius:var(--radius-md);
-  box-shadow:var(--pill-shadow);
-  color:#fff;
-  font-size:.9rem;
-  font-weight:500;
-  line-height:1.2;
-  padding:.6rem .9rem;
-  white-space:nowrap;
-}
-
-/* -------------------------------------------------
-   FOOTER
-------------------------------------------------- */
-footer{
-  max-width:1100px;
-  margin:4rem auto 3rem;
-  text-align:center;
+  padding:.75rem 1rem;
   font-size:.8rem;
-  font-weight:500;
-  color:var(--text-dim);
-  letter-spacing:.05em;
+  line-height:1.4;
+  color:var(--text-main);
+  box-shadow:0 12px 30px rgba(0,0,0,.8);
+}
+.no-after-hours{
+  font-size:.75rem;
+  line-height:1.4;
+  color:var(--text-soft);
+  margin-top:.5rem;
+}
+.contact-block{
+  margin-top:2rem;
+  font-size:.9rem;
+  line-height:1.5;
+  color:var(--text-main);
+}
+.contact-line{
+  display:flex;
+  align-items:flex-start;
+  gap:.5rem;
+  margin-bottom:.5rem;
+  font-size:.8rem;
+  line-height:1.4;
+  color:var(--text-main);
+  word-break:break-word;
+}
+.contact-line a{
+  color:var(--text-main);
+  text-decoration:underline;
+  text-decoration-color:rgba(255,255,255,.3);
 }
 
-/* -------------------------------------------------
-   SPOOK POPUP
-------------------------------------------------- */
-#spook{
+/* map container */
+.map-shell{
+  margin-top:2rem;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  border:1px solid var(--border-soft);
+  box-shadow:var(--shadow-card);
+}
+.map-shell iframe{
+  width:100%;
+  height:300px;
+  border:0;
+  display:block;
+}
+
+/* ------------- SPOOK POPUP ------------- */
+#spookPop{
   position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.8);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:clamp(2rem,4vw + 1rem,3rem);
-  font-weight:700;
-  line-height:1.2;
-  text-align:center;
-  letter-spacing:.08em;
-  text-transform:uppercase;
   z-index:999999;
+  left:50%;
+  top:20%;
+  transform:translate(-50%,-50%) scale(.9);
+  background:rgba(0,0,0,.75);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:var(--radius-lg);
+  padding:1rem 1.25rem 1.25rem;
+  width:min(90%,320px);
+  color:#fff;
+  text-align:center;
+  line-height:1.4;
+  font-size:.9rem;
+  font-weight:600;
+  box-shadow:0 30px 80px rgba(0,0,0,.95),
+             0 0 30px rgba(108,108,255,.7),
+             0 0 80px rgba(41,181,255,.5);
   opacity:0;
   pointer-events:none;
-  transition:opacity .2s ease;
-  text-shadow:
-    0 0 8px rgba(255,80,80,.9),
-    0 0 32px rgba(255,0,0,.6),
-    0 0 64px rgba(255,0,0,.4);
+  transition:opacity .2s ease, transform .2s ease;
 }
-#spook.show{opacity:1;}
+#spookPop.show{
+  opacity:1;
+  pointer-events:auto;
+  transform:translate(-50%,-50%) scale(1);
+}
+#spookPop .emoji{
+  font-size:1.4rem;
+  line-height:1;
+  display:block;
+  margin-bottom:.5rem;
+}
+#spookPop .close-spook{
+  display:inline-block;
+  margin-top:.75rem;
+  font-size:.75rem;
+  font-weight:500;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:var(--radius-md);
+  padding:.4rem .6rem;
+  cursor:pointer;
+}
 
-/* -------------------------------------------------
-   SMALL SCREENS
-------------------------------------------------- */
-@media(max-width:480px){
-  .hero-headline{font-size:1.4rem;}
-  .hero-desc{font-size:.95rem;}
-  .section-title{font-size:1.4rem;}
-  .section-blurb{font-size:.95rem;}
-  .barber-card{min-height:auto;}
+/* ------------- UTILS ------------- */
+.hide-on-desktop{display:block;}
+.show-on-desktop{display:none;}
+@media(min-width:768px){
+  .hide-on-desktop{display:none;}
+  .show-on-desktop{display:block;}
 }
+
+@keyframes glowPulse{
+  0%,100%{text-shadow:0 0 8px rgba(108,108,255,.5),0 0 24px rgba(41,181,255,.4);}
+  50%{text-shadow:0 0 12px rgba(108,108,255,.9),0 0 32px rgba(41,181,255,.7);}
+}
+
+/* make sure links can't hijack focus outline color */
+a:focus{outline:2px solid rgba(108,108,255,.6);outline-offset:2px;}
 </style>
 </head>
-
 <body>
 
-<!-- SPOOK POPUP -->
-<div id="spook">🎃 BOO ✂️ FRESH CUT?</div>
-
-<header id="siteHeader">
-  <div class="header-inner">
-
-    <!-- DESKTOP HEADER BLOCK -->
-    <div class="desktop-header-block">
-      <div class="brand-row">
-        <div class="brand-name neon-glow">NEXT LEVEL BARBERSHOP</div>
-
-        <a class="call-chip" href="tel:+15055036216">
-          <span class="emoji">📞</span>
-          <span>(505) 503-6216</span>
-        </a>
-      </div>
-
-      <nav class="nav-row">
-        <a class="nav-link" href="#home">Home</a>
-        <a class="nav-link" href="#barbers">Our Barbers</a>
-        <a class="nav-link" href="#reviews">Reviews</a>
-        <a class="nav-link" href="#paymentTop">Payment</a>
-        <a class="nav-link" href="#services">Services</a>
-        <a class="nav-link" href="#hours">Hours</a>
-        <a class="nav-link" href="#contact">Contact</a>
-        <a class="nav-link" href="#location">Location</a>
-      </nav>
-    </div>
-
-    <!-- MOBILE HEADER BLOCK -->
-    <div class="mobile-head-extras">
-      <div class="mobile-brand-mini neon-glow">NEXT LEVEL BARBERSHOP</div>
-
-      <a class="mobile-call-chip" href="tel:+15055036216">
-        <span class="emoji">📞</span>
-        <span>(505) 503-6216</span>
-      </a>
-
-      <button class="burger-btn" id="burgerBtn" aria-label="Menu">≡</button>
-    </div>
-
-  </div>
-</header>
+<div class="background-blobs" aria-hidden="true"></div>
 
 <!-- MOBILE DRAWER NAV -->
 <aside class="mobile-drawer" id="mobileDrawer">
   <div class="drawer-head">
-    <div class="drawer-title">NAVIGATE</div>
-    <button class="drawer-close" id="drawerClose" aria-label="Close Menu">✕</button>
+    <div style="font-weight:600;color:var(--text-main);letter-spacing:.08em;font-size:.8rem;text-transform:uppercase;">
+      MENU
+    </div>
+    <button class="drawer-close" id="drawerCloseBtn">Close ✕</button>
   </div>
 
-  <div class="drawer-links">
-    <a href="#home" data-drawer-link>Home</a>
-    <a href="#barbers" data-drawer-link>Our Barbers</a>
-    <a href="#reviews" data-drawer-link>Reviews</a>
-    <a href="#paymentTop" data-drawer-link>Payment</a>
-    <a href="#services" data-drawer-link>Services</a>
-    <a href="#hours" data-drawer-link>Hours</a>
-    <a href="#contact" data-drawer-link>Contact</a>
-    <a href="#location" data-drawer-link>Location / Directions</a>
+  <nav class="drawer-nav">
+    <a href="#" data-target="home">Home</a>
+    <a href="#" data-target="barbers">Our Barbers</a>
+    <a href="#" data-target="reviews">Reviews</a>
+    <a href="#" data-target="services">Services</a>
+    <a href="#" data-target="hours">Hours</a>
+    <a href="#" data-target="contact">Contact</a>
+    <a href="#" data-target="location">Location / Directions</a>
+  </nav>
+
+  <div class="drawer-phone">
+    📞 (505) 503-6216
   </div>
 
-  <a class="drawer-call" href="tel:+15055036216">📞 (505) 503-6216</a>
+  <div class="drawer-note">
+    Walk-ins welcome. Appointments preferred.
+    Right next to Bob’s Burgers.
+  </div>
 </aside>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+
+    <div class="header-top">
+      <div class="brand-stack">
+        <div class="brand-name" style="text-transform:uppercase;">NEXT LEVEL BARBERSHOP</div>
+      </div>
+
+      <div class="header-right">
+        <!-- call chip always -->
+        <a class="call-chip" href="tel:+15055036216">
+          <span>📞</span>
+          <span>(505) 503-6216</span>
+        </a>
+
+        <!-- burger only mobile -->
+        <button class="burger-btn hide-on-desktop" id="burgerBtn">
+          <span>☰</span>
+          <span style="font-weight:600;font-size:.8rem;">Menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- nav row -->
+    <nav class="nav-row" id="mainNav">
+      <a class="nav-link" href="#" data-target="home">Home</a>
+      <a class="nav-link" href="#" data-target="barbers">Our Barbers</a>
+      <a class="nav-link" href="#" data-target="reviews">Reviews</a>
+      <a class="nav-link show-on-desktop" href="#" data-target="home">Payment</a>
+      <a class="nav-link" href="#" data-target="services">Services</a>
+      <a class="nav-link" href="#" data-target="hours">Hours</a>
+      <a class="nav-link" href="#" data-target="contact">Contact</a>
+      <a class="nav-link" href="#" data-target="location">Location</a>
+    </nav>
+
+  </div>
+</header>
 
 <main>
 
   <!-- HOME / HERO -->
-  <section id="home" class="section">
-    <div class="section-focus-ring"></div>
+  <section id="home" class="section-block">
+    <div class="section-card hero-card watch-card">
+      <h1 class="hero-title">WELCOME TO NEXT LEVEL BARBERSHOP</h1>
+      <div class="hero-underline"></div>
 
-    <div class="section-shell">
-      <div class="glow-card hero-card">
+      <p class="hero-desc">
+        Professional cuts, sharp fades, and a clean vibe. Locally owned.
+        Walk-ins welcome. Appointments preferred.
+      </p>
 
-        <h1 class="hero-headline">
-          WELCOME TO NEXT LEVEL BARBERSHOP
-        </h1>
-
-        <div class="hero-underline underline-bar"></div>
-
-        <p class="hero-desc">
-          Professional cuts, sharp fades, and a clean vibe. Locally owned.
-          Walk-ins welcome. Appointments preferred.
-        </p>
-
-        <div class="pill-row">
-          <div class="pill primary">Locally Owned</div>
-          <div class="pill">Walk-Ins Welcome</div>
-          <div class="pill">Appointments Preferred</div>
-        </div>
-
-        <div class="pill-row" id="paymentTop">
-          <div class="pill primary">Cash</div>
-          <div class="pill">Apple Pay</div>
-          <div class="pill">Cash App</div>
-          <div class="pill">Venmo</div>
-        </div>
-        <div class="payment-note">
-          Payment method can vary by barber — just confirm when you book.
-        </div>
-
-        <div class="location-row" style="margin-top:1.5rem;">
-          <div class="location-chip">Albuquerque, NM</div>
-          <div class="location-chip">Right next to Bob's Burgers</div>
-          <div class="location-chip">Walk-Ins Welcome</div>
-          <div class="location-chip">Appointments Preferred</div>
-        </div>
-
+      <div class="chip-row">
+        <div class="chip primary">Locally Owned</div>
+        <div class="chip">Walk-Ins Welcome</div>
+        <div class="chip">Appointments Preferred</div>
       </div>
+
+      <!-- payments row -->
+      <div class="chip-row">
+        <div class="chip primary">Cash</div>
+        <div class="chip">Apple Pay</div>
+        <div class="chip">Cash App</div>
+        <div class="chip">Venmo</div>
+      </div>
+      <div class="payment-note">
+        Payment method can vary by barber — just confirm when you book.
+      </div>
+
+      <!-- quick facts bar -->
+      <div class="quick-facts">
+        <div class="fact-pill">Albuquerque, NM</div>
+        <div class="fact-pill">Right next to Bob’s Burgers</div>
+        <div class="fact-pill">Walk-Ins Welcome</div>
+        <div class="fact-pill">Appointments Preferred</div>
+      </div>
+
     </div>
   </section>
 
   <!-- BARBERS -->
-  <section id="barbers" class="section">
-    <div class="section-focus-ring"></div>
+  <section id="barbers" class="section-block">
+    <div class="section-heading-wrap">
+      <div class="section-heading">Our Barbers</div>
+      <div class="heading-underline"></div>
+    </div>
 
-    <div class="section-shell">
+    <div class="barbers-grid">
 
-      <header class="section-header">
-        <div class="section-title">OUR BARBERS</div>
-        <div class="section-underline underline-bar"></div>
-        <div class="section-blurb">
-          Book directly with your barber or call the shop. Real craft, no gimmicks.
+      <div class="barber-card watch-card">
+        <div class="barber-name">VINCENT (OWNER)</div>
+        <div class="barber-desc">Founder. Fader. Visionary.</div>
+        <div class="book-row">
+          <a class="call-btn" href="tel:+15055036216">
+            <span class="icon-phone">📞</span>
+            <span>Call to Book</span>
+          </a>
         </div>
-      </header>
-
-      <div class="barbers-grid">
-
-        <article class="barber-card">
-          <div class="barber-top">
-            <div class="barber-name">VINCENT (OWNER)</div>
-            <div class="barber-desc">Founder. Fader. Visionary.</div>
-          </div>
-          <div class="barber-actions">
-            <a class="call-btn" href="tel:+15055036216">
-              <span class="emoji">📞</span><span>Call to Book</span>
-            </a>
-          </div>
-        </article>
-
-        <article class="barber-card">
-          <div class="barber-top">
-            <div class="barber-name">ZWALUW</div>
-            <div class="barber-desc">Precision in every pass.</div>
-          </div>
-          <div class="barber-actions">
-            <a class="call-btn" href="tel:+15055036216">
-              <span class="emoji">📞</span><span>Call to Book</span>
-            </a>
-          </div>
-        </article>
-
-        <article class="barber-card">
-          <div class="barber-top">
-            <div class="barber-name">G-MO</div>
-            <div class="barber-desc">Style that speaks before you do.</div>
-          </div>
-          <div class="barber-actions">
-            <a class="call-btn" href="tel:+15055036216">
-              <span class="emoji">📞</span><span>Call to Book</span>
-            </a>
-          </div>
-        </article>
-
-        <article class="barber-card">
-          <div class="barber-top">
-            <div class="barber-name">DESHAUN</div>
-            <div class="barber-desc">Sharp fades. Chill vibes.</div>
-          </div>
-          <div class="barber-actions">
-            <a class="call-btn" href="tel:+15055036216">
-              <span class="emoji">📞</span><span>Call to Book</span>
-            </a>
-          </div>
-        </article>
-
-        <article class="barber-card">
-          <div class="barber-top">
-            <div class="barber-name">CA$H</div>
-            <div class="barber-desc">
-              Quick with the clippers, real with the results.
-            </div>
-          </div>
-          <div class="barber-actions">
-            <a class="book-btn" href="https://booksy.com" target="_blank" rel="noopener">
-              Book w/ Ca$h
-            </a>
-          </div>
-        </article>
-
-        <article class="barber-card">
-          <div class="barber-top">
-            <div class="barber-name">JONNY</div>
-            <div class="barber-desc">Where art meets the edge.</div>
-          </div>
-          <div class="barber-actions">
-            <a class="book-btn" href="https://booksy.com" target="_blank" rel="noopener">
-              Book w/ Jonny
-            </a>
-          </div>
-        </article>
-
-        <article class="barber-card">
-          <div class="barber-top">
-            <div class="barber-name">TAYLOR</div>
-            <div class="barber-desc">
-              Clean blends. Subtle structure. Quiet precision.
-            </div>
-          </div>
-          <div class="barber-actions">
-            <a class="book-btn" href="https://booksy.com/en-us/dl/show-business/1592260" target="_blank" rel="noopener">
-              Book w/ Taylor
-            </a>
-          </div>
-        </article>
-
       </div>
+
+      <div class="barber-card watch-card">
+        <div class="barber-name">ZWALUW</div>
+        <div class="barber-desc">Precision in every pass.</div>
+        <div class="book-row">
+          <a class="call-btn" href="tel:+15055036216">
+            <span class="icon-phone">📞</span>
+            <span>Call to Book</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="barber-card watch-card">
+        <div class="barber-name">G-MO</div>
+        <div class="barber-desc">Style that speaks before you do.</div>
+        <div class="book-row">
+          <a class="call-btn" href="tel:+15055036216">
+            <span class="icon-phone">📞</span>
+            <span>Call to Book</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="barber-card watch-card">
+        <div class="barber-name">DESHAUN</div>
+        <div class="barber-desc">Sharp fades. Chill vibes.</div>
+        <div class="book-row">
+          <a class="call-btn" href="tel:+15055036216">
+            <span class="icon-phone">📞</span>
+            <span>Call to Book</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="barber-card watch-card">
+        <div class="barber-name">CA$H</div>
+        <div class="barber-desc">Quick with the clippers, real with the results.</div>
+        <div class="book-row">
+          <a class="book-btn gradient"
+             href="https://booksy.com/en-us/dl/show-business/1012478" target="_blank" rel="noopener">
+            <span>Book w/ Ca$h</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="barber-card watch-card">
+        <div class="barber-name">JONNY</div>
+        <div class="barber-desc">Where art meets the edge.</div>
+        <div class="book-row">
+          <a class="book-btn gradient"
+             href="https://booksy.com/en-us/dl/show-business/1553387" target="_blank" rel="noopener">
+            <span>Book w/ Jonny</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="barber-card watch-card">
+        <div class="barber-name">TAYLOR</div>
+        <div class="barber-desc">Clean blends. Subtle structure. Quiet precision.</div>
+        <div class="book-row">
+          <a class="book-btn gradient"
+             href="https://booksy.com/en-us/dl/show-business/1592260" target="_blank" rel="noopener">
+            <span>Book w/ Taylor</span>
+          </a>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- REVIEWS -->
-  <section id="reviews" class="section">
-    <div class="section-focus-ring"></div>
+  <section id="reviews" class="section-block">
+    <div class="section-heading-wrap">
+      <div class="section-heading">What People Are Saying</div>
+      <div class="heading-underline"></div>
+    </div>
 
-    <div class="section-shell">
-      <header class="section-header">
-        <div class="section-title">WHAT PEOPLE ARE SAYING</div>
-        <div class="section-underline underline-bar"></div>
-        <div class="section-blurb">
-          Real clients. Real fades. Highlights from recent 5★ reviews.
+    <div class="reviews-row">
+      <div class="review-card watch-card">
+        <div class="review-head">
+          <span>🔥 Cleanest fade I've had in years</span>
+          <span class="review-badge">5★</span>
         </div>
-      </header>
-
-      <div class="reviews-grid">
-        <div class="review-card">
-          <div class="review-top">
-            <div class="review-title">
-              <span>🔥 Cleanest fade I’ve had in years</span>
-            </div>
-            <div class="review-stars">5★</div>
-          </div>
-          <div class="review-body">
-            “Attention to detail is insane. Lined me up perfect, beard crispy,
-            zero rush. If you’re picky, this is where you go.”
-          </div>
+        <div class="review-body">
+          <p style="font-size:.8rem;color:var(--text-soft);">
+            "Attention to detail is insane. Lined me up perfect, beard crispy, zero rush.
+            If you're picky, this is where you go."
+          </p>
         </div>
+      </div>
 
-        <div class="review-card">
-          <div class="review-top">
-            <div class="review-title">
-              <span>💈 Chill vibe / professional work</span>
-            </div>
-            <div class="review-stars">5★</div>
-          </div>
-          <div class="review-body">
-            “Felt welcome soon as I walked in. Music good, convo good,
-            cut even better. I’ll be back every week.”
-          </div>
+      <div class="review-card watch-card">
+        <div class="review-head">
+          <span>💼 Chill vibe / professional work</span>
+          <span class="review-badge">5★</span>
         </div>
+        <div class="review-body">
+          <p style="font-size:.8rem;color:var(--text-soft);">
+            "Felt welcome as soon as I walked in.
+            Music good, convo good, cut even better.
+            I'll be back every week."
+          </p>
+        </div>
+      </div>
 
-        <div class="review-card">
-          <div class="review-top">
-            <div class="review-title">
-              <span>✂️ Fixed my last bad haircut</span>
-            </div>
-            <div class="review-stars">5★</div>
-          </div>
-          <div class="review-body">
-            “They literally saved me. Cleaned up a messed up fade and
-            made it look intentional. This is skill.”
-          </div>
+      <div class="review-card watch-card">
+        <div class="review-head">
+          <span>✂️ Fixed my last bad haircut</span>
+          <span class="review-badge">5★</span>
+        </div>
+        <div class="review-body">
+          <p style="font-size:.8rem;color:var(--text-soft);">
+            "They literally saved me. Cleaned up a messed up fade
+            and made it look intentional. This is skill."
+          </p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- SERVICES -->
-  <section id="services" class="section">
-    <div class="section-focus-ring"></div>
+  <section id="services" class="section-block">
+    <div class="section-heading-wrap">
+      <div class="section-heading">Our Services</div>
+      <div class="heading-underline"></div>
+    </div>
 
-    <div class="section-shell">
-      <header class="section-header">
-        <div class="section-title">OUR SERVICES</div>
-        <div class="section-underline underline-bar"></div>
-      </header>
+    <div class="services-grid">
 
-      <div class="services-grid">
-
-        <div class="service-card">
-          <div class="service-top-row">
-            <div class="service-name">🪖 MILITARY / FIRST RESPONDER</div>
-            <div class="service-price">$28</div>
-          </div>
-          <div class="service-desc">
-            Discounted cut for active military, vets, police, firefighters, EMTs & first responders.
-          </div>
+      <div class="service-card watch-card">
+        <div class="service-top">
+          <div class="service-name">MILITARY / FIRST RESPONDER</div>
+          <div class="service-price">$28</div>
         </div>
-
-        <div class="service-card">
-          <div class="service-top-row">
-            <div class="service-name">💈 HAIRCUT (STANDARD)</div>
-            <div class="service-price">$35</div>
-          </div>
-          <div class="service-desc">
-            Classic or trending — fades, tapers, or scissor work.
-            Detailed styles may vary.
-          </div>
+        <div class="service-desc">
+          Discounted cut for active military, veterans, police, firefighters, EMTs & first responders.
         </div>
-
-        <div class="service-card">
-          <div class="service-top-row">
-            <div class="service-name">💈 HAIRCUT + BEARD</div>
-            <div class="service-price">$40</div>
-          </div>
-          <div class="service-desc">
-            Full cut plus beard trim / line-up for a sharp, balanced look.
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-top-row">
-            <div class="service-name">🪒 SKIN FADE / TAPER</div>
-            <div class="service-price">$40</div>
-          </div>
-          <div class="service-desc">
-            Down to the skin with foil shaver or razor for a clean finish.
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-top-row">
-            <div class="service-name">🪒 SKIN FADE / TAPER + BEARD</div>
-            <div class="service-price">$45</div>
-          </div>
-          <div class="service-desc">
-            Skin-level fade/taper plus full beard lineup.
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-top-row">
-            <div class="service-name">🧴 SHAMPOO SERVICE</div>
-            <div class="service-price">$15</div>
-          </div>
-          <div class="service-desc">
-            Cleanse, set, relax. Treat yourself.
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-top-row">
-            <div class="service-name">✂️ LONG HAIR (PAST SHOULDERS)</div>
-            <div class="service-price">$35</div>
-          </div>
-          <div class="service-desc">
-            Extra time & detail for longer lengths.
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-top-row">
-            <div class="service-name">🧔‍♂️ BEARD TRIM / LINE UP</div>
-            <div class="service-price">$25</div>
-          </div>
-          <div class="service-desc">
-            Clean edges, even bulk, crisp shape.
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-top-row">
-            <div class="service-name">🪒 FACE SHAVE</div>
-            <div class="service-price">$25</div>
-          </div>
-          <div class="service-desc">
-            Hot towel, lather, and smooth finish.
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-top-row">
-            <div class="service-name">✏️ LINE UP ONLY</div>
-            <div class="service-price">$15</div>
-          </div>
-          <div class="service-desc">
-            Edges only. Beard not included.
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-top-row">
-            <div class="service-name">🎨 DESIGN ONLY</div>
-            <div class="service-price">$10</div>
-          </div>
-          <div class="service-desc">
-            Add a freestyle design or bring a reference.
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-top-row">
-            <div class="service-name">🌊 PERM SERVICE</div>
-            <div class="service-price">$90+</div>
-          </div>
-          <div class="service-desc">
-            Beach waves to tighter curls — premium products for lasting results.
-          </div>
-        </div>
-
       </div>
+
+      <div class="service-card watch-card">
+        <div class="service-top">
+          <div class="service-name">HAIRCUT (STANDARD)</div>
+          <div class="service-price">$35</div>
+        </div>
+        <div class="service-desc">
+          Classic or trending — fades, tapers, or scissor work.
+          Detailed styles may vary by time/design.
+        </div>
+      </div>
+
+      <div class="service-card watch-card">
+        <div class="service-top">
+          <div class="service-name">HAIRCUT + BEARD</div>
+          <div class="service-price">$40</div>
+        </div>
+        <div class="service-desc">
+          Full cut plus beard trim/line-up for a sharp, balanced look.
+        </div>
+      </div>
+
+      <div class="service-card watch-card">
+        <div class="service-top">
+          <div class="service-name">SKIN FADE / TAPER</div>
+          <div class="service-price">$40</div>
+        </div>
+        <div class="service-desc">
+          Down to the skin with foil shaver or razor for a clean finish.
+        </div>
+      </div>
+
+      <div class="service-card watch-card">
+        <div class="service-top">
+          <div class="service-name">SKIN FADE / TAPER + BEARD</div>
+          <div class="service-price">$45</div>
+        </div>
+        <div class="service-desc">
+          Skin-level fade/taper plus full beard lineup.
+        </div>
+      </div>
+
+      <div class="service-card watch-card">
+        <div class="service-top">
+          <div class="service-name">LONG HAIR (PAST SHOULDERS)</div>
+          <div class="service-price">$35</div>
+        </div>
+        <div class="service-desc">
+          Extra time & detail for longer lengths.
+        </div>
+      </div>
+
+      <div class="service-card watch-card">
+        <div class="service-top">
+          <div class="service-name">BEARD TRIM / LINE UP</div>
+          <div class="service-price">$25</div>
+        </div>
+        <div class="service-desc">
+          Clean edges, even bulk, crisp shape.
+        </div>
+      </div>
+
+      <div class="service-card watch-card">
+        <div class="service-top">
+          <div class="service-name">FACE SHAVE</div>
+          <div class="service-price">$25</div>
+        </div>
+        <div class="service-desc">
+          Hot towel, lather, and smooth finish.
+        </div>
+      </div>
+
+      <div class="service-card watch-card">
+        <div class="service-top">
+          <div class="service-name">LINE UP ONLY</div>
+          <div class="service-price">$15</div>
+        </div>
+        <div class="service-desc">
+          Edges only. Beard not included.
+        </div>
+      </div>
+
+      <div class="service-card watch-card">
+        <div class="service-top">
+          <div class="service-name">DESIGN ONLY</div>
+          <div class="service-price">$10+</div>
+        </div>
+        <div class="service-desc">
+          Add a freestyle design or bring a reference.
+        </div>
+      </div>
+
+      <div class="service-card watch-card">
+        <div class="service-top">
+          <div class="service-name">HEAD SHAVE</div>
+          <div class="service-price">$35</div>
+        </div>
+        <div class="service-desc">
+          Clean and polished dome with hot towel finish.
+        </div>
+      </div>
+
+      <div class="service-card watch-card">
+        <div class="service-top">
+          <div class="service-name">PERM SERVICE</div>
+          <div class="service-price">$90+</div>
+        </div>
+        <div class="service-desc">
+          Beachy waves to tighter curls — premium products
+          for long-lasting results.
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- HOURS / CONTACT -->
-  <section id="hours" class="section">
-    <div class="section-focus-ring"></div>
+  <!-- HOURS & CONTACT -->
+  <section id="hours" class="section-block">
+    <div class="section-heading-wrap">
+      <div class="section-heading">Hours & Contact</div>
+      <div class="heading-underline"></div>
+    </div>
 
-    <div class="section-shell">
-      <header class="section-header">
-        <div class="section-title">HOURS & CONTACT</div>
-        <div class="section-underline underline-bar"></div>
-      </header>
+    <div class="section-card watch-card">
+      <div class="hours-grid">
+        <div class="hours-pill">SUNDAY : 9:00am – 4:00pm</div>
+        <div class="hours-pill">MONDAY : 9:00am – 4:00pm</div>
+        <div class="hours-pill">TUESDAY : 8:30am – 5:30pm</div>
+        <div class="hours-pill">WEDNESDAY : 8:30am – 5:30pm</div>
+        <div class="hours-pill">THURSDAY : 8:30am – 5:30pm</div>
+        <div class="hours-pill">FRIDAY : 8:30am – 5:30pm</div>
+        <div class="hours-pill">SATURDAY : 8:30am – 5:30pm</div>
+      </div>
+      <div class="no-after-hours">
+        NO ADDITIONAL CHARGE AFTER HOURS!
+      </div>
 
-      <div class="hours-flex">
-
-        <div class="frost-card hours-box">
-          <div class="hours-grid">
-            <div class="hour-chip">SUNDAY : 9:00am – 4:00pm</div>
-            <div class="hour-chip">MONDAY : 9:00am – 4:00pm</div>
-            <div class="hour-chip">TUESDAY : 8:30am – 5:30pm</div>
-            <div class="hour-chip">WEDNESDAY : 8:30am – 5:30pm</div>
-            <div class="hour-chip">THURSDAY : 8:30am – 5:30pm</div>
-            <div class="hour-chip">FRIDAY : 8:30am – 5:30pm</div>
-            <div class="hour-chip">SATURDAY : 8:30am – 5:30pm</div>
-          </div>
-          <div class="note-nocharge">NO ADDITIONAL CHARGE AFTER HOURS!</div>
-        </div>
-
-        <div class="frost-card contact-box" id="contact">
-          <a class="contact-item"
-             href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114"
+      <div class="contact-block" id="contact">
+        <div class="contact-line">
+          📍
+          <a href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D+Albuquerque+NM+87114"
              target="_blank" rel="noopener">
-            <span class="emoji">📍</span>
-            <span>6510 Paradise Blvd NW Unit D, Albuquerque, NM 87114</span>
-          </a>
-
-          <a class="contact-item" href="tel:+15055036216">
-            <span class="emoji">📞</span>
-            <span>(505) 503-6216</span>
+            6510 Paradise Blvd NW Unit D, Albuquerque, NM 87114
           </a>
         </div>
 
+        <div class="contact-line">
+          📞
+          <a href="tel:+15055036216">(505) 503-6216</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- LOCATION / MAP -->
-  <section id="location" class="section">
-    <div class="section-focus-ring"></div>
+  <section id="location" class="section-block">
+    <div class="section-heading-wrap">
+      <div class="section-heading">Find Us</div>
+      <div class="heading-underline"></div>
+    </div>
 
-    <div class="section-shell">
-      <header class="section-header">
-        <div class="section-title">FIND US</div>
-        <div class="section-underline underline-bar"></div>
-      </header>
-
-      <div class="frost-card map-card">
-        <div class="map-embed">
-          <!-- embed URL here -->
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3244.268431653064!2d-106.726!3d35.197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x872272e0...etc"
-            width="100%" height="320" style="border:0;"
-            loading="lazy" allowfullscreen=""
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="map-shell watch-card section-card" style="padding:0;">
+      <!-- Keep Google Maps embed -->
+      <iframe
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.969928172266!2d-106.701!3d35.1867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s6510%20Paradise%20Blvd%20NW%20Unit%20D%2C%20Albuquerque%2C%20NM%2087114!5e0!3m2!1sen!2sus!4v9999999999">
+      </iframe>
+      <!-- choose maps row -->
+      <div style="padding:1rem;border-top:1px solid var(--border-soft);background:rgba(0,0,0,.4);color:var(--text-main);font-size:.8rem;line-height:1.4;">
+        <div style="font-weight:600;margin-bottom:.5rem;">
+          Get Directions:
         </div>
-
-        <div class="map-links" style="margin-top:1rem;">
-          <a class="map-btn"
-             href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114"
-             target="_blank" rel="noopener">
-            Open in Google Maps
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
+          <a href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D+Albuquerque+NM+87114"
+             target="_blank" rel="noopener"
+             style="text-decoration:none;background:var(--chip-grad);color:#fff;border-radius:var(--radius-md);padding:.5rem .7rem;font-size:.8rem;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.8),0 0 20px rgba(108,108,255,.7),0 0 40px rgba(41,181,255,.5);">
+            Google Maps
           </a>
-
-          <a class="map-btn"
-             href="http://maps.apple.com/?address=6510+Paradise+Blvd+NW+Unit+D,Albuquerque,NM,87114"
-             target="_blank" rel="noopener">
-            Open in Apple Maps
+          <a href="https://maps.apple.com/?address=6510%20Paradise%20Blvd%20NW%20Unit%20D,%20Albuquerque,%20NM%2087114"
+             target="_blank" rel="noopener"
+             style="text-decoration:none;background:rgba(255,255,255,.07);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:.5rem .7rem;font-size:.8rem;font-weight:600;color:var(--text-main);box-shadow:0 12px 30px rgba(0,0,0,.8);">
+            Apple Maps
           </a>
         </div>
       </div>
+    </div>
 
+    <div style="text-align:center;color:var(--text-soft);font-size:.75rem;margin-top:2rem;">
+      © 2025 Next Level BarberShop
     </div>
   </section>
 
 </main>
 
-<footer>
-  © 2025 Next Level BarberShop
-</footer>
+<!-- SPOOK POPUP -->
+<div id="spookPop" role="dialog" aria-live="polite">
+  <div class="emoji">🎃✂️</div>
+  BOO. NEED A CLEAN FADE OR WHAT?<br/>
+  Happy spooky season from the shop 👻
+  <div class="close-spook" id="closeSpookBtn">lol ok</div>
+</div>
 
 <script>
-/* ==================================================
-   JS
-   - mobile drawer
-   - smooth scroll w/ header offset
-   - section glow tracking
-   - parallax background drift
-   - spooky popup (longer now)
-================================================== */
-
+/* ==========================
+   STATE
+========================== */
 const headerEl = document.getElementById('siteHeader');
 const burgerBtn = document.getElementById('burgerBtn');
-const mobileDrawer = document.getElementById('mobileDrawer');
-const drawerClose = document.getElementById('drawerClose');
-const drawerLinks = document.querySelectorAll('[data-drawer-link]');
+const drawer = document.getElementById('mobileDrawer');
+const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+const navLinks = document.querySelectorAll('[data-target]');
+const watchCards = document.querySelectorAll('.watch-card');
+const spookPop = document.getElementById('spookPop');
+const closeSpookBtn = document.getElementById('closeSpookBtn');
 
-/* mobile drawer open/close */
-if(burgerBtn && mobileDrawer){
-  burgerBtn.addEventListener('click',()=>mobileDrawer.classList.add('open'));
+let lastScrollY = window.scrollY;
+let headerHidden = false;
+
+/* ==========================
+   HEADER HIDE / SHOW ON SCROLL
+========================== */
+function handleScrollHeader() {
+  const currentY = window.scrollY;
+  const goingDown = currentY > lastScrollY;
+
+  // how far down before we start hiding?
+  if (currentY > 80) {
+    if (goingDown && !headerHidden) {
+      headerEl.classList.add('hide');
+      headerHidden = true;
+    } else if (!goingDown && headerHidden) {
+      headerEl.classList.remove('hide');
+      headerHidden = false;
+    }
+  } else {
+    // near top: always show header
+    headerEl.classList.remove('hide');
+    headerHidden = false;
+  }
+
+  lastScrollY = currentY;
 }
-if(drawerClose && mobileDrawer){
-  drawerClose.addEventListener('click',()=>mobileDrawer.classList.remove('open'));
+window.addEventListener('scroll', handleScrollHeader, {passive:true});
+
+/* ==========================
+   MOBILE DRAWER
+========================== */
+function openDrawer(){
+  drawer.classList.add('open');
 }
-drawerLinks.forEach(link=>{
-  link.addEventListener('click',()=>{
-    mobileDrawer.classList.remove('open');
+function closeDrawer(){
+  drawer.classList.remove('open');
+}
+if (burgerBtn) burgerBtn.addEventListener('click',openDrawer);
+if (drawerCloseBtn) drawerCloseBtn.addEventListener('click',closeDrawer);
+
+/* Close drawer when tapping a drawer link */
+drawer.querySelectorAll('[data-target]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    e.preventDefault();
+    smoothJump(a.getAttribute('data-target'));
+    closeDrawer();
   });
 });
 
-/* smooth scroll with header offset */
-function scrollToSection(id){
-  const el = document.querySelector(id);
-  if(!el) return;
-  const headerH = headerEl.getBoundingClientRect().height;
-  const rect = el.getBoundingClientRect();
-  const offsetTarget = window.scrollY + rect.top - headerH - 20;
-  window.scrollTo({top:offsetTarget,behavior:'smooth'});
-}
-function attachSmartScroll(selector){
-  document.querySelectorAll(selector).forEach(a=>{
-    a.addEventListener('click', e=>{
-      const href = a.getAttribute('href');
-      if(href && href.startsWith('#')){
-        e.preventDefault();
-        scrollToSection(href);
-      }
-    });
+/* ==========================
+   SMOOTH SCROLL WITH OFFSET
+   (We center the section better so it’s not jumping weird)
+========================== */
+function smoothJump(id){
+  const sec = document.getElementById(id);
+  if(!sec) return;
+  const rect = sec.getBoundingClientRect();
+  const absoluteY = window.scrollY + rect.top;
+
+  // offset: put section ~80px below top for comfort
+  const offset = 80;
+  window.scrollTo({
+    top:absoluteY - offset,
+    behavior:'smooth'
   });
 }
-attachSmartScroll('.nav-link');
-attachSmartScroll('.drawer-links a');
 
-/* section glow tracking for mobile:
-   picks the section ~center of viewport instead of bottom.
-   if not supported, nothing breaks. */
-(function(){
-  const sections = document.querySelectorAll('.section');
-  if(!('IntersectionObserver' in window) || !sections.length){
-    return;
-  }
-  const observer = new IntersectionObserver((entries)=>{
-    let best = null;
+/* intercept all nav-link clicks in header */
+navLinks.forEach(link=>{
+  link.addEventListener('click', e=>{
+    e.preventDefault();
+    const targetId = link.getAttribute('data-target');
+    smoothJump(targetId);
+  });
+});
+
+/* ==========================
+   INTERSECTION OBSERVER:
+   highlight one card at a time (mobile perf-friendly)
+========================== */
+const observer = new IntersectionObserver(
+  (entries)=>{
     entries.forEach(entry=>{
       if(entry.isIntersecting){
-        if(!best || entry.intersectionRatio > best.intersectionRatio){
-          best = entry;
-        }
+        // remove .active from others
+        watchCards.forEach(c=>c.classList.remove('active'));
+        entry.target.classList.add('active');
       }
     });
-    if(best){
-      sections.forEach(sec=>sec.classList.remove('active'));
-      best.target.classList.add('active');
-    }
-  },{
+  },
+  {
     root:null,
-    // -30%/-30% keeps the "spotlight" closer to mid-screen, more accurate
-    rootMargin:'-30% 0px -30% 0px',
-    threshold:[0,0.25,0.5,0.75,1]
-  });
-  sections.forEach(sec=>observer.observe(sec));
-})();
-
-/* parallax background drift */
-(function(){
-  let latestScrollY = window.scrollY;
-  function step(){
-    const y = latestScrollY * 0.05;
-    document.body.style.backgroundPosition = `
-      20% calc(20% + ${y}px),
-      80% calc(15% + ${y * 0.6}px),
-      50% calc(80% + ${y * 1.2}px)
-    `;
-    requestAnimationFrame(step);
+    rootMargin:"-30% 0px -40% 0px", // center-ish bias
+    threshold:0.1
   }
-  window.addEventListener('scroll',()=>{
-    latestScrollY = window.scrollY;
-  },{passive:true});
-  requestAnimationFrame(step);
-})();
+);
 
-/* SPOOK POPUP (Halloween fun, longer display now) */
-(function(){
-  const spook = document.getElementById('spook');
-  if(!spook) return;
+watchCards.forEach(card=>{
+  observer.observe(card);
+});
 
-  function spookyFlash(){
-    spook.classList.add('show');
-    // stay up ~1.7 seconds instead of super fast
-    setTimeout(()=>{ spook.classList.remove('show'); },1700);
-  }
+/* ==========================
+   SIMPLE PARALLAX FOR GLOW BLOBS
+   (tiny drift for vibe)
+========================== */
+const bgBlobs = document.querySelector('.background-blobs');
+let latestScrollY = window.scrollY;
+function parallaxLoop(){
+  const y = window.scrollY;
+  const diff = (y - latestScrollY)*0.04;
+  latestScrollY = y;
+  // tiny translate for that floating club-light feel
+  bgBlobs.style.transform = `translateY(${-(y*0.03).toFixed(2)}px)`;
+  requestAnimationFrame(parallaxLoop);
+}
+requestAnimationFrame(parallaxLoop);
 
-  // show once ~4s after load
-  setTimeout(spookyFlash,4000);
+/* ==========================
+   SPOOK POPUP
+========================== */
+/*
+How it works:
+ - shows ~1.8s after load
+ - stays ~4s or until tapped "lol ok"
+ - then hides
+ If you ever want to turn spooky OFF:
+   - just comment out `showSpook()` call below.
+*/
+function showSpook(){
+  spookPop.classList.add('show');
+  const timer = setTimeout(()=>{
+    hideSpook();
+  },4000); // 4 sec visible
+  closeSpookBtn.addEventListener('click',()=>{
+    clearTimeout(timer);
+    hideSpook();
+  },{once:true});
+}
+function hideSpook(){
+  spookPop.classList.remove('show');
+}
 
-  // optional random repeat every ~20-40s:
-  /*
-  function randomSpookLoop(){
-    const nextDelay = 20000 + Math.random()*20000;
-    setTimeout(()=>{
-      spookyFlash();
-      randomSpookLoop();
-    },nextDelay);
-  }
-  randomSpookLoop();
-  */
-})();
+window.addEventListener('load',()=>{
+  // enable Halloween gag:
+  showSpook();
+});
+
 </script>
-
 </body>
 </html>
