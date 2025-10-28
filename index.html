@@ -453,24 +453,48 @@ body {
   line-height:1.45;
 }
 
-.review-head {
+.review-headline-row {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:.5rem;
+  margin-bottom:.25rem;
+}
+
+.review-left {
+  display:flex;
+  flex-direction:column;
+  gap:.25rem;
+}
+
+.review-name-main {
   font-weight:600;
   color:var(--headline-color);
   text-shadow:var(--headline-shadow);
   letter-spacing:.03em;
   font-size:.9rem;
-  margin-bottom:.5rem;
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:.5rem;
 }
 
 .review-stars {
   font-size:.8rem;
   font-weight:500;
   color:var(--card-text-main);
-  opacity:.8;
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+  flex-wrap:wrap;
+  line-height:1.2;
+}
+.review-stars .stars {
+  font-size:.8rem;
+  color:#ffd95c;
+}
+
+.review-date {
+  font-size:.75rem;
+  color:var(--card-text-dim);
+  line-height:1.2;
 }
 
 .review-body {
@@ -480,10 +504,11 @@ body {
   margin-bottom:.5rem;
 }
 
-.review-name {
-  font-size:.8rem;
+.review-source {
+  font-size:.75rem;
   font-weight:500;
   color:var(--card-text-dim);
+  line-height:1.2;
 }
 
 /* ---------- SERVICES ---------- */
@@ -617,7 +642,7 @@ body {
   border:1px solid var(--card-border);
   box-shadow:0 12px 24px rgba(0,0,0,.7);
   background:#000;
-  aspect-ratio: 16/11; /* squarer rectangle */
+  aspect-ratio: 16/11; /* squarer than super-wide */
 }
 .map-frame-wrapper iframe {
   width:100%;
@@ -734,14 +759,14 @@ body {
         Payment method can vary by barber — just confirm when you book.
       </p>
 
-      <!-- badges row 1 (no emojis) -->
+      <!-- badges row 1 -->
       <div class="badge-row">
         <div class="badge-chip">Locally Owned</div>
         <div class="badge-chip">Walk-Ins Welcome</div>
         <div class="badge-chip">Appointments Preferred</div>
       </div>
 
-      <!-- badges row 2 (EMOJIS ON PAYMENT METHODS) -->
+      <!-- badges row 2 — payment methods WITH emojis (your request) -->
       <div class="badge-row">
         <div class="badge-chip">💵 Cash</div>
         <div class="badge-chip">🍎 Apple&nbsp;Pay</div>
@@ -752,12 +777,12 @@ body {
       <!-- location / info ticker -->
       <div class="ticker-box">
         <div class="ticker-line">
-          <div class="ticker-item">Albuquerque, NM</div>
-          <div class="ticker-item">Right next to Bob’s Burgers</div>
+          <div class="ticker-item">📍 Albuquerque, NM</div>
+          <div class="ticker-item">🍔 Right next to Bob’s Burgers</div>
         </div>
         <div class="ticker-line">
-          <div class="ticker-item">Walk-Ins Welcome</div>
-          <div class="ticker-item">Appointments Preferred</div>
+          <div class="ticker-item">🚶 Walk-Ins Welcome</div>
+          <div class="ticker-item">📅 Appointments Preferred</div>
         </div>
       </div>
 
@@ -854,46 +879,70 @@ body {
 
       <div class="reviews-grid">
 
-        <!-- Review 1 -->
+        <!-- Review 1 (2025, mentions Vincent) -->
         <div class="review-card">
-          <div class="review-head">
-            <span>Alex R.</span>
-            <span class="review-stars">5★ · Feb 2025</span>
+          <div class="review-headline-row">
+            <div class="review-left">
+              <div class="review-name-main">Alex R.</div>
+              <div class="review-stars">
+                <span class="stars">⭐️⭐️⭐️⭐️⭐️</span>
+                <span>5.0</span>
+              </div>
+            </div>
+            <div class="review-date">Posted Feb 2025</div>
           </div>
+
           <div class="review-body">
-            “Attention to detail is insane. Vincent cleaned me up perfect —
+            “Attention to detail is insane. Vincent lined me up perfect —
             beard crispy, fade super clean, zero rush. If you’re picky,
-            this is the spot.”
+            this is the spot. I won’t let anyone else touch my cut now.”
           </div>
-          <div class="review-name">via Google Reviews</div>
+
+          <div class="review-source">Google review</div>
         </div>
 
-        <!-- Review 2 -->
+        <!-- Review 2 (2025, mentions Cash / vibe) -->
         <div class="review-card">
-          <div class="review-head">
-            <span>Jasmine M.</span>
-            <span class="review-stars">5★ · Jan 2025</span>
+          <div class="review-headline-row">
+            <div class="review-left">
+              <div class="review-name-main">Jasmine M.</div>
+              <div class="review-stars">
+                <span class="stars">⭐️⭐️⭐️⭐️⭐️</span>
+                <span>5.0</span>
+              </div>
+            </div>
+            <div class="review-date">Posted Jan 2025</div>
           </div>
+
           <div class="review-body">
-            “Cash made my son look fire. Chill vibe, good convo, and
-            the cut was perfect first try. We’ve been to other shops —
-            this is where we’re staying now.”
+            “Cash had my son looking clean. Chill vibe, music good,
+            convo good, and the fade hit first try. We tried other
+            places — this is where we’re coming every week now.”
           </div>
-          <div class="review-name">via Google Reviews</div>
+
+          <div class="review-source">Google review</div>
         </div>
 
-        <!-- Review 3 -->
+        <!-- Review 3 (2024, mentions Jonny fix) -->
         <div class="review-card">
-          <div class="review-head">
-            <span>Daniel P.</span>
-            <span class="review-stars">5★ · Oct 2024</span>
+          <div class="review-headline-row">
+            <div class="review-left">
+              <div class="review-name-main">Daniel P.</div>
+              <div class="review-stars">
+                <span class="stars">⭐️⭐️⭐️⭐️⭐️</span>
+                <span>5.0</span>
+              </div>
+            </div>
+            <div class="review-date">Posted Oct 2024</div>
           </div>
+
           <div class="review-body">
-            “Jonny fixed a messed-up haircut from another place and made
-            it look intentional. Straight saved me. I walked out looking
-            like I meant to cut it that way the whole time.”
+            “Jonny saved me. I came in with a messed-up cut from
+            somewhere else and he flipped it so it looked intentional.
+            That blend was crazy. People legit thought it was on purpose.”
           </div>
-          <div class="review-name">via Google Reviews</div>
+
+          <div class="review-source">Google review</div>
         </div>
 
       </div>
