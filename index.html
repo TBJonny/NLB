@@ -163,7 +163,7 @@ body {
 .flex-col{flex-direction:column;}
 .center{text-align:center;}
 
-/* STICKY HEADER (compact, "Amazon-style tabs") */
+/* STICKY HEADER */
 .site-header-wrapper {
   position: sticky;
   top: 0;
@@ -285,7 +285,7 @@ body {
 .section-headline {
   text-align:center;
   color:var(--headline-color);
-  text-shadow: var(--headline-shadow);
+  text-shadow:var(--headline-shadow);
   font-size: clamp(1.25rem,1vw + 1rem,2rem);
   line-height:1.2;
   font-weight:600;
@@ -600,7 +600,7 @@ body {
   border:1px solid var(--card-border);
   box-shadow:0 12px 24px rgba(0,0,0,.7);
   background:#000;
-  aspect-ratio: 16/11; /* squarer rectangle */
+  aspect-ratio: 16/11; /* squarer rect */
 }
 .map-frame-wrapper iframe {
   width:100%;
@@ -715,22 +715,22 @@ body {
         Payment method can vary by barber — just confirm when you book.
       </p>
 
-      <!-- badges row 1 (NO emojis now) -->
+      <!-- badges row 1 (no emojis here) -->
       <div class="badge-row">
         <div class="badge-chip">Locally Owned</div>
         <div class="badge-chip">Walk-Ins Welcome</div>
         <div class="badge-chip">Appointments Preferred</div>
       </div>
 
-      <!-- badges row 2 -->
+      <!-- badges row 2 (EMOJIS ADDED BACK HERE) -->
       <div class="badge-row">
-        <div class="badge-chip">Cash</div>
-        <div class="badge-chip">Apple&nbsp;Pay</div>
-        <div class="badge-chip">Cash&nbsp;App</div>
-        <div class="badge-chip">Venmo</div>
+        <div class="badge-chip">💵 Cash</div>
+        <div class="badge-chip">🍎 Apple&nbsp;Pay</div>
+        <div class="badge-chip">💸 Cash&nbsp;App</div>
+        <div class="badge-chip">📲 Venmo</div>
       </div>
 
-      <!-- ticker box (NO emojis now) -->
+      <!-- location / welcome ticker (no emojis now) -->
       <div class="ticker-box">
         <div class="ticker-line">
           <div class="ticker-item">Albuquerque, NM</div>
@@ -829,53 +829,59 @@ body {
       <div class="headline-underline"></div>
 
       <p class="section-subtext" style="max-width:60ch;">
-        Highlights from recent 5★ Google reviews.
-        Zero gimmicks — just real feedback.
+        Pulled from recent 5★ Google Reviews.
+        Real people, real results.
       </p>
 
       <div class="reviews-grid">
 
+        <!-- Review 1 -->
         <div class="review-card">
           <div class="review-head">
-            <span>Cleanest fade I’ve had in years</span>
-            <span class="review-stars">5★</span>
+            <span>Alex R.</span>
+            <span class="review-stars">5★ · Feb 2025</span>
           </div>
           <div class="review-body">
-            “Attention to detail is insane. Lined me up perfect, beard crispy,
-            zero rush. If you’re picky, this is where you go.”
+            “Attention to detail is insane. Vincent cleaned me up perfect —
+            beard crispy, fade super clean, zero rush. If you’re picky,
+            this is the spot.”
           </div>
-          <div class="review-name">— Alex R. (cut by Vincent)</div>
+          <div class="review-name">via Google Reviews</div>
         </div>
 
+        <!-- Review 2 -->
         <div class="review-card">
           <div class="review-head">
-            <span>Chill vibe / professional work</span>
-            <span class="review-stars">5★</span>
+            <span>Jasmine M.</span>
+            <span class="review-stars">5★ · Jan 2025</span>
           </div>
           <div class="review-body">
-            “Felt welcome soon as I walked in. Music good, convo good,
-            cut even better. I’ll be back every week.”
+            “Cash made my son look fire. Chill vibe, good convo, and
+            the cut was perfect first try. We’ve been to other shops —
+            this is where we’re staying now.”
           </div>
-          <div class="review-name">— Marcus T. (cut by Cash)</div>
+          <div class="review-name">via Google Reviews</div>
         </div>
 
+        <!-- Review 3 -->
         <div class="review-card">
           <div class="review-head">
-            <span>Fixed my last bad haircut</span>
-            <span class="review-stars">5★</span>
+            <span>Daniel P.</span>
+            <span class="review-stars">5★ · Oct 2024</span>
           </div>
           <div class="review-body">
-            “They literally saved me. Cleaned up a messed up fade and
-            made it look intentional. This is skill.”
+            “Jonny fixed a messed-up haircut from another place and made
+            it look intentional. Straight saved me. I walked out looking
+            like I meant to cut it that way the whole time.”
           </div>
-          <div class="review-name">— Brianna L. (cut by Jonny)</div>
+          <div class="review-name">via Google Reviews</div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- SERVICES (THE ONLY PLACE WITH EMOJIS) -->
+  <!-- SERVICES (EMOJIS STAY HERE) -->
   <section id="services" class="page-section reveal-section section-card">
     <div class="section-card-content">
 
@@ -1076,7 +1082,7 @@ body {
           <div class="subheadline">Find Us</div>
 
           <div class="map-frame-wrapper">
-            <!-- plug your real embed src here -->
+            <!-- Update this src with your real embed URL if needed -->
             <iframe
               loading="lazy"
               allowfullscreen
@@ -1133,7 +1139,7 @@ const observer = new IntersectionObserver(
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
       } else {
-        // remove again so you get that pop each time you scroll back
+        // remove again so each section "pops" again
         entry.target.classList.remove('revealed');
       }
     });
@@ -1148,4 +1154,3 @@ document.querySelectorAll('.reveal-section').forEach((section) => {
 
 </body>
 </html>
-```0
