@@ -37,7 +37,7 @@
 
       --marquee-bg:rgba(0,0,0,.4);
 
-      /* scroll motion vars (JS updates this one only now) */
+      /* only parallax now (performance) */
       --parallax-y:0px;
     }
 
@@ -69,10 +69,7 @@
     }
 
     /* ============= GLOBAL RESET ============= */
-    * {
-      box-sizing:border-box;
-      -webkit-font-smoothing:antialiased;
-    }
+    * { box-sizing:border-box; -webkit-font-smoothing:antialiased; }
 
     html,body { height:100%; }
     html { scroll-behavior:smooth; }
@@ -91,7 +88,7 @@
     }
 
     img { display:block; max-width:100%; }
-    a   { color:inherit; text-decoration:none; }
+    a { color:inherit; text-decoration:none; }
 
     .wrap {
       max-width:1120px;
@@ -120,7 +117,6 @@
       transition:transform .15s linear, filter .15s linear;
     }
 
-    /* boost glow on mobile */
     @media (max-width:640px){
       .brand-bg {
         opacity:0.22;
@@ -217,8 +213,10 @@
       display:flex;
       flex-direction:column;
       gap:6px;
+      width:100%; /* we'll override on desktop in a sec */
     }
 
+    /* shop name */
     .brand-text {
       font-weight:800;
       letter-spacing:.14em;
@@ -234,27 +232,17 @@
         0 0 20px rgba(34,211,238,.35);
       filter:drop-shadow(0 0 5px rgba(124,58,237,.5));
       animation:brandPulse 3s ease-in-out infinite;
+      line-height:1.2;
     }
 
     @keyframes brandPulse {
-      0% {
-        filter:drop-shadow(0 0 5px rgba(124,58,237,.5));
-        background-position:0% 0%;
-      }
-      20% {
-        filter:drop-shadow(0 0 10px rgba(124,58,237,.9)) drop-shadow(0 0 16px rgba(34,211,238,.55));
-        background-position:100% 0%;
-      }
-      35% {
-        filter:drop-shadow(0 0 7px rgba(124,58,237,.7)) drop-shadow(0 0 12px rgba(34,211,238,.45));
-        background-position:50% 0%;
-      }
-      100% {
-        filter:drop-shadow(0 0 5px rgba(124,58,237,.5));
-        background-position:0% 0%;
-      }
+      0%   { filter:drop-shadow(0 0 5px rgba(124,58,237,.5)); background-position:0% 0%; }
+      20%  { filter:drop-shadow(0 0 10px rgba(124,58,237,.9)) drop-shadow(0 0 16px rgba(34,211,238,.55)); background-position:100% 0%; }
+      35%  { filter:drop-shadow(0 0 7px rgba(124,58,237,.7)) drop-shadow(0 0 12px rgba(34,211,238,.45)); background-position:50% 0%; }
+      100% { filter:drop-shadow(0 0 5px rgba(124,58,237,.5)); background-position:0% 0%; }
     }
 
+    /* call button */
     .call-now {
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
       color:#fff;
@@ -278,6 +266,7 @@
       display:flex;
       flex-wrap:wrap;
       gap:10px;
+      width:100%;
     }
 
     nav.primary-nav a {
@@ -302,12 +291,68 @@
       transform:translate3d(0,-1px,0) scale(1.03);
     }
 
-    @media (max-width:480px){
-      nav.primary-nav {
-        flex:1 1 100%;
+    /* desktop/header tweaks */
+    @media (min-width:481px){
+      .nav-row {
+        flex-wrap:nowrap;
+        align-items:flex-start;
+        gap:16px 24px;
       }
-      .call-now {
-        order:-1;
+
+      .brand-block {
+        flex:0 0 auto;
+        width:auto;
+      }
+
+      nav.primary-nav {
+        flex:1 1 auto;
+        justify-content:flex-end;
+        max-width:680px;
+      }
+    }
+
+    /* mobile header tweaks:
+       - brand + call button share one row
+       - call button shrinks and sits to the right
+       - header padding tightened
+    */
+    @media (max-width:480px){
+      .nav-row{
+        padding:12px 16px;
+      }
+
+      .brand-block{
+        flex-direction:row;
+        align-items:flex-start;
+        flex-wrap:nowrap;
+        gap:10px;
+      }
+
+      .brand-text{
+        font-size:16px;
+        letter-spacing:.14em;
+        line-height:1.2;
+        flex:0 1 auto;
+      }
+
+      .call-now{
+        font-size:13px;
+        padding:6px 10px;
+        border-radius:8px;
+        line-height:1.2;
+        margin-left:auto;
+        align-self:flex-start;
+      }
+
+      nav.primary-nav{
+        gap:8px;
+      }
+
+      nav.primary-nav a{
+        flex:1 1 calc(50% - 8px);
+        text-align:center;
+        font-size:13px;
+        padding:10px 12px;
       }
     }
 
@@ -329,12 +374,7 @@
       border-bottom:1px solid var(--border-subtle);
     }
 
-    /* ============= SECTION TITLES =============
-       special sauce for the “this section matters” vibe:
-       - Gradient text bits already exist
-       - Add neon-ish halo pulse behind
-       - Add gradient bar underline
-    */
+    /* ============= SECTION TITLES ============= */
     .section-title {
       position:relative;
       margin:0 0 28px;
@@ -351,7 +391,7 @@
       z-index:2;
     }
 
-    /* soft halo behind text */
+    /* glowing halo behind title */
     .section-title::before {
       content:"";
       position:absolute;
@@ -379,7 +419,6 @@
       content:"";
       position:absolute;
       left:0;
-      right:auto;
       bottom:-10px;
       height:4px;
       width:140px;
@@ -397,7 +436,7 @@
 
     .section-lead {
       max-width:740px;
-      margin:20px 0 16px; /* push down slightly now that underline exists */
+      margin:20px 0 16px;
       color:var(--text-dim);
       font-size:15px;
       line-height:1.5;
@@ -476,7 +515,6 @@
     .reviews-grid  { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
     .services-grid { grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
 
-    /* shared card styles */
     .card-unit {
       position:relative;
       background:var(--panel);
@@ -488,7 +526,6 @@
       gap:8px;
       box-shadow:0 8px 28px rgba(0,0,0,.45);
 
-      /* entrance fade */
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out forwards;
@@ -500,7 +537,7 @@
       will-change:transform,box-shadow,border-color;
     }
 
-    /* halo layer that we’ll brighten when active */
+    /* halo layer */
     .card-unit::before {
       content:"";
       position:absolute;
@@ -516,17 +553,16 @@
       transition:opacity .22s ease,filter .22s ease;
     }
 
-    /* services card look */
     .service-card {
       background:var(--panel-alt);
       border-radius:16px;
       padding:16px 16px 18px;
     }
 
-    /* desktop hover glow stays premium */
+    /* desktop hover glow */
     @media (hover:hover){
       .card-unit:hover {
-        transform:translateY(-2px) scale(1.01);
+        transform:translateY(-2px); /* removed scale for steadiness */
         border-color:var(--accent-1);
         box-shadow:
           0 20px 40px rgba(0,0,0,.75),
@@ -538,11 +574,9 @@
       }
     }
 
-    /* MOBILE / SCROLL glow:
-       JS toggles .in-view, making it look "hovered"
-       (lighter than before so it’s cheaper to render) */
+    /* scroll-activated glow */
     .card-unit.in-view {
-      transform:translateY(-2px) scale(1.01);
+      transform:translateY(-2px); /* no scale to stop button jump */
       border-color:var(--accent-1);
       box-shadow:
         0 16px 28px rgba(0,0,0,.6),
@@ -732,7 +766,7 @@
     .hours-grid .hours-item:nth-child(7){animation-delay:.23s;}
 
     .hours-item.in-view {
-      transform:translateY(-2px) scale(1.01);
+      transform:translateY(-2px); /* no scale */
       border-color:var(--accent-1);
       box-shadow:
         0 16px 28px rgba(0,0,0,.6),
@@ -797,7 +831,7 @@
     .map-links .map-btn:nth-child(2){animation-delay:.1s;}
 
     .map-btn.in-view {
-      transform:translateY(-2px) scale(1.01);
+      transform:translateY(-2px); /* no scale */
       border-color:var(--accent-1);
       box-shadow:
         0 16px 28px rgba(0,0,0,.6),
@@ -821,7 +855,7 @@
         transform .22s ease;
     }
     .map-frame.in-view {
-      transform:translateY(-2px) scale(1.01);
+      transform:translateY(-2px); /* no scale */
       border-color:var(--accent-1);
       box-shadow:
         0 16px 28px rgba(0,0,0,.6),
@@ -843,7 +877,7 @@
         transform .22s ease;
     }
     .landmark-note.in-view {
-      transform:translateY(-2px) scale(1.01);
+      transform:translateY(-2px); /* no scale */
       text-shadow:
         0 0 12px rgba(124,58,237,.6),
         0 0 24px rgba(34,211,238,.5);
@@ -869,7 +903,7 @@
         transform .22s ease;
     }
     footer.in-view {
-      transform:translateY(-2px) scale(1.01);
+      transform:translateY(-2px); /* no scale */
       text-shadow:
         0 0 12px rgba(124,58,237,.6),
         0 0 24px rgba(34,211,238,.5);
@@ -882,7 +916,6 @@
       .services-grid { grid-template-columns:1fr; }
       .reviews-grid  { grid-template-columns:1fr; }
       .section-lead  { font-size:14px; }
-      .nav-row       { padding-left:16px; padding-right:16px; }
       .badges-row    { gap:8px; }
       .badge-pill    { font-size:12px; padding:8px 12px; }
     }
@@ -1326,7 +1359,7 @@
       }
     }, {passive:true});
 
-    // ------- Parallax background drift (cheap only-one-element transform) -------
+    // ------- Parallax drift for background brand text -------
     const rootStyle = document.documentElement.style;
     let tickingParallax = false;
 
@@ -1347,8 +1380,10 @@
     window.addEventListener('scroll', onScrollParallax, {passive:true});
     updateParallax(); // initial
 
-    // ------- Scroll glow observer (mobile + desktop "pop in") -------
-    const glowTargets = document.querySelectorAll('.glow-animate, .hours-item, .map-btn, .map-frame, .landmark-note, footer');
+    // ------- Glow on visible cards / rows -------
+    const glowTargets = document.querySelectorAll(
+      '.glow-animate, .hours-item, .map-btn, .map-frame, .landmark-note, footer'
+    );
 
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
