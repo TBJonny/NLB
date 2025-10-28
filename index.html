@@ -59,7 +59,6 @@
   --header-height-mobile:72px;
 }
 
-/* base reset */
 *{
   box-sizing:border-box;
   -webkit-font-smoothing:antialiased;
@@ -113,7 +112,7 @@ img{max-width:100%;display:block;}
     0 28px 60px rgba(0,0,0,.9);
 }
 
-/* Main glowing card look (hero, barber cards, services, reviews) */
+/* Glow-card = hero, barbers, services, reviews */
 .glow-card{
   position:relative;
   border-radius:var(--radius-xl);
@@ -125,7 +124,7 @@ img{max-width:100%;display:block;}
   color:var(--text-main);
 }
 
-/* Softer frosted card look (hours/map/contact) */
+/* Frost-card = hours/contact/map */
 .frost-card{
   background:var(--frost-bg);
   border:1px solid var(--frost-border);
@@ -137,7 +136,7 @@ img{max-width:100%;display:block;}
 }
 
 /* -------------------------------------------------
-   HEADER (kept always visible; no hide-on-scroll now)
+   HEADER (always visible now)
 ------------------------------------------------- */
 header{
   position:fixed;
@@ -158,7 +157,7 @@ header{
   gap:.75rem;
 }
 
-/* desktop header layout (brand row + nav row) */
+/* Desktop header layout */
 .desktop-header-block{
   display:flex;
   flex-direction:column;
@@ -231,7 +230,7 @@ header{
     0 28px 60px rgba(0,0,0,.9);
 }
 
-/* mobile mini header (brand + call + burger) */
+/* Mobile header layout */
 .mobile-head-extras{
   display:none;
   align-items:center;
@@ -283,7 +282,7 @@ header{
   user-select:none;
 }
 
-/* show/hide desktop vs mobile header blocks */
+/* when under 768px wide, hide desktop header block and show mobile */
 @media(max-width:768px){
   .desktop-header-block{display:none;}
   .mobile-head-extras{display:flex;}
@@ -394,7 +393,7 @@ main{
   }
 }
 
-/* glow ring behind active section */
+/* halo behind active section */
 .section-focus-ring{
   position:absolute;
   inset:-16px;
@@ -409,7 +408,7 @@ main{
 }
 .section.active .section-focus-ring{opacity:1;}
 @media(min-width:900px){
-  /* On desktop we highlight on hover instead of locking one. */
+  /* desktop = glow on hover instead of locking always */
   .section.active .section-focus-ring{opacity:0;}
   .section:hover .section-focus-ring{opacity:1;}
 }
@@ -421,6 +420,7 @@ main{
   max-width:1000px;
   margin:0 auto;
   padding:2rem 1.25rem 2.5rem;
+  text-align:center; /* centered per request */
 }
 @media(min-width:768px){
   .hero-card{padding:2.5rem 2rem 3rem;}
@@ -434,7 +434,6 @@ main{
   text-shadow:var(--headline-shadow);
   color:#fff;
   margin:0;
-  text-align:left;
 }
 @media(min-width:600px){
   .hero-headline{font-size:2rem;}
@@ -442,18 +441,19 @@ main{
 .hero-underline{
   width:100%;
   max-width:600px;
-  margin:.75rem 0 1.5rem;
+  margin:.75rem auto 1.5rem;
 }
 .hero-desc{
   color:var(--text-dim);
   font-size:1rem;
   line-height:1.5;
   max-width:800px;
-  margin:0 0 1.5rem;
+  margin:0 auto 1.5rem;
 }
 .pill-row{
   display:flex;
   flex-wrap:wrap;
+  justify-content:center;
   gap:.75rem;
   margin-bottom:1rem;
 }
@@ -462,6 +462,9 @@ main{
   line-height:1.4;
   color:var(--text-dim);
   margin-top:.4rem;
+  max-width:800px;
+  margin-left:auto;
+  margin-right:auto;
 }
 .location-row{
   margin-top:1.5rem;
@@ -478,6 +481,9 @@ main{
   box-shadow:0 16px 40px rgba(0,0,0,.9);
   overflow:hidden;
   color:#fff;
+  max-width:1000px;
+  margin-left:auto;
+  margin-right:auto;
 }
 .location-chip{
   padding:.8rem .9rem;
@@ -493,7 +499,6 @@ main{
   max-width:1000px;
   margin:0 auto 2rem;
   color:#fff;
-  text-align:left;
 }
 .section-title{
   font-size:1.6rem;
@@ -903,7 +908,7 @@ footer{
 
 <body>
 
-<!-- SPOOK POPUP (fun Halloween flash) -->
+<!-- SPOOK POPUP -->
 <div id="spook">🎃 BOO ✂️ FRESH CUT?</div>
 
 <header id="siteHeader">
@@ -947,7 +952,7 @@ footer{
   </div>
 </header>
 
-<!-- MOBILE DRAWER -->
+<!-- MOBILE DRAWER NAV -->
 <aside class="mobile-drawer" id="mobileDrawer">
   <div class="drawer-head">
     <div class="drawer-title">NAVIGATE</div>
@@ -994,7 +999,6 @@ footer{
           <div class="pill">Appointments Preferred</div>
         </div>
 
-        <!-- payment row visible on first screen -->
         <div class="pill-row" id="paymentTop">
           <div class="pill primary">Cash</div>
           <div class="pill">Apple Pay</div>
@@ -1005,7 +1009,6 @@ footer{
           Payment method can vary by barber — just confirm when you book.
         </div>
 
-        <!-- location / vibe chips -->
         <div class="location-row" style="margin-top:1.5rem;">
           <div class="location-chip">Albuquerque, NM</div>
           <div class="location-chip">Right next to Bob's Burgers</div>
@@ -1373,7 +1376,7 @@ footer{
 
       <div class="frost-card map-card">
         <div class="map-embed">
-          <!-- keep/update with your legit embed URL -->
+          <!-- embed URL here -->
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3244.268431653064!2d-106.726!3d35.197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x872272e0...etc"
             width="100%" height="320" style="border:0;"
@@ -1408,11 +1411,11 @@ footer{
 <script>
 /* ==================================================
    JS
-   - mobile drawer toggle
+   - mobile drawer
    - smooth scroll w/ header offset
-   - section glow tracking (safe fallback)
+   - section glow tracking
    - parallax background drift
-   - spooky popup
+   - spooky popup (longer now)
 ================================================== */
 
 const headerEl = document.getElementById('siteHeader');
@@ -1457,17 +1460,15 @@ function attachSmartScroll(selector){
 attachSmartScroll('.nav-link');
 attachSmartScroll('.drawer-links a');
 
-/* section glow tracking / active halo
-   - If IntersectionObserver exists, use it.
-   - rootMargin is centered so mobile glow tracks middle of screen better.
-   - If not supported, we just skip. */
+/* section glow tracking for mobile:
+   picks the section ~center of viewport instead of bottom.
+   if not supported, nothing breaks. */
 (function(){
   const sections = document.querySelectorAll('.section');
   if(!('IntersectionObserver' in window) || !sections.length){
     return;
   }
   const observer = new IntersectionObserver((entries)=>{
-    // find the entry with the largest intersectionRatio
     let best = null;
     entries.forEach(entry=>{
       if(entry.isIntersecting){
@@ -1482,13 +1483,14 @@ attachSmartScroll('.drawer-links a');
     }
   },{
     root:null,
-    rootMargin:'-40% 0px -40% 0px',
+    // -30%/-30% keeps the "spotlight" closer to mid-screen, more accurate
+    rootMargin:'-30% 0px -30% 0px',
     threshold:[0,0.25,0.5,0.75,1]
   });
   sections.forEach(sec=>observer.observe(sec));
 })();
 
-/* parallax background drifting (safe) */
+/* parallax background drift */
 (function(){
   let latestScrollY = window.scrollY;
   function step(){
@@ -1506,23 +1508,24 @@ attachSmartScroll('.drawer-links a');
   requestAnimationFrame(step);
 })();
 
-/* SPOOK POPUP (Halloween mode) */
+/* SPOOK POPUP (Halloween fun, longer display now) */
 (function(){
   const spook = document.getElementById('spook');
   if(!spook) return;
 
   function spookyFlash(){
     spook.classList.add('show');
-    setTimeout(()=>{ spook.classList.remove('show'); },800);
+    // stay up ~1.7 seconds instead of super fast
+    setTimeout(()=>{ spook.classList.remove('show'); },1700);
   }
 
-  // one scare after ~3s
-  setTimeout(spookyFlash,3000);
+  // show once ~4s after load
+  setTimeout(spookyFlash,4000);
 
-  // OPTIONAL random spooks:
+  // optional random repeat every ~20-40s:
   /*
   function randomSpookLoop(){
-    const nextDelay = 20000 + Math.random()*20000; // 20-40s
+    const nextDelay = 20000 + Math.random()*20000;
     setTimeout(()=>{
       spookyFlash();
       randomSpookLoop();
