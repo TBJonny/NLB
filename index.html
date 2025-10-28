@@ -131,8 +131,7 @@ a{
   }
 }
 
-/* highlight ring that shows on scroll (mobile)
-   and on hover (desktop) */
+/* highlight ring on scroll/hover */
 .section-focus-ring{
   position:absolute;
   inset:-12px;
@@ -149,13 +148,12 @@ a{
   opacity:1;
 }
 @media(min-width:900px){
-  /* desktop: only light up on hover */
   .section.active .section-focus-ring{opacity:0;}
   .section:hover .section-focus-ring{opacity:1;}
 }
 
 /* ---------------------------------
-   STICKY HEADER (desktop + mobile)
+   STICKY HEADER
 -----------------------------------*/
 
 header{
@@ -261,7 +259,7 @@ header.nav-hidden{
   font-size:1rem;
 }
 
-/* mobile header (overrides) */
+/* mobile header overrides */
 @media(max-width:768px){
   .header-inner{
     padding:.5rem .75rem;
@@ -416,7 +414,6 @@ main{
   main{padding-top:var(--header-height-mobile);}
 }
 
-/* Each big page block is .section */
 .section{
   position:relative;
   scroll-margin-top:var(--header-height-desktop);
@@ -427,7 +424,7 @@ main{
   }
 }
 
-/* hero container */
+/* hero card */
 .hero-card{
   position:relative;
   border-radius:var(--radius-xl);
@@ -474,7 +471,6 @@ main{
   margin:.75rem 0 1.5rem;
 }
 
-/* hero text / pills */
 .hero-desc{
   font-size:1rem;
   color:var(--text-dim);
@@ -506,14 +502,12 @@ main{
   box-shadow:var(--accent-shadow);
 }
 
-/* payment row */
 .payment-note{
   font-size:.9rem;
   color:var(--text-dim);
   margin-top:.5rem;
 }
 
-/* location row */
 .location-row{
   margin-top:1.5rem;
   background:rgba(0,0,0,.4);
@@ -901,7 +895,7 @@ footer{
 }
 
 /* ---------------------------------
-   SPOOK (OFF BY DEFAULT)
+   SPOOK POPUP
 -----------------------------------*/
 #spook{
   position:fixed;
@@ -939,14 +933,13 @@ footer{
 
 <body>
 
-<!-- SPOOK POPUP (currently disabled; leave it commented until you want spooky season)
-<div id="spook">BOO ✂️</div>
--->
+<!-- SPOOK POPUP (now active) -->
+<div id="spook">🎃 BOO ✂️ FRESH CUT?</div>
 
 <header id="siteHeader">
   <div class="header-inner">
 
-    <!-- Desktop + mobile brand / left side -->
+    <!-- Brand / Name -->
     <div class="header-desktop-name neon-glow" id="brandName">
       NEXT LEVEL BARBERSHOP
     </div>
@@ -968,7 +961,7 @@ footer{
       </a>
     </nav>
 
-    <!-- Mobile-only actions (burger + call) -->
+    <!-- Mobile actions row (burger + call) -->
     <div class="mobile-actions" id="mobileActions" style="display:none;">
       <a class="mobile-call-chip" href="tel:+15055036216">
         <span class="emoji">📞</span>
@@ -1001,7 +994,7 @@ footer{
 
 <main>
 
-  <!-- HOME / HERO -------------------------------->
+  <!-- HOME / HERO -->
   <section id="home" class="section">
     <div class="section-focus-ring"></div>
 
@@ -1023,7 +1016,7 @@ footer{
           <div class="pill">Appointments Preferred</div>
         </div>
 
-        <!-- Payment info lives right up top so clients see it first -->
+        <!-- Payment info lives first screen -->
         <div class="pill-row" id="payment-info">
           <div class="pill primary">Cash</div>
           <div class="pill">Apple Pay</div>
@@ -1045,7 +1038,7 @@ footer{
     </div>
   </section>
 
-  <!-- BARBERS ----------------------------------->
+  <!-- BARBERS -->
   <section id="barbers" class="section">
     <div class="section-focus-ring"></div>
     <div class="section-shell">
@@ -1062,7 +1055,6 @@ footer{
 
       <div class="barbers-grid">
 
-        <!-- Vincent -->
         <article class="barber-card">
           <div class="barber-name">VINCENT (OWNER)</div>
           <div class="barber-desc">
@@ -1074,7 +1066,6 @@ footer{
           </a>
         </article>
 
-        <!-- Zwaluw -->
         <article class="barber-card">
           <div class="barber-name">ZWALUW</div>
           <div class="barber-desc">
@@ -1086,7 +1077,6 @@ footer{
           </a>
         </article>
 
-        <!-- G-Mo -->
         <article class="barber-card">
           <div class="barber-name">G-MO</div>
           <div class="barber-desc">
@@ -1098,7 +1088,6 @@ footer{
           </a>
         </article>
 
-        <!-- Deshaun -->
         <article class="barber-card">
           <div class="barber-name">DESHAUN</div>
           <div class="barber-desc">
@@ -1110,7 +1099,6 @@ footer{
           </a>
         </article>
 
-        <!-- Ca$h -->
         <article class="barber-card">
           <div class="barber-name">CA$H</div>
           <div class="barber-desc">
@@ -1121,7 +1109,6 @@ footer{
           </a>
         </article>
 
-        <!-- Jonny -->
         <article class="barber-card">
           <div class="barber-name">JONNY</div>
           <div class="barber-desc">
@@ -1132,7 +1119,6 @@ footer{
           </a>
         </article>
 
-        <!-- Taylor -->
         <article class="barber-card">
           <div class="barber-name">TAYLOR</div>
           <div class="barber-desc">
@@ -1147,7 +1133,7 @@ footer{
     </div>
   </section>
 
-  <!-- REVIEWS ----------------------------------->
+  <!-- REVIEWS -->
   <section id="reviews" class="section">
     <div class="section-focus-ring"></div>
     <div class="section-shell">
@@ -1207,7 +1193,7 @@ footer{
     </div>
   </section>
 
-  <!-- SERVICES ----------------------------------->
+  <!-- SERVICES -->
   <section id="services" class="section">
     <div class="section-focus-ring"></div>
     <div class="section-shell">
@@ -1374,7 +1360,7 @@ footer{
     </div>
   </section>
 
-  <!-- HOURS / CONTACT ---------------------------->
+  <!-- HOURS / CONTACT -->
   <section id="hours" class="section">
     <div class="section-focus-ring"></div>
     <div class="section-shell">
@@ -1419,7 +1405,7 @@ footer{
     </div>
   </section>
 
-  <!-- LOCATION / MAP ----------------------------->
+  <!-- LOCATION / MAP -->
   <section id="location" class="section">
     <div class="section-focus-ring"></div>
     <div class="section-shell">
@@ -1433,7 +1419,7 @@ footer{
       <div class="map-wrap">
         <div class="map-card">
           <div class="map-flex">
-            <!-- keep your iframe map the same as before -->
+            <!-- keep your iframe map or updated embed -->
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3244.268431653064!2d-106.726!3d35.197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x872272e0...etc"
               width="100%" height="320" style="border:0;"
@@ -1471,15 +1457,12 @@ footer{
    JS BEHAVIOR
    - mobile drawer toggle
    - smart sticky header (hide on scroll down, show on up)
-   - smooth scroll w/ offset so section centers nicer
-   - active section glow (mobile = section in middle;
-     desktop = hover only, but we still mark active so
-     heading glow works)
-   - soft parallax background
-   - (optional SPOOK popup is left commented)
+   - smooth scroll w/ offset (so section lands centered)
+   - active section glow tracking
+   - parallax background
+   - SPOOK popup
 ==================================================== */
 
-/* ---------- HELPERS ---------- */
 const qs = s=>document.querySelector(s);
 const qsa = s=>document.querySelectorAll(s);
 
@@ -1492,7 +1475,7 @@ const brandName = qs('#brandName');
 const desktopNav = qs('#desktopNav');
 const mobileActions = qs('#mobileActions');
 
-/* Responsive header mode: show burger on mobile, full nav on desktop */
+/* Responsive header layout */
 function handleHeaderLayout(){
   if(window.innerWidth <= 768){
     mobileActions.style.display='flex';
@@ -1518,34 +1501,28 @@ drawerLinks.forEach(link=>{
   link.addEventListener('click',()=>mobileDrawer.classList.remove('open'));
 });
 
-/* --------- smart sticky header hide/show --------- */
+/* smart sticky header hide/show */
 let lastScrollY = window.scrollY;
 function handleScrollHeader(){
   const current = window.scrollY;
-  // if scrolling down and past 80px -> hide
   if(current > lastScrollY && current > 80){
     header.classList.add('nav-hidden');
   }else{
-    // if scrolling up at all -> show
     header.classList.remove('nav-hidden');
   }
   lastScrollY = current;
 }
 window.addEventListener('scroll', handleScrollHeader,{passive:true});
 
-/* -------- smooth anchor scroll with offset ---------
-   We scroll so the section sits nicer on screen
-*/
+/* smooth anchor scroll w/ offset */
 function scrollToSection(id){
   const el = qs(id);
   if(!el) return;
-  // header height dynamic:
   const headerH = header.getBoundingClientRect().height;
   const rect = el.getBoundingClientRect();
-  const absoluteY = window.scrollY + rect.top - (headerH + 20); // 20px breathing room
+  const absoluteY = window.scrollY + rect.top - (headerH + 20);
   window.scrollTo({top:absoluteY,behavior:'smooth'});
 }
-
 function attachSmartScroll(selector){
   qsa(selector).forEach(a=>{
     a.addEventListener('click', e=>{
@@ -1560,37 +1537,26 @@ function attachSmartScroll(selector){
 attachSmartScroll('.nav-link');
 attachSmartScroll('.drawer-links a');
 
-/* -------- active section glow tracking -------------
-   Mobile: highlight the section that's centered-ish.
-   Desktop: we mostly glow on hover, but we still mark 
-   active so headings can soft-glow when you're near them.
-*/
+/* active section glow */
 const sections = qsa('.section');
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
-      // remove active from others
       sections.forEach(sec=>sec.classList.remove('active'));
-      // add active to the one that's mostly centered
       entry.target.classList.add('active');
     }
   });
 },{
-  // we want "in the middle of the screen"
   root:null,
   rootMargin:'-30% 0px -30% 0px',
   threshold:0.3
 });
 sections.forEach(sec=>observer.observe(sec));
 
-/* -------- parallax background (subtle, efficient) --
-   We'll offset radial backgrounds a little with scroll.
-   We'll run it on rAF so it's smooth.
-*/
+/* parallax body bg */
 let latestScrollY = window.scrollY;
 function parallaxLoop(){
-  const y = latestScrollY * 0.05; // gentle
-  // shift background-position for vibe
+  const y = latestScrollY * 0.05;
   document.body.style.backgroundPosition = `
     20% calc(20% + ${y}px),
     80% calc(15% + ${y * 0.6}px),
@@ -1601,16 +1567,28 @@ function parallaxLoop(){
 window.addEventListener('scroll',()=>{ latestScrollY = window.scrollY; },{passive:true});
 parallaxLoop();
 
-/* -------- SPOOK MODE (off) -------------------------
+/* SPOOK MODE (active) */
 const spook = document.getElementById('spook');
-function spookyFlash(){
-  if(!spook)return;
+function spookyFlash() {
+  if (!spook) return;
   spook.classList.add('show');
-  setTimeout(()=>{ spook.classList.remove('show'); },800);
+  // hide after 800ms
+  setTimeout(() => {
+    spook.classList.remove('show');
+  }, 800);
 }
-// Example trigger:
-// setTimeout(spookyFlash, 5000);
------------------------------------------------------ */
+// Fire once ~3s after page load
+setTimeout(spookyFlash, 3000);
+
+// OPTIONAL random repeat scare every 20-40s
+// function randomSpookLoop() {
+//   const nextDelay = 20000 + Math.random() * 20000; // 20-40s
+//   setTimeout(() => {
+//     spookyFlash();
+//     randomSpookLoop();
+//   }, nextDelay);
+// }
+// randomSpookLoop();
 
 </script>
 </body>
