@@ -7,7 +7,7 @@
 
 <style>
 /* -------------------------------------------------
-   CORE THEME (dark only, stable)
+   CORE THEME
 ------------------------------------------------- */
 :root {
   --bg-page: #0b0b12;
@@ -57,11 +57,9 @@
 
   --header-height-desktop:140px;
   --header-height-mobile:72px;
-
-  --ease-fast: .18s cubic-bezier(.25,.4,.45,1);
-  --ease-med:  .28s cubic-bezier(.25,.4,.45,1);
 }
 
+/* base reset */
 *{
   box-sizing:border-box;
   -webkit-font-smoothing:antialiased;
@@ -78,17 +76,9 @@ body{
   line-height:1.45;
   scroll-behavior:smooth;
 }
+a{text-decoration:none;color:inherit;display:inline-block;}
 img{max-width:100%;display:block;}
-a{text-decoration:none;color:inherit;}
 
-/* reusable tiny things */
-.gradient-text{
-  background:var(--accent-grad);
-  -webkit-background-clip:text;
-  color:transparent;
-  font-weight:600;
-  letter-spacing:.03em;
-}
 .neon-glow{
   text-shadow:var(--accent-text-shadow);
 }
@@ -123,7 +113,7 @@ a{text-decoration:none;color:inherit;}
     0 28px 60px rgba(0,0,0,.9);
 }
 
-/* a glowing panel card (hero / barber cards style) */
+/* Main glowing card look (hero, barber cards, services, reviews) */
 .glow-card{
   position:relative;
   border-radius:var(--radius-xl);
@@ -135,7 +125,7 @@ a{text-decoration:none;color:inherit;}
   color:var(--text-main);
 }
 
-/* softer frosted boxes for hours / contact / map etc */
+/* Softer frosted card look (hours/map/contact) */
 .frost-card{
   background:var(--frost-bg);
   border:1px solid var(--frost-border);
@@ -147,7 +137,7 @@ a{text-decoration:none;color:inherit;}
 }
 
 /* -------------------------------------------------
-   HEADER (sticky, hide/reveal)
+   HEADER (kept always visible; no hide-on-scroll now)
 ------------------------------------------------- */
 header{
   position:fixed;
@@ -158,10 +148,6 @@ header{
   backdrop-filter:blur(12px) saturate(160%);
   border-bottom:1px solid rgba(255,255,255,.08);
   box-shadow:0 24px 50px rgba(0,0,0,.9);
-  transition:transform var(--ease-med);
-}
-header.nav-hidden{
-  transform:translateY(-100%);
 }
 .header-inner{
   max-width:1300px;
@@ -169,7 +155,14 @@ header.nav-hidden{
   padding:.75rem 1rem 1rem;
   display:flex;
   flex-direction:column;
-  gap:.5rem;
+  gap:.75rem;
+}
+
+/* desktop header layout (brand row + nav row) */
+.desktop-header-block{
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
 }
 .brand-row{
   display:flex;
@@ -180,7 +173,7 @@ header.nav-hidden{
   row-gap:.5rem;
 }
 .brand-name{
-  font-size:1.4rem;
+  font-size:1.6rem;
   font-weight:600;
   line-height:1.2;
   letter-spacing:.15em;
@@ -206,23 +199,11 @@ header.nav-hidden{
     0 28px 60px rgba(0,0,0,.9);
   white-space:nowrap;
   border:0;
+  position:absolute;
+  right:0;
 }
 .call-chip .emoji{font-size:1rem;line-height:1;}
 
-@media(min-width:769px){
-  .brand-row{
-    justify-content:center;
-  }
-  .brand-name{
-    font-size:1.6rem;
-  }
-  .call-chip{
-    position:absolute;
-    right:0;
-  }
-}
-
-/* nav row (desktop pills) */
 .nav-row{
   display:flex;
   flex-wrap:wrap;
@@ -241,7 +222,7 @@ header.nav-hidden{
   color:var(--text-main);
   padding:.6rem .8rem;
   box-shadow:0 16px 36px rgba(0,0,0,.9);
-  transition:all var(--ease-fast);
+  transition:all .18s cubic-bezier(.25,.4,.45,1);
 }
 .nav-link:hover{
   box-shadow:
@@ -250,18 +231,19 @@ header.nav-hidden{
     0 28px 60px rgba(0,0,0,.9);
 }
 
-/* mobile header pieces */
+/* mobile mini header (brand + call + burger) */
 .mobile-head-extras{
   display:none;
   align-items:center;
   justify-content:space-between;
   gap:.5rem;
-  width:100%;
   flex-wrap:wrap;
+  width:100%;
 }
 .mobile-brand-mini{
   font-size:1rem;
   font-weight:600;
+  line-height:1.2;
   letter-spacing:.15em;
   text-transform:uppercase;
   text-shadow:var(--accent-text-shadow);
@@ -297,18 +279,17 @@ header.nav-hidden{
   justify-content:center;
   font-size:1rem;
   line-height:1;
+  cursor:pointer;
+  user-select:none;
 }
+
+/* show/hide desktop vs mobile header blocks */
 @media(max-width:768px){
-  /* on mobile:
-     - hide desktop brand+nav row
-     - show mobile mini row
-  */
-  .brand-row{display:none;}
-  .nav-row{display:none;}
+  .desktop-header-block{display:none;}
   .mobile-head-extras{display:flex;}
 }
 
-/* mobile slideout drawer */
+/* mobile drawer */
 .mobile-drawer{
   position:fixed;
   top:0;right:0;bottom:0;
@@ -320,7 +301,7 @@ header.nav-hidden{
   border-left:1px solid rgba(255,255,255,.15);
   box-shadow:-24px 0 60px rgba(0,0,0,.9);
   transform:translateX(100%);
-  transition:transform var(--ease-med);
+  transition:transform .28s cubic-bezier(.25,.4,.45,1);
   z-index:10000;
   color:#fff;
   display:flex;
@@ -351,6 +332,7 @@ header.nav-hidden{
   line-height:1;
   padding:.25rem .5rem;
   border-radius:var(--radius-md);
+  cursor:pointer;
 }
 .drawer-links{
   display:flex;
@@ -412,7 +394,7 @@ main{
   }
 }
 
-/* glowing spotlight behind active section */
+/* glow ring behind active section */
 .section-focus-ring{
   position:absolute;
   inset:-16px;
@@ -422,12 +404,13 @@ main{
   opacity:0;
   pointer-events:none;
   filter:blur(24px);
-  transition:opacity var(--ease-fast);
+  transition:opacity .18s cubic-bezier(.25,.4,.45,1);
   z-index:-1;
 }
 .section.active .section-focus-ring{opacity:1;}
 @media(min-width:900px){
-  .section.active .section-focus-ring{opacity:0;} /* mobile = always highlight current, desktop = glow when hover */
+  /* On desktop we highlight on hover instead of locking one. */
+  .section.active .section-focus-ring{opacity:0;}
   .section:hover .section-focus-ring{opacity:1;}
 }
 
@@ -451,6 +434,7 @@ main{
   text-shadow:var(--headline-shadow);
   color:#fff;
   margin:0;
+  text-align:left;
 }
 @media(min-width:600px){
   .hero-headline{font-size:2rem;}
@@ -503,12 +487,13 @@ main{
 .location-chip:last-child{border-right:0;}
 
 /* -------------------------------------------------
-   SECTION HEADERS (OUR BARBERS, etc)
+   SECTION HEADERS
 ------------------------------------------------- */
 .section-header{
   max-width:1000px;
   margin:0 auto 2rem;
   color:#fff;
+  text-align:left;
 }
 .section-title{
   font-size:1.6rem;
@@ -563,7 +548,7 @@ main{
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-  transition:transform var(--ease-fast),box-shadow var(--ease-fast);
+  transition:transform .18s cubic-bezier(.25,.4,.45,1),box-shadow .18s cubic-bezier(.25,.4,.45,1);
 }
 .barber-card:hover{
   transform:translateY(-2px);
@@ -572,9 +557,7 @@ main{
     0 0 64px rgba(0,200,255,.45),
     0 32px 70px rgba(0,0,0,.9);
 }
-.barber-top{
-  margin-bottom:1rem;
-}
+.barber-top{margin-bottom:1rem;}
 .barber-name{
   font-weight:600;
   font-size:1rem;
@@ -624,7 +607,7 @@ main{
     0 28px 60px rgba(0,0,0,.9);
   white-space:nowrap;
   display:inline-block;
-  transition:transform var(--ease-fast),box-shadow var(--ease-fast);
+  transition:transform .18s cubic-bezier(.25,.4,.45,1),box-shadow .18s cubic-bezier(.25,.4,.45,1);
 }
 .book-btn:hover{
   transform:translateY(-1px) scale(1.03);
@@ -635,7 +618,7 @@ main{
 }
 
 /* -------------------------------------------------
-   REVIEWS (3-up cards)
+   REVIEWS
 ------------------------------------------------- */
 .reviews-grid{
   max-width:1000px;
@@ -656,7 +639,7 @@ main{
   backdrop-filter:blur(16px) saturate(160%);
   padding:1rem 1rem 1.25rem;
   min-height:160px;
-  transition:transform var(--ease-fast),box-shadow var(--ease-fast);
+  transition:transform .18s cubic-bezier(.25,.4,.45,1),box-shadow .18s cubic-bezier(.25,.4,.45,1);
 }
 .review-card:hover{
   transform:translateY(-2px);
@@ -700,7 +683,7 @@ main{
 }
 
 /* -------------------------------------------------
-   SERVICES GRID
+   SERVICES
 ------------------------------------------------- */
 .services-grid{
   max-width:1100px;
@@ -710,9 +693,7 @@ main{
   gap:1rem;
 }
 @media(min-width:800px){
-  .services-grid{
-    grid-template-columns:1fr 1fr 1fr;
-  }
+  .services-grid{grid-template-columns:1fr 1fr 1fr;}
 }
 .service-card{
   background:var(--panel-bg);
@@ -723,7 +704,7 @@ main{
   backdrop-filter:blur(16px) saturate(160%);
   min-height:150px;
   padding:1rem 1rem 1.25rem;
-  transition:transform var(--ease-fast),box-shadow var(--ease-fast);
+  transition:transform .18s cubic-bezier(.25,.4,.45,1),box-shadow .18s cubic-bezier(.25,.4,.45,1);
 }
 .service-card:hover{
   transform:translateY(-2px);
@@ -783,7 +764,6 @@ main{
     align-items:flex-start;
   }
 }
-
 .hours-box{
   flex:2;
   padding:1rem 1rem 1.5rem;
@@ -812,7 +792,6 @@ main{
   font-weight:500;
   letter-spacing:.03em;
 }
-
 .contact-box{
   flex:1.3;
   padding:1rem 1rem 1.25rem;
@@ -910,7 +889,7 @@ footer{
 #spook.show{opacity:1;}
 
 /* -------------------------------------------------
-   SMALLER DEVICE TWEAKS
+   SMALL SCREENS
 ------------------------------------------------- */
 @media(max-width:480px){
   .hero-headline{font-size:1.4rem;}
@@ -924,35 +903,37 @@ footer{
 
 <body>
 
-<!-- SPOOK POPUP (flashes once ~3s after load and then goes away) -->
+<!-- SPOOK POPUP (fun Halloween flash) -->
 <div id="spook">🎃 BOO ✂️ FRESH CUT?</div>
 
 <header id="siteHeader">
   <div class="header-inner">
 
-    <!-- DESKTOP BRAND + NAV -->
-    <div class="brand-row" id="desktopBrandBlock">
-      <div class="brand-name neon-glow">NEXT LEVEL BARBERSHOP</div>
+    <!-- DESKTOP HEADER BLOCK -->
+    <div class="desktop-header-block">
+      <div class="brand-row">
+        <div class="brand-name neon-glow">NEXT LEVEL BARBERSHOP</div>
 
-      <a class="call-chip" href="tel:+15055036216">
-        <span class="emoji">📞</span>
-        <span>(505) 503-6216</span>
-      </a>
+        <a class="call-chip" href="tel:+15055036216">
+          <span class="emoji">📞</span>
+          <span>(505) 503-6216</span>
+        </a>
+      </div>
+
+      <nav class="nav-row">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#barbers">Our Barbers</a>
+        <a class="nav-link" href="#reviews">Reviews</a>
+        <a class="nav-link" href="#paymentTop">Payment</a>
+        <a class="nav-link" href="#services">Services</a>
+        <a class="nav-link" href="#hours">Hours</a>
+        <a class="nav-link" href="#contact">Contact</a>
+        <a class="nav-link" href="#location">Location</a>
+      </nav>
     </div>
 
-    <nav class="nav-row" id="desktopNavPills">
-      <a class="nav-link" href="#home">Home</a>
-      <a class="nav-link" href="#barbers">Our Barbers</a>
-      <a class="nav-link" href="#reviews">Reviews</a>
-      <a class="nav-link" href="#paymentTop">Payment</a>
-      <a class="nav-link" href="#services">Services</a>
-      <a class="nav-link" href="#hours">Hours</a>
-      <a class="nav-link" href="#contact">Contact</a>
-      <a class="nav-link" href="#location">Location</a>
-    </nav>
-
-    <!-- MOBILE MINI HEADER (brand + call + burger) -->
-    <div class="mobile-head-extras" id="mobileHead">
+    <!-- MOBILE HEADER BLOCK -->
+    <div class="mobile-head-extras">
       <div class="mobile-brand-mini neon-glow">NEXT LEVEL BARBERSHOP</div>
 
       <a class="mobile-call-chip" href="tel:+15055036216">
@@ -987,7 +968,6 @@ footer{
   <a class="drawer-call" href="tel:+15055036216">📞 (505) 503-6216</a>
 </aside>
 
-
 <main>
 
   <!-- HOME / HERO -->
@@ -1008,14 +988,13 @@ footer{
           Walk-ins welcome. Appointments preferred.
         </p>
 
-        <!-- main shop badges -->
         <div class="pill-row">
           <div class="pill primary">Locally Owned</div>
           <div class="pill">Walk-Ins Welcome</div>
           <div class="pill">Appointments Preferred</div>
         </div>
 
-        <!-- payment row lives right up front -->
+        <!-- payment row visible on first screen -->
         <div class="pill-row" id="paymentTop">
           <div class="pill primary">Cash</div>
           <div class="pill">Apple Pay</div>
@@ -1026,7 +1005,7 @@ footer{
           Payment method can vary by barber — just confirm when you book.
         </div>
 
-        <!-- location chips -->
+        <!-- location / vibe chips -->
         <div class="location-row" style="margin-top:1.5rem;">
           <div class="location-chip">Albuquerque, NM</div>
           <div class="location-chip">Right next to Bob's Burgers</div>
@@ -1394,7 +1373,7 @@ footer{
 
       <div class="frost-card map-card">
         <div class="map-embed">
-          <!-- Keep/update your real Google Map embed URL here -->
+          <!-- keep/update with your legit embed URL -->
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3244.268431653064!2d-106.726!3d35.197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x872272e0...etc"
             width="100%" height="320" style="border:0;"
@@ -1428,11 +1407,10 @@ footer{
 
 <script>
 /* ==================================================
-   JS BEHAVIOR (this matches what we’d dialed in)
+   JS
    - mobile drawer toggle
-   - sticky header hide/show on scroll
-   - smooth scroll w/ header offset (centers better)
-   - section glow tracking (mobile highlights current)
+   - smooth scroll w/ header offset
+   - section glow tracking (safe fallback)
    - parallax background drift
    - spooky popup
 ================================================== */
@@ -1443,25 +1421,11 @@ const mobileDrawer = document.getElementById('mobileDrawer');
 const drawerClose = document.getElementById('drawerClose');
 const drawerLinks = document.querySelectorAll('[data-drawer-link]');
 
-let lastScrollY = window.scrollY;
-
-/* hide header when scrolling down, show when up */
-function handleScrollHeader(){
-  const current = window.scrollY;
-  if(current > lastScrollY && current > 80){
-    headerEl.classList.add('nav-hidden');
-  }else{
-    headerEl.classList.remove('nav-hidden');
-  }
-  lastScrollY = current;
-}
-window.addEventListener('scroll', handleScrollHeader, {passive:true});
-
 /* mobile drawer open/close */
-if(burgerBtn){
+if(burgerBtn && mobileDrawer){
   burgerBtn.addEventListener('click',()=>mobileDrawer.classList.add('open'));
 }
-if(drawerClose){
+if(drawerClose && mobileDrawer){
   drawerClose.addEventListener('click',()=>mobileDrawer.classList.remove('open'));
 }
 drawerLinks.forEach(link=>{
@@ -1470,17 +1434,15 @@ drawerLinks.forEach(link=>{
   });
 });
 
-/* smooth scroll w/ header offset and "center-ish" snap */
+/* smooth scroll with header offset */
 function scrollToSection(id){
   const el = document.querySelector(id);
   if(!el) return;
   const headerH = headerEl.getBoundingClientRect().height;
   const rect = el.getBoundingClientRect();
-  // try to land the section a bit down from the top so it feels centered
   const offsetTarget = window.scrollY + rect.top - headerH - 20;
   window.scrollTo({top:offsetTarget,behavior:'smooth'});
 }
-
 function attachSmartScroll(selector){
   document.querySelectorAll(selector).forEach(a=>{
     a.addEventListener('click', e=>{
@@ -1495,37 +1457,54 @@ function attachSmartScroll(selector){
 attachSmartScroll('.nav-link');
 attachSmartScroll('.drawer-links a');
 
-/* section glow tracking (active section gets halo).
-   On mobile this makes the "spotlight" sit on the section
-   near the middle of the viewport (tighter rootMargin). */
-const sections = document.querySelectorAll('.section');
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
+/* section glow tracking / active halo
+   - If IntersectionObserver exists, use it.
+   - rootMargin is centered so mobile glow tracks middle of screen better.
+   - If not supported, we just skip. */
+(function(){
+  const sections = document.querySelectorAll('.section');
+  if(!('IntersectionObserver' in window) || !sections.length){
+    return;
+  }
+  const observer = new IntersectionObserver((entries)=>{
+    // find the entry with the largest intersectionRatio
+    let best = null;
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        if(!best || entry.intersectionRatio > best.intersectionRatio){
+          best = entry;
+        }
+      }
+    });
+    if(best){
       sections.forEach(sec=>sec.classList.remove('active'));
-      entry.target.classList.add('active');
+      best.target.classList.add('active');
     }
+  },{
+    root:null,
+    rootMargin:'-40% 0px -40% 0px',
+    threshold:[0,0.25,0.5,0.75,1]
   });
-},{
-  root:null,
-  rootMargin:'-40% 0px -40% 0px', // more centered
-  threshold:0.25
-});
-sections.forEach(sec=>observer.observe(sec));
+  sections.forEach(sec=>observer.observe(sec));
+})();
 
-/* parallax background drifting */
-let latestScrollY = window.scrollY;
-function parallaxLoop(){
-  const y = latestScrollY * 0.05;
-  document.body.style.backgroundPosition = `
-    20% calc(20% + ${y}px),
-    80% calc(15% + ${y * 0.6}px),
-    50% calc(80% + ${y * 1.2}px)
-  `;
-  requestAnimationFrame(parallaxLoop);
-}
-window.addEventListener('scroll',()=>{ latestScrollY = window.scrollY; },{passive:true});
-parallaxLoop();
+/* parallax background drifting (safe) */
+(function(){
+  let latestScrollY = window.scrollY;
+  function step(){
+    const y = latestScrollY * 0.05;
+    document.body.style.backgroundPosition = `
+      20% calc(20% + ${y}px),
+      80% calc(15% + ${y * 0.6}px),
+      50% calc(80% + ${y * 1.2}px)
+    `;
+    requestAnimationFrame(step);
+  }
+  window.addEventListener('scroll',()=>{
+    latestScrollY = window.scrollY;
+  },{passive:true});
+  requestAnimationFrame(step);
+})();
 
 /* SPOOK POPUP (Halloween mode) */
 (function(){
@@ -1537,10 +1516,10 @@ parallaxLoop();
     setTimeout(()=>{ spook.classList.remove('show'); },800);
   }
 
-  // fire once ~3s after load
+  // one scare after ~3s
   setTimeout(spookyFlash,3000);
 
-  // if you ever want random extra scares, uncomment:
+  // OPTIONAL random spooks:
   /*
   function randomSpookLoop(){
     const nextDelay = 20000 + Math.random()*20000; // 20-40s
