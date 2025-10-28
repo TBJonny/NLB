@@ -19,7 +19,7 @@
       --bg-grad-2:#083344;
 
       --panel:#121216;
-      --panel-alt:#1a1a22;
+      --panel-alt:#1a122;
 
       --text-primary:#f5f6f7;
       --text-dim:#a5a7ac;
@@ -38,19 +38,19 @@
       --marquee-bg:rgba(0,0,0,.4);
 
       --parallax-y:0px;
+      --parallax-y-half:0px;
 
-      /* halo softness + rim pop in dark mode */
+      /* slight white rim on dark for separation */
       --rim-color:rgba(255,255,255,.12);
       --rim-shadow:0 1px 2px rgba(255,255,255,.18);
-      --lift-shadow:
-        0 16px 32px rgba(0,0,0,.7);
+      --lift-shadow:0 16px 32px rgba(0,0,0,.7);
 
-      /* subtle color glow to match brand */
+      /* brand-color glow */
       --color-glow-shadow:
         0 0 24px rgba(124,58,237,.45),
         0 0 48px rgba(34,211,238,.35);
 
-      /* “featured” spotlight (mobile active card) */
+      /* strong spotlight (used when focused/in-view) */
       --spotlight-glow:
         0 24px 44px rgba(0,0,0,.8),
         0 0 40px rgba(124,58,237,.8),
@@ -85,11 +85,10 @@
 
         --marquee-bg:rgba(15,23,42,.07);
 
-        /* in light mode we want a darker rim so stuff doesn't look washed out */
+        /* in light mode, rim is dark so it doesn't get washed out */
         --rim-color:rgba(0,0,0,.14);
         --rim-shadow:0 1px 2px rgba(0,0,0,.18);
-        --lift-shadow:
-          0 16px 32px rgba(15,23,42,.17);
+        --lift-shadow:0 16px 32px rgba(15,23,42,.17);
 
         --color-glow-shadow:
           0 0 24px rgba(124,58,237,.35),
@@ -210,8 +209,12 @@
       100% { filter:drop-shadow(0 0 6px rgba(124,58,237,.7)) drop-shadow(0 0 18px rgba(34,211,238,.4)); background-position:0% 0%; }
     }
 
-    /* ========= HEADER ========= */
-
+    /* ========= HEADER =========
+       mobile: brand + call, then horizontal scroll nav
+       desktop: two rows
+         row 1 brand
+         row 2 nav tabs + call button on far right
+    */
     header.site-header {
       position:sticky;
       top:0;
@@ -219,14 +222,16 @@
       background:var(--header-bg);
       backdrop-filter:saturate(1.2) blur(8px);
       border-bottom:1px solid var(--border);
-      transition:transform .28s ease, box-shadow .28s ease, background .28s ease;
+      transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        background .28s ease;
       will-change:transform,box-shadow;
     }
     header.site-header.hide {
       transform:translateY(-100%);
     }
     header.site-header.scrolled {
-      /* brighter but still subtle */
       box-shadow:
         var(--rim-shadow),
         0 20px 40px rgba(0,0,0,.8),
@@ -241,15 +246,14 @@
       }
     }
 
-    /* MOBILE HEADER LAYOUT */
-    .nav-shell {
+    /* MOBILE HEADER */
+    .header-mobile {
       display:flex;
       flex-direction:column;
       gap:12px;
       padding:14px 20px;
     }
-
-    .header-top {
+    .mobile-top-row {
       width:100%;
       display:flex;
       align-items:flex-start;
@@ -305,7 +309,12 @@
     }
     .call-now-mini:active { transform:scale(.98); }
 
-    nav.primary-nav {
+    .mobile-nav-row {
+      display:flex;
+      flex-direction:column;
+    }
+
+    nav.primary-nav-mobile {
       display:flex;
       flex-wrap:nowrap;
       gap:10px;
@@ -314,9 +323,9 @@
       scrollbar-width:none;
       width:100%;
     }
-    nav.primary-nav::-webkit-scrollbar { display:none; }
+    nav.primary-nav-mobile::-webkit-scrollbar { display:none; }
 
-    nav.primary-nav a {
+    nav.primary-nav-mobile a {
       flex:0 0 auto;
       font-size:14px;
       line-height:1.2;
@@ -333,76 +342,122 @@
       transition:all .18s ease;
       will-change:transform,box-shadow;
     }
-    nav.primary-nav a:hover,
-    nav.primary-nav a:focus {
+    nav.primary-nav-mobile a:hover,
+    nav.primary-nav-mobile a:focus {
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
       color:#fff;
       border-color:transparent;
-      box-shadow:
-        var(--spotlight-glow);
+      box-shadow:var(--spotlight-glow);
       transform:translate3d(0,-1px,0) scale(1.03);
     }
 
-    /* DESKTOP HEADER LAYOUT */
+    /* DESKTOP HEADER */
+    .header-desktop {
+      display:none;
+      flex-direction:column;
+      gap:10px;
+      padding:16px 20px 18px;
+    }
+
+    .desktop-brand-row {
+      display:flex;
+      width:100%;
+      justify-content:space-between;
+      align-items:flex-start;
+      flex-wrap:wrap;
+      row-gap:8px;
+    }
+
+    .brand-desktop {
+      font-weight:800;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:18px;
+      line-height:1.2;
+      background:linear-gradient(90deg,#7c3aed 0%,#22d3ee 100%);
+      background-size:200% 100%;
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      text-shadow:
+        0 0 10px rgba(124,58,237,.8),
+        0 0 24px rgba(34,211,238,.5);
+      filter:
+        drop-shadow(0 0 6px rgba(124,58,237,.9))
+        drop-shadow(0 0 18px rgba(34,211,238,.6));
+      animation:brandPulse 3s ease-in-out infinite;
+      white-space:nowrap;
+    }
+
+    .desktop-nav-row {
+      display:flex;
+      width:100%;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      row-gap:10px;
+    }
+
+    nav.primary-nav-desktop {
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:10px;
+    }
+
+    nav.primary-nav-desktop a.nav-link {
+      font-size:14px;
+      line-height:1.2;
+      font-weight:600;
+      padding:10px 14px;
+      border-radius:12px;
+      color:var(--text-primary);
+      background:var(--chip-bg);
+      border:1px solid var(--border);
+      box-shadow:
+        var(--rim-shadow),
+        var(--lift-shadow),
+        var(--color-glow-shadow);
+      transition:all .18s ease;
+      will-change:transform,box-shadow;
+      text-decoration:none;
+    }
+    nav.primary-nav-desktop a.nav-link:hover,
+    nav.primary-nav-desktop a.nav-link:focus {
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      color:#fff;
+      border-color:transparent;
+      box-shadow:var(--spotlight-glow);
+      transform:translate3d(0,-1px,0) scale(1.03);
+    }
+
+    /* call button sits at the END of nav row on desktop */
+    a.nav-call {
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      color:#fff;
+      font-size:14px;
+      font-weight:600;
+      line-height:1.2;
+      padding:10px 14px;
+      border-radius:12px;
+      white-space:nowrap;
+      border:0;
+      box-shadow:
+        var(--rim-shadow),
+        var(--spotlight-glow);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+    }
+    a.nav-call:active { transform:scale(.98); }
+    a.nav-call:hover {
+      transform:translate3d(0,-1px,0) scale(1.02);
+    }
+
     @media(min-width:768px){
-      .nav-shell {
-        flex-direction:row;
-        align-items:center;
-        justify-content:space-between;
-        flex-wrap:nowrap;
-        gap:16px;
-      }
-
-      .header-top { display:none; }
-
-      .header-left {
-        display:flex;
-        align-items:center;
-        gap:16px;
-        min-width:max-content;
-      }
-
-      .brand-desktop {
-        font-weight:800;
-        letter-spacing:.14em;
-        text-transform:uppercase;
-        font-size:18px;
-        line-height:1.2;
-        background:linear-gradient(90deg,#7c3aed 0%,#22d3ee 100%);
-        background-size:200% 100%;
-        -webkit-background-clip:text;
-        background-clip:text;
-        color:transparent;
-        text-shadow:
-          0 0 10px rgba(124,58,237,.8),
-          0 0 24px rgba(34,211,238,.5);
-        filter:
-          drop-shadow(0 0 6px rgba(124,58,237,.9))
-          drop-shadow(0 0 18px rgba(34,211,238,.6));
-        animation:brandPulse 3s ease-in-out infinite;
-        white-space:nowrap;
-      }
-
-      .header-center {
-        display:flex;
-        flex:1;
-        justify-content:flex-end;
-        align-items:center;
-        gap:16px;
-        flex-wrap:nowrap;
-      }
-
-      nav.primary-nav {
-        flex:0 0 auto;
-        overflow-x:visible;
-        flex-wrap:nowrap;
-      }
-
-      .call-now-mini {
-        font-size:14px;
-        padding:9px 12px;
-        border-radius:10px;
-      }
+      .header-mobile { display:none; }
+      .header-desktop { display:flex; }
     }
 
     /* ========= SECTIONS ========= */
@@ -412,7 +467,7 @@
       padding:72px 20px;
       position:relative;
       z-index:2;
-      scroll-margin-top:90px;
+      scroll-margin-top:120px; /* a bit more so anchor scroll doesn't hide title under header */
     }
 
     section.band {
@@ -423,20 +478,17 @@
       border-bottom:1px solid var(--border-subtle);
     }
 
-    /* ========= SECTION TITLE ========= */
+    /* ========= SECTION TITLES ========= */
     .section-title {
       position:relative;
       margin:0 0 28px;
-      text-transform:uppercase;
-      font-weight:900;
-      letter-spacing:.08em;
       line-height:1.1;
       font-size:clamp(28px,2.4vw + 8px,44px);
+      font-weight:900;
+      letter-spacing:.08em;
       color:var(--text-primary);
-      display:flex;
-      flex-wrap:wrap;
-      row-gap:.4em;
-      column-gap:.4em;
+      text-transform:uppercase;
+      display:inline-block; /* important for underline width */
       z-index:2;
       text-shadow:
         var(--rim-shadow),
@@ -444,13 +496,14 @@
         0 0 32px rgba(34,211,238,.25);
     }
 
+    /* halo behind title w/ parallax */
     .section-title::before {
       content:"";
       position:absolute;
-      left:-8px;
-      right:-8px;
-      top:-12px;
-      bottom:-8px;
+      left:-12px;
+      right:-12px;
+      top:-16px;
+      bottom:-12px;
       background:radial-gradient(circle at 20% 30%,
         var(--section-halo-start) 0%,
         var(--section-halo-mid) 30%,
@@ -459,26 +512,38 @@
       opacity:.45;
       z-index:-1;
       animation:titleHalo 4s ease-in-out infinite;
-      will-change:filter,opacity;
+      will-change:filter,opacity,transform;
+      transform:translate3d(0,var(--parallax-y-half),0);
+      transition:transform .15s linear;
     }
+
     @keyframes titleHalo {
       0%   { filter:blur(32px); opacity:.32; }
       50%  { filter:blur(40px); opacity:.55; }
       100% { filter:blur(32px); opacity:.32; }
     }
 
+    /* underline exactly matches title width now */
     .section-title::after {
       content:"";
       position:absolute;
       left:0;
       bottom:-10px;
       height:4px;
-      width:160px;
+      width:100%;
       border-radius:999px;
       background:linear-gradient(90deg,var(--accent-1) 0%,var(--accent-2) 100%);
       box-shadow:
         0 0 20px rgba(124,58,237,.8),
         0 0 40px rgba(34,211,238,.6);
+    }
+
+    /* boosted glow when title is "in-view" */
+    .section-title.in-view {
+      text-shadow:
+        0 0 12px rgba(255,255,255,.6),
+        0 0 24px rgba(124,58,237,.9),
+        0 0 48px rgba(34,211,238,.7);
     }
 
     .gradient-accent {
@@ -589,13 +654,12 @@
       flex-direction:column;
       gap:8px;
 
-      /* “rim” so card doesn't disappear on dark background */
       box-shadow:
         var(--rim-shadow),
         var(--lift-shadow),
         var(--color-glow-shadow);
 
-      /* entrance anim */
+      /* entrance */
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out forwards;
@@ -607,7 +671,12 @@
       will-change:transform,box-shadow,border-color;
     }
 
-    /* subtle radial tint in desktop only */
+    .service-card {
+      background:var(--panel-alt);
+      border-radius:16px;
+      padding:16px 16px 18px;
+    }
+
     @media(min-width:768px){
       .card-unit {
         background:
@@ -625,13 +694,7 @@
       }
     }
 
-    .service-card {
-      background:var(--panel-alt);
-      border-radius:16px;
-      padding:16px 16px 18px;
-    }
-
-    /* halo "behind" card, parallax-shifted slightly with scroll */
+    /* halo behind card */
     .card-unit::before {
       content:"";
       position:absolute;
@@ -645,12 +708,14 @@
       filter:blur(36px);
       opacity:0;
       pointer-events:none;
-      will-change:opacity,filter,transform;
-      transition:opacity .22s ease,filter .22s ease,transform .22s ease;
-      transform:translate3d(0,var(--parallax-y),0);
+      will-change:opacity,filter;
+      transition:opacity .22s ease,filter .22s ease;
+      /* NOTE: we REMOVED translateY(var(--parallax-y)) here
+         so the glow stays aligned with the card on mobile.
+         This fixes that "glow sits lower than the card" issue. */
     }
 
-    /* desktop hover = brighter pop */
+    /* desktop hover = glow on hover only */
     @media (hover:hover){
       .card-unit:hover {
         transform:translateY(-2px) scale(1.01);
@@ -663,7 +728,11 @@
       }
     }
 
-    /* in-view spotlight (used for desktop AND for the "one at a time" mobile glow) */
+    /* in-view class:
+       - used for MOBILE spotlight (one at a time)
+       - also used for other elements like titles / map / footer
+       desktop cards will NOT auto-glow via JS,
+       so mobile keeps performance spotlight, desktop stays hover-only  */
     .card-unit.in-view {
       transform:translateY(-2px) scale(1.01);
       border-color:var(--accent-1);
@@ -674,7 +743,7 @@
       filter:blur(48px);
     }
 
-    /* stagger entrance */
+    /* stagger entrance anim timing */
     .barber-grid .barber-card:nth-child(1) { animation-delay:.05s; }
     .barber-grid .barber-card:nth-child(2) { animation-delay:.10s; }
     .barber-grid .barber-card:nth-child(3) { animation-delay:.15s; }
@@ -1020,7 +1089,7 @@
         0 0 24px rgba(34,211,238,.6);
     }
 
-    /* RESPONSIVE */
+    /* RESPONSIVE TWEAKS */
     @media (max-width:640px){
       section { padding:60px 20px; }
       .barber-grid   { grid-template-columns:1fr; }
@@ -1064,29 +1133,43 @@
 
   <!-- HEADER -->
   <header class="site-header" id="siteHeader">
-    <div class="wrap nav-shell">
-      <!-- mobile stack -->
-      <div class="header-top">
+    <!-- MOBILE HEADER -->
+    <div class="wrap header-mobile">
+      <div class="mobile-top-row">
         <div class="brand-text">NEXT LEVEL BARBERSHOP</div>
         <a class="call-now-mini" href="tel:+15055036216">📞 (505) 503-6216</a>
       </div>
 
-      <!-- desktop row -->
-      <div class="header-left" style="display:none;">
+      <div class="mobile-nav-row">
+        <nav class="primary-nav-mobile" aria-label="Main">
+          <a class="nav-link" href="#home">HOME</a>
+          <a class="nav-link" href="#barbers">OUR BARBERS</a>
+          <a class="nav-link" href="#reviews">REVIEWS</a>
+          <a class="nav-link" href="#services">SERVICES</a>
+          <a class="nav-link" href="#hours">HOURS</a>
+          <a class="nav-link" href="#contact">CONTACT</a>
+          <a class="nav-link" href="#location">LOCATION</a>
+        </nav>
+      </div>
+    </div>
+
+    <!-- DESKTOP HEADER -->
+    <div class="wrap header-desktop">
+      <div class="desktop-brand-row">
         <div class="brand-desktop">NEXT LEVEL BARBERSHOP</div>
       </div>
 
-      <div class="header-center" style="display:none;">
-        <nav class="primary-nav" aria-label="Main">
-          <a href="#home">HOME</a>
-          <a href="#barbers">OUR BARBERS</a>
-          <a href="#reviews">REVIEWS</a>
-          <a href="#services">SERVICES</a>
-          <a href="#hours">HOURS</a>
-          <a href="#contact">CONTACT</a>
-          <a href="#location">LOCATION</a>
+      <div class="desktop-nav-row">
+        <nav class="primary-nav-desktop" aria-label="Main">
+          <a class="nav-link" href="#home">HOME</a>
+          <a class="nav-link" href="#barbers">OUR BARBERS</a>
+          <a class="nav-link" href="#reviews">REVIEWS</a>
+          <a class="nav-link" href="#services">SERVICES</a>
+          <a class="nav-link" href="#hours">HOURS</a>
+          <a class="nav-link" href="#contact">CONTACT</a>
+          <a class="nav-link" href="#location">LOCATION</a>
+          <a class="nav-call" href="tel:+15055036216">📞 (505) 503-6216</a>
         </nav>
-        <a class="call-now-mini" href="tel:+15055036216">📞 (505) 503-6216</a>
       </div>
     </div>
   </header>
@@ -1094,10 +1177,7 @@
   <!-- HERO -->
   <section id="home" class="band">
     <div class="wrap">
-      <h2 class="section-title">
-        <span class="gradient-accent">Welcome</span>
-        to Next Level BarberShop
-      </h2>
+      <h2 class="section-title glow-animate">Welcome to Next Level BarberShop</h2>
 
       <p class="section-lead">
         Professional cuts, sharp fades, and a clean vibe. Locally owned. Walk-ins welcome. Appointments preferred.
@@ -1127,7 +1207,7 @@
   <!-- BARBERS -->
   <section id="barbers">
     <div class="wrap">
-      <h2 class="section-title">Our Barbers</h2>
+      <h2 class="section-title glow-animate">Our Barbers</h2>
       <p class="section-lead">
         Book directly with your barber or call the shop. Real craft, no gimmicks.
       </p>
@@ -1195,7 +1275,7 @@
   <!-- REVIEWS -->
   <section id="reviews" class="band">
     <div class="wrap">
-      <h2 class="section-title">What People Are Saying</h2>
+      <h2 class="section-title glow-animate">What People Are Saying</h2>
       <p class="section-lead">
         Consistent work, good energy, no nonsense. Rated over 4★ with 100+ reviews. People drive in just for the cut.
       </p>
@@ -1231,141 +1311,141 @@
   <!-- SERVICES -->
   <section id="services">
     <div class="wrap">
-      <h2 class="section-title">Our Services</h2>
+      <h2 class="section-title glow-animate">Our Services</h2>
       <p class="section-lead">
         Straightforward pricing. Detailed / trending styles may cost more depending on design and time.
       </p>
 
       <div class="services-grid">
         <div class="service-card card-unit glow-animate">
-          <div class="service-head">
-            <span>💈 MILITARY / FIRST RESPONDER</span>
-            <span class="price-chip">$28</span>
-          </div>
-          <span class="service-desc">
-            Discounted cut for active military, veterans, police, firefighters, EMTs & first responders.
-          </span>
+            <div class="service-head">
+              <span>💈 MILITARY / FIRST RESPONDER</span>
+              <span class="price-chip">$28</span>
+            </div>
+            <span class="service-desc">
+              Discounted cut for active military, veterans, police, firefighters, EMTs & first responders.
+            </span>
         </div>
 
         <div class="service-card card-unit glow-animate">
-          <div class="service-head">
-            <span>💇‍♂️ HAIRCUT (STANDARD)</span>
-            <span class="price-chip">$35</span>
-          </div>
-          <span class="service-desc">
-            Classic or trending — fades, tapers, or scissor work.
-            <em>Detailed styles:</em> $40–$50+ depending on design / time.
-          </span>
+            <div class="service-head">
+              <span>💇‍♂️ HAIRCUT (STANDARD)</span>
+              <span class="price-chip">$35</span>
+            </div>
+            <span class="service-desc">
+              Classic or trending — fades, tapers, or scissor work.
+              <em>Detailed styles:</em> $40–$50+ depending on design / time.
+            </span>
         </div>
 
         <div class="service-card card-unit glow-animate">
-          <div class="service-head">
-            <span>🧔 HAIRCUT + BEARD</span>
-            <span class="price-chip">$40</span>
-          </div>
-          <span class="service-desc">
-            Full cut plus beard trim / line-up for a sharp, balanced look.
-          </span>
+            <div class="service-head">
+              <span>🧔 HAIRCUT + BEARD</span>
+              <span class="price-chip">$40</span>
+            </div>
+            <span class="service-desc">
+              Full cut plus beard trim / line-up for a sharp, balanced look.
+            </span>
         </div>
 
         <div class="service-card card-unit glow-animate">
-          <div class="service-head">
-            <span>🪒 SKIN FADE / TAPER</span>
-            <span class="price-chip">$40</span>
-          </div>
-          <span class="service-desc">
-            Down to the skin with foil shaver or razor for a clean finish.
-          </span>
+            <div class="service-head">
+              <span>🪒 SKIN FADE / TAPER</span>
+              <span class="price-chip">$40</span>
+            </div>
+            <span class="service-desc">
+              Down to the skin with foil shaver or razor for a clean finish.
+            </span>
         </div>
 
         <div class="service-card card-unit glow-animate">
-          <div class="service-head">
-            <span>🪒🧔 SKIN FADE / TAPER + BEARD</span>
-            <span class="price-chip">$45</span>
-          </div>
-          <span class="service-desc">
-            Skin-level fade / taper plus full beard lineup.
-          </span>
+            <div class="service-head">
+              <span>🪒🧔 SKIN FADE / TAPER + BEARD</span>
+              <span class="price-chip">$45</span>
+            </div>
+            <span class="service-desc">
+              Skin-level fade / taper plus full beard lineup.
+            </span>
         </div>
 
         <div class="service-card card-unit glow-animate">
-          <div class="service-head">
-            <span>🧴 SHAMPOO SERVICE</span>
-            <span class="price-chip">$15</span>
-          </div>
-          <span class="service-desc">
-            Treat yourself — cleanse, set, relax.
-          </span>
+            <div class="service-head">
+              <span>🧴 SHAMPOO SERVICE</span>
+              <span class="price-chip">$15</span>
+            </div>
+            <span class="service-desc">
+              Treat yourself — cleanse, set, relax.
+            </span>
         </div>
 
         <div class="service-card card-unit glow-animate">
-          <div class="service-head">
-            <span>✂️ LONG HAIR (PAST SHOULDERS)</span>
-            <span class="price-chip">$35</span>
-          </div>
-          <span class="service-desc">
-            Extra time & detail for longer lengths.
-          </span>
+            <div class="service-head">
+              <span>✂️ LONG HAIR (PAST SHOULDERS)</span>
+              <span class="price-chip">$35</span>
+            </div>
+            <span class="service-desc">
+              Extra time & detail for longer lengths.
+            </span>
         </div>
 
         <div class="service-card card-unit glow-animate">
-          <div class="service-head">
-            <span>🧔‍♂️ BEARD TRIM / LINE UP</span>
-            <span class="price-chip">$25</span>
-          </div>
-          <span class="service-desc">
-            Clean edges, even bulk, crisp shape.
-          </span>
+            <div class="service-head">
+              <span>🧔‍♂️ BEARD TRIM / LINE UP</span>
+              <span class="price-chip">$25</span>
+            </div>
+            <span class="service-desc">
+              Clean edges, even bulk, crisp shape.
+            </span>
         </div>
 
         <div class="service-card card-unit glow-animate">
-          <div class="service-head">
-            <span>🧼 FACE SHAVE</span>
-            <span class="price-chip">$25</span>
-          </div>
-          <span class="service-desc">
-            Hot towel, lather, and smooth finish.
-          </span>
+            <div class="service-head">
+              <span>🧼 FACE SHAVE</span>
+              <span class="price-chip">$25</span>
+            </div>
+            <span class="service-desc">
+              Hot towel, lather, and smooth finish.
+            </span>
         </div>
 
         <div class="service-card card-unit glow-animate">
-          <div class="service-head">
-            <span>📏 LINE UP ONLY</span>
-            <span class="price-chip">$15</span>
-          </div>
-          <span class="service-desc">
-            Edges only. <em>Beard not included.</em>
-          </span>
+            <div class="service-head">
+              <span>📏 LINE UP ONLY</span>
+              <span class="price-chip">$15</span>
+            </div>
+            <span class="service-desc">
+              Edges only. <em>Beard not included.</em>
+            </span>
         </div>
 
         <div class="service-card card-unit glow-animate">
-          <div class="service-head">
-            <span>🎨 DESIGN ONLY</span>
-            <span class="price-chip">$10</span>
-          </div>
-          <span class="service-desc">
-            Add a freestyle design or bring a reference.
-          </span>
+            <div class="service-head">
+              <span>🎨 DESIGN ONLY</span>
+              <span class="price-chip">$10</span>
+            </div>
+            <span class="service-desc">
+              Add a freestyle design or bring a reference.
+            </span>
         </div>
 
         <div class="service-card card-unit glow-animate">
-          <div class="service-head">
-            <span>🌀 PERM SERVICE</span>
-            <span class="price-chip">$90+</span>
-          </div>
-          <span class="service-desc">
-            Beachy waves to tighter curls — premium products for lasting results.
-          </span>
+            <div class="service-head">
+              <span>🌀 PERM SERVICE</span>
+              <span class="price-chip">$90+</span>
+            </div>
+            <span class="service-desc">
+              Beachy waves to tighter curls — premium products for lasting results.
+            </span>
         </div>
 
         <div class="service-card card-unit glow-animate">
-          <div class="service-head">
-            <span>🪒 HEAD SHAVE</span>
-            <span class="price-chip">$35</span>
-          </div>
-          <span class="service-desc">
-            Clean and polished dome with hot towel finish.
-          </span>
+            <div class="service-head">
+              <span>🪒 HEAD SHAVE</span>
+              <span class="price-chip">$35</span>
+            </div>
+            <span class="service-desc">
+              Clean and polished dome with hot towel finish.
+            </span>
         </div>
       </div>
     </div>
@@ -1374,7 +1454,7 @@
   <!-- HOURS -->
   <section id="hours" class="band">
     <div class="wrap">
-      <h2 class="section-title">Business Hours</h2>
+      <h2 class="section-title glow-animate">Business Hours</h2>
       <p class="section-lead">
         Walk-ins welcome. Appointments preferred. No extra charge after hours.
       </p>
@@ -1396,7 +1476,7 @@
   <!-- CONTACT -->
   <section id="contact">
     <div class="wrap">
-      <h2 class="section-title">Contact</h2>
+      <h2 class="section-title glow-animate">Contact</h2>
 
       <div class="contact-block">
         <p>
@@ -1434,7 +1514,7 @@
   <!-- LOCATION -->
   <section id="location" class="band">
     <div class="wrap">
-      <h2 class="section-title">Find Us</h2>
+      <h2 class="section-title glow-animate">Find Us</h2>
 
       <iframe class="map-frame glow-animate"
         src="https://maps.google.com/maps?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114&t=&z=15&ie=UTF8&iwloc=&output=embed"
@@ -1456,27 +1536,7 @@
 
   <!-- ========= JS ========= -->
   <script>
-    // --- responsive header layout (mobile vs desktop row) ---
-    function configureHeaderLayout(){
-      const isDesktop = window.matchMedia('(min-width:768px)').matches;
-      const headerTop    = document.querySelector('.header-top');
-      const headerLeft   = document.querySelector('.header-left');
-      const headerCenter = document.querySelector('.header-center');
-
-      if(isDesktop){
-        headerTop.style.display    = 'none';
-        headerLeft.style.display   = 'flex';
-        headerCenter.style.display = 'flex';
-      } else {
-        headerTop.style.display    = 'flex';
-        headerLeft.style.display   = 'none';
-        headerCenter.style.display = 'none';
-      }
-    }
-    configureHeaderLayout();
-    window.addEventListener('resize', configureHeaderLayout);
-
-    // --- sticky header hide / show + shadow when scrolling ---
+    // ===== Sticky header hide / show logic =====
     const headerEl = document.getElementById('siteHeader');
     let lastScrollY = window.scrollY;
     let tickingHeader = false;
@@ -1484,14 +1544,14 @@
     function handleScrollHeader(){
       const currentY = window.scrollY;
 
-      // add subtle glow shadow when scrolled
+      // add subtle drop/glow when you scroll down a bit
       if (currentY > 20){
         headerEl.classList.add('scrolled');
       } else {
         headerEl.classList.remove('scrolled');
       }
 
-      // hide header only if scrolling down past a bit
+      // hide header when scrolling down past some point
       if (currentY > lastScrollY && currentY > 120){
         headerEl.classList.add('hide');
       } else {
@@ -1509,13 +1569,16 @@
       }
     }, {passive:true});
 
-    // --- Parallax drift for background signature and halo glow ---
+
+    // ===== Parallax drift for background signature + title halos =====
     const rootStyle = document.documentElement.style;
     let tickingParallax = false;
     function updateParallax(){
       const y = window.scrollY || 0;
-      const parallax = (y * -0.05); // super subtle
+      const parallax = (y * -0.05); // subtle
+      const half = parallax * 0.5;
       rootStyle.setProperty('--parallax-y', parallax.toFixed(2)+'px');
+      rootStyle.setProperty('--parallax-y-half', half.toFixed(2)+'px');
       tickingParallax = false;
     }
     function onScrollParallax(){
@@ -1527,88 +1590,118 @@
     window.addEventListener('scroll', onScrollParallax, {passive:true});
     updateParallax();
 
-    // --- Glow-on-scroll spotlight logic ---
-    // Goal:
-    //   Desktop: multiple cards can glow when in-view.
-    //   Mobile: only ONE at a time glows to save GPU.
+
+    // ===== Glow spotlight on scroll =====
+    // Mobile: ONE active glowing card at a time, centered to viewport.
+    // Desktop: cards only glow on hover now, we don't auto-force glow.
+    // BUT: we still "in-view" glow for non-card elements (titles, map, footer).
     //
-    // Strategy:
-    //   1. We'll use IntersectionObserver to mark what's "visible".
-    //   2. If we're on mobile (<768px), we remove "in-view" class
-    //      from all other cards and only keep it on the most recent entry.
+    // We'll treat anything with .glow-animate that is NOT a .card-unit
+    // as always eligible for in-view glow on all screen sizes.
+    //
+    // We'll treat .card-unit specially:
+    //   - if mobile: we spotlight ONE .card-unit at a time with .in-view
+    //   - if desktop: we do NOT auto-add .in-view to cards.
 
     const isMobileScreen = () => window.matchMedia('(max-width:767px)').matches;
 
-    const glowTargets = Array.from(document.querySelectorAll(
-      '.glow-animate, .card-unit, .hours-item, .map-btn, .map-frame, .landmark-note, footer'
+    const allGlowTargets = Array.from(document.querySelectorAll(
+      '.glow-animate, .hours-item, .map-btn, .map-frame, .landmark-note, footer, .section-title'
     ));
 
-    // Track currently "featured" element on mobile so we can turn others off
-    let currentMobileFeature = null;
+    // separate cards from non-cards
+    const cardTargets = allGlowTargets.filter(el => el.classList.contains('card-unit'));
+    const nonCardTargets = allGlowTargets.filter(el => !el.classList.contains('card-unit'));
 
+    let currentMobileFeature = null; // which card is lit right now on mobile
+
+    // intersection observer:
+    // rootMargin with negative top/bottom pulls the "sweet spot" toward vertical center,
+    // so mobile spotlight lines up with middle of the screen instead of bottom.
     const io = new IntersectionObserver((entries)=>{
-      // we’ll collect visible entries this tick:
+      // Track what became visible this tick
       const visibleNow = [];
 
       entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          visibleNow.push(entry.target);
+        const el = entry.target;
+        const ratio = entry.intersectionRatio;
+
+        if(ratio > 0){
+          visibleNow.push({el,ratio});
         } else {
-          // if leaving view, remove "in-view"
-          entry.target.classList.remove('in-view');
-          if(currentMobileFeature === entry.target){
+          // element left view -> remove glow class
+          el.classList.remove('in-view');
+          if(currentMobileFeature === el){
             currentMobileFeature = null;
           }
         }
       });
 
-      // If nothing became visible, done.
-      if(visibleNow.length === 0){
-        return;
-      }
+      if(visibleNow.length === 0) return;
 
-      if(isMobileScreen()){
-        // mobile spotlight mode:
-        // pick the one with greatest intersection ratio from visibleNow
-        let best = visibleNow[0];
-        for (const el of visibleNow){
-          const ratio = entries.find(e=>e.target===el)?.intersectionRatio || 0;
-          const bestRatio = entries.find(e=>e.target===best)?.intersectionRatio || 0;
-          if(ratio > bestRatio){
-            best = el;
+      // 1. Non-card stuff (section titles, footer, map, hours rows, etc):
+      //    Always glow when in-view, regardless of mobile/desktop.
+      visibleNow.forEach(({el})=>{
+        if(!el.classList.contains('card-unit')){
+          el.classList.add('in-view');
+        }
+      });
+
+      // 2. Cards:
+      //    Mobile -> pick ONE card with highest ratio.
+      //    Desktop -> don't auto glow cards here.
+      const mobile = isMobileScreen();
+      const visibleCards = visibleNow.filter(v => v.el.classList.contains('card-unit'));
+
+      if(mobile && visibleCards.length){
+        // pick the card with the highest intersection ratio
+        let best = visibleCards[0];
+        for (const v of visibleCards){
+          if(v.ratio > best.ratio){
+            best = v;
           }
         }
-        // remove glow from previous
-        if(currentMobileFeature && currentMobileFeature !== best){
+
+        // remove in-view from previous active
+        if(currentMobileFeature && currentMobileFeature !== best.el){
           currentMobileFeature.classList.remove('in-view');
         }
-        // set new
-        best.classList.add('in-view');
-        currentMobileFeature = best;
-      } else {
-        // desktop / tablet mode:
-        // any card that popped into view just gets in-view
-        visibleNow.forEach(el=>{
-          el.classList.add('in-view');
+        // set new mobile spotlight
+        best.el.classList.add('in-view');
+        currentMobileFeature = best.el;
+      } else if(!mobile){
+        // desktop: remove auto-glow from cards (we rely on hover)
+        visibleCards.forEach(v=>{
+          v.el.classList.remove('in-view');
         });
+        currentMobileFeature = null;
       }
     },{
       root:null,
-      threshold:[0.35,0.6] // use 0.6 to know "most visible" on mobile
+      // pull activation zone toward center of viewport:
+      // top -30%, bottom -30% = you basically have to be in the middle area
+      rootMargin:"-30% 0px -30% 0px",
+      threshold:[0.5,0.75] // need decent amount visible to count
     });
 
-    glowTargets.forEach(el=>io.observe(el));
+    allGlowTargets.forEach(el=>io.observe(el));
 
-    // Also listen for resize: if you resize from desktop -> mobile,
-    // clear multi-glow and re-spotlight.
+    // On resize: if we switch between mobile <-> desktop,
+    // clean up card glows so desktop doesn't leave cards stuck lit.
     window.addEventListener('resize',()=>{
       if(isMobileScreen()){
-        // clear all but currentMobileFeature
-        glowTargets.forEach(el=>{
-          if(el !== currentMobileFeature){
-            el.classList.remove('in-view');
+        // keep current mobile feature as-is, clear others
+        cardTargets.forEach(card=>{
+          if(card !== currentMobileFeature){
+            card.classList.remove('in-view');
           }
         });
+      } else {
+        // desktop -> remove in-view from all cards
+        cardTargets.forEach(card=>{
+          card.classList.remove('in-view');
+        });
+        currentMobileFeature = null;
       }
     });
   </script>
