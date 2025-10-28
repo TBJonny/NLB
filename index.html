@@ -37,8 +37,7 @@
 
       --marquee-bg:rgba(0,0,0,.4);
 
-      /* scroll motion vars (updated by JS) */
-      --bobble-y:0px;
+      /* scroll motion vars (JS updates this one only now) */
       --parallax-y:0px;
     }
 
@@ -100,9 +99,6 @@
       padding:0 20px;
       position:relative;
       z-index:3;
-      transform:translate3d(0,var(--bobble-y),0);
-      will-change:transform;
-      transition:transform .18s ease-out;
     }
 
     /* ============= BACKGROUND GLOW BRAND ============= */
@@ -124,7 +120,7 @@
       transition:transform .15s linear, filter .15s linear;
     }
 
-    /* boost glow on mobile to make sure you SEE it behind the content */
+    /* boost glow on mobile */
     @media (max-width:640px){
       .brand-bg {
         opacity:0.22;
@@ -323,10 +319,6 @@
       position:relative;
       z-index:2;
       scroll-margin-top:90px;
-
-      transform:translate3d(0,var(--bobble-y),0);
-      will-change:transform;
-      transition:transform .18s ease-out;
     }
 
     section.band {
@@ -337,7 +329,14 @@
       border-bottom:1px solid var(--border-subtle);
     }
 
+    /* ============= SECTION TITLES =============
+       special sauce for the “this section matters” vibe:
+       - Gradient text bits already exist
+       - Add neon-ish halo pulse behind
+       - Add gradient bar underline
+    */
     .section-title {
+      position:relative;
       margin:0 0 28px;
       text-transform:uppercase;
       font-weight:900;
@@ -349,6 +348,44 @@
       flex-wrap:wrap;
       row-gap:.4em;
       column-gap:.4em;
+      z-index:2;
+    }
+
+    /* soft halo behind text */
+    .section-title::before {
+      content:"";
+      position:absolute;
+      left:-8px;
+      right:-8px;
+      top:-12px;
+      bottom:-8px;
+      background:radial-gradient(circle at 20% 30%,
+        rgba(124,58,237,.32) 0%,
+        rgba(34,211,238,.18) 30%,
+        transparent 70%);
+      filter:blur(28px);
+      opacity:.35;
+      z-index:-1;
+      animation:titleHalo 4s ease-in-out infinite;
+    }
+    @keyframes titleHalo {
+      0%   { filter:blur(28px); opacity:.28; }
+      50%  { filter:blur(36px); opacity:.45; }
+      100% { filter:blur(28px); opacity:.28; }
+    }
+
+    /* underline bar */
+    .section-title::after {
+      content:"";
+      position:absolute;
+      left:0;
+      right:auto;
+      bottom:-10px;
+      height:4px;
+      width:140px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--accent-1) 0%,var(--accent-2) 100%);
+      box-shadow:0 0 16px rgba(124,58,237,.6),0 0 32px rgba(34,211,238,.45);
     }
 
     .gradient-accent {
@@ -360,7 +397,7 @@
 
     .section-lead {
       max-width:740px;
-      margin:0 0 16px;
+      margin:20px 0 16px; /* push down slightly now that underline exists */
       color:var(--text-dim);
       font-size:15px;
       line-height:1.5;
@@ -433,9 +470,6 @@
     .services-grid {
       display:grid;
       gap:16px;
-      will-change:transform;
-      transform:translate3d(0,var(--bobble-y),0);
-      transition:transform .18s ease-out;
     }
 
     .barber-grid   { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
@@ -459,57 +493,67 @@
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out forwards;
 
-      /* new: smooth transitions for glow/hover/mobile-scroll */
       transition:
-        box-shadow .25s ease,
-        border-color .25s ease,
-        transform .25s ease;
+        box-shadow .22s ease,
+        border-color .22s ease,
+        transform .22s ease;
       will-change:transform,box-shadow,border-color;
     }
 
-    /* services card: slightly different bg */
+    /* halo layer that we’ll brighten when active */
+    .card-unit::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      background:radial-gradient(circle at 20% 20%,
+        rgba(124,58,237,.32) 0%,
+        rgba(34,211,238,.18) 40%,
+        transparent 70%);
+      filter:blur(32px);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .22s ease,filter .22s ease;
+    }
+
+    /* services card look */
     .service-card {
       background:var(--panel-alt);
       border-radius:16px;
       padding:16px 16px 18px;
     }
 
-    /* desktop hover glow effect (same vibe as before) */
-    .card-unit::before {
-      content:"";
-      position:absolute;
-      inset:0;
-      background:radial-gradient(circle at 20% 20%,rgba(124,58,237,.28),transparent 60%);
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .2s ease;
-    }
-
+    /* desktop hover glow stays premium */
     @media (hover:hover){
       .card-unit:hover {
-        transform:translateY(-3px) scale(1.015);
+        transform:translateY(-2px) scale(1.01);
         border-color:var(--accent-1);
-        box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
+        box-shadow:
+          0 20px 40px rgba(0,0,0,.75),
+          0 0 32px rgba(124,58,237,.4);
       }
       .card-unit:hover::before {
-        opacity:.4;
+        opacity:.5;
+        filter:blur(40px);
       }
     }
 
-    /* MOBILE scroll glow:
-       JS adds .in-view to the card on mobile when it's onscreen.
-       That class basically forces the "hover" look even without touching it.
-    */
+    /* MOBILE / SCROLL glow:
+       JS toggles .in-view, making it look "hovered"
+       (lighter than before so it’s cheaper to render) */
     .card-unit.in-view {
-      transform:translateY(-3px) scale(1.015);
+      transform:translateY(-2px) scale(1.01);
       border-color:var(--accent-1);
-      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
+      box-shadow:
+        0 16px 28px rgba(0,0,0,.6),
+        0 0 24px rgba(124,58,237,.35);
     }
     .card-unit.in-view::before {
-      opacity:.4;
+      opacity:.45;
+      filter:blur(36px);
     }
 
-    /* stagger each grid for entrance timing */
+    /* stagger entrance timing */
     .barber-grid .barber-card:nth-child(1) { animation-delay:.05s; }
     .barber-grid .barber-card:nth-child(2) { animation-delay:.10s; }
     .barber-grid .barber-card:nth-child(3) { animation-delay:.15s; }
@@ -584,7 +628,9 @@
       box-shadow:0 10px 20px rgba(0,0,0,.6);
     }
     .btn-primary:hover {
-      box-shadow:0 20px 40px rgba(0,0,0,.8),0 0 24px rgba(124,58,237,.5);
+      box-shadow:
+        0 20px 40px rgba(0,0,0,.8),
+        0 0 24px rgba(124,58,237,.5);
       transform:translate3d(0,-1px,0) scale(1.02);
     }
     .btn-outline {
@@ -670,10 +716,11 @@
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out forwards;
+
       transition:
-        box-shadow .25s ease,
-        border-color .25s ease,
-        transform .25s ease;
+        box-shadow .22s ease,
+        border-color .22s ease,
+        transform .22s ease;
       will-change:transform,box-shadow,border-color;
     }
     .hours-grid .hours-item:nth-child(1){animation-delay:.05s;}
@@ -684,11 +731,12 @@
     .hours-grid .hours-item:nth-child(6){animation-delay:.20s;}
     .hours-grid .hours-item:nth-child(7){animation-delay:.23s;}
 
-    /* also allow glow on hours cards */
     .hours-item.in-view {
-      transform:translateY(-3px) scale(1.015);
+      transform:translateY(-2px) scale(1.01);
       border-color:var(--accent-1);
-      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
+      box-shadow:
+        0 16px 28px rgba(0,0,0,.6),
+        0 0 24px rgba(124,58,237,.35);
     }
 
     .after-hours {
@@ -734,10 +782,11 @@
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out forwards;
+
       transition:
-        box-shadow .25s ease,
-        border-color .25s ease,
-        transform .25s ease;
+        box-shadow .22s ease,
+        border-color .22s ease,
+        transform .22s ease;
     }
     .map-btn.google {
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
@@ -748,9 +797,11 @@
     .map-links .map-btn:nth-child(2){animation-delay:.1s;}
 
     .map-btn.in-view {
-      transform:translateY(-3px) scale(1.015);
+      transform:translateY(-2px) scale(1.01);
       border-color:var(--accent-1);
-      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
+      box-shadow:
+        0 16px 28px rgba(0,0,0,.6),
+        0 0 24px rgba(124,58,237,.35);
     }
 
     .map-frame {
@@ -763,15 +814,18 @@
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out .15s forwards;
+
       transition:
-        box-shadow .25s ease,
-        border-color .25s ease,
-        transform .25s ease;
+        box-shadow .22s ease,
+        border-color .22s ease,
+        transform .22s ease;
     }
     .map-frame.in-view {
-      transform:translateY(-3px) scale(1.015);
+      transform:translateY(-2px) scale(1.01);
       border-color:var(--accent-1);
-      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
+      box-shadow:
+        0 16px 28px rgba(0,0,0,.6),
+        0 0 24px rgba(124,58,237,.35);
     }
 
     .landmark-note {
@@ -783,14 +837,16 @@
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out .22s forwards;
+
       transition:
-        box-shadow .25s ease,
-        border-color .25s ease,
-        transform .25s ease;
+        text-shadow .22s ease,
+        transform .22s ease;
     }
     .landmark-note.in-view {
-      transform:translateY(-3px) scale(1.015);
-      text-shadow:0 0 16px rgba(124,58,237,.6),0 0 32px rgba(34,211,238,.5);
+      transform:translateY(-2px) scale(1.01);
+      text-shadow:
+        0 0 12px rgba(124,58,237,.6),
+        0 0 24px rgba(34,211,238,.5);
     }
 
     /* FOOTER */
@@ -807,6 +863,16 @@
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out .3s forwards;
+
+      transition:
+        text-shadow .22s ease,
+        transform .22s ease;
+    }
+    footer.in-view {
+      transform:translateY(-2px) scale(1.01);
+      text-shadow:
+        0 0 12px rgba(124,58,237,.6),
+        0 0 24px rgba(34,211,238,.5);
     }
 
     /* RESPONSIVE TWEAKS */
@@ -825,7 +891,8 @@
     @media (prefers-reduced-motion:reduce){
       .brand-text,
       .brand-bg-line1,
-      .hero-marquee-track {
+      .hero-marquee-track,
+      .section-title::before {
         animation:none !important;
       }
 
@@ -963,7 +1030,7 @@
 
         <article class="barber-card card-unit glow-animate">
           <p class="barber-name">TAYLOR</p>
-          <p class="barber-bio">Clean blends, subtle structure, quiet precision.</p>
+          <p class="barber-bio">Clean blends. Subtle structure. Quiet precision.</p>
           <div class="cta-row">
             <a class="btn btn-primary" href="https://booksy.com/en-us/dl/show-business/1592260" target="_blank" rel="noopener">Book w/ Taylor</a>
           </div>
@@ -1239,62 +1306,50 @@
     // ------- Header hide/show on scroll -------
     const header = document.getElementById('siteHeader');
     let lastScrollY = window.scrollY;
-    let ticking = false;
+    let tickingHeader = false;
 
-    function handleScrollFrame(){
+    function handleScrollHeader(){
       const currentY = window.scrollY;
       if (currentY > lastScrollY && currentY > 80){
-        // scrolling down
-        header.classList.add('hide');
+        header.classList.add('hide');   // scrolling down
       } else {
-        // scrolling up
-        header.classList.remove('hide');
+        header.classList.remove('hide'); // scrolling up
       }
       lastScrollY = currentY;
-      ticking = false;
+      tickingHeader = false;
     }
 
     window.addEventListener('scroll',()=>{
-      if(!ticking){
-        window.requestAnimationFrame(handleScrollFrame);
-        ticking=true;
+      if(!tickingHeader){
+        window.requestAnimationFrame(handleScrollHeader);
+        tickingHeader=true;
       }
     }, {passive:true});
 
-    // ------- Bobble + Parallax background drift -------
+    // ------- Parallax background drift (cheap only-one-element transform) -------
     const rootStyle = document.documentElement.style;
     let tickingParallax = false;
 
-    function updateScrollEffects(){
+    function updateParallax(){
       const y = window.scrollY || 0;
-
-      // tiny float on content
-      const bobble = Math.sin(y * 0.02) * 2; // +/-2px
-      rootStyle.setProperty('--bobble-y', bobble.toFixed(2)+'px');
-
-      // slow parallax drift of BIG NEXT LEVEL BARBERSHOP text
       const parallax = (y * -0.05);
       rootStyle.setProperty('--parallax-y', parallax.toFixed(2)+'px');
-
       tickingParallax = false;
     }
 
     function onScrollParallax(){
       if(!tickingParallax){
         tickingParallax = true;
-        window.requestAnimationFrame(updateScrollEffects);
+        window.requestAnimationFrame(updateParallax);
       }
     }
 
     window.addEventListener('scroll', onScrollParallax, {passive:true});
-    updateScrollEffects(); // set initial position on load
+    updateParallax(); // initial
 
-    // ------- Mobile scroll glow / "hover while in view" -------
-    // We watch cards/blocks with .glow-animate and when they are in view,
-    // we add .in-view so they light up (border + glow + lift).
-    const glowTargets = document.querySelectorAll('.glow-animate');
+    // ------- Scroll glow observer (mobile + desktop "pop in") -------
+    const glowTargets = document.querySelectorAll('.glow-animate, .hours-item, .map-btn, .map-frame, .landmark-note, footer');
 
-    // Use an intersection observer so it reacts as you scroll.
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -1305,7 +1360,7 @@
       });
     },{
       root:null,
-      threshold:0.35 // ~35% visible
+      threshold:0.35
     });
 
     glowTargets.forEach(el=>io.observe(el));
