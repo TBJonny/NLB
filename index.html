@@ -7,7 +7,7 @@
 <title>Next Level Barbershop • Albuquerque, NM</title>
 
 <style>
-/* RESET / BASE */
+/* ---------- RESET ---------- */
 *,
 *::before,
 *::after {
@@ -24,22 +24,24 @@ body {
     "Helvetica Neue", Arial, sans-serif;
   min-height: 100%;
   scroll-behavior: smooth;
+  font-size: 16px;
+  line-height: 1.4;
 }
 
-/* THEME TOKENS */
+/* ---------- THEME TOKENS (DARK DEFAULT) ---------- */
 :root {
   /* page bg gradient */
   --page-bg-start: #070b16;
   --page-bg-end: #0f1c2a;
 
-  /* frosted cards */
+  /* glass cards */
   --card-bg: rgba(10, 13, 22, 0.6);
   --card-border: rgba(255,255,255,0.07);
   --card-shadow: 0 20px 40px rgba(0,0,0,.8);
   --card-text-main: #dbe4f7;
   --card-text-dim: #9aa3b6;
 
-  /* nav + pills */
+  /* nav / pills / buttons */
   --pill-bg: rgba(15,15,20,0.6);
   --pill-border: rgba(255,255,255,0.12);
   --pill-text: #ffffff;
@@ -53,10 +55,24 @@ body {
   --accent-left: #8b6bff;
   --accent-right: #49c9ff;
 
-  /* spacing */
-  --section-gap: clamp(2.5rem, 2vw + 2rem, 3.5rem);
+  /* header bar glass */
+  --header-bg: rgba(10,10,20,0.7);
+  --header-border: rgba(255,255,255,0.08);
+  --header-shadow: 0 20px 40px rgba(0,0,0,.8);
+  --header-text: #fff;
 
-  /* radii */
+  /* little chips */
+  --chip-bg: rgba(15,15,20,0.6);
+  --chip-border: rgba(255,255,255,0.15);
+  --chip-text: #fff;
+
+  /* subcard/ticker box */
+  --subcard-bg: rgba(0,0,0,0.4);
+  --subcard-border: rgba(255,255,255,0.12);
+  --subcard-text: #fff;
+
+  /* spacing + radius */
+  --section-gap: clamp(2.5rem, 2vw + 2rem, 3.5rem);
   --radius-xl: 1.25rem;
   --radius-lg: 1rem;
   --radius-pill: 999px;
@@ -65,25 +81,9 @@ body {
   --lift-translate-y: 16px;
   --lift-scale: 0.99;
   --lift-shadow: 0 24px 48px rgba(0,0,0,.6);
-
-  /* header bar */
-  --header-bg: rgba(10,10,20,0.7);
-  --header-border: rgba(255,255,255,0.08);
-  --header-shadow: 0 20px 40px rgba(0,0,0,.8);
-  --header-text: #fff;
-
-  /* chips / small badges */
-  --chip-bg: rgba(15,15,20,0.6);
-  --chip-border: rgba(255,255,255,0.15);
-  --chip-text: #fff;
-
-  /* ticker box */
-  --subcard-bg: rgba(0,0,0,0.4);
-  --subcard-border: rgba(255,255,255,0.12);
-  --subcard-text: #fff;
 }
 
-/* Light mode */
+/* ---------- LIGHT MODE ---------- */
 @media (prefers-color-scheme: light) {
   :root {
     --page-bg-start: #f9f8ff;
@@ -92,7 +92,6 @@ body {
     --card-bg: rgba(255,255,255,0.6);
     --card-border: rgba(0,0,30,0.08);
     --card-shadow: 0 16px 32px rgba(0,0,0,.08);
-
     --card-text-main: #1a1b23;
     --card-text-dim: #4a4d5c;
 
@@ -110,7 +109,6 @@ body {
     --header-bg: rgba(255,255,255,0.6);
     --header-border: rgba(0,0,30,0.07);
     --header-shadow: 0 16px 32px rgba(0,0,0,.15);
-
     --header-text: #1a1b23;
 
     --chip-bg: rgba(255,255,255,0.75);
@@ -123,7 +121,7 @@ body {
   }
 }
 
-/* PAGE BACKDROP */
+/* ---------- PAGE BACKGROUND ---------- */
 body {
   background:
     radial-gradient(circle at 20% 20%, rgba(90,60,255,0.18) 0%, transparent 60%),
@@ -134,12 +132,11 @@ body {
   padding-bottom: 4rem;
   font-size: 1rem;
 }
-
 @media(min-width:768px){
   body{font-size:1.05rem;}
 }
 
-/* WRAPPER */
+/* ---------- WRAPPER ---------- */
 .wrapper {
   max-width: 1280px;
   width: 100%;
@@ -147,23 +144,19 @@ body {
   padding-inline: clamp(1rem,2vw,2rem);
 }
 
-/* UTIL */
-.page-section {
-  margin-top: var(--section-gap);
-}
+/* ---------- EASY UTILS ---------- */
+.page-section { margin-top: var(--section-gap); }
 
-.flex {
-  display:flex;
-}
-.flex-wrap {flex-wrap:wrap;}
-.gap-sm {gap:.5rem;}
-.gap-md {gap:1rem;}
-.items-center{align-items:center;}
-.justify-center{justify-content:center;}
-.flex-col{flex-direction:column;}
-.center{text-align:center;}
+.flex { display:flex; }
+.flex-col { flex-direction:column; }
+.flex-wrap { flex-wrap:wrap; }
+.items-center { align-items:center; }
+.justify-center { justify-content:center; }
+.gap-sm { gap:.5rem; }
+.gap-md { gap:1rem; }
+.center { text-align:center; }
 
-/* STICKY HEADER */
+/* ---------- STICKY HEADER ---------- */
 .site-header-wrapper {
   position: sticky;
   top: 0;
@@ -175,10 +168,6 @@ body {
   transition: all .2s ease;
 }
 
-.site-header-wrapper.shrink {
-  padding-block: .4rem .6rem;
-}
-
 .site-header {
   display:flex;
   flex-direction:column;
@@ -188,6 +177,10 @@ body {
   text-align:center;
   padding-block: .75rem 1rem;
   gap:.75rem;
+}
+
+.site-header-wrapper.shrink {
+  padding-block: .4rem .6rem;
 }
 
 .header-topline {
@@ -248,13 +241,13 @@ body {
   box-shadow:0 8px 16px rgba(0,0,0,.4);
   transition:all .15s ease;
 }
-.nav-pill:focus,
-.nav-pill:hover {
+.nav-pill:hover,
+.nav-pill:focus {
   box-shadow: var(--pill-hover-shadow);
   transform: translateY(-2px) scale(1.03);
 }
 
-/* CARD SHELL */
+/* ---------- CARD SHELL ---------- */
 .section-card {
   position: relative;
   background: var(--card-bg);
@@ -272,7 +265,7 @@ body {
   z-index:2;
 }
 
-/* HEADLINES */
+/* ---------- HEADLINES ---------- */
 .section-eyebrow {
   font-size: .8rem;
   font-weight:500;
@@ -282,6 +275,7 @@ body {
   text-align:center;
   margin-bottom:.5rem;
 }
+
 .section-headline {
   text-align:center;
   color:var(--headline-color);
@@ -295,6 +289,7 @@ body {
 @media(min-width:768px){
   .section-headline{font-size:clamp(1.5rem,1vw + 1.2rem,2.2rem);}
 }
+
 .headline-underline {
   width: clamp(140px,20vw,220px);
   height:4px;
@@ -305,6 +300,7 @@ body {
   box-shadow:0 0 16px rgba(120,100,255,.4),
              0 0 24px rgba(0,200,255,.4);
 }
+
 .section-subtext {
   text-align:center;
   color:var(--card-text-main);
@@ -319,7 +315,7 @@ body {
   .section-subtext{font-size:1.1rem;}
 }
 
-/* WELCOME BADGES / TICKER */
+/* ---------- BADGE ROWS / TICKER ---------- */
 .badge-row {
   display:flex;
   flex-wrap:wrap;
@@ -327,6 +323,7 @@ body {
   gap:.75rem;
   margin-bottom:1rem;
 }
+
 .badge-chip {
   background:var(--chip-bg);
   border:1px solid var(--chip-border);
@@ -357,6 +354,7 @@ body {
   font-weight:500;
   text-align:center;
 }
+
 .ticker-line {
   display:flex;
   flex-wrap:wrap;
@@ -371,7 +369,7 @@ body {
   font-size:.9rem;
 }
 
-/* BARBERS */
+/* ---------- BARBERS ---------- */
 .barbers-wrapper {
   display:grid;
   grid-template-columns:1fr;
@@ -396,6 +394,7 @@ body {
   flex-direction:column;
   gap:.75rem;
 }
+
 .barber-name {
   font-size:1rem;
   font-weight:600;
@@ -403,11 +402,13 @@ body {
   text-shadow:var(--headline-shadow);
   letter-spacing:.04em;
 }
+
 .barber-desc {
   font-size:.9rem;
   line-height:1.4;
   color:var(--card-text-main);
 }
+
 .call-btn {
   align-self:flex-start;
   background: var(--pill-bg);
@@ -430,7 +431,7 @@ body {
   transform: translateY(-2px) scale(1.03);
 }
 
-/* REVIEWS */
+/* ---------- REVIEWS ---------- */
 .reviews-grid {
   display:grid;
   grid-template-columns:1fr;
@@ -440,6 +441,7 @@ body {
 @media(min-width:800px){
   .reviews-grid {grid-template-columns:1fr 1fr 1fr;}
 }
+
 .review-card {
   background: var(--card-bg);
   border:1px solid var(--card-border);
@@ -450,6 +452,7 @@ body {
   font-size:.9rem;
   line-height:1.45;
 }
+
 .review-head {
   font-weight:600;
   color:var(--headline-color);
@@ -462,25 +465,28 @@ body {
   align-items:center;
   gap:.5rem;
 }
+
 .review-stars {
   font-size:.8rem;
   font-weight:500;
   color:var(--card-text-main);
   opacity:.8;
 }
+
 .review-body {
   color:var(--card-text-main);
   font-size:.9rem;
   line-height:1.45;
   margin-bottom:.5rem;
 }
+
 .review-name {
   font-size:.8rem;
   font-weight:500;
   color:var(--card-text-dim);
 }
 
-/* SERVICES */
+/* ---------- SERVICES ---------- */
 .services-grid {
   display:grid;
   grid-template-columns:1fr;
@@ -490,6 +496,7 @@ body {
 @media(min-width:800px){
   .services-grid {grid-template-columns:1fr 1fr;}
 }
+
 .service-card {
   background: var(--card-bg);
   border:1px solid var(--card-border);
@@ -505,7 +512,9 @@ body {
   font-size:.9rem;
   line-height:1.4;
 }
+
 .service-left {max-width:75%;}
+
 .service-topline {
   font-weight:600;
   color:var(--headline-color);
@@ -521,11 +530,13 @@ body {
   font-size:1rem;
   line-height:1;
 }
+
 .service-desc {
   font-size:.85rem;
   color:var(--card-text-main);
   line-height:1.4;
 }
+
 .service-price {
   font-size:.8rem;
   font-weight:500;
@@ -538,7 +549,7 @@ body {
   box-shadow:0 8px 16px rgba(0,0,0,.6);
 }
 
-/* HOURS / CONTACT / LOCATION */
+/* ---------- HOURS / CONTACT / LOCATION ---------- */
 .info-flex {
   display:flex;
   flex-direction:column;
@@ -552,6 +563,7 @@ body {
     justify-content:space-between;
   }
 }
+
 .hours-card,
 .contact-card {
   flex:1;
@@ -565,6 +577,7 @@ body {
   line-height:1.45;
   min-width:0;
 }
+
 .subheadline {
   font-weight:600;
   color:var(--headline-color);
@@ -573,11 +586,13 @@ body {
   font-size:.9rem;
   margin-bottom:.5rem;
 }
+
 .hours-list {
   font-size:.85rem;
   line-height:1.5;
   color:var(--card-text-main);
 }
+
 .contact-line {
   font-size:.85rem;
   line-height:1.5;
@@ -585,6 +600,7 @@ body {
   color:var(--card-text-main);
   word-break:break-word;
 }
+
 .map-card {
   flex:1;
   background: var(--card-bg);
@@ -594,13 +610,14 @@ body {
   padding:1rem;
   min-width:0;
 }
+
 .map-frame-wrapper {
   border-radius: var(--radius-lg);
   overflow:hidden;
   border:1px solid var(--card-border);
   box-shadow:0 12px 24px rgba(0,0,0,.7);
   background:#000;
-  aspect-ratio: 16/11; /* squarer rect */
+  aspect-ratio: 16/11; /* squarer rectangle */
 }
 .map-frame-wrapper iframe {
   width:100%;
@@ -608,6 +625,7 @@ body {
   border:0;
   display:block;
 }
+
 .map-buttons {
   display:flex;
   flex-wrap:wrap;
@@ -615,6 +633,7 @@ body {
   gap:.75rem;
   margin-top:1rem;
 }
+
 .map-btn {
   background: var(--pill-bg);
   border:1px solid var(--pill-border);
@@ -637,7 +656,7 @@ body {
   transform:translateY(-2px) scale(1.03);
 }
 
-/* FOOTER */
+/* ---------- FOOTER ---------- */
 .footer {
   text-align:center;
   color:var(--card-text-dim);
@@ -646,7 +665,7 @@ body {
   margin-top:var(--section-gap);
 }
 
-/* SCROLL REVEAL */
+/* ---------- SCROLL REVEAL ---------- */
 .reveal-section {
   opacity:0;
   transform: translateY(var(--lift-translate-y)) scale(var(--lift-scale));
@@ -665,7 +684,7 @@ body {
   box-shadow: var(--lift-shadow);
 }
 
-/* anchor offset for sticky header */
+/* anchor offset so sticky header doesn't cover anchor targets */
 [id] { scroll-margin-top: 6rem; }
 .first-section-fix { scroll-margin-top: 6rem; }
 </style>
@@ -673,7 +692,7 @@ body {
 
 <body>
 
-<!-- HEADER -->
+<!-- ===== HEADER / NAV ===== -->
 <header class="site-header-wrapper" id="siteHeader">
   <div class="wrapper site-header">
 
@@ -700,7 +719,7 @@ body {
 
 <main class="wrapper">
 
-  <!-- WELCOME / HERO -->
+  <!-- ===== WELCOME / HERO ===== -->
   <section id="welcome" class="page-section first-section-fix reveal-section section-card">
     <div class="section-card-content">
 
@@ -715,14 +734,14 @@ body {
         Payment method can vary by barber — just confirm when you book.
       </p>
 
-      <!-- badges row 1 (no emojis here) -->
+      <!-- badges row 1 (no emojis) -->
       <div class="badge-row">
         <div class="badge-chip">Locally Owned</div>
         <div class="badge-chip">Walk-Ins Welcome</div>
         <div class="badge-chip">Appointments Preferred</div>
       </div>
 
-      <!-- badges row 2 (EMOJIS ADDED BACK HERE) -->
+      <!-- badges row 2 (EMOJIS ON PAYMENT METHODS) -->
       <div class="badge-row">
         <div class="badge-chip">💵 Cash</div>
         <div class="badge-chip">🍎 Apple&nbsp;Pay</div>
@@ -730,7 +749,7 @@ body {
         <div class="badge-chip">📲 Venmo</div>
       </div>
 
-      <!-- location / welcome ticker (no emojis now) -->
+      <!-- location / info ticker -->
       <div class="ticker-box">
         <div class="ticker-line">
           <div class="ticker-item">Albuquerque, NM</div>
@@ -745,7 +764,7 @@ body {
     </div>
   </section>
 
-  <!-- BARBERS -->
+  <!-- ===== BARBERS ===== -->
   <section id="barbers" class="page-section reveal-section section-card">
     <div class="section-card-content">
 
@@ -820,7 +839,7 @@ body {
     </div>
   </section>
 
-  <!-- REVIEWS -->
+  <!-- ===== REVIEWS ===== -->
   <section id="reviews" class="page-section reveal-section section-card">
     <div class="section-card-content">
 
@@ -881,7 +900,7 @@ body {
     </div>
   </section>
 
-  <!-- SERVICES (EMOJIS STAY HERE) -->
+  <!-- ===== SERVICES ===== -->
   <section id="services" class="page-section reveal-section section-card">
     <div class="section-card-content">
 
@@ -1038,7 +1057,7 @@ body {
     </div>
   </section>
 
-  <!-- HOURS / CONTACT / LOCATION -->
+  <!-- ===== HOURS / CONTACT / LOCATION ===== -->
   <section id="hours" class="page-section reveal-section section-card">
     <div class="section-card-content">
 
@@ -1082,7 +1101,7 @@ body {
           <div class="subheadline">Find Us</div>
 
           <div class="map-frame-wrapper">
-            <!-- Update this src with your real embed URL if needed -->
+            <!-- replace src with your live embed if needed -->
             <iframe
               loading="lazy"
               allowfullscreen
@@ -1111,7 +1130,7 @@ body {
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div>© Next Level Barbershop • Albuquerque, NM</div>
     <div style="opacity:.7;">Walk-ins welcome • Appointments preferred</div>
@@ -1119,7 +1138,7 @@ body {
 
 </main>
 
-<!-- INTERACTION SCRIPT -->
+<!-- ===== JS: SHRINK HEADER + SECTION POP-IN ===== -->
 <script>
 // shrink header on scroll
 const headerEl = document.getElementById('siteHeader');
@@ -1132,14 +1151,14 @@ function handleHeader() {
 }
 window.addEventListener('scroll', handleHeader, { passive: true });
 
-// section pop-in / settle
+// scroll reveal per section
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
       } else {
-        // remove again so each section "pops" again
+        // remove so it can "pop" again next time you scroll back
         entry.target.classList.remove('revealed');
       }
     });
