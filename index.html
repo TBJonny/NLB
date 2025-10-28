@@ -37,7 +37,7 @@
 
       --marquee-bg:rgba(0,0,0,.4);
 
-      /* live scroll motion vars (JS updates these) */
+      /* scroll motion vars (updated by JS) */
       --bobble-y:0px;
       --parallax-y:0px;
     }
@@ -116,10 +116,22 @@
       pointer-events:none;
       user-select:none;
       opacity:0.14;
-      filter:drop-shadow(0 0 8px rgba(124,58,237,.6)) drop-shadow(0 0 24px rgba(34,211,238,.4));
+      filter:
+        drop-shadow(0 0 8px rgba(124,58,237,.6))
+        drop-shadow(0 0 24px rgba(34,211,238,.4));
       padding:0 16px;
       will-change:transform,filter;
-      transition:transform .15s linear;
+      transition:transform .15s linear, filter .15s linear;
+    }
+
+    /* boost glow on mobile to make sure you SEE it behind the content */
+    @media (max-width:640px){
+      .brand-bg {
+        opacity:0.22;
+        filter:
+          drop-shadow(0 0 10px rgba(124,58,237,.8))
+          drop-shadow(0 0 32px rgba(34,211,238,.55));
+      }
     }
 
     @media (prefers-color-scheme: light){
@@ -259,6 +271,11 @@
       box-shadow:0 10px 20px rgba(0,0,0,.6);
       border:0;
       display:inline-block;
+      transition:box-shadow .18s ease,transform .18s ease;
+    }
+    .call-now:hover {
+      box-shadow:0 20px 40px rgba(0,0,0,.8),0 0 24px rgba(124,58,237,.5);
+      transform:translate3d(0,-1px,0) scale(1.03);
     }
 
     nav.primary-nav {
@@ -289,7 +306,6 @@
       transform:translate3d(0,-1px,0) scale(1.03);
     }
 
-    /* small screens: nav wraps naturally, button first */
     @media (max-width:480px){
       nav.primary-nav {
         flex:1 1 100%;
@@ -308,7 +324,6 @@
       z-index:2;
       scroll-margin-top:90px;
 
-      /* bobble tracking */
       transform:translate3d(0,var(--bobble-y),0);
       will-change:transform;
       transition:transform .18s ease-out;
@@ -427,9 +442,8 @@
     .reviews-grid  { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
     .services-grid { grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
 
-    .barber-card,
-    .review-card,
-    .service-card {
+    /* shared card styles */
+    .card-unit {
       position:relative;
       background:var(--panel);
       border:1px solid var(--border);
@@ -440,46 +454,62 @@
       gap:8px;
       box-shadow:0 8px 28px rgba(0,0,0,.45);
 
-      /* fade-up on load */
+      /* entrance fade */
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out forwards;
+
+      /* new: smooth transitions for glow/hover/mobile-scroll */
+      transition:
+        box-shadow .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
+      will-change:transform,box-shadow,border-color;
     }
 
+    /* services card: slightly different bg */
     .service-card {
       background:var(--panel-alt);
       border-radius:16px;
       padding:16px 16px 18px;
     }
 
-    /* card hover glow (desktop) */
-    .barber-card::before,
-    .review-card::before,
-    .service-card::before {
+    /* desktop hover glow effect (same vibe as before) */
+    .card-unit::before {
       content:"";
       position:absolute;
       inset:0;
       background:radial-gradient(circle at 20% 20%,rgba(124,58,237,.28),transparent 60%);
       opacity:0;
-      transition:opacity .2s ease;
       pointer-events:none;
+      transition:opacity .2s ease;
     }
+
     @media (hover:hover){
-      .barber-card:hover,
-      .review-card:hover,
-      .service-card:hover {
+      .card-unit:hover {
         transform:translateY(-3px) scale(1.015);
         border-color:var(--accent-1);
         box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
       }
-      .barber-card:hover::before,
-      .review-card:hover::before,
-      .service-card:hover::before {
+      .card-unit:hover::before {
         opacity:.4;
       }
     }
 
-    /* staggered animation delays for each grid without JS */
+    /* MOBILE scroll glow:
+       JS adds .in-view to the card on mobile when it's onscreen.
+       That class basically forces the "hover" look even without touching it.
+    */
+    .card-unit.in-view {
+      transform:translateY(-3px) scale(1.015);
+      border-color:var(--accent-1);
+      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
+    }
+    .card-unit.in-view::before {
+      opacity:.4;
+    }
+
+    /* stagger each grid for entrance timing */
     .barber-grid .barber-card:nth-child(1) { animation-delay:.05s; }
     .barber-grid .barber-card:nth-child(2) { animation-delay:.10s; }
     .barber-grid .barber-card:nth-child(3) { animation-delay:.15s; }
@@ -640,6 +670,11 @@
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out forwards;
+      transition:
+        box-shadow .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
+      will-change:transform,box-shadow,border-color;
     }
     .hours-grid .hours-item:nth-child(1){animation-delay:.05s;}
     .hours-grid .hours-item:nth-child(2){animation-delay:.08s;}
@@ -648,6 +683,13 @@
     .hours-grid .hours-item:nth-child(5){animation-delay:.17s;}
     .hours-grid .hours-item:nth-child(6){animation-delay:.20s;}
     .hours-grid .hours-item:nth-child(7){animation-delay:.23s;}
+
+    /* also allow glow on hours cards */
+    .hours-item.in-view {
+      transform:translateY(-3px) scale(1.015);
+      border-color:var(--accent-1);
+      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
+    }
 
     .after-hours {
       margin-top:14px;
@@ -692,6 +734,10 @@
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out forwards;
+      transition:
+        box-shadow .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
     }
     .map-btn.google {
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
@@ -700,6 +746,12 @@
     }
     .map-links .map-btn:nth-child(1){animation-delay:.05s;}
     .map-links .map-btn:nth-child(2){animation-delay:.1s;}
+
+    .map-btn.in-view {
+      transform:translateY(-3px) scale(1.015);
+      border-color:var(--accent-1);
+      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
+    }
 
     .map-frame {
       width:100%;
@@ -711,6 +763,15 @@
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out .15s forwards;
+      transition:
+        box-shadow .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
+    }
+    .map-frame.in-view {
+      transform:translateY(-3px) scale(1.015);
+      border-color:var(--accent-1);
+      box-shadow:0 30px 60px rgba(0,0,0,.8),0 0 40px rgba(124,58,237,.4);
     }
 
     .landmark-note {
@@ -722,6 +783,14 @@
       opacity:0;
       transform:translateY(14px) scale(.98);
       animation:fadeUp .5s ease-out .22s forwards;
+      transition:
+        box-shadow .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
+    }
+    .landmark-note.in-view {
+      transform:translateY(-3px) scale(1.015);
+      text-shadow:0 0 16px rgba(124,58,237,.6),0 0 32px rgba(34,211,238,.5);
     }
 
     /* FOOTER */
@@ -752,16 +821,15 @@
       .badge-pill    { font-size:12px; padding:8px 12px; }
     }
 
-    /* REDUCED MOTION (accessibility) */
+    /* REDUCED MOTION */
     @media (prefers-reduced-motion:reduce){
       .brand-text,
       .brand-bg-line1,
       .hero-marquee-track {
         animation:none !important;
       }
-      .barber-card,
-      .review-card,
-      .service-card,
+
+      .card-unit,
       .hours-item,
       .after-hours,
       .map-btn,
@@ -845,7 +913,7 @@
       </p>
 
       <div class="barber-grid">
-        <article class="barber-card">
+        <article class="barber-card card-unit glow-animate">
           <p class="barber-name">VINCENT (OWNER)</p>
           <p class="barber-bio">Founder. Fader. Visionary.</p>
           <div class="cta-row">
@@ -853,7 +921,7 @@
           </div>
         </article>
 
-        <article class="barber-card">
+        <article class="barber-card card-unit glow-animate">
           <p class="barber-name">ZWALUW</p>
           <p class="barber-bio">Precision in every pass.</p>
           <div class="cta-row">
@@ -861,7 +929,7 @@
           </div>
         </article>
 
-        <article class="barber-card">
+        <article class="barber-card card-unit glow-animate">
           <p class="barber-name">G-MO</p>
           <p class="barber-bio">Style that speaks before you do.</p>
           <div class="cta-row">
@@ -869,7 +937,7 @@
           </div>
         </article>
 
-        <article class="barber-card">
+        <article class="barber-card card-unit glow-animate">
           <p class="barber-name">DESHAUN</p>
           <p class="barber-bio">Sharp fades. Chill vibes.</p>
           <div class="cta-row">
@@ -877,7 +945,7 @@
           </div>
         </article>
 
-        <article class="barber-card">
+        <article class="barber-card card-unit glow-animate">
           <p class="barber-name">CA$H</p>
           <p class="barber-bio">Quick with the clippers, real with the results.</p>
           <div class="cta-row">
@@ -885,7 +953,7 @@
           </div>
         </article>
 
-        <article class="barber-card">
+        <article class="barber-card card-unit glow-animate">
           <p class="barber-name">JONNY</p>
           <p class="barber-bio">Where art meets the edge.</p>
           <div class="cta-row">
@@ -893,7 +961,7 @@
           </div>
         </article>
 
-        <article class="barber-card">
+        <article class="barber-card card-unit glow-animate">
           <p class="barber-name">TAYLOR</p>
           <p class="barber-bio">Clean blends, subtle structure, quiet precision.</p>
           <div class="cta-row">
@@ -913,7 +981,7 @@
       </p>
 
       <div class="reviews-grid">
-        <div class="review-card">
+        <div class="review-card card-unit glow-animate">
           <div class="review-stars">★★★★★</div>
           <p class="review-text">
             “When you go in ask for Ca$h. She is on point each and every time. Highly recommended.”
@@ -921,7 +989,7 @@
           <div class="review-author">– Anthony V.</div>
         </div>
 
-        <div class="review-card">
+        <div class="review-card card-unit glow-animate">
           <div class="review-stars">★★★★★</div>
           <p class="review-text">
             “Everyone in here is so chill and down to earth. They do a fantastic job. My boys are always begging to go.”
@@ -929,7 +997,7 @@
           <div class="review-author">– Stephanie A.</div>
         </div>
 
-        <div class="review-card">
+        <div class="review-card card-unit glow-animate">
           <div class="review-stars">★★★★★</div>
           <p class="review-text">
             “Fantastic job for my 15-year-old son — low taper, super clean. He loves the vibe. They’re welcoming.”
@@ -949,7 +1017,7 @@
       </p>
 
       <div class="services-grid">
-        <div class="service-card">
+        <div class="service-card card-unit glow-animate">
           <div class="service-head">
             <span>💈 MILITARY / FIRST RESPONDER</span>
             <span class="price-chip">$28</span>
@@ -959,7 +1027,7 @@
           </span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card card-unit glow-animate">
           <div class="service-head">
             <span>💇‍♂️ HAIRCUT (STANDARD)</span>
             <span class="price-chip">$35</span>
@@ -970,7 +1038,7 @@
           </span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card card-unit glow-animate">
           <div class="service-head">
             <span>🧔 HAIRCUT + BEARD</span>
             <span class="price-chip">$40</span>
@@ -980,7 +1048,7 @@
           </span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card card-unit glow-animate">
           <div class="service-head">
             <span>🪒 SKIN FADE / TAPER</span>
             <span class="price-chip">$40</span>
@@ -990,7 +1058,7 @@
           </span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card card-unit glow-animate">
           <div class="service-head">
             <span>🪒🧔 SKIN FADE / TAPER + BEARD</span>
             <span class="price-chip">$45</span>
@@ -1000,7 +1068,7 @@
           </span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card card-unit glow-animate">
           <div class="service-head">
             <span>🧴 SHAMPOO SERVICE</span>
             <span class="price-chip">$15</span>
@@ -1010,7 +1078,7 @@
           </span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card card-unit glow-animate">
           <div class="service-head">
             <span>✂️ LONG HAIR (PAST SHOULDERS)</span>
             <span class="price-chip">$35</span>
@@ -1020,7 +1088,7 @@
           </span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card card-unit glow-animate">
           <div class="service-head">
             <span>🧔‍♂️ BEARD TRIM / LINE UP</span>
             <span class="price-chip">$25</span>
@@ -1030,7 +1098,7 @@
           </span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card card-unit glow-animate">
           <div class="service-head">
             <span>🧼 FACE SHAVE</span>
             <span class="price-chip">$25</span>
@@ -1040,7 +1108,7 @@
           </span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card card-unit glow-animate">
           <div class="service-head">
             <span>📏 LINE UP ONLY</span>
             <span class="price-chip">$15</span>
@@ -1050,7 +1118,7 @@
           </span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card card-unit glow-animate">
           <div class="service-head">
             <span>🎨 DESIGN ONLY</span>
             <span class="price-chip">$10</span>
@@ -1060,7 +1128,7 @@
           </span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card card-unit glow-animate">
           <div class="service-head">
             <span>🌀 PERM SERVICE</span>
             <span class="price-chip">$90+</span>
@@ -1070,7 +1138,7 @@
           </span>
         </div>
 
-        <div class="service-card">
+        <div class="service-card card-unit glow-animate">
           <div class="service-head">
             <span>🪒 HEAD SHAVE</span>
             <span class="price-chip">$35</span>
@@ -1092,13 +1160,13 @@
       </p>
 
       <ul class="hours-grid">
-        <li class="hours-item">SUNDAY : 9:00am – 4:00pm</li>
-        <li class="hours-item">MONDAY : 9:00am – 4:00pm</li>
-        <li class="hours-item">TUESDAY : 8:30am – 5:30pm</li>
-        <li class="hours-item">WEDNESDAY : 8:30am – 5:30pm</li>
-        <li class="hours-item">THURSDAY : 8:30am – 5:30pm</li>
-        <li class="hours-item">FRIDAY : 8:30am – 5:30pm</li>
-        <li class="hours-item">SATURDAY : 8:30am – 5:30pm</li>
+        <li class="hours-item glow-animate">SUNDAY : 9:00am – 4:00pm</li>
+        <li class="hours-item glow-animate">MONDAY : 9:00am – 4:00pm</li>
+        <li class="hours-item glow-animate">TUESDAY : 8:30am – 5:30pm</li>
+        <li class="hours-item glow-animate">WEDNESDAY : 8:30am – 5:30pm</li>
+        <li class="hours-item glow-animate">THURSDAY : 8:30am – 5:30pm</li>
+        <li class="hours-item glow-animate">FRIDAY : 8:30am – 5:30pm</li>
+        <li class="hours-item glow-animate">SATURDAY : 8:30am – 5:30pm</li>
       </ul>
 
       <p class="after-hours">NO ADDITIONAL CHARGE AFTER HOURS!</p>
@@ -1118,7 +1186,7 @@
 
         <div class="map-links">
           <a
-            class="map-btn google"
+            class="map-btn glow-animate"
             href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114"
             target="_blank"
             rel="noopener"
@@ -1127,7 +1195,7 @@
           </a>
 
           <a
-            class="map-btn"
+            class="map-btn glow-animate"
             href="https://maps.apple.com/?address=6510%20Paradise%20Blvd%20NW%20Unit%20D,%20Albuquerque,%20NM%2087114"
             target="_blank"
             rel="noopener"
@@ -1148,37 +1216,38 @@
     <div class="wrap">
       <h2 class="section-title">Find Us</h2>
 
-      <iframe class="map-frame"
+      <iframe class="map-frame glow-animate"
         src="https://maps.google.com/maps?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114&t=&z=15&ie=UTF8&iwloc=&output=embed"
         loading="lazy"
         allowfullscreen
         title="Map to Next Level BarberShop">
       </iframe>
 
-      <p class="landmark-note">
+      <p class="landmark-note glow-animate">
         We’re right next to Bob’s Burgers. Plenty of parking in front.
       </p>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer>
+  <footer class="glow-animate">
     © 2025 Next Level BarberShop
   </footer>
 
-  <!-- ========== INTERACTION SCRIPT (header hide + bobble/parallax) ========== -->
+  <!-- ========== INTERACTION SCRIPT ========== -->
   <script>
-    // Smooth header hide/show on scroll
+    // ------- Header hide/show on scroll -------
     const header = document.getElementById('siteHeader');
     let lastScrollY = window.scrollY;
     let ticking = false;
 
     function handleScrollFrame(){
       const currentY = window.scrollY;
-      // hide header when scrolling down past 80px
       if (currentY > lastScrollY && currentY > 80){
+        // scrolling down
         header.classList.add('hide');
       } else {
+        // scrolling up
         header.classList.remove('hide');
       }
       lastScrollY = currentY;
@@ -1192,17 +1261,18 @@
       }
     }, {passive:true});
 
-    // bobble + parallax motion
+    // ------- Bobble + Parallax background drift -------
     const rootStyle = document.documentElement.style;
     let tickingParallax = false;
 
     function updateScrollEffects(){
       const y = window.scrollY || 0;
-      // little float/bobble
-      const bobble = Math.sin(y * 0.02) * 2; // tiny +/-2px
+
+      // tiny float on content
+      const bobble = Math.sin(y * 0.02) * 2; // +/-2px
       rootStyle.setProperty('--bobble-y', bobble.toFixed(2)+'px');
 
-      // background brand drifts slower upward as you scroll
+      // slow parallax drift of BIG NEXT LEVEL BARBERSHOP text
       const parallax = (y * -0.05);
       rootStyle.setProperty('--parallax-y', parallax.toFixed(2)+'px');
 
@@ -1217,8 +1287,28 @@
     }
 
     window.addEventListener('scroll', onScrollParallax, {passive:true});
-    // set initial position
-    updateScrollEffects();
+    updateScrollEffects(); // set initial position on load
+
+    // ------- Mobile scroll glow / "hover while in view" -------
+    // We watch cards/blocks with .glow-animate and when they are in view,
+    // we add .in-view so they light up (border + glow + lift).
+    const glowTargets = document.querySelectorAll('.glow-animate');
+
+    // Use an intersection observer so it reacts as you scroll.
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+        } else {
+          entry.target.classList.remove('in-view');
+        }
+      });
+    },{
+      root:null,
+      threshold:0.35 // ~35% visible
+    });
+
+    glowTargets.forEach(el=>io.observe(el));
   </script>
 </body>
 </html>
