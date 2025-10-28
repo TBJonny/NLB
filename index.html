@@ -4,1008 +4,1402 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="color-scheme" content="dark light" />
-<title>Next Level Barbershop</title>
+<title>Next Level Barbershop • Albuquerque, NM</title>
 
 <style>
-/* RESET-ish */
-* {
+/* ---------------------------------
+   RESET / BASE
+---------------------------------- */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   margin: 0;
   padding: 0;
 }
+
+html,
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background: radial-gradient(circle at 20% 20%, #1a1d36 0%, #0b0d13 70%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background-color: #000;
   color: #fff;
-  line-height: 1.4;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+/* ---------------------------------
+   THEME TOKENS
+   We default to dark and override for light.
+---------------------------------- */
+
+:root {
+  /* page bg gradient */
+  --page-bg-start: #070b16;
+  --page-bg-end: #0f1c2a;
+
+  /* glass cards */
+  --card-bg: rgba(10, 13, 22, 0.75);
+  --card-border: rgba(255,255,255,0.07);
+  --card-inner-shadow: 0 30px 80px rgba(96, 80, 255, 0.25),
+                       0 0 120px rgba(0, 153, 255, 0.3);
+  --card-text-main: #dbe4f7;
+  --card-text-dim: #9aa3b6;
+
+  /* pills / buttons / nav */
+  --pill-bg: rgba(15,15,20,0.6);
+  --pill-border: rgba(255,255,255,0.15);
+  --pill-text: #ffffff;
+  --pill-glow: 0 18px 40px rgba(100,84,255,.4),
+               0 0 60px rgba(0,170,255,.4);
+
+  /* headline glow */
+  --headline-color: #fff;
+  --headline-shadow: 0 0 18px rgba(180, 160, 255, 0.7),
+                     0 0 48px rgba(0, 180, 255, 0.5);
+
+  /* underline gradient */
+  --accent-left: #8b6bff;
+  --accent-right: #49c9ff;
+
+  /* section gap */
+  --section-gap: clamp(2.5rem, 2vw + 2rem, 3.5rem);
+
+  /* radii */
+  --radius-xl: 1.25rem;
+  --radius-lg: 1rem;
+  --radius-pill: 999px;
+
+  /* "lift in" animation settings */
+  --lift-translate-y: 24px;
+  --lift-scale: 0.985;
+  --lift-shadow: 0 50px 120px rgba(0,0,0,0.8),
+                 0 0 120px rgba(110,80,255,0.3);
+
+  /* header bg blur */
+  --header-bg: rgba(10,10,20,0.6);
+  --header-border: rgba(255,255,255,0.08);
+  --header-shadow: 0 30px 80px rgba(90,60,255,0.45),
+                   0 0 120px rgba(0,180,255,0.4);
+  --header-text: #fff;
+
+  /* welcome chips */
+  --chip-bg: rgba(15,15,20,0.7);
+  --chip-border: rgba(255,255,255,0.2);
+  --chip-text: #fff;
+
+  /* ticker box under welcome */
+  --subcard-bg: rgba(0,0,0,0.4);
+  --subcard-border: rgba(255,255,255,0.15);
+  --subcard-text: #fff;
+}
+
+/* Light mode override */
+@media (prefers-color-scheme: light) {
+  :root {
+    --page-bg-start: #f9f8ff;
+    --page-bg-end: #e8ecff;
+
+    --card-bg: rgba(255,255,255,0.65);
+    --card-border: rgba(0,0,30,0.08);
+    --card-inner-shadow: 0 30px 60px rgba(60,30,180,0.15),
+                         0 0 120px rgba(0,120,255,0.15),
+                         0 10px 30px rgba(0,0,0,0.08) inset;
+    --card-text-main: #1a1b23;
+    --card-text-dim: #4a4d5c;
+
+    --pill-bg: rgba(255,255,255,0.7);
+    --pill-border: rgba(0,0,0,0.08);
+    --pill-text: #1a1b23;
+    --pill-glow: 0 20px 40px rgba(120,100,255,0.3),
+                 0 0 60px rgba(90,200,255,0.35);
+
+    --headline-color: #1a1b23;
+    --headline-shadow: 0 0 20px rgba(150,120,255,0.35),
+                       0 0 60px rgba(0,170,255,0.25);
+
+    --accent-left: #7f6dff;
+    --accent-right: #4fc3ff;
+
+    --header-bg: rgba(255,255,255,0.6);
+    --header-border: rgba(0,0,30,0.07);
+    --header-shadow: 0 30px 60px rgba(100,80,255,0.24),
+                     0 0 80px rgba(0,170,255,0.25),
+                     0 20px 30px rgba(0,0,0,0.06);
+    --header-text: #1a1b23;
+
+    --chip-bg: rgba(255,255,255,0.8);
+    --chip-border: rgba(0,0,0,0.08);
+    --chip-text: #1a1b23;
+
+    --subcard-bg: rgba(255,255,255,0.9);
+    --subcard-border: rgba(0,0,0,0.08);
+    --subcard-text: #1a1b23;
+  }
+}
+
+/* ---------------------------------
+   PAGE BACKDROP
+---------------------------------- */
+body {
+  background: radial-gradient(circle at 20% 20%, rgba(90,60,255,0.3) 0%, transparent 60%),
+              radial-gradient(circle at 80% 40%, rgba(0,160,255,0.27) 0%, transparent 60%),
+              linear-gradient(to bottom right, var(--page-bg-start) 0%, var(--page-bg-end) 80%);
+  background-attachment: fixed;
+  color: var(--card-text-main);
   padding-bottom: 4rem;
 }
 
-/* container widths */
+/* ---------------------------------
+   UTILITIES
+---------------------------------- */
 .wrapper {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1280px;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(1rem,2vw,2rem);
 }
 
-/* =========================================
-   HEADER / NAV
-   ========================================= */
+.flex {
+  display: flex;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.gap-sm {
+  gap: .5rem;
+}
+.gap-md {
+  gap: 1rem;
+}
+.center {
+  text-align: center;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.flex-col {
+  flex-direction: column;
+}
 
-.site-header {
+/* ---------------------------------
+   HEADER
+---------------------------------- */
+.site-header-wrapper {
   position: sticky;
   top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  background: radial-gradient(circle at 20% 20%, rgba(20,20,40,.6) 0%, rgba(10,10,20,.6) 60%);
-  border-bottom: 1px solid rgba(150,150,255,.2);
-  box-shadow:
-    0 30px 60px rgba(0,0,0,.9),
-    0 0 60px rgba(120,80,255,.25);
-  padding: 1rem 0 1.25rem;
+  z-index: 999;
+  backdrop-filter: blur(20px) saturate(140%);
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--header-border);
+  box-shadow: var(--header-shadow);
+  transition: all .25s ease;
 }
 
-.header-inner {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
+.site-header-wrapper.shrink {
+  padding-top: .5rem;
+  padding-bottom: .75rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6),
+              0 0 80px rgba(110,80,255,0.4);
+}
+
+.site-header {
   display: flex;
   flex-direction: column;
-  gap: .75rem;
   align-items: center;
+  padding-block: 1rem 1.5rem;
+  gap: 1rem;
+  color: var(--header-text);
   text-align: center;
 }
 
-/* shop name bigger */
 .shop-name {
-  font-size: clamp(1.4rem, 1rem + 1vw, 2rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: .06em;
-  color: #fff;
-  text-shadow:
-    0 0 8px rgba(120,80,255,.8),
-    0 0 32px rgba(0,200,255,.4),
-    0 0 64px rgba(120,80,255,.4);
+  font-size: clamp(1.4rem, 1vw + 1rem, 2rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: .07em;
+  color: var(--headline-color);
+  text-shadow: var(--headline-shadow);
+  transition: font-size .25s ease, padding .25s ease;
+}
+.site-header-wrapper.shrink .shop-name {
+  font-size: clamp(1.2rem, 1vw + .8rem, 1.6rem);
 }
 
-/* call button + nav row */
+.call-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: .5rem;
+  column-gap: .75rem;
+}
+
+.call-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .75rem 1rem;
+  font-size: .9rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--pill-text);
+  background: linear-gradient(90deg,#5a3cff 0%,#4ccaff 100%);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 25px 60px rgba(80,60,255,.5),
+              0 0 100px rgba(0,200,255,.5);
+  min-width: 200px;
+  border: 1px solid rgba(255,255,255,.2);
+  text-decoration: none;
+}
+.call-button span {
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  white-space:nowrap;
+}
+.call-button span::before {
+  content:"📞";
+  font-size:1rem;
+}
+
 .nav-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: .5rem .75rem;
+  row-gap: .75rem;
+  column-gap: .75rem;
+  max-width: 1000px;
+  margin-inline:auto;
 }
 
-.call-pill {
-  background: linear-gradient(90deg, rgba(120,80,255,1) 0%, rgba(0,200,255,1) 100%);
-  color: #fff;
-  font-weight: 600;
-  font-size: .8rem;
-  line-height: 1rem;
-  padding: .6rem .8rem;
-  border-radius: .6rem;
-  box-shadow:
-    0 24px 32px rgba(0,0,0,.8),
-    0 0 32px rgba(120,80,255,.7),
-    0 0 64px rgba(0,200,255,.4);
-  border: 1px solid rgba(255,255,255,.3);
+.nav-pill {
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  border-radius: var(--radius-lg);
+  padding: .75rem 1rem;
+  font-size: .9rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--pill-text);
   text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  white-space: nowrap;
+  box-shadow: var(--pill-glow);
+  transition: all .18s ease;
+}
+.nav-pill:active,
+.nav-pill:focus,
+.nav-pill:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 30px 80px rgba(110,80,255,.6),
+              0 0 120px rgba(0,200,255,.6);
 }
 
-.nav-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: .5rem .5rem;
+/* ---------------------------------
+   SECTION WRAPPER / SPACING
+---------------------------------- */
+.page-section {
+  margin-top: var(--section-gap);
 }
-
-.nav-btn {
-  background: radial-gradient(circle at 20% 20%, rgba(20,20,40,.8) 0%, rgba(10,10,20,.6) 60%);
-  border: 1px solid rgba(150,150,255,.25);
-  border-radius: .6rem;
-  color: #fff;
-  font-size: .8rem;
-  font-weight: 600;
-  line-height: 1rem;
-  padding: .6rem .8rem;
-  text-decoration: none;
-  box-shadow:
-    0 20px 30px rgba(0,0,0,.85),
-    0 0 30px rgba(120,80,255,.4),
-    0 0 60px rgba(0,200,255,.2);
-  transition: box-shadow .25s ease, filter .25s ease;
-}
-.nav-btn:hover {
-  filter: brightness(1.07);
-  box-shadow:
-    0 30px 40px rgba(0,0,0,.9),
-    0 0 50px rgba(120,80,255,.5),
-    0 0 80px rgba(0,200,255,.25);
-}
-
-/* =========================================
-   SECTION CARDS + SCROLL POP
-   ========================================= */
 
 .section-card {
   position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-inner-shadow);
+  color: var(--card-text-main);
+  padding: clamp(1.25rem,2vw,2rem);
   max-width: 1200px;
-  width: 90%;
-  margin: 2.5rem auto;
-  padding: 1.5rem 1.5rem 2rem;
-  border-radius: 1.25rem;
-  background: radial-gradient(circle at 20% 20%, rgba(30,32,60,0.6) 0%, rgba(10,10,20,0.6) 60%);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid rgba(130,140,255,0.18);
-  box-shadow:
-    0 30px 60px rgba(0,0,0,0.9),
-    0 0 60px rgba(120,80,255,.25);
-  transition:
-    box-shadow .4s ease,
-    transform .4s ease,
-    filter .4s ease,
-    opacity .4s ease;
-  transform: translateY(16px) scale(.985);
-  opacity: 0.6;
-  filter: brightness(.9);
-}
-.section-card.in-view {
-  box-shadow:
-    0 40px 80px rgba(0,0,0,0.8),
-    0 0 90px rgba(120,80,255,.4),
-    0 0 140px rgba(0,200,255,.2);
-  transform: translateY(0) scale(1);
-  opacity: 1;
-  filter: brightness(1);
+  margin-inline: auto;
+  overflow: hidden;
 }
 
-/* headings */
-.section-title-row {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: .5rem;
-  margin-bottom: 1rem;
-}
-.section-title-row.centered {
-  align-items: center;
-  text-align: center;
-}
-.section-heading {
-  font-size: clamp(.7rem,.55rem + .4vw,.8rem);
-  font-weight: 600;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: #9ddcff;
-  text-shadow: 0 0 8px rgba(0,180,255,.8);
-  margin-bottom: .25rem;
-}
-.section-bigtitle {
-  font-size: clamp(1.4rem,1rem + 1vw,2rem);
-  font-weight: 700;
-  line-height: 1.2;
-  color: #fff;
-  text-shadow:
-    0 0 8px rgba(120,80,255,.8),
-    0 0 32px rgba(0,200,255,.4);
-  letter-spacing: .03em;
-}
-.section-underline {
-  width: clamp(140px,30%,260px);
-  height: 4px;
-  border-radius: 999px;
-  background: linear-gradient(90deg,
-    rgba(130,100,255,1) 0%,
-    rgba(0,200,255,1) 100%);
-  box-shadow:
-    0 0 12px rgba(130,100,255,.8),
-    0 0 24px rgba(0,200,255,.6);
+/* halo / glow ring behind card */
+.section-card::before {
+  content:"";
+  position:absolute;
+  inset:-60px;
+  background: radial-gradient(circle at 50% 0%,
+              rgba(120,80,255,.4) 0%,
+              rgba(0,0,0,0) 70%);
+  filter: blur(60px);
+  opacity:.6;
+  pointer-events:none;
+  z-index:0;
 }
 
-/* body text */
-.section-body-text {
-  color: rgba(255,255,255,.8);
-  font-size: clamp(0.95rem,0.2vw + 0.9rem,1rem);
-  line-height: 1.5;
-  font-weight: 400;
-  max-width: 70ch;
-  text-align: center;
-  margin: 0 auto 1rem;
+/* inner content sits above halo */
+.section-card-content {
+  position:relative;
+  z-index:2;
 }
 
-/* badges/payment chips */
-.badge-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-  justify-content: center;
-  margin-bottom: .75rem;
+/* some thin top-row styles if needed */
+.section-top-divider {
+  border-top:1px solid var(--card-border);
+  padding-top:1rem;
+  margin-top:1rem;
+  font-size:.75rem;
+  line-height:1.2;
+  color:var(--card-text-main);
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.75rem;
 }
-.badge-pill {
-  background: radial-gradient(circle at 0% 0%, rgba(0,0,0,.6) 0%, rgba(20,20,40,.6) 60%);
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: .6rem;
-  padding: .5rem .75rem;
+
+/* ---------------------------------
+   HEADLINES / UNDERLINES
+---------------------------------- */
+
+.section-eyebrow {
   font-size: .8rem;
-  line-height: 1rem;
-  color: #fff;
-  white-space: nowrap;
-  box-shadow:
-    0 10px 20px rgba(0,0,0,.8),
-    0 0 20px rgba(120,80,255,.5);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ticker strip in welcome */
-.info-ticker {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem;
-  justify-content: center;
-  font-size: .7rem;
   font-weight: 500;
-  letter-spacing: .08em;
-  color: #fff;
-  background: rgba(0,0,0,.4);
-  border-radius: .5rem;
-  border: 1px solid rgba(255,255,255,.14);
-  padding: .6rem .75rem;
-  width: 100%;
-  box-shadow:
-    0 16px 32px rgba(0,0,0,.9),
-    0 0 40px rgba(120,80,255,.4);
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--card-text-dim);
+  text-align: center;
+  margin-bottom: .5rem;
 }
-.info-ticker::-webkit-scrollbar { display:none; }
 
-/* grid helpers */
-.flex-wrap-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem;
+.section-headline {
+  text-align:center;
+  color:var(--headline-color);
+  text-shadow: var(--headline-shadow);
+  font-size: clamp(1.25rem,1vw + 1rem,2rem);
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:.05em;
+  margin-bottom:1rem;
 }
-.barber-grid,
-.services-grid,
+
+.headline-underline {
+  width: clamp(140px,20vw,220px);
+  height:4px;
+  border-radius:var(--radius-pill);
+  background: linear-gradient(90deg,var(--accent-left) 0%,var(--accent-right) 100%);
+  box-shadow:0 0 20px rgba(120,100,255,.6),
+             0 0 40px rgba(0,200,255,.6);
+  margin-inline:auto;
+  margin-bottom:1.5rem;
+}
+
+.section-subtext {
+  text-align:center;
+  color:var(--card-text-main);
+  font-size:1.05rem;
+  line-height:1.6;
+  max-width: 46ch;
+  margin-inline:auto;
+  margin-bottom:1.5rem;
+  font-weight:400;
+}
+
+/* ---------------------------------
+   BADGE / CHIP ROWS (WELCOME)
+---------------------------------- */
+.badge-row {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.75rem;
+  margin-bottom:1rem;
+}
+
+.badge-chip {
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  background: var(--chip-bg);
+  border:1px solid var(--chip-border);
+  color:var(--chip-text);
+  font-size:.9rem;
+  font-weight:500;
+  line-height:1.2;
+  padding:.75rem 1rem;
+  border-radius:var(--radius-lg);
+  box-shadow:0 20px 40px rgba(110,80,255,.45),
+             0 0 80px rgba(0,200,255,.35);
+  white-space:nowrap;
+}
+
+.badge-chip .emoji {
+  font-size:1.1rem;
+  line-height:1;
+}
+
+.ticker-box {
+  background: var(--subcard-bg);
+  border:1px solid var(--subcard-border);
+  color:var(--subcard-text);
+  border-radius:var(--radius-lg);
+  box-shadow:0 30px 80px rgba(0,0,0,.8),
+             0 0 120px rgba(110,80,255,.4);
+  padding:1rem;
+  max-width: 700px;
+  margin-inline:auto;
+  margin-top:1rem;
+
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+  font-size:.95rem;
+  font-weight:500;
+  text-align:center;
+}
+.ticker-line {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.75rem;
+}
+.ticker-item {
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  white-space:nowrap;
+}
+.ticker-item .emoji{
+  font-size:1rem;
+  line-height:1;
+}
+
+/* ---------------------------------
+   BARBERS
+---------------------------------- */
+.barbers-wrapper {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1rem;
+  margin-top:1.5rem;
+}
+@media(min-width:700px){
+  .barbers-wrapper {
+    grid-template-columns:1fr 1fr;
+  }
+}
+@media(min-width:1000px){
+  .barbers-wrapper {
+    grid-template-columns:1fr 1fr 1fr;
+  }
+}
+
+.barber-card {
+  background: var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  color:var(--card-text-main);
+  padding:1rem 1rem 1.25rem;
+  box-shadow: 0 30px 60px rgba(0,0,0,.8),
+             0 0 120px rgba(110,80,255,.3);
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+}
+
+.barber-name {
+  font-size:1rem;
+  font-weight:600;
+  color:var(--headline-color);
+  text-shadow: var(--headline-shadow);
+  letter-spacing:.04em;
+}
+.barber-desc {
+  font-size:.9rem;
+  line-height:1.4;
+  color:var(--card-text-main);
+}
+
+.call-btn {
+  align-self:flex-start;
+  background: var(--pill-bg);
+  border:1px solid var(--pill-border);
+  color:var(--pill-text);
+  font-size:.9rem;
+  line-height:1.2;
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  border-radius:var(--radius-lg);
+  padding:.75rem 1rem;
+  box-shadow: var(--pill-glow);
+  text-decoration:none;
+  font-weight:500;
+  transition:all .18s ease;
+}
+.call-btn::before {
+  content:"📞";
+  font-size:1rem;
+}
+.call-btn:hover,
+.call-btn:focus {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow:0 30px 80px rgba(110,80,255,.6),
+             0 0 120px rgba(0,200,255,.6);
+}
+
+/* ---------------------------------
+   REVIEWS
+---------------------------------- */
 .reviews-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit,minmax(min(320px,100%),1fr));
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1rem;
+  margin-top:1.5rem;
+}
+@media(min-width:800px){
+  .reviews-grid {
+    grid-template-columns:1fr 1fr 1fr;
+  }
+}
+.review-card {
+  background: var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  box-shadow:0 30px 60px rgba(0,0,0,.8),
+             0 0 120px rgba(110,80,255,.3);
+  padding:1rem 1rem 1.25rem;
+  color:var(--card-text-main);
+  font-size:.9rem;
+  line-height:1.45;
+}
+.review-head {
+  font-weight:600;
+  color:var(--headline-color);
+  text-shadow:var(--headline-shadow);
+  letter-spacing:.03em;
+  font-size:.9rem;
+  margin-bottom:.5rem;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:.5rem;
+}
+.review-head .emoji {
+  font-size:1rem;
+}
+.review-stars {
+  font-size:.8rem;
+  font-weight:500;
+  color:var(--card-text-main);
+  opacity:.8;
+}
+.review-body {
+  color:var(--card-text-main);
+  font-size:.9rem;
+  line-height:1.45;
+  margin-bottom:.5rem;
+}
+.review-name {
+  font-size:.8rem;
+  font-weight:500;
+  color:var(--card-text-dim);
 }
 
-/* barber/service/review cards */
-.card-inner,
-.review-card,
+/* ---------------------------------
+   SERVICES
+---------------------------------- */
+.services-grid {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1rem;
+  margin-top:1.5rem;
+}
+@media(min-width:800px){
+  .services-grid {
+    grid-template-columns:1fr 1fr;
+  }
+}
+
 .service-card {
-  background: radial-gradient(circle at 20% 20%, rgba(20,20,40,.8) 0%, rgba(10,10,20,.6) 60%);
-  border: 1px solid rgba(150,150,255,.2);
-  border-radius: .9rem;
-  padding: 1rem;
-  color: rgba(255,255,255,.8);
-  box-shadow:
-    0 20px 30px rgba(0,0,0,.85),
-    0 0 30px rgba(120,80,255,.25);
-  transition: box-shadow .25s ease, filter .25s ease, background .25s ease;
-}
-.card-inner:hover,
-.card-inner:focus-within,
-.service-card:hover,
-.service-card:focus-within,
-.review-card:hover {
-  filter: brightness(1.05);
-  box-shadow:
-    0 30px 40px rgba(0,0,0,.9),
-    0 0 50px rgba(120,80,255,.5),
-    0 0 80px rgba(0,200,255,.2);
+  background: var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  box-shadow:0 30px 60px rgba(0,0,0,.8),
+             0 0 120px rgba(110,80,255,.3);
+  padding:1rem 1rem 1.25rem;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:.75rem;
+  color:var(--card-text-main);
+  font-size:.9rem;
+  line-height:1.4;
 }
 
-/* service cards = rounder, app-like */
-.service-card {
-  border-radius: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
+.service-left {
+  max-width:75%;
 }
-
-/* barber name, service header rows */
-.barber-name,
 .service-topline {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: .5rem;
-  font-size: .9rem;
-  font-weight: 600;
-  color: #fff;
-  text-shadow: 0 0 8px rgba(120,80,255,.8);
+  font-weight:600;
+  color:var(--headline-color);
+  text-shadow:var(--headline-shadow);
+  letter-spacing:.03em;
+  font-size:.95rem;
+  margin-bottom:.25rem;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
 }
-.service-topline .service-left {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-  align-items: baseline;
+.service-topline .emoji {
+  font-size:1rem;
+  line-height:1;
+}
+.service-desc {
+  font-size:.85rem;
+  color:var(--card-text-main);
+  line-height:1.4;
 }
 .service-price {
-  font-size: .8rem;
-  color: #9ddcff;
-  font-weight: 500;
+  font-size:.8rem;
+  font-weight:500;
+  white-space:nowrap;
+  background:var(--chip-bg);
+  border:1px solid var(--chip-border);
+  border-radius:var(--radius-pill);
+  color:var(--chip-text);
+  padding:.5rem .75rem;
+  box-shadow:0 20px 40px rgba(110,80,255,.45),
+             0 0 80px rgba(0,200,255,.35);
 }
 
-/* barber details text / service desc */
-.card-line,
-.service-desc {
-  font-size: .8rem;
-  line-height: 1.4;
-  color: rgba(255,255,255,.7);
+/* ---------------------------------
+   HOURS + CONTACT + LOCATION
+---------------------------------- */
+.info-flex {
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+  margin-top:1.5rem;
+}
+@media(min-width:800px){
+  .info-flex {
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:space-between;
+  }
 }
 
-/* mini call / book buttons */
-.mini-btn-row {
-  margin-top: .75rem;
-}
-.mini-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  font-size: .75rem;
-  line-height: 1rem;
-  font-weight: 600;
-  background: radial-gradient(circle at 0% 0%, rgba(0,0,0,.6) 0%, rgba(20,20,40,.6) 60%);
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: .6rem;
-  padding: .5rem .6rem;
-  color: #fff;
-  text-decoration: none;
-  box-shadow:
-    0 15px 24px rgba(0,0,0,.8),
-    0 0 20px rgba(120,80,255,.5);
-  white-space: nowrap;
+.hours-card,
+.contact-card {
+  flex:1;
+  background: var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  box-shadow:0 30px 60px rgba(0,0,0,.8),
+             0 0 120px rgba(110,80,255,.3);
+  padding:1rem 1rem 1.25rem;
+  color:var(--card-text-main);
+  font-size:.9rem;
+  line-height:1.45;
+  min-width:0;
 }
 
-/* review cards */
-.review-badge {
-  font-size: .8rem;
-  font-weight: 600;
-  color: #fff;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: .4rem;
-  margin-bottom: .5rem;
-  text-shadow: 0 0 8px rgba(255,255,0,.5);
+.subheadline {
+  font-weight:600;
+  color:var(--headline-color);
+  text-shadow:var(--headline-shadow);
+  letter-spacing:.03em;
+  font-size:.9rem;
+  margin-bottom:.5rem;
 }
-.review-text {
-  font-size: .8rem;
-  line-height: 1.4;
-  color: rgba(255,255,255,.8);
-  margin-bottom: .5rem;
-}
-.review-meta {
-  font-size: .7rem;
-  line-height: 1.3;
-  color: rgba(157,220,255,.9);
-  font-weight: 500;
-}
-
-/* HOURS simple row style */
-.hours-grid {
-  display: grid;
-  gap: .5rem;
-  grid-template-columns: repeat(auto-fit,minmax(min(150px,100%),1fr));
-  font-size: .8rem;
-  color: rgba(255,255,255,.8);
-}
-.hours-box {
-  background: radial-gradient(circle at 20% 20%, rgba(20,20,40,.8) 0%, rgba(10,10,20,.6) 60%);
-  border: 1px solid rgba(150,150,255,.2);
-  border-radius: .75rem;
-  padding: .75rem;
-  text-align: center;
-  line-height: 1.4;
-  box-shadow:
-    0 20px 30px rgba(0,0,0,.85),
-    0 0 30px rgba(120,80,255,.25);
-}
-
-/* CONTACT */
-.contact-lines {
-  font-size: .8rem;
-  line-height: 1.5;
-  color: rgba(255,255,255,.8);
+.hours-list {
+  font-size:.85rem;
+  line-height:1.5;
+  color:var(--card-text-main);
 }
 .contact-line {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-  align-items: baseline;
-  margin-bottom: .5rem;
+  font-size:.85rem;
+  line-height:1.5;
+  margin-bottom:.5rem;
+  color:var(--card-text-main);
+  display:flex;
+  align-items:flex-start;
+  gap:.5rem;
+  word-break:break-word;
 }
-.contact-label {
-  font-weight: 600;
-  color: #9ddcff;
-  text-shadow: 0 0 8px rgba(0,180,255,.8);
-}
-.contact-val {
-  color: rgba(255,255,255,.8);
-  word-break: break-word;
+.contact-line .emoji {
+  font-size:1rem;
+  line-height:1;
 }
 
-/* MAP CARD */
 .map-card {
-  border-radius: 1.25rem;
-  overflow: hidden;
-  background: radial-gradient(circle at 20% 20%, rgba(20,20,40,.8) 0%, rgba(10,10,20,.6) 60%);
-  border: 1px solid rgba(150,150,255,.2);
-  box-shadow:
-    0 30px 60px rgba(0,0,0,.9),
-    0 0 60px rgba(120,80,255,.25);
-  padding: 1rem;
-  color: rgba(255,255,255,.8);
+  flex:1;
+  background: var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  box-shadow:0 30px 60px rgba(0,0,0,.8),
+             0 0 120px rgba(110,80,255,.3);
+  padding:1rem;
+  min-width:0;
 }
+
+.map-frame-wrapper {
+  border-radius: var(--radius-lg);
+  overflow:hidden;
+  border:1px solid var(--card-border);
+  box-shadow:0 30px 60px rgba(0,0,0,.8),
+             0 0 120px rgba(110,80,255,.3);
+  background:#000;
+  aspect-ratio: 16/11; /* more square-ish */
+}
+.map-frame-wrapper iframe {
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+}
+
 .map-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem;
-  justify-content: center;
-  margin-bottom: .75rem;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.75rem;
+  margin-top:1rem;
 }
-.map-buttons a {
-  text-decoration: none;
-  font-size: .8rem;
-  font-weight: 600;
-  line-height: 1rem;
-  padding: .6rem .8rem;
-  border-radius: .6rem;
-  background: radial-gradient(circle at 0% 0%, rgba(0,0,0,.6) 0%, rgba(20,20,40,.6) 60%);
-  border: 1px solid rgba(255,255,255,.18);
-  color: #fff;
-  box-shadow:
-    0 10px 20px rgba(0,0,0,.8),
-    0 0 20px rgba(120,80,255,.5);
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
+.map-btn {
+  background: var(--pill-bg);
+  border:1px solid var(--pill-border);
+  border-radius:var(--radius-lg);
+  padding:.75rem 1rem;
+  font-size:.9rem;
+  line-height:1.2;
+  color:var(--pill-text);
+  text-decoration:none;
+  box-shadow: var(--pill-glow);
+  font-weight:500;
+  transition:.18s ease;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
 }
-.map-embed {
-  width: 100%;
-  border: 0;
-  border-radius: .75rem;
-  height: 260px;
-  background: #000;
-  box-shadow:
-    0 20px 30px rgba(0,0,0,.85),
-    0 0 30px rgba(120,80,255,.25);
+.map-btn:active,
+.map-btn:focus,
+.map-btn:hover {
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 30px 80px rgba(110,80,255,.6),
+             0 0 120px rgba(0,200,255,.6);
+}
+.map-btn .emoji {
+  font-size:1rem;
+  line-height:1;
 }
 
-/* light mode */
-@media (prefers-color-scheme: light) {
-  body {
-    background: radial-gradient(circle at 20% 20%, #ffffff 0%, #eef2ff 40%, #e9e6ff 70%);
-    color: #0e0e16;
-  }
-  .site-header {
-    background: rgba(255,255,255,.6);
-    border-bottom: 1px solid rgba(120,80,255,.25);
-    box-shadow:
-      0 24px 40px rgba(0,0,0,.12),
-      0 0 60px rgba(120,80,255,.25),
-      0 0 120px rgba(0,200,255,.18);
-  }
-  .shop-name {
-    color: #1a1a2a;
-    text-shadow:
-      0 0 8px rgba(120,80,255,.4),
-      0 0 20px rgba(0,200,255,.25);
-  }
-  .nav-btn {
-    background: rgba(255,255,255,.55);
-    border: 1px solid rgba(120,80,255,.25);
-    color: #1a1a2a;
-    box-shadow:
-      0 20px 30px rgba(0,0,0,.15),
-      0 0 30px rgba(120,80,255,.3),
-      0 0 60px rgba(0,200,255,.2);
-  }
+/* ---------------------------------
+   FOOTER
+---------------------------------- */
+.footer {
+  text-align:center;
+  color:var(--card-text-dim);
+  font-size:.75rem;
+  line-height:1.4;
+  margin-top:var(--section-gap);
+}
 
-  .section-card {
-    background: rgba(255,255,255,0.6);
-    border: 1px solid rgba(120,80,255,.25);
-    box-shadow:
-      0 24px 40px rgba(0,0,0,.12),
-      0 0 60px rgba(120,80,255,.25),
-      0 0 120px rgba(0,200,255,.18);
-    color: #1a1a2a;
+/* ---------------------------------
+   SCROLL REVEAL ANIMATION
+---------------------------------- */
+.reveal-section {
+  opacity:0;
+  transform: translateY(var(--lift-translate-y)) scale(var(--lift-scale));
+  filter: brightness(.8);
+  transition:
+    opacity .4s ease,
+    transform .4s ease,
+    filter .4s ease,
+    box-shadow .4s ease;
+  will-change: opacity, transform, filter, box-shadow;
+}
+.reveal-section.revealed {
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:brightness(1);
+  box-shadow: var(--lift-shadow);
+}
+
+/* make sure anchor targets land nicely below sticky header */
+[id] {
+  scroll-margin-top: 6rem;
+}
+.first-section-fix {
+  scroll-margin-top: 6rem;
+}
+
+/* responsive font bump = "2x bold" feel */
+body { font-size: 1rem; }
+@media(min-width:768px){
+  body { font-size:1.05rem; }
+  .shop-name { font-size: clamp(1.6rem, 0.5vw + 1.4rem, 2.2rem); }
+  .site-header-wrapper.shrink .shop-name {
+    font-size: clamp(1.4rem, 0.5vw + 1.2rem, 1.8rem);
   }
-  .section-body-text {
-    color: rgba(0,0,0,.75);
+  .section-headline {
+    font-size: clamp(1.5rem,1vw + 1.2rem,2.2rem);
   }
-  .section-bigtitle {
-    color: #1a1a2a;
-    text-shadow:
-      0 0 8px rgba(120,80,255,.4),
-      0 0 20px rgba(0,200,255,.25);
+  .section-subtext {
+    font-size:1.1rem;
   }
-  .badge-pill,
-  .card-inner,
-  .service-card,
   .review-card,
-  .hours-box,
-  .map-card,
-  .map-buttons a {
-    background: rgba(255,255,255,.55);
-    border: 1px solid rgba(120,80,255,.25);
-    color: #1a1a2a;
-    text-shadow: none;
-    box-shadow:
-      0 20px 30px rgba(0,0,0,.15),
-      0 0 30px rgba(120,80,255,.3),
-      0 0 60px rgba(0,200,255,.2);
+  .service-card,
+  .hours-card,
+  .contact-card,
+  .map-card {
+    font-size:.95rem;
   }
-  .service-topline,
-  .barber-name,
-  .review-badge,
-  .contact-label {
-    color: #1a1a2a;
-    text-shadow:
-      0 0 8px rgba(120,80,255,.4),
-      0 0 20px rgba(0,200,255,.25);
-  }
-  .review-meta {
-    color: #304bff;
-  }
-  .contact-val {
-    color: #1a1a2a;
-  }
-  .info-ticker {
-    background: rgba(255,255,255,.5);
-    border: 1px solid rgba(120,80,255,.25);
-    color: #1a1a2a;
-    box-shadow:
-      0 16px 32px rgba(0,0,0,.15),
-      0 0 40px rgba(120,80,255,.3);
-  }
+  .service-topline { font-size:1rem; }
+  .service-desc { font-size:.9rem; }
+  .hours-list,
+  .contact-line { font-size:.9rem; }
 }
 </style>
 </head>
 
 <body>
 
-<header class="site-header">
-  <div class="header-inner">
+<!-- =======================================
+     STICKY HEADER
+======================================= -->
+<header class="site-header-wrapper" id="siteHeader">
+  <div class="wrapper site-header">
+
     <div class="shop-name">NEXT LEVEL BARBERSHOP</div>
 
-    <div class="nav-row">
-      <a class="call-pill" href="tel:+15055036216">📞 (505) 503-6216</a>
-
-      <nav class="nav-links">
-        <a class="nav-btn" href="#welcome">Home</a>
-        <a class="nav-btn" href="#barbers">Our Barbers</a>
-        <a class="nav-btn" href="#reviews">Reviews</a>
-        <a class="nav-btn" href="#services">Services</a>
-        <a class="nav-btn" href="#hours">Hours</a>
-        <a class="nav-btn" href="#contact">Contact</a>
-        <a class="nav-btn" href="#location">Location</a>
-      </nav>
+    <div class="call-row">
+      <a class="call-button" href="tel:+15055036216">
+        <span>(505) 503-6216</span>
+      </a>
     </div>
+
+    <nav class="nav-row">
+      <a class="nav-pill" href="#welcome">Home</a>
+      <a class="nav-pill" href="#barbers">Our Barbers</a>
+      <a class="nav-pill" href="#reviews">Reviews</a>
+      <a class="nav-pill" href="#services">Services</a>
+      <a class="nav-pill" href="#hours">Hours</a>
+      <a class="nav-pill" href="#contact">Contact</a>
+      <a class="nav-pill" href="#location">Location</a>
+    </nav>
+
   </div>
 </header>
 
-<main>
+<main class="wrapper">
 
-  <!-- WELCOME -->
-  <section id="welcome" class="section-card">
-    <div class="section-title-row centered">
-      <span class="section-heading">WELCOME TO</span>
-      <div class="section-bigtitle">NEXT LEVEL BARBERSHOP</div>
-      <div class="section-underline"></div>
-    </div>
+  <!-- =======================================
+       WELCOME / HERO
+  ======================================= -->
+  <section id="welcome" class="page-section first-section-fix reveal-section section-card">
+    <div class="section-card-content">
 
-    <p class="section-body-text">
-      Professional cuts, sharp fades, and a clean vibe. Locally owned.
-      Walk-ins welcome. Appointments preferred. Payment method can vary
-      by barber — just confirm when you book.
-    </p>
+      <div class="section-eyebrow">WELCOME TO</div>
 
-    <!-- local / walk-in / appt row -->
-    <div class="badge-row">
-      <div class="badge-pill">🏠 Locally Owned</div>
-      <div class="badge-pill">🚶‍♂️ Walk-Ins Welcome</div>
-      <div class="badge-pill">📅 Appointments Preferred</div>
-    </div>
+      <h1 class="section-headline">
+        NEXT LEVEL BARBERSHOP
+      </h1>
 
-    <!-- payment row -->
-    <div class="badge-row">
-      <div class="badge-pill">💵 Cash</div>
-      <div class="badge-pill">🍎 Apple Pay</div>
-      <div class="badge-pill">💸 Cash App</div>
-      <div class="badge-pill">📲 Venmo</div>
-    </div>
+      <div class="headline-underline"></div>
 
-    <!-- ticker -->
-    <div class="info-ticker">
-      <span>📍 ALBUQUERQUE, NM</span>
-      <span>🍔 RIGHT NEXT TO BOB’S BURGERS</span>
-      <span>🚶‍♂️ WALK-INS WELCOME</span>
-      <span>📅 APPOINTMENTS PREFERRED</span>
-    </div>
-  </section>
+      <p class="section-subtext">
+        Professional cuts, sharp fades, and a clean vibe.
+        Locally owned. Walk-ins welcome.
+        Appointments preferred.
+        Payment method can vary by barber — just confirm when you book.
+      </p>
 
-  <!-- BARBERS -->
-  <section id="barbers" class="section-card">
-    <div class="section-title-row">
-      <span class="section-heading">OUR BARBERS</span>
-      <div class="section-bigtitle">Book directly with your barber or call the shop. Real craft, no gimmicks.</div>
-      <div class="section-underline"></div>
-    </div>
-
-    <div class="barber-grid">
-
-      <div class="card-inner">
-        <div class="barber-name">
-          <span>VINCENT (OWNER)</span>
+      <!-- badges row 1 -->
+      <div class="badge-row">
+        <div class="badge-chip">
+          <span class="emoji">🏠</span>
+          <span>Locally Owned</span>
         </div>
-        <div class="card-line">Founder. Fader. Visionary.</div>
-        <div class="mini-btn-row">
-          <a class="mini-btn" href="tel:+15055036216">📞 Call to Book</a>
+        <div class="badge-chip">
+          <span class="emoji">🧍</span>
+          <span>Walk-Ins Welcome</span>
+        </div>
+        <div class="badge-chip">
+          <span class="emoji">📅</span>
+          <span>Appointments Preferred</span>
         </div>
       </div>
 
-      <div class="card-inner">
-        <div class="barber-name">
-          <span>Z WALUW</span>
+      <!-- badges row 2 -->
+      <div class="badge-row">
+        <div class="badge-chip">
+          <span class="emoji">💵</span>
+          <span>Cash</span>
         </div>
-        <div class="card-line">Precision in every pass.</div>
-        <div class="mini-btn-row">
-          <a class="mini-btn" href="tel:+15055036216">📞 Call to Book</a>
+        <div class="badge-chip">
+          <span class="emoji">🍎</span>
+          <span>Apple&nbsp;Pay</span>
         </div>
-      </div>
-
-      <div class="card-inner">
-        <div class="barber-name">
-          <span>G-MO</span>
+        <div class="badge-chip">
+          <span class="emoji">💸</span>
+          <span>Cash&nbsp;App</span>
         </div>
-        <div class="card-line">Style that speaks before you do.</div>
-        <div class="mini-btn-row">
-          <a class="mini-btn" href="tel:+15055036216">📞 Call to Book</a>
-        </div>
-      </div>
-
-      <div class="card-inner">
-        <div class="barber-name">
-          <span>DESHAUN</span>
-        </div>
-        <div class="card-line">Sharp fades. Chill vibes.</div>
-        <div class="mini-btn-row">
-          <a class="mini-btn" href="tel:+15055036216">📞 Call to Book</a>
+        <div class="badge-chip">
+          <span class="emoji">📲</span>
+          <span>Venmo</span>
         </div>
       </div>
 
-      <div class="card-inner">
-        <div class="barber-name">
-          <span>CASH</span>
+      <!-- location / ticker -->
+      <div class="ticker-box">
+        <div class="ticker-line">
+          <div class="ticker-item">
+            <span class="emoji">📍</span>
+            <span>Albuquerque, NM</span>
+          </div>
+          <div class="ticker-item">
+            <span class="emoji">🍔</span>
+            <span>Right next to Bob’s Burgers</span>
+          </div>
         </div>
-        <div class="card-line">Quick with the clippers, real with the results.</div>
-        <div class="mini-btn-row">
-          <a class="mini-btn" href="tel:+15055036216">💬 Book w/ Cash</a>
-        </div>
-      </div>
-
-      <div class="card-inner">
-        <div class="barber-name">
-          <span>JONNY</span>
-        </div>
-        <div class="card-line">Where art meets the edge.</div>
-        <div class="mini-btn-row">
-          <a class="mini-btn" href="tel:+15055036216">💬 Book w/ Jonny</a>
-        </div>
-      </div>
-
-      <div class="card-inner">
-        <div class="barber-name">
-          <span>TAYLOR</span>
-        </div>
-        <div class="card-line">
-          Clean blends. Subtle structure. Quiet precision.
-        </div>
-        <div class="mini-btn-row">
-          <a class="mini-btn" href="tel:+15055036216">💬 Book w/ Taylor</a>
+        <div class="ticker-line">
+          <div class="ticker-item">
+            <span class="emoji">🧍</span>
+            <span>Walk-Ins Welcome</span>
+          </div>
+          <div class="ticker-item">
+            <span class="emoji">📅</span>
+            <span>Appointments Preferred</span>
+          </div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- REVIEWS -->
-  <section id="reviews" class="section-card">
-    <div class="section-title-row">
-      <span class="section-heading">WHAT PEOPLE ARE SAYING</span>
-      <div class="section-bigtitle">Real clients. Real fades.</div>
-      <div class="section-underline"></div>
+  <!-- =======================================
+       BARBERS
+  ======================================= -->
+  <section id="barbers" class="page-section reveal-section section-card">
+    <div class="section-card-content">
+      <div class="section-eyebrow">OUR BARBERS</div>
+      <div class="section-headline">Meet the crew</div>
+      <div class="headline-underline"></div>
+
+      <p class="section-subtext" style="max-width:60ch;">
+        Book directly with your barber or call the shop.
+        Real craft, no gimmicks.
+      </p>
+
+      <div class="barbers-wrapper">
+
+        <div class="barber-card">
+          <div class="barber-name">VINCENT (OWNER)</div>
+          <div class="barber-desc">
+            Founder. Fader. Visionary.
+          </div>
+          <a class="call-btn" href="tel:+15055036216">Call to Book</a>
+        </div>
+
+        <div class="barber-card">
+          <div class="barber-name">Z WALUW</div>
+          <div class="barber-desc">
+            Precision in every pass.
+          </div>
+          <a class="call-btn" href="tel:+15055036216">Call to Book</a>
+        </div>
+
+        <div class="barber-card">
+          <div class="barber-name">G-MO</div>
+          <div class="barber-desc">
+            Style that speaks before you do.
+          </div>
+          <a class="call-btn" href="tel:+15055036216">Call to Book</a>
+        </div>
+
+        <div class="barber-card">
+          <div class="barber-name">DESHAUN</div>
+          <div class="barber-desc">
+            Sharp fades. Chill vibes.
+          </div>
+          <a class="call-btn" href="tel:+15055036216">Call to Book</a>
+        </div>
+
+        <div class="barber-card">
+          <div class="barber-name">CASH</div>
+          <div class="barber-desc">
+            Quick with the clippers, real with the results.
+          </div>
+          <a class="call-btn" href="tel:+15055036216">Book w/ Cash</a>
+        </div>
+
+        <div class="barber-card">
+          <div class="barber-name">JONNY</div>
+          <div class="barber-desc">
+            Where art meets the edge.
+          </div>
+          <a class="call-btn" href="tel:+15055036216">Book w/ Jonny</a>
+        </div>
+
+        <div class="barber-card">
+          <div class="barber-name">TAYLOR</div>
+          <div class="barber-desc">
+            Clean blends. Subtle structure. Quiet precision.
+          </div>
+          <a class="call-btn" href="tel:+15055036216">Book w/ Taylor</a>
+        </div>
+
+      </div>
     </div>
+  </section>
 
-    <div class="reviews-grid">
+  <!-- =======================================
+       REVIEWS
+  ======================================= -->
+  <section id="reviews" class="page-section reveal-section section-card">
+    <div class="section-card-content">
 
-      <div class="review-card">
-        <div class="review-badge">
-          🔥 Cleanest fade I’ve had in years • <span>5★</span>
-        </div>
-        <div class="review-text">
-          “Attention to detail is insane. Lined me up perfect, beard crispy, zero rush.
-          If you’re picky, this is where you go.”
-        </div>
-        <div class="review-meta">— Ryan M. (cut by Vincent)</div>
-      </div>
+      <div class="section-eyebrow">WHAT PEOPLE ARE SAYING</div>
+      <div class="section-headline">Real clients. Real fades.</div>
+      <div class="headline-underline"></div>
 
-      <div class="review-card">
-        <div class="review-badge">
-          😌 Chill vibe / professional work • <span>5★</span>
-        </div>
-        <div class="review-text">
-          “Felt welcome soon as I walked in. Music good, convo good, cut even better.
-          I’ll be back every week.”
-        </div>
-        <div class="review-meta">— Alexis R. (cut by Deshaun)</div>
-      </div>
+      <p class="section-subtext" style="max-width:60ch;">
+        Highlights from recent 5★ Google reviews.
+        Zero gimmicks — just real feedback.
+      </p>
 
-      <div class="review-card">
-        <div class="review-badge">
-          ✂️ Fixed my last bad haircut • <span>5★</span>
-        </div>
-        <div class="review-text">
-          “They literally saved me. Cleaned up a messed up fade and made it
-          look intentional. This is skill.”
-        </div>
-        <div class="review-meta">— Jordan C. (cut by Jonny)</div>
-      </div>
+      <div class="reviews-grid">
 
-      <div class="review-card">
-        <div class="review-badge">
-          🥶 Precision in every pass • <span>5★</span>
+        <div class="review-card">
+          <div class="review-head">
+            <span class="emoji">🔥</span>
+            <span>Cleanest fade I’ve had in years</span>
+            <span class="review-stars">5★</span>
+          </div>
+          <div class="review-body">
+            “Attention to detail is insane. Lined me up perfect, beard crispy,
+            zero rush. If you’re picky, this is where you go.”
+          </div>
+          <div class="review-name">— Alex R. (cut by Vincent)</div>
         </div>
-        <div class="review-text">
-          “Z Waluw does not miss. Crispy lineup every single time,
-          blends are stupid clean.”
+
+        <div class="review-card">
+          <div class="review-head">
+            <span class="emoji">🎧</span>
+            <span>Chill vibe / professional work</span>
+            <span class="review-stars">5★</span>
+          </div>
+          <div class="review-body">
+            “Felt welcome soon as I walked in. Music good, convo good,
+            cut even better. I’ll be back every week.”
+          </div>
+          <div class="review-name">— Marcus T. (cut by Cash)</div>
         </div>
-        <div class="review-meta">— Miguel S. (cut by Z Waluw)</div>
+
+        <div class="review-card">
+          <div class="review-head">
+            <span class="emoji">✂️</span>
+            <span>Fixed my last bad haircut</span>
+            <span class="review-stars">5★</span>
+          </div>
+          <div class="review-body">
+            “They literally saved me. Cleaned up a messed up fade and
+            made it look intentional. This is skill.”
+          </div>
+          <div class="review-name">— Brianna L. (cut by Jonny)</div>
+        </div>
+
       </div>
 
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <section id="services" class="section-card">
-    <div class="section-title-row">
-      <span class="section-heading">OUR SERVICES</span>
-      <div class="section-bigtitle">Straight cuts. Clean tapers. Sharp detail. No gimmicks.</div>
-      <div class="section-underline"></div>
-    </div>
+  <!-- =======================================
+       SERVICES
+  ======================================= -->
+  <section id="services" class="page-section reveal-section section-card">
+    <div class="section-card-content">
 
-    <div class="services-grid">
+      <div class="section-eyebrow">OUR SERVICES</div>
+      <div class="section-headline">Straight cuts. Clean tapers. Sharp detail.</div>
+      <div class="headline-underline"></div>
 
-      <div class="service-card">
-        <div class="service-topline">
+      <p class="section-subtext" style="max-width:60ch;">
+        No nonsense. Just quality work.
+        Prices can vary by barber or length — ask when you book.
+      </p>
+
+      <div class="services-grid">
+
+        <div class="service-card">
           <div class="service-left">
-            <span>🎖️ Military / First Responder</span>
+            <div class="service-topline">
+              <span class="emoji">🎖️</span>
+              <span>Military / First Responder</span>
+            </div>
+            <div class="service-desc">
+              Discounted cuts for military, veterans, police, firefighters,
+              EMTs & first responders.
+            </div>
           </div>
           <div class="service-price">$25</div>
         </div>
-        <div class="service-desc">
-          Discounted cut for military, veterans, police, firefighters, EMTs & first responders.
-        </div>
-      </div>
 
-      <div class="service-card">
-        <div class="service-topline">
+        <div class="service-card">
           <div class="service-left">
-            <span>💈 Haircut (Standard)</span>
+            <div class="service-topline">
+              <span class="emoji">💇‍♂️</span>
+              <span>Haircut (Standard)</span>
+            </div>
+            <div class="service-desc">
+              Classic or modern — fades, tapers, or scissor work.
+              Detailed style, blended right.
+            </div>
           </div>
           <div class="service-price">$30</div>
         </div>
-        <div class="service-desc">
-          Classic or modern — fades, tapers, or scissor work.
-          Detailed style may vary price.
-        </div>
-      </div>
 
-      <div class="service-card">
-        <div class="service-topline">
+        <div class="service-card">
           <div class="service-left">
-            <span>🪒 Line-Up / Edge-Up</span>
+            <div class="service-topline">
+              <span class="emoji">✂️</span>
+              <span>Line Up / Edge-Up</span>
+            </div>
+            <div class="service-desc">
+              Crisp lineup around the edges to keep it sharp
+              between full cuts.
+            </div>
           </div>
           <div class="service-price">$15</div>
         </div>
-        <div class="service-desc">
-          Full lineup: beard, hairline, taper clean-up.
-          Keep it sharp, balanced, locked-in.
-        </div>
-      </div>
 
-      <div class="service-card">
-        <div class="service-topline">
+        <div class="service-card">
           <div class="service-left">
-            <span>🔥 Skin Fade / Taper</span>
+            <div class="service-topline">
+              <span class="emoji">🔥</span>
+              <span>Skin Fade / Taper</span>
+            </div>
+            <div class="service-desc">
+              Down to the skin with a clean blend, or hard taper.
+              Your fade. Your finish.
+            </div>
           </div>
           <div class="service-price">$30+</div>
         </div>
-        <div class="service-desc">
-          Down to the skin with a clean blend, no hard steps. Your fade, your finish.
-        </div>
-      </div>
 
-      <div class="service-card">
-        <div class="service-topline">
+        <div class="service-card">
           <div class="service-left">
-            <span>🧼 Shampoo Service</span>
-          </div>
-          <div class="service-price">$5</div>
-        </div>
-        <div class="service-desc">
-          Fresh rinse, product out, clean scalp. Feel brand new.
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-topline">
-          <div class="service-left">
-            <span>🧔 Beard Trim / Line Up</span>
+            <div class="service-topline">
+              <span class="emoji">🧔</span>
+              <span>Beard Trim / Line-Up</span>
+            </div>
+            <div class="service-desc">
+              Beard shape, cleanup, razor work.
+              Keep it lined and intentional.
+            </div>
           </div>
           <div class="service-price">$15</div>
         </div>
-        <div class="service-desc">
-          Clean edges, even bulk, crisp shape. Beard stays talking.
-        </div>
-      </div>
 
-      <div class="service-card">
-        <div class="service-topline">
+        <div class="service-card">
           <div class="service-left">
-            <span>💇 Long Hair / Past Shoulders</span>
+            <div class="service-topline">
+              <span class="emoji">💈</span>
+              <span>Skin Fade / Taper + Beard</span>
+            </div>
+            <div class="service-desc">
+              Full fade plus beard detail.
+              Total reset. Walk out photo-ready.
+            </div>
+          </div>
+          <div class="service-price">$45</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-left">
+            <div class="service-topline">
+              <span class="emoji">🧴</span>
+              <span>Shampoo / Rinse</span>
+            </div>
+            <div class="service-desc">
+              Rinse, clean, refresh. Add it to the cut or beard service.
+            </div>
+          </div>
+          <div class="service-price">$15</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-left">
+            <div class="service-topline">
+              <span class="emoji">🧑‍🎓</span>
+              <span>Kids Cut (Under 12)</span>
+            </div>
+            <div class="service-desc">
+              Clean, comfortable, patient.
+              Keep ‘em looking sharp.
+            </div>
+          </div>
+          <div class="service-price">$25</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-left">
+            <div class="service-topline">
+              <span class="emoji">🧼</span>
+              <span>Hot Towel / Razor Shave</span>
+            </div>
+            <div class="service-desc">
+              Classic barbershop treatment. Towel, steam, blade.
+            </div>
+          </div>
+          <div class="service-price">$30</div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-left">
+            <div class="service-topline">
+              <span class="emoji">💇‍♀️</span>
+              <span>Long Hair / Past Shoulders</span>
+            </div>
+            <div class="service-desc">
+              Shaping & style for longer lengths.
+              Balanced look, no bulk lines.
+            </div>
           </div>
           <div class="service-price">$35</div>
         </div>
-        <div class="service-desc">
-          Scissor-focused shaping, layer work, extra time for longer lengths.
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================
+       HOURS / CONTACT / LOCATION
+  ======================================= -->
+  <section id="hours" class="page-section reveal-section section-card">
+    <div class="section-card-content">
+
+      <div class="section-eyebrow">VISIT US</div>
+      <div class="section-headline">Hours • Contact • Directions</div>
+      <div class="headline-underline"></div>
+
+      <div class="info-flex">
+
+        <div class="hours-card" id="contact">
+          <div class="subheadline">Hours</div>
+          <div class="hours-list">
+            <div>Mon – Thu: 10:00 AM – 7:00 PM</div>
+            <div>Fri – Sat: 10:00 AM – 8:00 PM</div>
+            <div>Sun: 11:00 AM – 5:00 PM</div>
+            <div style="opacity:.7;font-size:.8rem;margin-top:.5rem;">
+              (Hours can vary by barber. Call or DM to confirm.)
+            </div>
+          </div>
         </div>
-      </div>
 
-    </div>
-  </section>
+        <div class="contact-card">
+          <div class="subheadline">Contact</div>
+          <div class="contact-line">
+            <span class="emoji">📞</span>
+            <span>
+              <a href="tel:+15055036216"
+                 style="color:inherit;text-decoration:none;font-weight:500;">
+                (505) 503-6216
+              </a>
+            </span>
+          </div>
+          <div class="contact-line">
+            <span class="emoji">📍</span>
+            <span>
+              6510 Paradise Blvd NW<br/>
+              Unit D<br/>
+              Albuquerque, NM 87114
+            </span>
+          </div>
+          <div class="contact-line">
+            <span class="emoji">💬</span>
+            <span>Walk-ins welcome. Appointments preferred.</span>
+          </div>
+        </div>
 
-  <!-- HOURS -->
-  <section id="hours" class="section-card">
-    <div class="section-title-row">
-      <span class="section-heading">BUSINESS HOURS</span>
-      <div class="section-bigtitle">When we’re cutting.</div>
-      <div class="section-underline"></div>
-    </div>
+        <div class="map-card" id="location">
+          <div class="subheadline">Find Us</div>
 
-    <div class="hours-grid">
+          <div class="map-frame-wrapper">
+            <!-- Replace the src with your official embed link -->
+            <iframe
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3341.0!2d-106.72503!3d35.19173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1sNext%20Level%20Barber%20Shop!2s6510%20Paradise%20Blvd%20NW%20Unit%20D%2C%20Albuquerque%2C%20NM%2087114!5e0!3m2!1sen!2sus!4v0000000000000">
+            </iframe>
+          </div>
 
-      <div class="hours-box">
-        <div>Mon</div>
-        <div>10:00a – 7:00p</div>
-      </div>
-      <div class="hours-box">
-        <div>Tue</div>
-        <div>10:00a – 7:00p</div>
-      </div>
-      <div class="hours-box">
-        <div>Wed</div>
-        <div>10:00a – 7:00p</div>
-      </div>
-      <div class="hours-box">
-        <div>Thu</div>
-        <div>10:00a – 7:00p</div>
-      </div>
-      <div class="hours-box">
-        <div>Fri</div>
-        <div>10:00a – 7:00p</div>
-      </div>
-      <div class="hours-box">
-        <div>Sat</div>
-        <div>10:00a – 4:00p</div>
-      </div>
-      <div class="hours-box">
-        <div>Sun</div>
-        <div>Closed</div>
-      </div>
+          <div class="map-buttons">
+            <a class="map-btn"
+               href="https://maps.apple.com/?address=6510%20Paradise%20Blvd%20NW,%20Unit%20D,%20Albuquerque,%20NM%2087114"
+               target="_blank" rel="noopener">
+              <span class="emoji">🍎</span>
+              <span>Apple Maps</span>
+            </a>
 
-    </div>
-  </section>
+            <a class="map-btn"
+               href="https://www.google.com/maps/place/Next+Level+Barber+Shop+Albuquerque"
+               target="_blank" rel="noopener">
+              <span class="emoji">📍</span>
+              <span>Google Maps</span>
+            </a>
+          </div>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section-card">
-    <div class="section-title-row">
-      <span class="section-heading">CONTACT</span>
-      <div class="section-bigtitle">Call or pull up.</div>
-      <div class="section-underline"></div>
-    </div>
+        </div>
 
-    <div class="contact-lines">
-      <div class="contact-line">
-        <span class="contact-label">📍 Address:</span>
-        <span class="contact-val">6510 Paradise Blvd NW, Unit D, Albuquerque, NM 87114</span>
-      </div>
-      <div class="contact-line">
-        <span class="contact-label">📞 Phone:</span>
-        <span class="contact-val">(505) 503-6216</span>
       </div>
     </div>
   </section>
 
-  <!-- LOCATION / MAP -->
-  <section id="location" class="section-card">
-    <div class="section-title-row">
-      <span class="section-heading">FIND US</span>
-      <div class="section-bigtitle">Right next to Bob’s Burgers.</div>
-      <div class="section-underline"></div>
-    </div>
-
-    <div class="map-card">
-      <div class="map-buttons">
-        <a href="https://www.google.com/maps/place/Next+Level+Barber+Shop+Albuquerque,+6510+Paradise+Blvd+NW+unit+d,+Albuquerque,+NM+87114" target="_blank" rel="noopener">
-          📍 Google Maps
-        </a>
-        <a href="https://maps.apple.com/?address=6510%20Paradise%20Blvd%20NW%20Unit%20D%2C%20Albuquerque%2C%20NM%2C%2087114%2C%20United%20States&ll=35.1917307%2C-106.7250303&q=Next%20Level%20Barbershop" target="_blank" rel="noopener">
-          🍎 Apple Maps
-        </a>
-      </div>
-
-      <!-- replace src with your actual embed iframe if you have one -->
-      <iframe
-        class="map-embed"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3362.5575!2d-106.7250303!3d35.1917307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87226f7a1054dd87%3A0x7736d7f662fd5a2b!2sNext%20Level%20Barber%20Shop%20Albuquerque!5e0!3m2!1sen!2sus!4v0000000000000"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-
-      <div style="margin-top:.75rem;font-size:.7rem;line-height:1.4;color:rgba(255,255,255,.7);text-align:center;">
-        Albuquerque, NM • Walk-ins welcome • Appointments preferred
-      </div>
-    </div>
-  </section>
+  <!-- =======================================
+       FOOTER
+  ======================================= -->
+  <footer class="footer">
+    <div>© Next Level Barbershop • Albuquerque, NM</div>
+    <div style="opacity:.7;">Walk-ins welcome • Appointments preferred</div>
+  </footer>
 
 </main>
 
+<!-- =======================================
+     INTERACTION / SCROLL SCRIPT
+======================================= -->
 <script>
-/* Scroll pop in/out for each .section-card */
-document.addEventListener("DOMContentLoaded", () => {
-  const cards = document.querySelectorAll('.section-card');
+// Sticky header shrink on scroll
+const headerEl = document.getElementById('siteHeader');
 
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+function handleHeader() {
+  if (window.scrollY > 30) {
+    headerEl.classList.add('shrink');
+  } else {
+    headerEl.classList.remove('shrink');
+  }
+}
+window.addEventListener('scroll', handleHeader, { passive: true });
+
+// Reveal / pop-in on scroll
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
+        entry.target.classList.add('revealed');
       } else {
-        entry.target.classList.remove('in-view');
+        // remove on exit so you get that pop again when scrolling back
+        entry.target.classList.remove('revealed');
       }
     });
-  }, {
-    root: null,
-    threshold: 0.4
-  });
+  },
+  { threshold: 0.15 }
+);
 
-  cards.forEach(card => obs.observe(card));
+document.querySelectorAll('.reveal-section').forEach((section) => {
+  observer.observe(section);
 });
 </script>
 
 </body>
 </html>
+```0
