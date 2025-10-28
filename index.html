@@ -1,1950 +1,1617 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Next Level BarberShop</title>
-
-  <meta name="description" content="Real cuts, sharp fades, and a clean vibe. Book with Vincent, Ca$h, Jonny, Taylor & more. Walk-ins welcome." />
-  <meta property="og:title" content="Next Level BarberShop" />
-  <meta property="og:description" content="Locally owned. Walk-ins welcome. Appointments preferred. Right next to Bob's Burgers." />
-  <meta property="og:type" content="website" />
-  <link rel="icon" type="image/png" href="favicon.png" />
-
-  <style>
-    /* ========= THEME ========= */
-    :root {
-      --bg:#0b0b0d;
-      --bg-grad-1:#1f1147;
-      --bg-grad-2:#083344;
-
-      --panel:#121216;
-      --panel-alt:#1a1a22;
-
-      --text-primary:#f5f6f7;
-      --text-dim:#a5a7ac;
-
-      --accent-1:#7c3aed;
-      --accent-2:#22d3ee;
-
-      --border:rgba(255,255,255,.12);
-      --border-subtle:rgba(255,255,255,.06);
-      --chip-bg:rgba(255,255,255,.08);
-      --header-bg:rgba(12,12,16,.8);
-
-      --marquee-bg:rgba(0,0,0,.4);
-
-      --parallax-y:0px;
-      --parallax-y-half:0px;
-
-      --rim-color:rgba(255,255,255,.12);
-      --rim-shadow:0 1px 2px rgba(255,255,255,.18);
-      --lift-shadow:0 16px 32px rgba(0,0,0,.7);
-
-      --color-glow-shadow:
-        0 0 24px rgba(124,58,237,.45),
-        0 0 48px rgba(34,211,238,.35);
-
-      --spotlight-glow:
-        0 24px 44px rgba(0,0,0,.8),
-        0 0 40px rgba(124,58,237,.8),
-        0 0 80px rgba(34,211,238,.6);
-
-      --section-halo-start:rgba(124,58,237,.45);
-      --section-halo-mid:rgba(34,211,238,.28);
-    }
-
-    @media (prefers-color-scheme: light){
-      :root {
-        --bg:#f7f7fb;
-        --bg-grad-1:#e0e7ff;
-        --bg-grad-2:#cffafe;
-
-        --panel:#ffffff;
-        --panel-alt:#ffffff;
-
-        --text-primary:#0f172a;
-        --text-dim:#4b5563;
-
-        --accent-1:#7c3aed;
-        --accent-2:#06b6d4;
-
-        --border:rgba(15,23,42,.14);
-        --border-subtle:rgba(15,23,42,.06);
-        --chip-bg:rgba(15,23,42,.07);
-        --header-bg:rgba(255,255,255,.92);
-
-        --marquee-bg:rgba(15,23,42,.07);
-
-        --rim-color:rgba(0,0,0,.14);
-        --rim-shadow:0 1px 2px rgba(0,0,0,.18);
-        --lift-shadow:0 16px 32px rgba(15,23,42,.17);
-
-        --color-glow-shadow:
-          0 0 24px rgba(124,58,237,.35),
-          0 0 48px rgba(6,182,212,.28);
-
-        --spotlight-glow:
-          0 24px 44px rgba(15,23,42,.3),
-          0 0 32px rgba(124,58,237,.6),
-          0 0 64px rgba(6,182,212,.45);
-
-        --section-halo-start:rgba(124,58,237,.3);
-        --section-halo-mid:rgba(6,182,212,.24);
-      }
-    }
-
-    /* ========= RESET ========= */
-    * {
-      box-sizing:border-box;
-      -webkit-font-smoothing:antialiased;
-    }
-    html,body { height:100%; }
-    html { scroll-behavior:smooth; }
-    body {
-      margin:0;
-      font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      background:
-        radial-gradient(1200px 800px at 10% -10%,var(--bg-grad-1) 0%,transparent 40%),
-        radial-gradient(1000px 600px at 110% 10%,var(--bg-grad-2) 0%,transparent 45%),
-        var(--bg);
-      color:var(--text-primary);
-      line-height:1.55;
-      position:relative;
-      overflow-x:hidden;
-    }
-    img { display:block; max-width:100%; }
-    a   { color:inherit; text-decoration:none; }
-
-    .wrap {
-      max-width:1120px;
-      margin:auto;
-      padding:0 20px;
-      position:relative;
-      z-index:3;
-    }
-
-    /* ========= BACKGROUND SIGNATURE ========= */
-    .brand-bg {
-      position:fixed;
-      left:50%;
-      top:40vh;
-      transform:translate3d(-50%,var(--parallax-y),0);
-      z-index:0;
-      text-align:center;
-      pointer-events:none;
-      user-select:none;
-      opacity:0.14;
-      filter:
-        drop-shadow(0 0 8px rgba(124,58,237,.6))
-        drop-shadow(0 0 24px rgba(34,211,238,.4));
-      padding:0 16px;
-      will-change:transform,filter;
-      transition:transform .15s linear, filter .15s linear;
-    }
-    @media (max-width:640px){
-      .brand-bg {
-        opacity:0.22;
-        filter:
-          drop-shadow(0 0 10px rgba(124,58,237,.8))
-          drop-shadow(0 0 32px rgba(34,211,238,.55));
-      }
-    }
-    @media (prefers-color-scheme: light){
-      .brand-bg { opacity:0.12; mix-blend-mode:multiply; }
-    }
-    .brand-bg-line1 {
-      font-weight:800;
-      letter-spacing:.25em;
-      text-transform:uppercase;
-      font-size:clamp(28px,4vw,44px);
-      line-height:1.15;
-      background:linear-gradient(90deg,#7c3aed 0%,#22d3ee 100%);
-      background-size:200% 100%;
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      text-shadow:
-        0 0 18px rgba(124,58,237,.7),
-        0 0 48px rgba(34,211,238,.5);
-      white-space:nowrap;
-      animation:glowCycle 3s ease-in-out infinite;
-    }
-    .brand-bg-line2 {
-      display:inline-block;
-      margin-top:8px;
-      font-size:11px;
-      font-weight:600;
-      line-height:1.2;
-      letter-spacing:.4em;
-      color:#fff;
-      background:rgba(0,0,0,.4);
-      border:1px solid rgba(255,255,255,.22);
-      border-radius:6px;
-      padding:4px 8px;
-      text-shadow:0 0 8px rgba(0,0,0,.8);
-    }
-    @keyframes glowCycle {
-      0%   { filter:drop-shadow(0 0 6px rgba(124,58,237,.7)) drop-shadow(0 0 18px rgba(34,211,238,.4)); background-position:0% 0%; }
-      20%  { filter:drop-shadow(0 0 10px rgba(124,58,237,1)) drop-shadow(0 0 28px rgba(34,211,238,.7)); background-position:100% 0%; }
-      35%  { filter:drop-shadow(0 0 7px rgba(124,58,237,.8)) drop-shadow(0 0 20px rgba(34,211,238,.5)); background-position:50% 0%; }
-      100% { filter:drop-shadow(0 0 6px rgba(124,58,237,.7)) drop-shadow(0 0 18px rgba(34,211,238,.4)); background-position:0% 0%; }
-    }
-
-    /* ========= HEADER ========= */
-    header.site-header {
-      position:sticky;
-      top:0;
-      z-index:100;
-      background:var(--header-bg);
-      backdrop-filter:saturate(1.2) blur(8px);
-      border-bottom:1px solid var(--border);
-      transition:
-        transform .28s ease,
-        box-shadow .28s ease,
-        background .28s ease;
-      will-change:transform,box-shadow;
-    }
-    header.site-header.hide {
-      transform:translateY(-100%);
-    }
-    header.site-header.scrolled {
-      box-shadow:
-        var(--rim-shadow),
-        0 20px 40px rgba(0,0,0,.8),
-        0 0 30px rgba(124,58,237,.35);
-    }
-    @media (prefers-color-scheme: light){
-      header.site-header.scrolled {
-        box-shadow:
-          var(--rim-shadow),
-          0 20px 40px rgba(15,23,42,.25),
-          0 0 30px rgba(124,58,237,.25);
-      }
-    }
-
-    /* MOBILE HEADER */
-    .header-mobile {
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      padding:14px 20px;
-    }
-    .mobile-top-row {
-      width:100%;
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      flex-wrap:nowrap;
-      gap:12px;
-    }
-    .brand-text {
-      font-weight:800;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      font-size:clamp(16px,2vw,20px);
-      line-height:1.2;
-      background:linear-gradient(90deg,#7c3aed 0%,#22d3ee 100%);
-      background-size:200% 100%;
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      text-shadow:
-        0 0 10px rgba(124,58,237,.6),
-        0 0 20px rgba(34,211,238,.4);
-      filter:drop-shadow(0 0 6px rgba(124,58,237,.6));
-      animation:brandPulse 3s ease-in-out infinite;
-      white-space:nowrap;
-    }
-    @keyframes brandPulse {
-      0%   { filter:drop-shadow(0 0 6px rgba(124,58,237,.6)); background-position:0% 0%; }
-      20%  { filter:drop-shadow(0 0 10px rgba(124,58,237,1)) drop-shadow(0 0 18px rgba(34,211,238,.6)); background-position:100% 0%; }
-      35%  { filter:drop-shadow(0 0 7px rgba(124,58,237,.8)) drop-shadow(0 0 12px rgba(34,211,238,.5)); background-position:50% 0%; }
-      100% { filter:drop-shadow(0 0 6px rgba(124,58,237,.6)); background-position:0% 0%; }
-    }
-    .call-now-mini {
-      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-      color:#fff;
-      font-size:13px;
-      font-weight:600;
-      padding:8px 10px;
-      border-radius:10px;
-      line-height:1.2;
-      white-space:nowrap;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width:max-content;
-      border:0;
-      box-shadow:
-        var(--rim-shadow),
-        var(--lift-shadow),
-        var(--color-glow-shadow);
-    }
-    .call-now-mini:active { transform:scale(.98); }
-
-    .mobile-nav-row {
-      display:flex;
-      flex-direction:column;
-    }
-    /* MOBILE NAV LINKS (no pill background) */
-    nav.primary-nav-mobile {
-      display:flex;
-      flex-wrap:nowrap;
-      gap:16px;
-      overflow-x:auto;
-      -webkit-overflow-scrolling:touch;
-      scrollbar-width:none;
-      width:100%;
-    }
-    nav.primary-nav-mobile::-webkit-scrollbar { display:none; }
-    nav.primary-nav-mobile a {
-      flex:0 0 auto;
-      font-size:14px;
-      line-height:1.2;
-      font-weight:600;
-      padding:10px 0;
-      border-radius:0;
-      background:transparent;
-      border:0;
-      color:var(--text-primary);
-      text-shadow:
-        0 0 6px rgba(124,58,237,.6),
-        0 0 16px rgba(34,211,238,.4);
-      box-shadow:none;
-      border-bottom:2px solid transparent;
-      transition:all .18s ease;
-      will-change:color, text-shadow, border-color;
-      text-decoration:none;
-    }
-    nav.primary-nav-mobile a:hover,
-    nav.primary-nav-mobile a:focus {
-      color:#fff;
-      border-bottom:2px solid var(--accent-2);
-      text-shadow:
-        0 0 10px rgba(255,255,255,.9),
-        0 0 24px rgba(124,58,237,.8),
-        0 0 40px rgba(34,211,238,.7);
-    }
-
-    /* DESKTOP HEADER */
-    .header-desktop {
-      display:none;
-      flex-direction:column;
-      gap:10px;
-      padding:16px 20px 18px;
-    }
-    .desktop-brand-row {
-      display:flex;
-      width:100%;
-      justify-content:center;
-      align-items:flex-start;
-      flex-wrap:wrap;
-      row-gap:8px;
-      text-align:center;
-    }
-    .brand-desktop {
-      font-weight:800;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      line-height:1.2;
-      white-space:nowrap;
-
-      /* 2x bigger brand for desktop */
-      font-size:clamp(28px,1.6vw + 16px,40px);
-
-      background:linear-gradient(90deg,#7c3aed 0%,#22d3ee 100%);
-      background-size:200% 100%;
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      text-shadow:
-        0 0 12px rgba(124,58,237,.8),
-        0 0 28px rgba(34,211,238,.5);
-      filter:
-        drop-shadow(0 0 8px rgba(124,58,237,.9))
-        drop-shadow(0 0 20px rgba(34,211,238,.6));
-      animation:brandPulse 3s ease-in-out infinite;
-    }
-    .desktop-nav-row {
-      display:flex;
-      width:100%;
-      justify-content:center;
-      align-items:center;
-      flex-wrap:wrap;
-      row-gap:10px;
-    }
-    nav.primary-nav-desktop {
-      display:flex;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:center;
-      gap:10px 14px;
-    }
-    nav.primary-nav-desktop a.nav-link {
-      font-size:14px;
-      line-height:1.2;
-      font-weight:600;
-      padding:10px 14px;
-      border-radius:12px;
-      color:var(--text-primary);
-      background:var(--chip-bg);
-      border:1px solid var(--border);
-      box-shadow:
-        var(--rim-shadow),
-        var(--lift-shadow),
-        var(--color-glow-shadow);
-      transition:all .18s ease;
-      will-change:transform,box-shadow;
-      text-decoration:none;
-    }
-    nav.primary-nav-desktop a.nav-link:hover,
-    nav.primary-nav-desktop a.nav-link:focus {
-      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-      color:#fff;
-      border-color:transparent;
-      box-shadow:var(--spotlight-glow);
-      transform:translate3d(0,-1px,0) scale(1.03);
-    }
-    a.nav-call {
-      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-      color:#fff;
-      font-size:14px;
-      font-weight:600;
-      line-height:1.2;
-      padding:10px 14px;
-      border-radius:12px;
-      white-space:nowrap;
-      border:0;
-      box-shadow:
-        var(--rim-shadow),
-        var(--spotlight-glow);
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      text-decoration:none;
-    }
-    a.nav-call:active { transform:scale(.98); }
-    a.nav-call:hover {
-      transform:translate3d(0,-1px,0) scale(1.02);
-    }
-    @media(min-width:768px){
-      .header-mobile { display:none; }
-      .header-desktop { display:flex; }
-    }
-
-    /* ========= SECTIONS LAYOUT ========= */
-    section {
-      position:relative;
-      z-index:2;
-      padding:48px 20px;
-      scroll-margin-top:140px; /* desktop default anchor offset */
-    }
-    @media(min-width:768px){
-      section { padding:64px 20px; }
-    }
-    @media(max-width:767px){
-      section {
-        scroll-margin-top:180px; /* mobile click-to-nav offset fix */
-      }
-    }
-
-    /* Frosted panel (wrapper for each big section) */
-    .frost-panel {
-      position:relative;
-      max-width:1120px;
-      margin:0 auto;
-      background:rgba(15,15,25,.35);
-      backdrop-filter:blur(14px) saturate(1.2);
-      -webkit-backdrop-filter:blur(14px) saturate(1.2);
-
-      border:1px solid var(--border);
-      border-radius:24px;
-      padding:32px 20px 40px;
-
-      /* desktop tilt vars */
-      --tiltX:0deg;
-      --tiltY:0deg;
-      --spotX:50%;
-      --spotY:50%;
-
-      transform-style:preserve-3d;
-      transform:translateY(0) scale(1) perspective(800px)
-        rotateX(var(--tiltX)) rotateY(var(--tiltY));
-
-      box-shadow:
-        var(--rim-shadow),
-        var(--lift-shadow),
-        var(--color-glow-shadow);
-
-      transition:
-        box-shadow .22s ease,
-        border-color .22s ease,
-        transform .22s ease;
-      will-change:transform,box-shadow,border-color;
-    }
-    @media(min-width:768px){
-      .frost-panel {
-        padding:48px 32px 56px;
-        background:
-          radial-gradient(circle at 15% 20%,rgba(124,58,237,.07) 0%,rgba(0,0,0,0) 60%),
-          rgba(15,15,25,.35);
-      }
-    }
-    @media(prefers-color-scheme: light){
-      .frost-panel {
-        background:rgba(255,255,255,.45);
-      }
-      @media(min-width:768px){
-        .frost-panel {
-          background:
-            radial-gradient(circle at 15% 20%,rgba(124,58,237,.07) 0%,rgba(0,0,0,0) 60%),
-            rgba(255,255,255,.45);
-        }
-      }
-    }
-
-    .frost-panel::before {
-      content:"";
-      position:absolute;
-      inset:-40px;
-      border-radius:32px;
-      background:
-        radial-gradient(circle at var(--spotX) var(--spotY),
-          rgba(124,58,237,.28) 0%,
-          rgba(34,211,238,.18) 30%,
-          transparent 70%);
-      filter:blur(60px);
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .18s ease;
-    }
-
-    .frost-panel.in-view {
-      box-shadow:var(--spotlight-glow);
-      border-color:var(--accent-1);
-      transform:translateY(-1px) scale(1.01) perspective(800px)
-        rotateX(var(--tiltX)) rotateY(var(--tiltY));
-    }
-    .frost-panel.in-view::before {
-      opacity:.7;
-    }
-
-    @media(max-width:767px){
-      .frost-panel,
-      .frost-panel.in-view {
-        transform:translateY(0) scale(1);
-        perspective:none;
-        rotate:0;
-      }
-    }
-
-    /* ========= SECTION TITLES ========= */
-    .section-title {
-      position:relative;
-      margin:0 0 28px;
-      line-height:1.1;
-      font-size:clamp(28px,2.4vw + 8px,44px);
-      font-weight:900;
-      letter-spacing:.08em;
-      color:var(--text-primary);
-      text-transform:uppercase;
-      display:inline-block;
-      z-index:2;
-      text-shadow:
-        var(--rim-shadow),
-        0 0 16px rgba(124,58,237,.4),
-        0 0 32px rgba(34,211,238,.25);
-    }
-    .section-title::before {
-      content:"";
-      position:absolute;
-      left:-12px;
-      right:-12px;
-      top:-16px;
-      bottom:-12px;
-      background:radial-gradient(circle at 20% 30%,
-        var(--section-halo-start) 0%,
-        var(--section-halo-mid) 30%,
-        transparent 70%);
-      filter:blur(32px);
-      opacity:.45;
-      z-index:-1;
-      animation:titleHalo 4s ease-in-out infinite;
-      will-change:filter,opacity,transform;
-      transform:translate3d(0,var(--parallax-y-half),0);
-      transition:transform .15s linear;
-    }
-    @keyframes titleHalo {
-      0%   { filter:blur(32px); opacity:.32; }
-      50%  { filter:blur(40px); opacity:.55; }
-      100% { filter:blur(32px); opacity:.32; }
-    }
-    .section-title::after {
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:-10px;
-      height:4px;
-      width:100%;
-      border-radius:999px;
-      background:linear-gradient(90deg,var(--accent-1) 0%,var(--accent-2) 100%);
-      box-shadow:
-        0 0 20px rgba(124,58,237,.8),
-        0 0 40px rgba(34,211,238,.6);
-    }
-    .section-title.in-view {
-      text-shadow:
-        0 0 12px rgba(255,255,255,.6),
-        0 0 24px rgba(124,58,237,.9),
-        0 0 48px rgba(34,211,238,.7);
-    }
-
-    .section-lead {
-      max-width:740px;
-      margin:20px 0 24px;
-      color:var(--text-dim);
-      font-size:15px;
-      line-height:1.5;
-      text-shadow:var(--rim-shadow);
-    }
-    @media(max-width:640px){
-      .section-lead { font-size:14px; }
-    }
-
-    /* ========= HERO BADGES / PAYMENT PREVIEW ========= */
-    .badges-row {
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:20px;
-    }
-    .badge-pill {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:10px 14px;
-      font-size:14px;
-      font-weight:600;
-      line-height:1.2;
-      border-radius:12px;
-      background:var(--panel);
-      border:1px solid var(--border);
-      color:var(--text-primary);
-      box-shadow:
-        var(--rim-shadow),
-        var(--lift-shadow),
-        var(--color-glow-shadow);
-    }
-    .badge-pill.gradient {
-      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-      border:0;
-      color:#fff;
-      box-shadow:
-        var(--rim-shadow),
-        var(--spotlight-glow);
-    }
-    @media(max-width:640px){
-      .badge-pill { font-size:13px; padding:8px 12px; }
-    }
-
-    /* mini payment row IN HERO */
-    .hero-pay-row {
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:20px;
-      align-items:center;
-    }
-    .hero-pay-note {
-      flex-basis:100%;
-      color:var(--text-dim);
-      font-size:12px;
-      line-height:1.4;
-      font-weight:500;
-      text-shadow:var(--rim-shadow);
-    }
-
-    /* marquee */
-    .hero-marquee-wrapper {
-      overflow:hidden;
-      width:100%;
-      border-radius:10px;
-      border:1px solid var(--border);
-      background:var(--marquee-bg);
-      box-shadow:
-        var(--rim-shadow),
-        var(--lift-shadow),
-        var(--color-glow-shadow);
-      margin-top:28px;
-    }
-    .hero-marquee-track {
-      display:flex;
-      white-space:nowrap;
-      animation:marqueeSlide 12s linear infinite;
-      font-size:12px;
-      font-weight:600;
-      letter-spacing:.15em;
-      text-transform:uppercase;
-      color:var(--text-primary);
-      padding:10px 0;
-      will-change:transform;
-    }
-    .hero-marquee-track span {
-      padding:0 24px;
-      display:flex;
-      align-items:center;
-    }
-    @keyframes marqueeSlide {
-      0%   { transform:translate3d(0,0,0); }
-      100% { transform:translate3d(-50%,0,0); }
-    }
-
-    /* ========= GRIDS ========= */
-    .barber-grid,
-    .reviews-grid,
-    .services-grid {
-      display:grid;
-      gap:16px;
-    }
-    .barber-grid   { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
-    .reviews-grid  { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
-    .services-grid { grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
-    @media(max-width:640px){
-      .barber-grid   { grid-template-columns:1fr; }
-      .reviews-grid  { grid-template-columns:1fr; }
-      .services-grid { grid-template-columns:1fr; }
-    }
-
-    /* ========= CARD BASE (barbers / reviews) ========= */
-    .card-unit {
-      position:relative;
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:18px 18px 20px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      box-shadow:
-        var(--rim-shadow),
-        var(--lift-shadow),
-        var(--color-glow-shadow);
-      opacity:0;
-      transform:translateY(14px) scale(.98);
-      animation:fadeUp .5s ease-out forwards;
-      transition:
-        box-shadow .22s ease,
-        border-color .22s ease,
-        transform .22s ease;
-      will-change:transform,box-shadow,border-color;
-    }
-    @media(min-width:768px){
-      .card-unit {
-        background:
-          radial-gradient(circle at 20% 20%,
-            rgba(124,58,237,.07) 0%,
-            rgba(0,0,0,0) 60%),
-          var(--panel);
-      }
-    }
-
-    .card-unit::before {
-      content:"";
-      position:absolute;
-      inset:-24px;
-      border-radius:24px;
-      background:
-        radial-gradient(circle at 20% 20%,
-          rgba(124,58,237,.35) 0%,
-          rgba(34,211,238,.22) 30%,
-          transparent 70%);
-      filter:blur(36px);
-      opacity:0;
-      pointer-events:none;
-      will-change:opacity,filter;
-      transition:opacity .22s ease,filter .22s ease;
-    }
-
-    /* Desktop hover glow for cards */
-    @media (hover:hover){
-      .card-unit:hover {
-        transform:translateY(-2px) scale(1.01);
-        border-color:var(--accent-1);
-        box-shadow:var(--spotlight-glow);
-      }
-      .card-unit:hover::before {
-        opacity:.8;
-        filter:blur(48px);
-      }
-    }
-
-    /* Mobile/scroll spotlight */
-    .card-unit.in-view {
-      transform:translateY(-2px) scale(1.01);
-      border-color:var(--accent-1);
-      box-shadow:var(--spotlight-glow);
-    }
-    .card-unit.in-view::before {
-      opacity:.8;
-      filter:blur(48px);
-    }
-
-    @keyframes fadeUp {
-      0%   { opacity:0; transform:translateY(14px) scale(.98); }
-      100% { opacity:1; transform:none; }
-    }
-
-    .barber-name {
-      font-weight:800;
-      font-size:14px;
-      letter-spacing:.06em;
-      color:var(--text-primary);
-      margin:2px 0 2px;
-      text-shadow:var(--rim-shadow);
-    }
-    .barber-bio {
-      color:var(--text-dim);
-      font-size:14px;
-      line-height:1.4;
-      text-shadow:var(--rim-shadow);
-    }
-
-    .cta-row {
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:10px;
-    }
-
-    .btn {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      text-decoration:none;
-      font-weight:700;
-      border-radius:12px;
-      padding:10px 14px;
-      font-size:14px;
-      line-height:1.25;
-      min-width:max-content;
-      border:1px solid transparent;
-      transition:all .18s ease;
-      will-change:transform,box-shadow;
-    }
-    .btn-primary {
-      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-      color:#fff;
-      box-shadow:
-        var(--rim-shadow),
-        var(--spotlight-glow);
-      border:0;
-    }
-    .btn-primary:active { transform:scale(.98); }
-    .btn-primary:hover {
-      transform:translate3d(0,-1px,0) scale(1.02);
-    }
-
-    .btn-outline {
-      background:transparent;
-      color:var(--text-primary);
-      border:1px solid var(--border);
-      background-color:rgba(0,0,0,.15);
-      box-shadow:
-        var(--rim-shadow),
-        var(--lift-shadow),
-        var(--color-glow-shadow);
-    }
-    .btn-outline:active { transform:scale(.98); }
-
-    /* REVIEWS text */
-    .review-stars {
-      font-size:13px;
-      font-weight:700;
-      color:#ffd95a;
-      margin-bottom:8px;
-      text-shadow:var(--rim-shadow);
-    }
-    .review-text {
-      color:var(--text-primary);
-      font-size:14px;
-      line-height:1.5;
-      margin:0 0 10px;
-      text-shadow:var(--rim-shadow);
-    }
-    .review-author {
-      font-size:12px;
-      font-weight:600;
-      color:var(--text-dim);
-      text-shadow:var(--rim-shadow);
-    }
-
-    /* ========= SERVICE CARDS ========= */
-    .service-card {
-      position:relative;
-      background:var(--panel-alt);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:16px 16px 18px;
-      box-shadow:
-        var(--rim-shadow),
-        var(--lift-shadow),
-        var(--color-glow-shadow);
-
-      opacity:0;
-      transform:translateY(14px) scale(.98);
-      animation:fadeUp .5s ease-out forwards;
-
-      transition:
-        box-shadow .22s ease,
-        border-color .22s ease,
-        transform .22s ease;
-      will-change:transform,box-shadow,border-color;
-
-      /* desktop tilt vars per service */
-      --sTiltX:0deg;
-      --sTiltY:0deg;
-      --sSpotX:50%;
-      --sSpotY:50%;
-
-      transform-style:preserve-3d;
-    }
-    @media(min-width:768px){
-      .service-card {
-        background:
-          radial-gradient(circle at 20% 20%,
-            rgba(124,58,237,.05) 0%,
-            rgba(0,0,0,0) 60%),
-          var(--panel-alt);
-
-        /* apply tilt perspective on desktop only */
-        transform:translateY(0) scale(1) perspective(600px)
-          rotateX(var(--sTiltX)) rotateY(var(--sTiltY));
-      }
-    }
-
-    /* glow layer follow cursor for services (desktop only) */
-    .service-card::before {
-      content:"";
-      position:absolute;
-      inset:-24px;
-      border-radius:24px;
-      background:
-        radial-gradient(circle at var(--sSpotX) var(--sSpotY),
-          rgba(124,58,237,.28) 0%,
-          rgba(34,211,238,.18) 30%,
-          transparent 70%);
-      filter:blur(48px);
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .18s ease;
-    }
-
-    /* scroll/mobile spotlight */
-    .service-card.in-view {
-      transform:translateY(-2px) scale(1.01);
-      border-color:var(--accent-1);
-      box-shadow:var(--spotlight-glow);
-    }
-    .service-card.in-view::before {
-      opacity:.8;
-    }
-
-    /* desktop hover behavior for services */
-    @media(hover:hover){
-      .service-card:hover {
-        border-color:var(--accent-1);
-        box-shadow:var(--spotlight-glow);
-      }
-      .service-card:hover::before {
-        opacity:.9;
-      }
-    }
-
-    .service-head {
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      flex-wrap:nowrap;
-      gap:8px;
-      font-weight:800;
-      color:var(--text-primary);
-      font-size:14px;
-      line-height:1.4;
-      letter-spacing:.03em;
-      text-shadow:var(--rim-shadow);
-    }
-    .price-chip {
-      background:var(--chip-bg);
-      border-radius:999px;
-      padding:6px 10px;
-      font-weight:900;
-      font-size:13px;
-      line-height:1;
-      color:var(--text-primary);
-      border:1px solid var(--border);
-      white-space:nowrap;
-      box-shadow:
-        var(--rim-shadow),
-        var(--lift-shadow),
-        var(--color-glow-shadow);
-    }
-    .service-desc {
-      display:block;
-      margin-top:8px;
-      color:var(--text-dim);
-      font-size:14px;
-      line-height:1.5;
-      text-shadow:var(--rim-shadow);
-    }
-
-    /* ========= HOURS ========= */
-    .hours-grid {
-      list-style:none;
-      margin:0;
-      padding:0;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:10px;
-    }
-    .hours-item {
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:10px 12px;
-      font-size:13px;
-      font-weight:500;
-      color:var(--text-primary);
-      line-height:1.4;
-      min-height:44px;
-      display:flex;
-      align-items:center;
-      box-shadow:
-        var(--rim-shadow),
-        var(--lift-shadow),
-        var(--color-glow-shadow);
-
-      opacity:0;
-      transform:translateY(14px) scale(.98);
-      animation:fadeUp .5s ease-out forwards;
-      transition:
-        box-shadow .22s ease,
-        border-color .22s ease,
-        transform .22s ease;
-      will-change:transform,box-shadow,border-color;
-    }
-    .hours-item.in-view {
-      transform:translateY(-2px) scale(1.01);
-      border-color:var(--accent-1);
-      box-shadow:var(--spotlight-glow);
-    }
-    .after-hours {
-      margin-top:14px;
-      font-size:13px;
-      font-weight:600;
-      color:var(--text-dim);
-      text-shadow:var(--rim-shadow);
-
-      opacity:0;
-      transform:translateY(14px) scale(.98);
-      animation:fadeUp .5s ease-out .28s forwards;
-      transition:text-shadow .22s ease,transform .22s ease;
-    }
-    .after-hours.in-view {
-      transform:translateY(-2px) scale(1.01);
-      text-shadow:
-        0 0 12px rgba(124,58,237,.8),
-        0 0 24px rgba(34,211,238,.6);
-    }
-
-    /* ========= CONTACT / MAP ========= */
-    .contact-block {
-      font-size:14px;
-      line-height:1.5;
-      color:var(--text-primary);
-      text-shadow:var(--rim-shadow);
-    }
-    .contact-block a { text-decoration:underline; }
-
-    .map-links {
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin:8px 0 16px;
-    }
-    .map-btn {
-      font-size:13px;
-      font-weight:600;
-      line-height:1.2;
-      border-radius:10px;
-      padding:8px 12px;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border:1px solid var(--border);
-      background-color:rgba(0,0,0,.15);
-      color:var(--text-primary);
-      box-shadow:
-        var(--rim-shadow),
-        var(--lift-shadow),
-        var(--color-glow-shadow);
-
-      opacity:0;
-      transform:translateY(14px) scale(.98);
-      animation:fadeUp .5s ease-out forwards;
-      transition:box-shadow .22s ease,border-color .22s ease,transform .22s ease;
-      will-change:transform,box-shadow,border-color;
-    }
-    .map-btn.google {
-      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-      color:#fff;
-      border:none;
-      box-shadow:
-        var(--rim-shadow),
-        var(--spotlight-glow);
-    }
-    .map-btn.in-view {
-      transform:translateY(-2px) scale(1.01);
-      border-color:var(--accent-1);
-      box-shadow:var(--spotlight-glow);
-    }
-
-    .map-frame {
-      width:100%;
-      height:400px;
-      border-radius:16px;
-      border:1px solid var(--border);
-      box-shadow:
-        var(--rim-shadow),
-        var(--lift-shadow),
-        var(--color-glow-shadow);
-
-      opacity:0;
-      transform:translateY(14px) scale(.98);
-      animation:fadeUp .5s ease-out .15s forwards;
-      transition:box-shadow .22s ease,border-color .22s ease,transform .22s ease;
-      will-change:transform,box-shadow,border-color;
-    }
-    .map-frame.in-view {
-      transform:translateY(-2px) scale(1.01);
-      border-color:var(--accent-1);
-      box-shadow:var(--spotlight-glow);
-    }
-    .landmark-note {
-      margin-top:12px;
-      font-size:13px;
-      font-weight:600;
-      color:var(--text-dim);
-      text-shadow:var(--rim-shadow);
-
-      opacity:0;
-      transform:translateY(14px) scale(.98);
-      animation:fadeUp .5s ease-out .22s forwards;
-      transition:text-shadow .22s ease,transform .22s ease;
-    }
-    .landmark-note.in-view {
-      transform:translateY(-2px) scale(1.01);
-      text-shadow:
-        0 0 12px rgba(124,58,237,.8),
-        0 0 24px rgba(34,211,238,.6);
-    }
-
-    /* ========= PAYMENT SECTION (full section, not hero mini) ========= */
-    .payment-row {
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:20px;
-    }
-    .pay-pill {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:10px 14px;
-      font-size:14px;
-      font-weight:600;
-      line-height:1.2;
-      border-radius:12px;
-      background:var(--panel);
-      border:1px solid var(--border);
-      color:var(--text-primary);
-      box-shadow:
-        var(--rim-shadow),
-        var(--lift-shadow),
-        var(--color-glow-shadow);
-    }
-    .pay-pill.gradient {
-      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-      border:0;
-      color:#fff;
-      box-shadow:
-        var(--rim-shadow),
-        var(--spotlight-glow);
-    }
-    @media(max-width:640px){
-      .pay-pill { font-size:13px; padding:8px 12px; }
-    }
-
-    .payment-note {
-      max-width:740px;
-      margin-top:16px;
-      font-size:13px;
-      line-height:1.5;
-      color:var(--text-dim);
-      text-shadow:var(--rim-shadow);
-      font-weight:500;
-    }
-
-    /* ========= FOOTER ========= */
-    footer {
-      border-top:1px solid var(--border);
-      color:var(--text-dim);
-      font-size:13px;
-      text-align:center;
-      padding:32px 20px;
-      margin-top:48px;
-      position:relative;
-      z-index:2;
-
-      opacity:0;
-      transform:translateY(14px) scale(.98);
-      animation:fadeUp .5s ease-out .3s forwards;
-
-      transition:text-shadow .22s ease,transform .22s ease;
-      text-shadow:var(--rim-shadow);
-    }
-    footer.in-view {
-      transform:translateY(-2px) scale(1.01);
-      text-shadow:
-        0 0 12px rgba(124,58,237,.8),
-        0 0 24px rgba(34,211,238,.6);
-    }
-
-    /* REDUCED MOTION */
-    @media (prefers-reduced-motion:reduce){
-      .brand-text,
-      .brand-desktop,
-      .brand-bg-line1,
-      .hero-marquee-track,
-      .section-title::before {
-        animation:none !important;
-      }
-      .card-unit,
-      .service-card,
-      .hours-item,
-      .after-hours,
-      .map-btn,
-      .map-frame,
-      .landmark-note,
-      footer,
-      .frost-panel {
-        opacity:1 !important;
-        transform:none !important;
-        animation:none !important;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark light" />
+<title>Next Level BarberShop</title>
+
+<style>
+/* ------------------------------
+   THEME / TOKENS
+---------------------------------*/
+:root {
+  --bg-body:#0b0b10;
+  --bg-panel:rgba(20,20,28,.6);
+  --bg-panel-solid:#1a1b22;
+  --frost-bg:rgba(18,18,26,.55);
+  --frost-bg-light:rgba(255,255,255,.1);
+  --frost-border:rgba(255,255,255,.18);
+  --text-main:#fff;
+  --text-dim:#bfc7d8;
+  --pill-bg:#1e1f27;
+  --pill-border:#3a3a4a;
+  --accent-grad:linear-gradient(90deg,#633bff 0%,#40d9ff 100%);
+  --accent-blue:#4c7dff;
+  --accent-shadow:0 0 24px rgba(100,130,255,.45),0 0 64px rgba(0,200,255,.25);
+  --section-ring:rgba(120,80,255,.4);
+  --section-ring-strong:rgba(120,80,255,.7);
+  --header-height-desktop:120px;
+  --header-height-mobile:68px;
+  --radius-xl:18px;
+  --radius-lg:14px;
+  --radius-md:10px;
+  --radius-pill:12px;
+  --transition-fast:0.18s cubic-bezier(.25,.4,.45,1);
+  --transition-med:0.28s cubic-bezier(.25,.4,.45,1);
+  --shadow-card:
+    0 24px 60px rgba(0,0,0,.9),
+    0 4px 12px rgba(0,0,0,.6);
+  --shadow-card-light:
+    0 24px 60px rgba(0,0,0,.4),
+    0 4px 12px rgba(0,0,0,.4);
+}
+
+@media (prefers-color-scheme: light){
+  :root {
+    --bg-body:#f7f8ff;
+    --bg-panel:rgba(255,255,255,.55);
+    --bg-panel-solid:rgba(255,255,255,.8);
+    --frost-bg:rgba(255,255,255,.55);
+    --frost-bg-light:rgba(255,255,255,.65);
+    --frost-border:rgba(0,0,0,.12);
+    --text-main:#0a0b10;
+    --text-dim:#44495a;
+    --pill-bg:#ffffffea;
+    --pill-border:#00000020;
+    --accent-shadow:0 0 24px rgba(120,80,255,.4),0 0 64px rgba(0,0,0,.15);
+    --section-ring:rgba(120,80,255,.25);
+    --section-ring-strong:rgba(120,80,255,.5);
+    --shadow-card:
+      0 28px 60px rgba(0,0,0,.15),
+      0 4px 18px rgba(0,0,0,.18);
+    --shadow-card-light:
+      0 28px 60px rgba(0,0,0,.12),
+      0 4px 18px rgba(0,0,0,.12);
+  }
+}
+
+/* reset-ish */
+*{
+  box-sizing:border-box;
+  -webkit-font-smoothing:antialiased;
+}
+body{
+  margin:0;
+  background-color:var(--bg-body);
+  color:var(--text-main);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Inter","Roboto","Helvetica Neue",Arial,sans-serif;
+  line-height:1.45;
+  scroll-behavior:smooth;
+  background-image:
+    radial-gradient(circle at 20% 20%,rgba(100,0,255,.25) 0%,rgba(0,0,0,0)60%),
+    radial-gradient(circle at 80% 15%,rgba(0,130,170,.25) 0%,rgba(0,0,0,0)60%),
+    radial-gradient(circle at 50% 80%,rgba(40,0,90,.4)0%,rgba(0,0,0,0)70%);
+  background-attachment:fixed;
+  background-size:1400px 1400px,1200px 1200px,1600px 1600px;
+  background-repeat:no-repeat;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* utility */
+.gradient-text{
+  background:var(--accent-grad);
+  -webkit-background-clip:text;
+  color:transparent;
+  font-weight:600;
+  letter-spacing:.03em;
+}
+.neon-glow{
+  text-shadow:
+    0 0 6px rgba(120,120,255,.8),
+    0 0 18px rgba(0,200,255,.6),
+    0 0 42px rgba(0,200,255,.4);
+}
+.soft-glow{
+  filter:drop-shadow(0 0 12px rgba(120,80,255,.35))
+         drop-shadow(0 0 32px rgba(0,200,255,.18));
+}
+.frost-card{
+  position:relative;
+  border-radius:var(--radius-xl);
+  background:var(--frost-bg);
+  -webkit-backdrop-filter:blur(16px) saturate(150%);
+  backdrop-filter:blur(16px) saturate(150%);
+  border:1px solid var(--frost-border);
+  box-shadow:var(--shadow-card);
+}
+.section-shell{
+  max-width:1200px;
+  margin-inline:auto;
+  padding:2rem 1rem 3rem;
+  position:relative;
+}
+@media(min-width:768px){
+  .section-shell{
+    padding:4rem 2rem 5rem;
+  }
+}
+
+/* highlight ring that shows on scroll (mobile)
+   and on hover (desktop) */
+.section-focus-ring{
+  position:absolute;
+  inset:-12px;
+  border-radius:calc(var(--radius-xl) + 12px);
+  background:radial-gradient(circle at 50% 30%,var(--section-ring-strong)0%,rgba(0,0,0,0)70%);
+  box-shadow:0 0 120px 40px var(--section-ring);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity var(--transition-fast);
+  filter:blur(24px);
+  z-index:-1;
+}
+.section.active .section-focus-ring{
+  opacity:1;
+}
+@media(min-width:900px){
+  /* desktop: only light up on hover */
+  .section.active .section-focus-ring{opacity:0;}
+  .section:hover .section-focus-ring{opacity:1;}
+}
+
+/* ---------------------------------
+   STICKY HEADER (desktop + mobile)
+-----------------------------------*/
+
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:9999;
+  background:rgba(10,10,15,.6);
+  -webkit-backdrop-filter:blur(12px) saturate(160%);
+  backdrop-filter:blur(12px) saturate(160%);
+  box-shadow:0 20px 40px rgba(0,0,0,.9);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  transition:transform var(--transition-med);
+  will-change:transform;
+}
+@media(prefers-color-scheme:light){
+  header{
+    background:rgba(255,255,255,.55);
+    box-shadow:0 20px 40px rgba(0,0,0,.18);
+    border-bottom:1px solid rgba(0,0,0,.08);
+  }
+}
+header.nav-hidden{
+  transform:translateY(-100%);
+}
+
+/* desktop layout */
+.header-inner{
+  max-width:1300px;
+  margin:0 auto;
+  padding:.75rem 1rem 1rem;
+  display:flex;
+  flex-direction:column;
+  gap:.5rem;
+}
+.header-top-row{
+  display:none;
+}
+.header-desktop-name{
+  text-align:center;
+  font-size:1.4rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  color:var(--text-main);
+  text-transform:uppercase;
+  line-height:1.2;
+  text-shadow:
+    0 0 6px rgba(120,120,255,.8),
+    0 0 16px rgba(0,200,255,.5),
+    0 0 48px rgba(0,200,255,.3);
+}
+.nav-row{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:.5rem .75rem;
+  row-gap:.5rem;
+  flex:1;
+}
+.nav-link{
+  position:relative;
+  font-size:.9rem;
+  line-height:1;
+  font-weight:500;
+  color:var(--text-main);
+  background:var(--bg-panel);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius-md);
+  padding:.6rem .8rem;
+  box-shadow:0 12px 32px rgba(0,0,0,.8);
+  transition:all var(--transition-fast);
+}
+@media(prefers-color-scheme:light){
+  .nav-link{
+    background:var(--bg-panel-solid);
+    border:1px solid rgba(0,0,0,.18);
+    box-shadow:0 12px 32px rgba(0,0,0,.15);
+  }
+}
+.nav-link:hover{
+  box-shadow:0 0 12px rgba(120,80,255,.5),
+             0 0 40px rgba(0,200,255,.4),
+             0 16px 40px rgba(0,0,0,.9);
+}
+.call-chip{
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+  font-size:.9rem;
+  line-height:1;
+  font-weight:500;
+  color:#fff;
+  background:var(--accent-grad);
+  border-radius:var(--radius-md);
+  padding:.6rem .8rem;
+  box-shadow:var(--accent-shadow);
+  border:0;
+  white-space:nowrap;
+}
+.call-chip span.emoji{
+  font-size:1rem;
+}
+
+/* mobile header (overrides) */
+@media(max-width:768px){
+  .header-inner{
+    padding:.5rem .75rem;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .header-desktop-name{
+    font-size:1rem;
+    letter-spacing:.15em;
+    text-align:left;
+  }
+  .header-top-row{display:none;}
+  .nav-row{
+    display:none;
+  }
+
+  .mobile-actions{
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+  }
+  .mobile-call-chip{
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+    background:var(--accent-grad);
+    color:#fff;
+    font-size:.8rem;
+    font-weight:500;
+    padding:.5rem .6rem;
+    border-radius:var(--radius-md);
+    box-shadow:var(--accent-shadow);
+    white-space:nowrap;
+  }
+  .burger-btn{
+    background:var(--bg-panel);
+    border:1px solid rgba(255,255,255,.15);
+    color:var(--text-main);
+    width:40px;
+    height:40px;
+    border-radius:var(--radius-md);
+    font-size:1rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 12px 32px rgba(0,0,0,.9);
+  }
+  @media(prefers-color-scheme:light){
+    .burger-btn{
+      background:var(--bg-panel-solid);
+      border:1px solid rgba(0,0,0,.18);
+      box-shadow:0 12px 28px rgba(0,0,0,.18);
+    }
+  }
+}
+
+/* mobile slideout menu */
+.mobile-drawer{
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  width:80%;
+  max-width:320px;
+  background:rgba(10,10,20,.9);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  backdrop-filter:blur(16px) saturate(180%);
+  border-left:1px solid rgba(255,255,255,.12);
+  box-shadow:-24px 0 60px rgba(0,0,0,.9);
+  transform:translateX(100%);
+  transition:transform var(--transition-med);
+  z-index:10000;
+  display:flex;
+  flex-direction:column;
+  padding:1rem 1rem 2rem;
+}
+@media(prefers-color-scheme:light){
+  .mobile-drawer{
+    background:rgba(255,255,255,.7);
+    border-left:1px solid rgba(0,0,0,.15);
+    box-shadow:-24px 0 60px rgba(0,0,0,.25);
+  }
+}
+.mobile-drawer.open{
+  transform:translateX(0);
+}
+.drawer-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:1rem;
+}
+.drawer-title{
+  font-size:.8rem;
+  font-weight:600;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--text-main);
+}
+.drawer-close{
+  background:none;
+  border:0;
+  color:var(--text-main);
+  font-size:1.4rem;
+  line-height:1;
+  padding:.25rem .5rem;
+  border-radius:var(--radius-md);
+}
+.drawer-links{
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+  flex:1;
+}
+.drawer-links a{
+  background:var(--bg-panel);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:var(--radius-md);
+  padding:.8rem .9rem;
+  font-size:1rem;
+  font-weight:500;
+  color:var(--text-main);
+  box-shadow:0 16px 36px rgba(0,0,0,.9);
+}
+@media(prefers-color-scheme:light){
+  .drawer-links a{
+    background:var(--bg-panel-solid);
+    border:1px solid rgba(0,0,0,.18);
+    box-shadow:0 16px 36px rgba(0,0,0,.16);
+  }
+}
+.drawer-call{
+  margin-top:1.25rem;
+  background:var(--accent-grad);
+  color:#fff;
+  border-radius:var(--radius-md);
+  font-weight:600;
+  font-size:1rem;
+  padding:.9rem .9rem;
+  box-shadow:var(--accent-shadow);
+  text-align:center;
+}
+
+/* ---------------------------------
+   HERO / HOME SECTION
+-----------------------------------*/
+main{
+  padding-top:var(--header-height-desktop);
+}
+@media(max-width:768px){
+  main{padding-top:var(--header-height-mobile);}
+}
+
+/* Each big page block is .section */
+.section{
+  position:relative;
+  scroll-margin-top:var(--header-height-desktop);
+}
+@media(max-width:768px){
+  .section{
+    scroll-margin-top:var(--header-height-mobile);
+  }
+}
+
+/* hero container */
+.hero-card{
+  position:relative;
+  border-radius:var(--radius-xl);
+  background:var(--frost-bg);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid var(--frost-border);
+  box-shadow:var(--shadow-card);
+  padding:2rem 1.25rem 2.5rem;
+  max-width:1000px;
+  margin:0 auto;
+  color:var(--text-main);
+}
+@media(min-width:768px){
+  .hero-card{
+    padding:2.5rem 2rem 3rem;
+  }
+}
+.hero-headline{
+  font-size:1.6rem;
+  line-height:1.3;
+  font-weight:700;
+  text-transform:uppercase;
+  text-align:left;
+  color:var(--text-main);
+  text-shadow:0 0 8px rgba(255,255,255,.3),
+             0 0 32px rgba(120,80,255,.4),
+             0 0 64px rgba(0,200,255,.25);
+  letter-spacing:.05em;
+}
+@media(min-width:600px){
+  .hero-headline{
+    font-size:2rem;
+  }
+}
+.hero-underline{
+  height:4px;
+  width:100%;
+  max-width:600px;
+  background:var(--accent-grad);
+  border-radius:3px;
+  box-shadow:0 0 12px rgba(120,80,255,.6),
+             0 0 32px rgba(0,200,255,.35);
+  margin:.75rem 0 1.5rem;
+}
+
+/* hero text / pills */
+.hero-desc{
+  font-size:1rem;
+  color:var(--text-dim);
+  max-width:800px;
+  line-height:1.5;
+  margin-bottom:1.5rem;
+}
+.pill-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.75rem;
+  margin-bottom:1rem;
+}
+.pill{
+  background:var(--pill-bg);
+  border:1px solid var(--pill-border);
+  border-radius:var(--radius-pill);
+  font-size:.9rem;
+  color:var(--text-main);
+  font-weight:500;
+  padding:.6rem .9rem;
+  line-height:1.1;
+  box-shadow:0 12px 32px rgba(0,0,0,.8);
+}
+.pill.primary{
+  background:var(--accent-grad);
+  color:#fff;
+  border:0;
+  box-shadow:var(--accent-shadow);
+}
+
+/* payment row */
+.payment-note{
+  font-size:.9rem;
+  color:var(--text-dim);
+  margin-top:.5rem;
+}
+
+/* location row */
+.location-row{
+  margin-top:1.5rem;
+  background:rgba(0,0,0,.4);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:var(--radius-md);
+  box-shadow:0 16px 40px rgba(0,0,0,.9);
+  overflow:hidden;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  font-size:.8rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#fff;
+}
+@media(prefers-color-scheme:light){
+  .location-row{
+    background:rgba(0,0,0,.8);
+    border:1px solid rgba(255,255,255,.25);
+  }
+}
+.location-chip{
+  padding:.8rem .9rem;
+  white-space:nowrap;
+  border-right:1px solid rgba(255,255,255,.12);
+}
+.location-chip:last-child{
+  border-right:0;
+}
+
+/* ---------------------------------
+   SECTION HEADERS
+-----------------------------------*/
+.section-header{
+  max-width:1000px;
+  margin:0 auto 2rem;
+  color:var(--text-main);
+}
+.section-title-wrap{
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+}
+.section-title{
+  font-size:1.6rem;
+  line-height:1.2;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--text-main);
+  text-shadow:
+    0 0 8px rgba(255,255,255,.25),
+    0 0 32px rgba(120,80,255,.4),
+    0 0 64px rgba(0,200,255,.25);
+  max-width:1000px;
+}
+@media(min-width:600px){
+  .section-title{font-size:2rem;}
+}
+.section-underline{
+  height:4px;
+  width:220px;
+  max-width:60%;
+  background:var(--accent-grad);
+  border-radius:3px;
+  box-shadow:0 0 12px rgba(120,80,255,.6),
+             0 0 32px rgba(0,200,255,.35);
+}
+.section-blurb{
+  color:var(--text-dim);
+  max-width:900px;
+  font-size:1rem;
+  line-height:1.5;
+}
+
+/* ---------------------------------
+   BARBERS GRID
+-----------------------------------*/
+.barbers-grid{
+  max-width:1000px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.25rem;
+}
+@media(min-width:700px){
+  .barbers-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+@media(min-width:1024px){
+  .barbers-grid{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+}
+.barber-card{
+  position:relative;
+  background:var(--frost-bg);
+  border:1px solid var(--frost-border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+  padding:1.25rem 1rem 1.5rem;
+  min-height:180px;
+  overflow:hidden;
+  transition:transform var(--transition-fast),
+             box-shadow var(--transition-fast);
+}
+.barber-card:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 0 24px rgba(120,80,255,.5),
+    0 0 64px rgba(0,200,255,.4),
+    0 28px 60px rgba(0,0,0,.9);
+}
+.barber-name{
+  font-weight:600;
+  font-size:1rem;
+  color:var(--text-main);
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  margin-bottom:.75rem;
+}
+.barber-desc{
+  font-size:.95rem;
+  line-height:1.4;
+  color:var(--text-dim);
+  min-height:3em;
+  margin-bottom:1rem;
+}
+.book-btn{
+  display:inline-block;
+  background:var(--accent-grad);
+  color:#fff;
+  font-weight:600;
+  font-size:.9rem;
+  line-height:1.2;
+  border:0;
+  border-radius:var(--radius-md);
+  padding:.7rem .9rem;
+  box-shadow:var(--accent-shadow);
+  white-space:nowrap;
+  transition:box-shadow var(--transition-fast),transform var(--transition-fast);
+}
+.book-btn:hover{
+  box-shadow:
+    0 0 16px rgba(120,80,255,.7),
+    0 0 48px rgba(0,200,255,.5),
+    0 28px 60px rgba(0,0,0,.9);
+  transform:translateY(-1px) scale(1.02);
+}
+.call-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  background:var(--pill-bg);
+  border:1px solid var(--pill-border);
+  border-radius:var(--radius-md);
+  color:var(--text-main);
+  font-size:.9rem;
+  font-weight:500;
+  padding:.7rem .9rem;
+  box-shadow:0 16px 36px rgba(0,0,0,.9);
+}
+.call-btn .emoji{
+  font-size:1rem;
+}
+
+/* ---------------------------------
+   SERVICES GRID
+-----------------------------------*/
+.services-grid{
+  max-width:1100px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1rem;
+}
+@media(min-width:800px){
+  .services-grid{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+}
+.service-card{
+  background:var(--frost-bg);
+  border:1px solid var(--frost-border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+  padding:1rem 1rem 1.25rem;
+  min-height:150px;
+  position:relative;
+  transition:transform var(--transition-fast),box-shadow var(--transition-fast);
+}
+.service-card:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 0 24px rgba(120,80,255,.5),
+    0 0 64px rgba(0,200,255,.4),
+    0 28px 60px rgba(0,0,0,.9);
+}
+.service-top-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:.5rem;
+  margin-bottom:.75rem;
+}
+.service-name{
+  font-size:.9rem;
+  font-weight:600;
+  line-height:1.3;
+  color:var(--text-main);
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  display:flex;
+  align-items:flex-start;
+  gap:.5rem;
+}
+.service-price{
+  font-size:.8rem;
+  font-weight:600;
+  background:var(--bg-panel);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:var(--radius-md);
+  padding:.4rem .5rem;
+  color:var(--text-main);
+  box-shadow:0 12px 28px rgba(0,0,0,.8);
+}
+@media(prefers-color-scheme:light){
+  .service-price{
+    background:var(--bg-panel-solid);
+    border:1px solid rgba(0,0,0,.18);
+    box-shadow:0 12px 28px rgba(0,0,0,.18);
+  }
+}
+.service-desc{
+  font-size:.9rem;
+  color:var(--text-dim);
+  line-height:1.4;
+}
+
+/* ---------------------------------
+   HOURS / CONTACT / MAP
+-----------------------------------*/
+.hours-wrap{
+  max-width:1100px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:2rem;
+}
+@media(min-width:900px){
+  .hours-wrap{
+    flex-direction:row;
+    align-items:flex-start;
+  }
+}
+
+.hours-box{
+  flex:2;
+  background:var(--frost-bg);
+  border:1px solid var(--frost-border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+  padding:1rem 1rem 1.5rem;
+}
+.hours-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+}
+.hour-chip{
+  background:var(--bg-panel);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:var(--radius-md);
+  color:var(--text-main);
+  font-size:.8rem;
+  line-height:1.4;
+  padding:.6rem .8rem;
+  box-shadow:0 12px 28px rgba(0,0,0,.8);
+  white-space:nowrap;
+}
+@media(prefers-color-scheme:light){
+  .hour-chip{
+    background:var(--bg-panel-solid);
+    border:1px solid rgba(0,0,0,.18);
+    box-shadow:0 12px 28px rgba(0,0,0,.18);
+  }
+}
+.note-nocharge{
+  font-size:.8rem;
+  color:var(--text-dim);
+  margin-top:1rem;
+  font-weight:500;
+  letter-spacing:.03em;
+}
+.contact-box{
+  flex:1.3;
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+  background:var(--frost-bg);
+  border:1px solid var(--frost-border);
+  border-radius:var(--radius-lg);
+  padding:1rem 1rem 1.25rem;
+  box-shadow:var(--shadow-card);
+}
+.contact-item{
+  font-size:.9rem;
+  line-height:1.4;
+  color:var(--text-main);
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:.5rem;
+  font-weight:500;
+  text-decoration:none;
+}
+.contact-item .emoji{
+  font-size:1rem;
+}
+.map-wrap{
+  max-width:1100px;
+  margin:3rem auto 0;
+}
+.map-card{
+  background:var(--frost-bg);
+  border:1px solid var(--frost-border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+  padding:1rem;
+  overflow:hidden;
+}
+.map-flex{
+  width:100%;
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 20px 60px rgba(0,0,0,.9);
+}
+@media(prefers-color-scheme:light){
+  .map-flex{
+    border:1px solid rgba(0,0,0,.18);
+    box-shadow:0 20px 60px rgba(0,0,0,.2);
+  }
+}
+.map-links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.75rem;
+  margin-top:1rem;
+}
+.map-btn{
+  background:var(--pill-bg);
+  border:1px solid var(--pill-border);
+  border-radius:var(--radius-md);
+  padding:.6rem .9rem;
+  font-size:.9rem;
+  font-weight:500;
+  line-height:1.2;
+  color:var(--text-main);
+  box-shadow:0 12px 32px rgba(0,0,0,.9);
+}
+@media(prefers-color-scheme:light){
+  .map-btn{
+    background:var(--bg-panel-solid);
+    border:1px solid rgba(0,0,0,.18);
+    box-shadow:0 12px 32px rgba(0,0,0,.18);
+  }
+}
+
+/* ---------------------------------
+   FOOTER
+-----------------------------------*/
+footer{
+  max-width:1100px;
+  margin:4rem auto 3rem;
+  text-align:center;
+  font-size:.8rem;
+  font-weight:500;
+  color:var(--text-dim);
+  letter-spacing:.05em;
+}
+
+/* ---------------------------------
+   SPOOK (OFF BY DEFAULT)
+-----------------------------------*/
+#spook{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  z-index:100000;
+  opacity:0;
+  pointer-events:none;
+  text-shadow:0 0 12px #ff4d4d,0 0 40px #ff4d4d;
+  transition:opacity .2s ease;
+}
+#spook.show{
+  opacity:1;
+}
+
+/* ---------------------------------
+   RESPONSIVE TIGHTENERS
+-----------------------------------*/
+@media(max-width:480px){
+  .hero-headline{font-size:1.4rem;}
+  .hero-desc{font-size:.95rem;}
+  .section-title{font-size:1.4rem;}
+  .section-blurb{font-size:.95rem;}
+  .barber-card{min-height:auto;}
+}
+</style>
 </head>
+
 <body>
 
-  <!-- BACKGROUND SIGNATURE -->
-  <div class="brand-bg">
-    <div class="brand-bg-line1">NEXT LEVEL BARBERSHOP</div>
-    <div class="brand-bg-line2">ALBUQUERQUE, NM</div>
+<!-- SPOOK POPUP (currently disabled; leave it commented until you want spooky season)
+<div id="spook">BOO ✂️</div>
+-->
+
+<header id="siteHeader">
+  <div class="header-inner">
+
+    <!-- Desktop + mobile brand / left side -->
+    <div class="header-desktop-name neon-glow" id="brandName">
+      NEXT LEVEL BARBERSHOP
+    </div>
+
+    <!-- Desktop nav row -->
+    <nav class="nav-row" id="desktopNav">
+      <a class="nav-link" href="#home">Home</a>
+      <a class="nav-link" href="#barbers">Our Barbers</a>
+      <a class="nav-link" href="#reviews">Reviews</a>
+      <a class="nav-link" href="#payment-info">Payment</a>
+      <a class="nav-link" href="#services">Services</a>
+      <a class="nav-link" href="#hours">Hours</a>
+      <a class="nav-link" href="#contact">Contact</a>
+      <a class="nav-link" href="#location">Location</a>
+
+      <a class="call-chip" href="tel:+15055036216">
+        <span class="emoji">📞</span>
+        <span>(505) 503-6216</span>
+      </a>
+    </nav>
+
+    <!-- Mobile-only actions (burger + call) -->
+    <div class="mobile-actions" id="mobileActions" style="display:none;">
+      <a class="mobile-call-chip" href="tel:+15055036216">
+        <span class="emoji">📞</span>
+        <span>(505) 503-6216</span>
+      </a>
+      <button class="burger-btn" id="burgerBtn" aria-label="Menu">≡</button>
+    </div>
+
   </div>
+</header>
 
-  <!-- HEADER -->
-  <header class="site-header" id="siteHeader">
-    <!-- MOBILE -->
-    <div class="wrap header-mobile">
-      <div class="mobile-top-row">
-        <div class="brand-text">NEXT LEVEL BARBERSHOP</div>
-        <a class="call-now-mini" href="tel:+15055036216">📞 (505) 503-6216</a>
-      </div>
+<!-- Mobile drawer -->
+<aside class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-head">
+    <div class="drawer-title">Navigate</div>
+    <button class="drawer-close" id="drawerClose" aria-label="Close Menu">✕</button>
+  </div>
+  <div class="drawer-links">
+    <a href="#home" data-drawer-link>Home</a>
+    <a href="#barbers" data-drawer-link>Our Barbers</a>
+    <a href="#reviews" data-drawer-link>Reviews</a>
+    <a href="#payment-info" data-drawer-link>Payment</a>
+    <a href="#services" data-drawer-link>Services</a>
+    <a href="#hours" data-drawer-link>Hours</a>
+    <a href="#contact" data-drawer-link>Contact</a>
+    <a href="#location" data-drawer-link>Location / Directions</a>
+  </div>
+  <a class="drawer-call" href="tel:+15055036216">📞 (505) 503-6216</a>
+</aside>
 
-      <div class="mobile-nav-row">
-        <nav class="primary-nav-mobile" aria-label="Main">
-          <a href="#home">HOME</a>
-          <a href="#barbers">OUR BARBERS</a>
-          <a href="#reviews">REVIEWS</a>
-          <a href="#payments">PAYMENT</a>
-          <a href="#services">SERVICES</a>
-          <a href="#hours">HOURS</a>
-          <a href="#contact">CONTACT</a>
-          <a href="#location">LOCATION</a>
-        </nav>
-      </div>
-    </div>
+<main>
 
-    <!-- DESKTOP -->
-    <div class="wrap header-desktop">
-      <div class="desktop-brand-row">
-        <div class="brand-desktop">NEXT LEVEL BARBERSHOP</div>
-      </div>
+  <!-- HOME / HERO -------------------------------->
+  <section id="home" class="section">
+    <div class="section-focus-ring"></div>
 
-      <div class="desktop-nav-row">
-        <nav class="primary-nav-desktop" aria-label="Main">
-          <a class="nav-link" href="#home">HOME</a>
-          <a class="nav-link" href="#barbers">OUR BARBERS</a>
-          <a class="nav-link" href="#reviews">REVIEWS</a>
-          <a class="nav-link" href="#payments">PAYMENT</a>
-          <a class="nav-link" href="#services">SERVICES</a>
-          <a class="nav-link" href="#hours">HOURS</a>
-          <a class="nav-link" href="#contact">CONTACT</a>
-          <a class="nav-link" href="#location">LOCATION</a>
-          <a class="nav-call" href="tel:+15055036216">📞 (505) 503-6216</a>
-        </nav>
-      </div>
-    </div>
-  </header>
+    <div class="section-shell">
+      <div class="hero-card">
+        <h1 class="hero-headline">
+          WELCOME TO NEXT LEVEL BARBERSHOP
+        </h1>
+        <div class="hero-underline"></div>
 
-  <!-- HERO -->
-  <section id="home">
-    <div class="frost-panel glow-animate">
-      <h2 class="section-title glow-animate">Welcome to Next Level BarberShop</h2>
+        <p class="hero-desc">
+          Professional cuts, sharp fades, and a clean vibe. Locally owned.
+          Walk-ins welcome. Appointments preferred.
+        </p>
 
-      <p class="section-lead">
-        Professional cuts, sharp fades, and a clean vibe. Locally owned.
-        Walk-ins welcome. Appointments preferred.
-      </p>
+        <div class="pill-row">
+          <div class="pill primary">Locally Owned</div>
+          <div class="pill">Walk-Ins Welcome</div>
+          <div class="pill">Appointments Preferred</div>
+        </div>
 
-      <div class="badges-row">
-        <div class="badge-pill gradient">Locally Owned</div>
-        <div class="badge-pill">Walk-Ins Welcome</div>
-        <div class="badge-pill">Appointments Preferred</div>
-      </div>
-
-      <!-- Payment preview (right up front for new clients) -->
-      <div class="hero-pay-row">
-        <div class="badge-pill gradient">Cash</div>
-        <div class="badge-pill">Apple&nbsp;Pay</div>
-        <div class="badge-pill">Cash&nbsp;App</div>
-        <div class="badge-pill">Venmo</div>
-        <div class="hero-pay-note">
+        <!-- Payment info lives right up top so clients see it first -->
+        <div class="pill-row" id="payment-info">
+          <div class="pill primary">Cash</div>
+          <div class="pill">Apple Pay</div>
+          <div class="pill">Cash App</div>
+          <div class="pill">Venmo</div>
+        </div>
+        <div class="payment-note">
           Payment method can vary by barber — just confirm when you book.
         </div>
-      </div>
 
-      <div class="hero-marquee-wrapper">
-        <div class="hero-marquee-track">
-          <span>ALBUQUERQUE, NM</span>
-          <span>RIGHT NEXT TO BOB'S BURGERS</span>
-          <span>WALK-INS WELCOME</span>
-          <span>APPOINTMENTS PREFERRED</span>
-          <span>ALBUQUERQUE, NM</span>
-          <span>RIGHT NEXT TO BOB'S BURGERS</span>
-          <span>WALK-INS WELCOME</span>
-          <span>APPOINTMENTS PREFERRED</span>
+        <div class="location-row" style="margin-top:1.5rem;">
+          <div class="location-chip">Locally Owned</div>
+          <div class="location-chip">Walk-Ins Welcome</div>
+          <div class="location-chip">Appointments Preferred</div>
+          <div class="location-chip">Albuquerque, NM</div>
+          <div class="location-chip">Right next to Bob's Burgers</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- BARBERS -->
-  <section id="barbers">
-    <div class="frost-panel glow-animate">
-      <h2 class="section-title glow-animate">Our Barbers</h2>
-      <p class="section-lead">
-        Book directly with your barber or call the shop. Real craft, no gimmicks.
-      </p>
+  <!-- BARBERS ----------------------------------->
+  <section id="barbers" class="section">
+    <div class="section-focus-ring"></div>
+    <div class="section-shell">
 
-      <div class="barber-grid">
-        <article class="barber-card card-unit glow-animate">
-          <p class="barber-name">VINCENT (OWNER)</p>
-          <p class="barber-bio">Founder. Fader. Visionary.</p>
-          <div class="cta-row">
-            <a class="btn btn-outline" href="tel:+15055036216">📞 Call to Book</a>
+      <header class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-title">Our Barbers</div>
+          <div class="section-underline"></div>
+          <div class="section-blurb">
+            Book directly with your barber or call the shop. Real craft, no gimmicks.
           </div>
+        </div>
+      </header>
+
+      <div class="barbers-grid">
+
+        <!-- Vincent -->
+        <article class="barber-card">
+          <div class="barber-name">VINCENT (OWNER)</div>
+          <div class="barber-desc">
+            Founder. Fader. Visionary.
+          </div>
+          <a class="call-btn" href="tel:+15055036216">
+            <span class="emoji">📞</span>
+            <span>Call to Book</span>
+          </a>
         </article>
 
-        <article class="barber-card card-unit glow-animate">
-          <p class="barber-name">ZWALUW</p>
-          <p class="barber-bio">Precision in every pass.</p>
-          <div class="cta-row">
-            <a class="btn btn-outline" href="tel:+15055036216">📞 Call to Book</a>
+        <!-- Zwaluw -->
+        <article class="barber-card">
+          <div class="barber-name">ZWALUW</div>
+          <div class="barber-desc">
+            Precision in every pass.
           </div>
+          <a class="call-btn" href="tel:+15055036216">
+            <span class="emoji">📞</span>
+            <span>Call to Book</span>
+          </a>
         </article>
 
-        <article class="barber-card card-unit glow-animate">
-          <p class="barber-name">G-MO</p>
-          <p class="barber-bio">Style that speaks before you do.</p>
-          <div class="cta-row">
-            <a class="btn btn-outline" href="tel:+15055036216">📞 Call to Book</a>
+        <!-- G-Mo -->
+        <article class="barber-card">
+          <div class="barber-name">G-MO</div>
+          <div class="barber-desc">
+            Style that speaks before you do.
           </div>
+          <a class="call-btn" href="tel:+15055036216">
+            <span class="emoji">📞</span>
+            <span>Call to Book</span>
+          </a>
         </article>
 
-        <article class="barber-card card-unit glow-animate">
-          <p class="barber-name">DESHAUN</p>
-          <p class="barber-bio">Sharp fades. Chill vibes.</p>
-          <div class="cta-row">
-            <a class="btn btn-outline" href="tel:+15055036216">📞 Call to Book</a>
+        <!-- Deshaun -->
+        <article class="barber-card">
+          <div class="barber-name">DESHAUN</div>
+          <div class="barber-desc">
+            Sharp fades. Chill vibes.
           </div>
+          <a class="call-btn" href="tel:+15055036216">
+            <span class="emoji">📞</span>
+            <span>Call to Book</span>
+          </a>
         </article>
 
-        <article class="barber-card card-unit glow-animate">
-          <p class="barber-name">CA$H</p>
-          <p class="barber-bio">Quick with the clippers, real with the results.</p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="https://booksy.com/en-us/dl/show-business/1346592?utm_medium=c2c_referral" target="_blank" rel="noopener">Book w/ Ca$h</a>
+        <!-- Ca$h -->
+        <article class="barber-card">
+          <div class="barber-name">CA$H</div>
+          <div class="barber-desc">
+            Quick with the clippers, real with the results.
           </div>
+          <a class="book-btn" href="https://booksy.com" target="_blank" rel="noopener">
+            Book w/ Ca$h
+          </a>
         </article>
 
-        <article class="barber-card card-unit glow-animate">
-          <p class="barber-name">JONNY</p>
-          <p class="barber-bio">Where art meets the edge.</p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="https://linktr.ee/TBJONNY" target="_blank" rel="noopener">Book w/ Jonny</a>
+        <!-- Jonny -->
+        <article class="barber-card">
+          <div class="barber-name">JONNY</div>
+          <div class="barber-desc">
+            Where art meets the edge.
           </div>
+          <a class="book-btn" href="https://booksy.com" target="_blank" rel="noopener">
+            Book w/ Jonny
+          </a>
         </article>
 
-        <article class="barber-card card-unit glow-animate">
-          <p class="barber-name">TAYLOR</p>
-          <p class="barber-bio">Clean blends. Subtle structure. Quiet precision.</p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="https://booksy.com/en-us/dl/show-business/1592260" target="_blank" rel="noopener">Book w/ Taylor</a>
+        <!-- Taylor -->
+        <article class="barber-card">
+          <div class="barber-name">TAYLOR</div>
+          <div class="barber-desc">
+            Clean blends. Subtle structure. Quiet precision.
           </div>
+          <a class="book-btn" href="https://booksy.com/en-us/dl/show-business/1592260" target="_blank" rel="noopener">
+            Book w/ Taylor
+          </a>
         </article>
+
       </div>
     </div>
   </section>
 
-  <!-- REVIEWS -->
-  <section id="reviews">
-    <div class="frost-panel glow-animate">
-      <h2 class="section-title glow-animate">What People Are Saying</h2>
-      <p class="section-lead">
-        Consistent work, good energy, no nonsense. Rated over 4★ with 100+ reviews.
-        People drive in just for the cut.
-      </p>
+  <!-- REVIEWS ----------------------------------->
+  <section id="reviews" class="section">
+    <div class="section-focus-ring"></div>
+    <div class="section-shell">
 
-      <div class="reviews-grid">
-        <div class="review-card card-unit glow-animate">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">
-            “When you go in ask for Ca$h. She is on point each and every time. Highly recommended.”
-          </p>
-          <div class="review-author">– Anthony V.</div>
+      <header class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-title">What People Are Saying</div>
+          <div class="section-underline"></div>
+          <div class="section-blurb">
+            Real clients. Real fades. Highlights from recent 5★ reviews
+            (pulled from the most recent best reviews in shop).
+          </div>
+        </div>
+      </header>
+
+      <div class="services-grid" style="max-width:1000px;">
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>🔥 Cleanest fade I’ve had in years</span>
+            </div>
+            <div class="service-price">5★</div>
+          </div>
+          <div class="service-desc">
+            “Attention to detail is insane. Lined me up perfect, beard
+            crispy, zero rush. If you’re picky, this is where you go.”
+          </div>
         </div>
 
-        <div class="review-card card-unit glow-animate">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">
-            “Everyone in here is so chill and down to earth. They do a fantastic job.
-            My boys are always begging to go.”
-          </p>
-          <div class="review-author">– Stephanie A.</div>
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>💈 Chill vibe / professional work</span>
+            </div>
+            <div class="service-price">5★</div>
+          </div>
+          <div class="service-desc">
+            “Felt welcome soon as I walked in. Music good, convo good,
+            cut even better. I’ll be back every week.”
+          </div>
         </div>
 
-        <div class="review-card card-unit glow-animate">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">
-            “Fantastic job for my 15-year-old son — low taper, super clean.
-            He loves the vibe. They’re welcoming.”
-          </p>
-          <div class="review-author">– Stacie B.</div>
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>✂️ Fixed my last bad haircut</span>
+            </div>
+            <div class="service-price">5★</div>
+          </div>
+          <div class="service-desc">
+            “They literally saved me. Cleaned up a messed up fade and
+            made it look intentional. This is skill.”
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- PAYMENT & BOOKING SECTION -->
-  <section id="payments">
-    <div class="frost-panel glow-animate">
-      <h2 class="section-title glow-animate">Payment & Booking</h2>
-      <p class="section-lead">
-        No stress at checkout. Most of our barbers accept digital or cash — just confirm
-        your barber’s preferred method when you book.
-      </p>
+  <!-- SERVICES ----------------------------------->
+  <section id="services" class="section">
+    <div class="section-focus-ring"></div>
+    <div class="section-shell">
 
-      <div class="payment-row">
-        <div class="pay-pill gradient">Cash</div>
-        <div class="pay-pill">Apple&nbsp;Pay</div>
-        <div class="pay-pill">Cash&nbsp;App</div>
-        <div class="pay-pill">Venmo</div>
-      </div>
-
-      <div class="payment-note">
-        Payment methods can vary by barber.
-        If you’re not sure, call the shop or DM the barber when you book.
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="frost-panel glow-animate">
-      <h2 class="section-title glow-animate">Our Services</h2>
-      <p class="section-lead">
-        Straightforward pricing. Detailed / trending styles may cost more depending
-        on design and time.
-      </p>
+      <header class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-title">Our Services</div>
+          <div class="section-underline"></div>
+        </div>
+      </header>
 
       <div class="services-grid">
-        <div class="service-card glow-animate">
-          <div class="service-head">
-            <span>💈 MILITARY / FIRST RESPONDER</span>
-            <span class="price-chip">$28</span>
+
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>🪖 MILITARY / FIRST RESPONDER</span>
+            </div>
+            <div class="service-price">$28</div>
           </div>
-          <span class="service-desc">
-            Discounted cut for active military, veterans, police, firefighters,
-            EMTs & first responders.
-          </span>
+          <div class="service-desc">
+            Discounted cut for active military, vets, police,
+            firefighters, EMTs, and first responders.
+          </div>
         </div>
 
-        <div class="service-card glow-animate">
-          <div class="service-head">
-            <span>💇‍♂️ HAIRCUT (STANDARD)</span>
-            <span class="price-chip">$35</span>
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>💈 HAIRCUT (STANDARD)</span>
+            </div>
+            <div class="service-price">$35</div>
           </div>
-          <span class="service-desc">
+          <div class="service-desc">
             Classic or trending — fades, tapers, or scissor work.
-            <em>Detailed styles:</em> $40–$50+ depending on design / time.
-          </span>
+            Detailed styles may vary.
+          </div>
         </div>
 
-        <div class="service-card glow-animate">
-          <div class="service-head">
-            <span>🧔 HAIRCUT + BEARD</span>
-            <span class="price-chip">$40</span>
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>💈 HAIRCUT + BEARD</span>
+            </div>
+            <div class="service-price">$40</div>
           </div>
-          <span class="service-desc">
-            Full cut plus beard trim / line-up for a sharp, balanced look.
-          </span>
+          <div class="service-desc">
+            Full cut plus beard trim / line-up for a sharp,
+            balanced look.
+          </div>
         </div>
 
-        <div class="service-card glow-animate">
-          <div class="service-head">
-            <span>🪒 SKIN FADE / TAPER</span>
-            <span class="price-chip">$40</span>
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>🪒 SKIN FADE / TAPER</span>
+            </div>
+            <div class="service-price">$40</div>
           </div>
-          <span class="service-desc">
-            Down to the skin with foil shaver or razor for a clean finish.
-          </span>
+          <div class="service-desc">
+            Down to the skin with foil shaver or razor
+            for a clean finish.
+          </div>
         </div>
 
-        <div class="service-card glow-animate">
-          <div class="service-head">
-            <span>🪒🧔 SKIN FADE / TAPER + BEARD</span>
-            <span class="price-chip">$45</span>
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>🪒 SKIN FADE / TAPER + BEARD</span>
+            </div>
+            <div class="service-price">$45</div>
           </div>
-          <span class="service-desc">
-            Skin-level fade / taper plus full beard lineup.
-          </span>
+          <div class="service-desc">
+            Skin-level fade/taper plus full beard lineup.
+          </div>
         </div>
 
-        <div class="service-card glow-animate">
-          <div class="service-head">
-            <span>🧴 SHAMPOO SERVICE</span>
-            <span class="price-chip">$15</span>
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>🧴 SHAMPOO SERVICE</span>
+            </div>
+            <div class="service-price">$15</div>
           </div>
-          <span class="service-desc">
-            Treat yourself — cleanse, set, relax.
-          </span>
+          <div class="service-desc">
+            Cleanse, set, relax. Treat yourself.
+          </div>
         </div>
 
-        <div class="service-card glow-animate">
-          <div class="service-head">
-            <span>✂️ LONG HAIR (PAST SHOULDERS)</span>
-            <span class="price-chip">$35</span>
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>✂️ LONG HAIR (PAST SHOULDERS)</span>
+            </div>
+            <div class="service-price">$35</div>
           </div>
-          <span class="service-desc">
+          <div class="service-desc">
             Extra time & detail for longer lengths.
-          </span>
+          </div>
         </div>
 
-        <div class="service-card glow-animate">
-          <div class="service-head">
-            <span>🧔‍♂️ BEARD TRIM / LINE UP</span>
-            <span class="price-chip">$25</span>
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>🧔‍♂️ BEARD TRIM / LINE UP</span>
+            </div>
+            <div class="service-price">$25</div>
           </div>
-          <span class="service-desc">
+          <div class="service-desc">
             Clean edges, even bulk, crisp shape.
-          </span>
+          </div>
         </div>
 
-        <div class="service-card glow-animate">
-          <div class="service-head">
-            <span>🧼 FACE SHAVE</span>
-            <span class="price-chip">$25</span>
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>🪒 FACE SHAVE</span>
+            </div>
+            <div class="service-price">$25</div>
           </div>
-          <span class="service-desc">
+          <div class="service-desc">
             Hot towel, lather, and smooth finish.
-          </span>
+          </div>
         </div>
 
-        <div class="service-card glow-animate">
-          <div class="service-head">
-            <span>📏 LINE UP ONLY</span>
-            <span class="price-chip">$15</span>
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>✏️ LINE UP ONLY</span>
+            </div>
+            <div class="service-price">$15</div>
           </div>
-          <span class="service-desc">
-            Edges only. <em>Beard not included.</em>
-          </span>
+          <div class="service-desc">
+            Edges only. Beard not included.
+          </div>
         </div>
 
-        <div class="service-card glow-animate">
-          <div class="service-head">
-            <span>🎨 DESIGN ONLY</span>
-            <span class="price-chip">$10</span>
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>🎨 DESIGN ONLY</span>
+            </div>
+            <div class="service-price">$10</div>
           </div>
-          <span class="service-desc">
+          <div class="service-desc">
             Add a freestyle design or bring a reference.
-          </span>
+          </div>
         </div>
 
-        <div class="service-card glow-animate">
-          <div class="service-head">
-            <span>🌀 PERM SERVICE</span>
-            <span class="price-chip">$90+</span>
+        <div class="service-card">
+          <div class="service-top-row">
+            <div class="service-name">
+              <span>🌊 PERM SERVICE</span>
+            </div>
+            <div class="service-price">$90+</div>
           </div>
-          <span class="service-desc">
-            Beachy waves to tighter curls — premium products for lasting results.
-          </span>
+          <div class="service-desc">
+            Beach waves to tighter curls — premium products
+            for lasting results.
+          </div>
         </div>
 
-        <div class="service-card glow-animate">
-          <div class="service-head">
-            <span>🪒 HEAD SHAVE</span>
-            <span class="price-chip">$35</span>
-          </div>
-          <span class="service-desc">
-            Clean and polished dome with hot towel finish.
-          </span>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- HOURS -->
-  <section id="hours">
-    <div class="frost-panel glow-animate">
-      <h2 class="section-title glow-animate">Business Hours</h2>
-      <p class="section-lead">
-        Walk-ins welcome. Appointments preferred. No extra charge after hours.
-      </p>
+  <!-- HOURS / CONTACT ---------------------------->
+  <section id="hours" class="section">
+    <div class="section-focus-ring"></div>
+    <div class="section-shell">
 
-      <ul class="hours-grid">
-        <li class="hours-item glow-animate">SUNDAY : 9:00am – 4:00pm</li>
-        <li class="hours-item glow-animate">MONDAY : 9:00am – 4:00pm</li>
-        <li class="hours-item glow-animate">TUESDAY : 8:30am – 5:30pm</li>
-        <li class="hours-item glow-animate">WEDNESDAY : 8:30am – 5:30pm</li>
-        <li class="hours-item glow-animate">THURSDAY : 8:30am – 5:30pm</li>
-        <li class="hours-item glow-animate">FRIDAY : 8:30am – 5:30pm</li>
-        <li class="hours-item glow-animate">SATURDAY : 8:30am – 5:30pm</li>
-      </ul>
+      <header class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-title">Hours & Contact</div>
+          <div class="section-underline"></div>
+        </div>
+      </header>
 
-      <p class="after-hours glow-animate">NO ADDITIONAL CHARGE AFTER HOURS!</p>
-    </div>
-  </section>
+      <div class="hours-wrap">
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="frost-panel glow-animate">
-      <h2 class="section-title glow-animate">Contact</h2>
+        <div class="hours-box">
+          <div class="hours-grid">
+            <div class="hour-chip">SUNDAY : 9:00am – 4:00pm</div>
+            <div class="hour-chip">MONDAY : 9:00am – 4:00pm</div>
+            <div class="hour-chip">TUESDAY : 8:30am – 5:30pm</div>
+            <div class="hour-chip">WEDNESDAY : 8:30am – 5:30pm</div>
+            <div class="hour-chip">THURSDAY : 8:30am – 5:30pm</div>
+            <div class="hour-chip">FRIDAY : 8:30am – 5:30pm</div>
+            <div class="hour-chip">SATURDAY : 8:30am – 5:30pm</div>
+          </div>
+          <div class="note-nocharge">
+            NO ADDITIONAL CHARGE AFTER HOURS!
+          </div>
+        </div>
 
-      <div class="contact-block">
-        <p>
-          📍 Our Address:<br />
-          6510 Paradise Blvd NW Unit D, Albuquerque, NM 87114
-        </p>
-
-        <div class="map-links">
-          <a
-            class="map-btn glow-animate google"
-            href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114"
-            target="_blank"
-            rel="noopener"
-          >
-            Open in Google Maps
+        <div class="contact-box" id="contact">
+          <a class="contact-item" href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114" target="_blank" rel="noopener">
+            <span class="emoji">📍</span>
+            <span>6510 Paradise Blvd NW Unit D, Albuquerque, NM 87114</span>
           </a>
 
-          <a
-            class="map-btn glow-animate"
-            href="https://maps.apple.com/?address=6510%20Paradise%20Blvd%20NW%20Unit%20D,%20Albuquerque,%20NM%2087114"
-            target="_blank"
-            rel="noopener"
-          >
-            Open in Apple Maps
+          <a class="contact-item" href="tel:+15055036216">
+            <span class="emoji">📞</span>
+            <span>(505) 503-6216</span>
           </a>
         </div>
 
-        <p>
-          📞 <a href="tel:+15055036216">(505) 503-6216</a>
-        </p>
       </div>
     </div>
   </section>
 
-  <!-- LOCATION -->
-  <section id="location">
-    <div class="frost-panel glow-animate">
-      <h2 class="section-title glow-animate">Find Us</h2>
+  <!-- LOCATION / MAP ----------------------------->
+  <section id="location" class="section">
+    <div class="section-focus-ring"></div>
+    <div class="section-shell">
+      <header class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-title">Find Us</div>
+          <div class="section-underline"></div>
+        </div>
+      </header>
 
-      <iframe class="map-frame glow-animate"
-        src="https://maps.google.com/maps?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114&t=&z=15&ie=UTF8&iwloc=&output=embed"
-        loading="lazy"
-        allowfullscreen
-        title="Map to Next Level BarberShop">
-      </iframe>
+      <div class="map-wrap">
+        <div class="map-card">
+          <div class="map-flex">
+            <!-- keep your iframe map the same as before -->
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3244.268431653064!2d-106.726!3d35.197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x872272e0...etc"
+              width="100%" height="320" style="border:0;"
+              loading="lazy" allowfullscreen=""
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
 
-      <p class="landmark-note glow-animate">
-        We’re right next to Bob’s Burgers. Plenty of parking in front.
-      </p>
+          <div class="map-links">
+            <a class="map-btn"
+               href="https://maps.google.com/?q=6510+Paradise+Blvd+NW+Unit+D,+Albuquerque,+NM+87114"
+               target="_blank" rel="noopener">
+              Open in Google Maps
+            </a>
+
+            <a class="map-btn"
+               href="http://maps.apple.com/?address=6510+Paradise+Blvd+NW+Unit+D,Albuquerque,NM,87114"
+               target="_blank" rel="noopener">
+              Open in Apple Maps
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="glow-animate">
-    © 2025 Next Level BarberShop
-  </footer>
+</main>
 
-  <!-- ========= JS ========= -->
-  <script>
-    /* ===== HEADER SHOW/HIDE (more sensitive now) =====
-       - Hides on scroll down.
-       - Shows again as soon as you scroll UP even a little (doesn't force you to scroll a lot).
-    */
-    const headerEl = document.getElementById('siteHeader');
-    let lastScrollY = window.scrollY;
-    let tickingHeader = false;
+<footer>
+  © 2025 Next Level BarberShop
+</footer>
 
-    function handleScrollHeader(){
-      const y = window.scrollY;
-      const diff = y - lastScrollY;
+<script>
+/* ====================================================
+   JS BEHAVIOR
+   - mobile drawer toggle
+   - smart sticky header (hide on scroll down, show on up)
+   - smooth scroll w/ offset so section centers nicer
+   - active section glow (mobile = section in middle;
+     desktop = hover only, but we still mark active so
+     heading glow works)
+   - soft parallax background
+   - (optional SPOOK popup is left commented)
+==================================================== */
 
-      // Glow state when not at very top
-      if (y > 20){
-        headerEl.classList.add('scrolled');
-      } else {
-        headerEl.classList.remove('scrolled');
-      }
+/* ---------- HELPERS ---------- */
+const qs = s=>document.querySelector(s);
+const qsa = s=>document.querySelectorAll(s);
 
-      // Scrolling DOWN -> hide header once you're past hero
-      if (diff > 0 && y > 80){
-        headerEl.classList.add('hide');
-      }
+const header = qs('#siteHeader');
+const mobileDrawer = qs('#mobileDrawer');
+const burgerBtn = qs('#burgerBtn');
+const drawerClose = qs('#drawerClose');
+const drawerLinks = qsa('[data-drawer-link]');
+const brandName = qs('#brandName');
+const desktopNav = qs('#desktopNav');
+const mobileActions = qs('#mobileActions');
 
-      // Scrolling UP -> immediately show header
-      if (diff < 0){
-        headerEl.classList.remove('hide');
-      }
+/* Responsive header mode: show burger on mobile, full nav on desktop */
+function handleHeaderLayout(){
+  if(window.innerWidth <= 768){
+    mobileActions.style.display='flex';
+    desktopNav.style.display='none';
+    brandName.style.textAlign='left';
+  }else{
+    mobileActions.style.display='none';
+    desktopNav.style.display='flex';
+    brandName.style.textAlign='center';
+  }
+}
+handleHeaderLayout();
+window.addEventListener('resize', handleHeaderLayout);
 
-      lastScrollY = y;
-      tickingHeader = false;
-    }
+/* Burger drawer open/close */
+if(burgerBtn){
+  burgerBtn.addEventListener('click',()=>mobileDrawer.classList.add('open'));
+}
+if(drawerClose){
+  drawerClose.addEventListener('click',()=>mobileDrawer.classList.remove('open'));
+}
+drawerLinks.forEach(link=>{
+  link.addEventListener('click',()=>mobileDrawer.classList.remove('open'));
+});
 
-    window.addEventListener('scroll', ()=>{
-      if(!tickingHeader){
-        window.requestAnimationFrame(handleScrollHeader);
-        tickingHeader = true;
-      }
-    }, {passive:true});
+/* --------- smart sticky header hide/show --------- */
+let lastScrollY = window.scrollY;
+function handleScrollHeader(){
+  const current = window.scrollY;
+  // if scrolling down and past 80px -> hide
+  if(current > lastScrollY && current > 80){
+    header.classList.add('nav-hidden');
+  }else{
+    // if scrolling up at all -> show
+    header.classList.remove('nav-hidden');
+  }
+  lastScrollY = current;
+}
+window.addEventListener('scroll', handleScrollHeader,{passive:true});
 
+/* -------- smooth anchor scroll with offset ---------
+   We scroll so the section sits nicer on screen
+*/
+function scrollToSection(id){
+  const el = qs(id);
+  if(!el) return;
+  // header height dynamic:
+  const headerH = header.getBoundingClientRect().height;
+  const rect = el.getBoundingClientRect();
+  const absoluteY = window.scrollY + rect.top - (headerH + 20); // 20px breathing room
+  window.scrollTo({top:absoluteY,behavior:'smooth'});
+}
 
-    /* ===== PARALLAX DRIFT for background sig + title halos ===== */
-    const rootStyle = document.documentElement.style;
-    let tickingParallax = false;
-    function updateParallax(){
-      const y = window.scrollY || 0;
-      const parallax = (y * -0.05);
-      const half = parallax * 0.5;
-      rootStyle.setProperty('--parallax-y', parallax.toFixed(2)+'px');
-      rootStyle.setProperty('--parallax-y-half', half.toFixed(2)+'px');
-      tickingParallax = false;
-    }
-    function onScrollParallax(){
-      if(!tickingParallax){
-        tickingParallax = true;
-        window.requestAnimationFrame(updateParallax);
-      }
-    }
-    window.addEventListener('scroll', onScrollParallax, {passive:true});
-    updateParallax();
-
-
-    /* ===== MOBILE/SCROLL SPOTLIGHT + DESKTOP GLOW =====
-       We watch what's in the center area of the viewport.
-       On mobile: only one "feature" card (barber/service/etc) glows at a time.
-       On desktop: cards mostly glow on hover, not scroll, to keep it clean.
-    */
-    const isMobileScreen = () => window.matchMedia('(max-width:767px)').matches;
-
-    const allGlowTargets = Array.from(document.querySelectorAll(
-      '.glow-animate, .hours-item, .after-hours, .map-btn, .map-frame, .landmark-note, footer, .section-title, .frost-panel, .service-card, .card-unit'
-    ));
-
-    const cardTargets = allGlowTargets.filter(el =>
-      el.classList.contains('card-unit') || el.classList.contains('service-card')
-    );
-    const nonCardTargets = allGlowTargets.filter(el =>
-      !(el.classList.contains('card-unit') || el.classList.contains('service-card'))
-    );
-
-    let currentMobileFeature = null;
-
-    const io = new IntersectionObserver((entries)=>{
-      const visibleNow = [];
-
-      entries.forEach(entry=>{
-        const el = entry.target;
-        const ratio = entry.intersectionRatio;
-
-        if(ratio > 0){
-          visibleNow.push({el,ratio});
-        } else {
-          el.classList.remove('in-view');
-          if(currentMobileFeature === el){
-            currentMobileFeature = null;
-          }
-        }
-      });
-
-      if(visibleNow.length === 0) return;
-
-      // Non-card items: if they're in view at all, give them in-view glow
-      visibleNow.forEach(({el})=>{
-        if(!(el.classList.contains('card-unit') || el.classList.contains('service-card'))){
-          el.classList.add('in-view');
-        }
-      });
-
-      // MOBILE spotlight logic, more center-accurate
-      const mobile = isMobileScreen();
-      const visibleCards = visibleNow.filter(v =>
-        v.el.classList.contains('card-unit') || v.el.classList.contains('service-card')
-      );
-
-      if(mobile && visibleCards.length){
-        // pick card with highest ratio
-        let best = visibleCards[0];
-        for (const v of visibleCards){
-          if(v.ratio > best.ratio){
-            best = v;
-          }
-        }
-        // turn off old
-        if(currentMobileFeature && currentMobileFeature !== best.el){
-          currentMobileFeature.classList.remove('in-view');
-        }
-        // turn on current
-        best.el.classList.add('in-view');
-        currentMobileFeature = best.el;
-      } else if(!mobile){
-        // desktop still uses hover for cards, so don't permanently light them from scroll
-        visibleCards.forEach(v=>{
-          v.el.classList.remove('in-view');
-        });
-        currentMobileFeature = null;
-      }
-    },{
-      root:null,
-      // bring trigger zone closer to TRUE middle vertically:
-      // we "crop" 45% top / 45% bottom, so ~10% tall sweet spot in the center
-      rootMargin:"-45% 0px -45% 0px",
-      threshold:[0.6,0.8]
-    });
-
-    allGlowTargets.forEach(el=>io.observe(el));
-
-    // keep logic in sync if orientation / width changes
-    window.addEventListener('resize',()=>{
-      if(isMobileScreen()){
-        // mobile keeps one card glowing at a time
-        cardTargets.forEach(card=>{
-          if(card !== currentMobileFeature){
-            card.classList.remove('in-view');
-          }
-        });
-      } else {
-        // desktop -> no scroll-glow lock on cards
-        cardTargets.forEach(card=>{
-          card.classList.remove('in-view');
-        });
-        currentMobileFeature = null;
+function attachSmartScroll(selector){
+  qsa(selector).forEach(a=>{
+    a.addEventListener('click', e=>{
+      const href = a.getAttribute('href');
+      if(href && href.startsWith('#')){
+        e.preventDefault();
+        scrollToSection(href);
       }
     });
+  });
+}
+attachSmartScroll('.nav-link');
+attachSmartScroll('.drawer-links a');
 
-
-    /* ===== DESKTOP PANEL TILT / CURSOR GLOW (sections) ===== */
-    function enablePanelTilt(panel){
-      panel.__tiltBound = true;
-      panel.addEventListener('mousemove', e=>{
-        const rect = panel.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const px = x / rect.width;
-        const py = y / rect.height;
-
-        const rotY = (px - 0.5) * 4;
-        const rotX = (0.5 - py) * 4;
-
-        panel.style.setProperty('--tiltX', rotX.toFixed(2)+'deg');
-        panel.style.setProperty('--tiltY', rotY.toFixed(2)+'deg');
-        panel.style.setProperty('--spotX', (px*100).toFixed(1)+'%');
-        panel.style.setProperty('--spotY', (py*100).toFixed(1)+'%');
-      });
-
-      panel.addEventListener('mouseleave', ()=>{
-        panel.style.setProperty('--tiltX','0deg');
-        panel.style.setProperty('--tiltY','0deg');
-        panel.style.setProperty('--spotX','50%');
-        panel.style.setProperty('--spotY','50%');
-      });
+/* -------- active section glow tracking -------------
+   Mobile: highlight the section that's centered-ish.
+   Desktop: we mostly glow on hover, but we still mark 
+   active so headings can soft-glow when you're near them.
+*/
+const sections = qsa('.section');
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      // remove active from others
+      sections.forEach(sec=>sec.classList.remove('active'));
+      // add active to the one that's mostly centered
+      entry.target.classList.add('active');
     }
+  });
+},{
+  // we want "in the middle of the screen"
+  root:null,
+  rootMargin:'-30% 0px -30% 0px',
+  threshold:0.3
+});
+sections.forEach(sec=>observer.observe(sec));
 
-    /* ===== DESKTOP SERVICE TILT / CURSOR GLOW (each service card) ===== */
-    function enableServiceTilt(card){
-      card.__tiltBound = true;
-      card.addEventListener('mousemove', e=>{
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const px = x / rect.width;
-        const py = y / rect.height;
+/* -------- parallax background (subtle, efficient) --
+   We'll offset radial backgrounds a little with scroll.
+   We'll run it on rAF so it's smooth.
+*/
+let latestScrollY = window.scrollY;
+function parallaxLoop(){
+  const y = latestScrollY * 0.05; // gentle
+  // shift background-position for vibe
+  document.body.style.backgroundPosition = `
+    20% calc(20% + ${y}px),
+    80% calc(15% + ${y * 0.6}px),
+    50% calc(80% + ${y * 1.2}px)
+  `;
+  requestAnimationFrame(parallaxLoop);
+}
+window.addEventListener('scroll',()=>{ latestScrollY = window.scrollY; },{passive:true});
+parallaxLoop();
 
-        const rotY = (px - 0.5) * 4;
-        const rotX = (0.5 - py) * 4;
+/* -------- SPOOK MODE (off) -------------------------
+const spook = document.getElementById('spook');
+function spookyFlash(){
+  if(!spook)return;
+  spook.classList.add('show');
+  setTimeout(()=>{ spook.classList.remove('show'); },800);
+}
+// Example trigger:
+// setTimeout(spookyFlash, 5000);
+----------------------------------------------------- */
 
-        card.style.setProperty('--sTiltX', rotX.toFixed(2)+'deg');
-        card.style.setProperty('--sTiltY', rotY.toFixed(2)+'deg');
-        card.style.setProperty('--sSpotX', (px*100).toFixed(1)+'%');
-        card.style.setProperty('--sSpotY', (py*100).toFixed(1)+'%');
-
-        // apply transform only on desktop screens:
-        if(window.matchMedia('(min-width:768px)').matches){
-          card.style.transform =
-            `perspective(600px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale(1.01)`;
-        }
-      });
-
-      card.addEventListener('mouseleave', ()=>{
-        card.style.setProperty('--sTiltX','0deg');
-        card.style.setProperty('--sTiltY','0deg');
-        card.style.setProperty('--sSpotX','50%');
-        card.style.setProperty('--sSpotY','50%');
-        if(window.matchMedia('(min-width:768px)').matches){
-          card.style.transform = `perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)`;
-        }
-      });
-    }
-
-    const frostPanels = document.querySelectorAll('.frost-panel');
-    const serviceCards = document.querySelectorAll('.service-card');
-
-    function bindDesktopTiltIfNeeded(){
-      if(window.matchMedia('(min-width:768px)').matches){
-        frostPanels.forEach(panel=>{
-          if(!panel.__tiltBound) enablePanelTilt(panel);
-        });
-        serviceCards.forEach(card=>{
-          if(!card.__tiltBound) enableServiceTilt(card);
-        });
-      }
-    }
-    bindDesktopTiltIfNeeded();
-    window.addEventListener('resize', bindDesktopTiltIfNeeded);
-  </script>
+</script>
 </body>
 </html>
