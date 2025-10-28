@@ -3,527 +3,460 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f0f1a" />
   <title>Next Level Barbershop • Albuquerque, NM</title>
 
-  <!-- Favicon / logo for browser tab and PWA icons -->
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <!-- Favicon / PWA icon -->
+  <link rel="icon" href="favicon.png" type="image/png" />
 
-  <!-- Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet"
-  />
-
+  <link rel="preload" as="image" href="bg-blurred.jpg" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <!-- HEADER / BRAND BAR -->
+<body class="site">
+
+  <!-- ***********************
+       HEADER / NAVBAR
+  *************************** -->
   <header class="site-header glass-header">
+    <!-- watermark / skull background in header -->
+    <div class="header-watermark"></div>
+
     <div class="header-inner">
       <div class="brand-wrap">
-        <img src="favicon.png" alt="Next Level Barbershop logo" class="brand-logo" />
-        <div class="brand-text pulse-glow">
+        <div class="brand-text pulse-glow" id="shopName">
           NEXT LEVEL BARBERSHOP
         </div>
       </div>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
-        <span class="menu-lines"></span>
-        <span class="menu-lines"></span>
+      <button class="menu-toggle pill pill-solid" id="menuToggle" aria-label="Open navigation">
         <span class="menu-lines"></span>
       </button>
     </div>
 
-    <!-- MOBILE / OVERLAY NAV -->
-    <nav class="nav-overlay" id="navOverlay" hidden>
-      <div class="nav-overlay-inner glass-heavy">
-        <ul class="nav-links">
-          <li><a class="nav-pill" href="#welcome">Home</a></li>
-          <li><a class="nav-pill" href="#barbers">Our Barbers</a></li>
-          <li><a class="nav-pill" href="#reviews">Reviews</a></li>
-          <li><a class="nav-pill" href="#services">Services</a></li>
-          <li><a class="nav-pill" href="#visit">Hours</a></li>
-          <li><a class="nav-pill" href="#visit">Contact</a></li>
-          <li><a class="nav-pill" href="#visit">Location</a></li>
-        </ul>
+    <!-- slide / float menu panel -->
+    <nav class="nav-panel glass-pop" id="navPanel" aria-hidden="true">
+      <button class="nav-close pill pill-solid" id="navClose" aria-label="Close navigation">✕</button>
 
-        <div class="nav-phone-row">
-          <a class="call-pill gradient-pill" href="tel:+15055036216">
-            (505) 503-6216
-          </a>
-        </div>
+      <ul class="nav-links">
+        <li><a class="pill pill-strong" href="#welcome">Home</a></li>
+        <li><a class="pill pill-strong" href="#barbers">Our Barbers</a></li>
+        <li><a class="pill pill-strong" href="#reviews">Reviews</a></li>
+        <li><a class="pill pill-strong" href="#services">Services</a></li>
+        <li><a class="pill pill-strong" href="#visit">Hours / Contact</a></li>
+        <li><a class="pill pill-strong" href="#visit">Location</a></li>
+      </ul>
+
+      <div class="nav-phone">
+        <a class="pill pill-call" href="tel:+15055036216">📞 (505) 503-6216</a>
       </div>
     </nav>
+
+    <!-- backdrop for tapping outside menu -->
+    <div class="nav-backdrop" id="navBackdrop"></div>
   </header>
 
-  <main>
-    <!-- WELCOME / ABOUT -->
-    <section id="welcome" class="page-section reveal-section">
-      <div class="section-card glass-card">
-        <div class="section-head text-center">
-          <div class="eyebrow">WELCOME TO</div>
-          <h1 class="section-title underline-gradient">
-            NEXT LEVEL BARBERSHOP
-          </h1>
-        </div>
+  <!-- ***********************
+       MAIN CONTENT
+  *************************** -->
+  <main class="content-wrapper">
+    <!-- HERO / WELCOME -->
+    <section id="welcome" class="section-block observe-me">
+      <div class="card-section glass-card pop-card">
+        <div class="section-label">WELCOME TO</div>
+        <h1 class="section-title underline-gradient">
+          NEXT LEVEL BARBERSHOP
+        </h1>
 
-        <p class="section-body-text text-center">
+        <p class="section-desc">
           Professional cuts, sharp fades, and a clean vibe. Locally owned.
-          Walk-ins welcome. Appointments preferred. Payment method can vary
-          by barber — just confirm when you book.
+          Walk-ins welcome. Appointments preferred. Payment method can
+          vary by barber — just confirm when you book.
         </p>
 
-        <!-- badges row -->
         <div class="chip-row">
-          <div class="chip glass-chip strong-chip">Locally Owned</div>
-          <div class="chip glass-chip strong-chip">Walk-Ins Welcome</div>
+          <span class="pill pill-soft pill-strong">Locally Owned</span>
+          <span class="pill pill-soft pill-strong">Walk-Ins Welcome</span>
         </div>
 
         <div class="chip-row">
-          <div class="chip glass-chip strong-chip">Appointments Preferred</div>
-        </div>
-
-        <!-- payment methods -->
-        <div class="chip-row">
-          <div class="chip glass-chip strong-chip">
-            💵 Cash
-          </div>
-          <div class="chip glass-chip strong-chip">
-            🍎 Apple&nbsp;Pay
-          </div>
-          <div class="chip glass-chip strong-chip">
-            💸 Cash&nbsp;App
-          </div>
+          <span class="pill pill-soft pill-strong">Appointments Preferred</span>
         </div>
 
         <div class="chip-row">
-          <div class="chip glass-chip strong-chip">
-            📲 Venmo
-          </div>
+          <span class="pill pill-soft pill-strong">💵 Cash</span>
+          <span class="pill pill-soft pill-strong">🍎 Apple Pay</span>
+          <span class="pill pill-soft pill-strong">💸 Cash App</span>
         </div>
 
-        <!-- location bullets -->
-        <div class="info-box glass-inner">
-          <div class="info-line">📍 Albuquerque, NM</div>
-          <div class="info-line">🍔 Right next to Bob’s Burgers</div>
-          <div class="info-line">
-            🕺 Walk-Ins Welcome &nbsp;•&nbsp; 📅 Appointments Preferred
-          </div>
+        <div class="chip-row">
+          <span class="pill pill-soft pill-strong">📲💳 Venmo</span>
+        </div>
+
+        <div class="location-box glass-inner">
+          <div class="loc-line">📍 Albuquerque, NM</div>
+          <div class="loc-line">🍔 Right next to Bob’s Burgers</div>
+          <div class="loc-line">🚶‍♂️ Walk-Ins Welcome • 📅 Appointments Preferred</div>
         </div>
       </div>
     </section>
 
     <!-- BARBERS -->
-    <section id="barbers" class="page-section reveal-section">
-      <div class="section-card glass-card">
-        <div class="section-head text-center">
-          <div class="eyebrow">OUR BARBERS</div>
-          <h2 class="section-title underline-gradient">Book Your Barber</h2>
+    <section id="barbers" class="section-block observe-me">
+      <div class="card-section glass-card pop-card">
+        <div class="section-heading">OUR BARBERS</div>
+
+        <div class="barber-list">
+          <div class="barber-card glass-inner pill-bg-boost">
+            <div class="barber-name">VINCENT (OWNER)</div>
+            <div class="barber-tagline">Founder. Fader. Visionary.</div>
+            <a class="pill pill-call pill-strong" href="tel:+15055036216">Call to Book</a>
+          </div>
+
+          <div class="barber-card glass-inner pill-bg-boost">
+            <div class="barber-name">Z WALUW</div>
+            <div class="barber-tagline">Precision in every pass.</div>
+            <a class="pill pill-call pill-strong" href="tel:+15055036216">Call to Book</a>
+          </div>
+
+          <div class="barber-card glass-inner pill-bg-boost">
+            <div class="barber-name">G-MO</div>
+            <div class="barber-tagline">Style that speaks before you do.</div>
+            <a class="pill pill-call pill-strong" href="tel:+15055036216">Call to Book</a>
+          </div>
+
+          <div class="barber-card glass-inner pill-bg-boost">
+            <div class="barber-name">DESHAUN</div>
+            <div class="barber-tagline">Sharp fades. Chill vibes.</div>
+            <a class="pill pill-call pill-strong" href="tel:+15055036216">Call to Book</a>
+          </div>
+
+          <div class="barber-card glass-inner pill-bg-boost">
+            <div class="barber-name">CASH</div>
+            <div class="barber-tagline">Quick with the clippers, real with the results.</div>
+            <a class="pill pill-call pill-strong" href="tel:+15055036216">Book w/ Cash</a>
+          </div>
+
+          <div class="barber-card glass-inner pill-bg-boost">
+            <div class="barber-name">JONNY</div>
+            <div class="barber-tagline">Where art meets the edge.</div>
+            <a class="pill pill-call pill-strong" href="tel:+15055036216">Book w/ Jonny</a>
+          </div>
+
+          <div class="barber-card glass-inner pill-bg-boost">
+            <div class="barber-name">TAYLOR</div>
+            <div class="barber-tagline">Clean blends. Subtle structure. Quiet precision.</div>
+            <a class="pill pill-call pill-strong" href="tel:+15055036216">Book w/ Taylor</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="reviews" class="section-block observe-me">
+      <div class="card-section glass-card pop-card">
+        <div class="section-heading">Recent 5★ Google reviews — real people talking about real cuts.</div>
+
+        <div class="review-card glass-inner pill-bg-boost">
+          <div class="review-head">
+            <div class="review-name">Keely Struck</div>
+            <div class="review-date">a month ago</div>
+          </div>
+          <div class="review-stars">★★★★★ <span class="score">5.0</span></div>
+          <div class="review-text">
+            “They did a great job on my son’s hair! It was his first haircut and I wanted kinda like a baby mullet — they are really good with kids and very patient. I love the way it turned out!!”
+          </div>
+          <div class="review-service">Service: Haircut • Google review</div>
         </div>
 
-        <div class="barber-grid">
-          <!-- Barber card template -->
-          <div class="barber-card glass-inner">
-            <div class="barber-name">VINCENT (OWNER)</div>
-            <div class="barber-desc">
-              Founder. Fader. Visionary.
-            </div>
-            <a class="action-btn strong-chip" href="tel:+15055036216">
-              Call to Book
-            </a>
+        <div class="review-card glass-inner pill-bg-boost">
+          <div class="review-head">
+            <div class="review-name">Jennifer Lopez</div>
+            <div class="review-date">a month ago</div>
           </div>
+          <div class="review-stars">★★★★★ <span class="score">5.0</span></div>
+          <div class="review-text">
+            “I take my toddler here to get a haircut from Cash and she does an amazing job every time. She’s very good with kids and is pretty fast.
+            We will be going back with barber Cash!”
+          </div>
+          <div class="review-service">Service: Haircut • Google review</div>
+        </div>
 
-          <div class="barber-card glass-inner">
-            <div class="barber-name">Z WALUW</div>
-            <div class="barber-desc">
-              Precision in every pass.
-            </div>
-            <a class="action-btn strong-chip" href="tel:+15055036216">
-              Call to Book
-            </a>
+        <div class="review-card glass-inner pill-bg-boost">
+          <div class="review-head">
+            <div class="review-name">Francesca Tafoya</div>
+            <div class="review-date">3 weeks ago</div>
           </div>
-
-          <div class="barber-card glass-inner">
-            <div class="barber-name">G-MO</div>
-            <div class="barber-desc">
-              Style that speaks before you do.
-            </div>
-            <a class="action-btn strong-chip" href="tel:+15055036216">
-              Call to Book
-            </a>
+          <div class="review-stars">★★★★★ <span class="score">5.0</span></div>
+          <div class="review-text">
+            “If I could give a million stars I would! Taylor was amazing and I have a great cut for my new job tomorrow! We had a great conversation and she was fast, gentle and efficient. I’ll be back next week. And always remember, kindness is free 🙏🏽💕”
           </div>
-
-          <div class="barber-card glass-inner">
-            <div class="barber-name">DESHAUN</div>
-            <div class="barber-desc">
-              Sharp fades. Chill vibes.
-            </div>
-            <a class="action-btn strong-chip" href="tel:+15055036216">
-              Call to Book
-            </a>
-          </div>
-
-          <div class="barber-card glass-inner">
-            <div class="barber-name">CASH</div>
-            <div class="barber-desc">
-              Quick with the clippers, real with the results.
-            </div>
-            <a class="action-btn strong-chip" href="tel:+15055036216">
-              Book w/ Cash
-            </a>
-          </div>
-
-          <div class="barber-card glass-inner">
-            <div class="barber-name">JONNY</div>
-            <div class="barber-desc">
-              Where art meets the edge.
-            </div>
-            <a class="action-btn strong-chip" href="tel:+15055036216">
-              Book w/ Jonny
-            </a>
-          </div>
-
-          <div class="barber-card glass-inner">
-            <div class="barber-name">TAYLOR</div>
-            <div class="barber-desc">
-              Clean blends. Subtle structure. Quiet precision.
-            </div>
-            <a class="action-btn strong-chip" href="tel:+15055036216">
-              Book w/ Taylor
-            </a>
-          </div>
+          <div class="review-service">Service: Haircut • Google review</div>
         </div>
       </div>
     </section>
 
     <!-- SERVICES -->
-    <section id="services" class="page-section reveal-section">
-      <div class="section-card glass-card">
-        <div class="section-head text-center">
-          <div class="eyebrow">MENU / PRICING</div>
-          <h2 class="section-title underline-gradient">Services</h2>
-        </div>
+    <section id="services" class="section-block observe-me">
+      <div class="card-section glass-card pop-card">
+        <div class="section-heading">SERVICES & PRICING</div>
 
         <ul class="service-list">
-          <li class="service-card glass-inner">
+          <li class="service-card glass-inner pill-bg-boost">
             <div class="service-main">
-              <div class="service-title">💇‍♂️ Regular Haircut</div>
-              <div class="service-desc">
-                Clean classic or fresh modern. Taper, blend, shape — your style.
-                + Beard lineup available.
-              </div>
+              💇‍♂️ <span class="service-title">Regular Haircut</span>
+              <span class="price pill pill-price pill-strong">$35</span>
             </div>
-            <div class="price-badge strong-chip">$35</div>
+            <div class="service-desc">
+              Clean classic or fresh modern. Taper, blend, shape — your style.
+              + Beard lineup available.
+            </div>
           </li>
 
-          <li class="service-card glass-inner">
+          <li class="service-card glass-inner pill-bg-boost">
             <div class="service-main">
-              <div class="service-title">🧔 Beard Add-On (with cut)</div>
-              <div class="service-desc">
-                Add a beard cleanup / line-up to your haircut. Sharp outline,
-                clean finish.
-              </div>
+              🧔 <span class="service-title">Beard Add-On (with cut)</span>
+              <span class="price pill pill-price pill-strong">+ $5</span>
             </div>
-            <div class="price-badge strong-chip">+ $5</div>
+            <div class="service-desc">
+              Add a beard cleanup / line-up to your haircut. Sharp outline, clean finish.
+            </div>
           </li>
 
-          <li class="service-card glass-inner">
+          <li class="service-card glass-inner pill-bg-boost">
             <div class="service-main">
-              <div class="service-title">🔥 Razor Fade</div>
-              <div class="service-desc">
-                Down to skin with a tight, smooth fade and detail work.
-                Can add beard detail.
-              </div>
+              🔥 <span class="service-title">Razor Fade</span>
+              <span class="price pill pill-price pill-strong">$40</span>
             </div>
-            <div class="price-badge strong-chip">$40</div>
+            <div class="service-desc">
+              Down to skin with a tight, smooth fade and detail work.
+              Can add beard detail.
+            </div>
           </li>
 
-          <li class="service-card glass-inner">
+          <li class="service-card glass-inner pill-bg-boost">
             <div class="service-main">
-              <div class="service-title">✂️ Style Cut</div>
-              <div class="service-desc">
-                Custom look, texture work, extra time and detail.
-              </div>
+              ✂️ <span class="service-title">Style Cut</span>
+              <span class="price pill pill-price pill-strong">$45</span>
             </div>
-            <div class="price-badge strong-chip">$45</div>
+            <div class="service-desc">
+              Custom look, texture work, extra time and detail.
+            </div>
           </li>
 
-          <li class="service-card glass-inner">
+          <li class="service-card glass-inner pill-bg-boost">
             <div class="service-main">
-              <div class="service-title">💨 Blowout Taper</div>
-              <div class="service-desc">
-                Volume on top, clean burst/neck taper. Ask your barber.
-              </div>
+              💨 <span class="service-title">Blowout Taper</span>
+              <span class="price pill pill-price pill-strong">Ask</span>
             </div>
-            <div class="price-badge strong-chip">Ask</div>
+            <div class="service-desc">
+              Volume on top, clean burst/neck taper. Ask your barber.
+            </div>
           </li>
 
-          <li class="service-card glass-inner">
+          <li class="service-card glass-inner pill-bg-boost">
             <div class="service-main">
-              <div class="service-title">💥 Burst Fade</div>
-              <div class="service-desc">
-                Open around the ear, tight and curved. Signature look.
-              </div>
+              💥 <span class="service-title">Burst Fade</span>
+              <span class="price pill pill-price pill-strong">Ask</span>
             </div>
-            <div class="price-badge strong-chip">Ask</div>
+            <div class="service-desc">
+              Open around the ear, tight and curved. Signature look.
+            </div>
           </li>
 
-          <li class="service-card glass-inner">
+          <li class="service-card glass-inner pill-bg-boost">
             <div class="service-main">
-              <div class="service-title">🧱 Flat Top</div>
-              <div class="service-desc">
-                Solid, squared, leveled. Old school / military fresh.
-              </div>
+              🪒 <span class="service-title">Flat Top</span>
+              <span class="price pill pill-price pill-strong">Ask</span>
             </div>
-            <div class="price-badge strong-chip">Ask</div>
+            <div class="service-desc">
+              Clean straight top. Military classic.
+            </div>
           </li>
 
-          <li class="service-card glass-inner">
+          <li class="service-card glass-inner pill-bg-boost">
             <div class="service-main">
-              <div class="service-title">🐍 Mullet</div>
-              <div class="service-desc">
-                Business in the front, party everywhere else.
-              </div>
+              🐍 <span class="service-title">Mullet</span>
+              <span class="price pill pill-price pill-strong">Ask</span>
             </div>
-            <div class="price-badge strong-chip">Ask</div>
+            <div class="service-desc">
+              Business up front, party everywhere else.
+            </div>
           </li>
 
-          <li class="service-card glass-inner">
+          <li class="service-card glass-inner pill-bg-boost">
             <div class="service-main">
-              <div class="service-title">🎨 Designs</div>
-              <div class="service-desc">
-                Custom art in the fade / hairline.
-              </div>
+              🎨 <span class="service-title">Designs</span>
+              <span class="price pill pill-price pill-strong">$10</span>
             </div>
-            <div class="price-badge strong-chip">$10+</div>
+            <div class="service-desc">
+              Clean razor / clipper art. Ask for availability.
+            </div>
           </li>
 
-          <li class="service-card glass-inner">
+          <li class="service-card glass-inner pill-bg-boost">
             <div class="service-main">
-              <div class="service-title">🧔 Beard Only</div>
-              <div class="service-desc">
-                Beard shape / lineup only.
-              </div>
+              🧼 <span class="service-title">Beard Only</span>
+              <span class="price pill pill-price pill-strong">$20</span>
             </div>
-            <div class="price-badge strong-chip">$20</div>
+            <div class="service-desc">
+              Line-up, shape, clean edges.
+            </div>
           </li>
 
-          <li class="service-card glass-inner">
+          <li class="service-card glass-inner pill-bg-boost">
             <div class="service-main">
-              <div class="service-title">🌀 Perm</div>
-              <div class="service-desc">
-                Texture / curl set. Ask for details.
-              </div>
+              💈 <span class="service-title">Perm</span>
+              <span class="price pill pill-price pill-strong">$100</span>
             </div>
-            <div class="price-badge strong-chip">$100</div>
+            <div class="service-desc">
+              Texture + curl. Ask stylist for timing.
+            </div>
           </li>
 
-          <li class="service-card glass-inner">
+          <li class="service-card glass-inner pill-bg-boost">
             <div class="service-main">
-              <div class="service-title">🎖️ Military / EMT / First Responder</div>
-              <div class="service-desc">
-                Discounted cut. Respect. Thank you.
-              </div>
+              🎖️ <span class="service-title">Military / EMT / First Responder</span>
+              <span class="price pill pill-price pill-strong">$28</span>
             </div>
-            <div class="price-badge strong-chip">$28</div>
+            <div class="service-desc">
+              Discounted clean professional cut. Thank you for what you do.
+            </div>
           </li>
 
-          <li class="service-card glass-inner">
+          <li class="service-card glass-inner pill-bg-boost">
             <div class="service-main">
-              <div class="service-title">🎯 Color</div>
-              <div class="service-desc">
-                Starting tone / color work.
-              </div>
+              🎨 <span class="service-title">Color</span>
+              <span class="price pill pill-price pill-strong">Starting at $30</span>
             </div>
-            <div class="price-badge strong-chip">From $30</div>
+            <div class="service-desc">
+              Color, tone, blend. Ask for consultation.
+            </div>
           </li>
         </ul>
       </div>
     </section>
 
-    <!-- REVIEWS -->
-    <section id="reviews" class="page-section reveal-section">
-      <div class="section-card glass-card">
-        <div class="section-head text-center">
-          <div class="eyebrow">REAL TALK</div>
-          <h2 class="section-title underline-gradient">
-            Recent 5★ Google Reviews
-          </h2>
-          <p class="section-subtext">
-            Real people talking about real cuts.
-          </p>
-        </div>
-
-        <div class="reviews-col">
-          <div class="review-card glass-inner">
-            <div class="review-top">
-              <div class="review-name">Keely Struck</div>
-              <div class="review-date">a month ago</div>
-            </div>
-            <div class="review-stars">★★★★★ <span class="rating">5.0</span></div>
-            <div class="review-body">
-              “They did a great job on my son’s hair! It was his first haircut
-              and I wanted kinda like a baby mullet — they are really good with
-              kids and very patient. I love the way it turned out!!”
-            </div>
-            <div class="review-meta">
-              Service: Haircut • Google review
-            </div>
-          </div>
-
-          <div class="review-card glass-inner">
-            <div class="review-top">
-              <div class="review-name">Jennifer Lopez</div>
-              <div class="review-date">a month ago</div>
-            </div>
-            <div class="review-stars">★★★★★ <span class="rating">5.0</span></div>
-            <div class="review-body">
-              “I take my toddler here to get a haircut from Cash and she does
-              an amazing job every time. She’s very good with kids and is pretty
-              fast. We will be going back with barber Cash!”
-            </div>
-            <div class="review-meta">
-              Service: Haircut • Google review
-            </div>
-          </div>
-
-          <div class="review-card glass-inner">
-            <div class="review-top">
-              <div class="review-name">Francesca Tafoya</div>
-              <div class="review-date">3 weeks ago</div>
-            </div>
-            <div class="review-stars">★★★★★ <span class="rating">5.0</span></div>
-            <div class="review-body">
-              “If I could give a million stars for my experience today I would!
-              Taylor was so amazing and I have a great cut for my new job
-              tomorrow! We had a great conversation and she was fast, gentle,
-              and efficient. I’ll be back next week. And always remember,
-              kindness is free 🙏💕”
-            </div>
-            <div class="review-meta">
-              Service: Haircut • Google review
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- VISIT / HOURS / CONTACT / MAP -->
-    <section id="visit" class="page-section reveal-section">
-      <div class="section-card glass-card">
-        <div class="section-head text-center">
-          <div class="eyebrow">VISIT US</div>
-          <h2 class="section-title underline-gradient">
-            Hours • Contact • Directions
-          </h2>
+    <section id="visit" class="section-block observe-me">
+      <div class="card-section glass-card pop-card">
+        <div class="visit-heading-wrap">
+          <div class="visit-prelabel">VISIT US</div>
+          <div class="visit-core-title underline-gradient">
+            HOURS • CONTACT • DIRECTIONS
+          </div>
         </div>
 
-        <div class="visit-stack">
-          <div class="info-block glass-inner text-center">
-            <div class="info-block-title">Hours</div>
-            <div class="info-block-body">
-              Mon – Thu: 10:00 AM – 7:00 PM<br />
-              Fri – Sat: 10:00 AM – 8:00 PM<br />
-              Sun: 11:00 AM – 5:00 PM
-              <div class="info-small">
-                (Hours can vary by barber. Call or DM to confirm.)
-              </div>
-            </div>
+        <!-- Hours -->
+        <div class="visit-card glass-inner pill-bg-boost">
+          <div class="visit-card-title">Hours</div>
+          <div class="visit-card-body">
+            Mon – Thu: 10:00 AM – 7:00 PM<br/>
+            Fri – Sat: 10:00 AM – 8:00 PM<br/>
+            Sun: 11:00 AM – 5:00 PM<br/><br/>
+            <small>(Hours can vary by barber. Call or DM to confirm.)</small>
           </div>
+        </div>
 
-          <div class="info-block glass-inner text-center">
-            <div class="info-block-title">Contact</div>
-            <div class="info-block-body">
-              <a class="strong-chip inline-call" href="tel:+15055036216">
-                (505) 503-6216
+        <!-- Contact -->
+        <div class="visit-card glass-inner pill-bg-boost">
+          <div class="visit-card-title">Contact</div>
+          <div class="visit-card-body">
+            <a class="pill pill-call pill-strong big-call" href="tel:+15055036216">📞 (505) 503-6216</a>
+            <br/><br/>
+            6510 Paradise Blvd NW<br/>
+            Unit D<br/>
+            Albuquerque, NM 87114<br/><br/>
+            Walk-ins welcome. Appointments preferred.
+          </div>
+        </div>
+
+        <!-- Map / Directions -->
+        <div class="visit-card glass-inner pill-bg-boost">
+          <div class="visit-card-title">Find Us</div>
+          <div class="visit-card-body">
+            <div class="map-shell">
+              <iframe
+                class="map-frame"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                src="YOUR_EMBED_URL_HERE">
+              </iframe>
+            </div>
+
+            <div class="map-buttons">
+              <a
+                class="pill pill-strong pill-soft"
+                href="https://maps.apple.com/?address=6510%20Paradise%20Blvd%20NW%20Unit%20D%2C%20Albuquerque%2C%20NM%2087114"
+                target="_blank" rel="noopener">
+                🍎 Apple Maps
               </a>
-              <br />
-              6510 Paradise Blvd NW<br />
-              Unit D<br />
-              Albuquerque, NM 87114
-              <div class="info-small">
-                Walk-ins welcome. Appointments preferred.
-              </div>
+
+              <a
+                class="pill pill-strong pill-soft"
+                href="https://www.google.com/maps/search/?api=1&query=6510+Paradise+Blvd+NW+Unit+D+Albuquerque+NM+87114"
+                target="_blank" rel="noopener">
+                📍 Google Maps
+              </a>
             </div>
           </div>
+        </div>
 
-          <div class="info-block glass-inner text-center">
-            <div class="info-block-title">Find Us</div>
-            <div class="info-block-body">
-              <div class="map-shell">
-                <!-- Google Maps embed -->
-                <iframe
-                  class="map-embed"
-                  style="border:0"
-                  loading="lazy"
-                  allowfullscreen
-                  referrerpolicy="no-referrer-when-downgrade"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d...REPLACE_WITH_YOUR_EMBED..."
-                  title="Next Level Barbershop Map"
-                ></iframe>
-              </div>
-
-              <div class="map-buttons-row">
-                <a
-                  class="nav-pill solid-pill"
-                  href="https://maps.apple.com/?q=6510+Paradise+Blvd+NW+Albuquerque+NM+87114"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >🍎 Apple Maps</a>
-
-                <a
-                  class="nav-pill solid-pill"
-                  href="https://www.google.com/maps/search/?api=1&query=6510+Paradise+Blvd+NW+Unit+D+Albuquerque+NM+87114"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >📍 Google Maps</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="footer-line text-center info-small">
-            © Next Level Barbershop • Albuquerque, NM<br />
-            Walk-ins welcome • Appointments preferred
-          </div>
+        <!-- tiny footer line -->
+        <div class="footer-line">
+          © Next Level Barbershop • Albuquerque, NM<br/>
+          Walk-ins welcome • Appointments preferred
         </div>
       </div>
     </section>
+
   </main>
 
+  <!-- ***********************
+       SCRIPT
+  *************************** -->
   <script>
-    // Mobile nav toggle
+    /* ---------------------------
+       NAV PANEL TOGGLE
+    ---------------------------- */
     const menuToggle = document.getElementById('menuToggle');
-    const navOverlay = document.getElementById('navOverlay');
+    const navPanel = document.getElementById('navPanel');
+    const navClose = document.getElementById('navClose');
+    const backdrop = document.getElementById('navBackdrop');
 
-    menuToggle.addEventListener('click', () => {
-      const isHidden = navOverlay.hasAttribute('hidden');
-      if (isHidden) {
-        navOverlay.removeAttribute('hidden');
-        navOverlay.classList.add('overlay-open');
-      } else {
-        navOverlay.setAttribute('hidden', '');
-        navOverlay.classList.remove('overlay-open');
-      }
+    function openNav() {
+      navPanel.setAttribute('data-open', 'true');
+      backdrop.setAttribute('data-active', 'true');
+    }
+    function closeNav() {
+      navPanel.setAttribute('data-open', 'false');
+      backdrop.setAttribute('data-active', 'false');
+    }
+
+    menuToggle.addEventListener('click', openNav);
+    navClose.addEventListener('click', closeNav);
+    backdrop.addEventListener('click', closeNav);
+
+    /* ---------------------------
+       SCROLL REVEAL ANIMATION
+       "pop up / pop down"
+    ---------------------------- */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const el = entry.target;
+        if (entry.isIntersecting) {
+          el.classList.add('in-view');
+        } else {
+          // Remove class so it can animate again if user scrolls away + back
+          el.classList.remove('in-view');
+        }
+      });
+    }, {
+      threshold: 0.2
     });
 
-    // Section reveal / pop animation
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('reveal-visible');
-          } else {
-            entry.target.classList.remove('reveal-visible');
-          }
-        });
-      },
-      {
-        threshold: 0.2,
-      }
-    );
-
-    document.querySelectorAll('.reveal-section').forEach((sec) => {
-      observer.observe(sec);
+    document.querySelectorAll('.observe-me .card-section').forEach(card => {
+      observer.observe(card);
     });
   </script>
 </body>
