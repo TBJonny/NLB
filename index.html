@@ -91,6 +91,8 @@
         var(--bg);
       color:var(--text-primary);
       line-height:1.55;
+      position:relative;
+      overflow-x:hidden;
     }
     a { color:inherit; text-decoration:none; }
     img { max-width:100%; display:block; }
@@ -99,6 +101,85 @@
       max-width:1120px;
       margin:auto;
       padding:0 20px;
+      position:relative;
+      z-index:3;
+    }
+
+    /* =========================
+       BACKGROUND BRAND WATERMARK
+       ========================= */
+    .brand-bg {
+      position:fixed;
+      left:50%;
+      top:45vh;
+      transform:translateX(-50%);
+      z-index:0;
+      text-align:center;
+      pointer-events:none;
+      user-select:none;
+      mix-blend-mode:screen;
+      opacity:0.16;
+      filter:blur(0.5px) drop-shadow(0 0 10px rgba(124,58,237,.6)) drop-shadow(0 0 30px rgba(34,211,238,.5));
+      padding:0 16px;
+    }
+
+    @media (prefers-color-scheme: light){
+      .brand-bg {
+        mix-blend-mode:multiply;
+        opacity:0.14;
+      }
+    }
+
+    .brand-bg-line1 {
+      font-weight:800;
+      letter-spacing:.25em;
+      text-transform:uppercase;
+      font-size:clamp(28px,4vw,44px);
+      line-height:1.15;
+      background:linear-gradient(90deg,#7c3aed 0%,#22d3ee 100%);
+      background-size:200% 100%;
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      text-shadow:
+        0 0 20px rgba(124,58,237,.8),
+        0 0 60px rgba(34,211,238,.6),
+        0 0 110px rgba(34,211,238,.4);
+      animation:pulseBg 3s ease-in-out infinite;
+      white-space:nowrap;
+    }
+    .brand-bg-line2 {
+      display:inline-block;
+      margin-top:8px;
+      font-size:11px;
+      font-weight:600;
+      line-height:1.2;
+      letter-spacing:.4em;
+      color:#fff;
+      background:rgba(0,0,0,.4);
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:6px;
+      padding:4px 8px;
+      text-shadow:0 0 8px rgba(0,0,0,.8);
+    }
+
+    @keyframes pulseBg {
+      0% {
+        filter:drop-shadow(0 0 6px rgba(124,58,237,.7)) drop-shadow(0 0 18px rgba(34,211,238,.4));
+        background-position:0% 0%;
+      }
+      20% {
+        filter:drop-shadow(0 0 10px rgba(124,58,237,1)) drop-shadow(0 0 30px rgba(34,211,238,.7));
+        background-position:100% 0%;
+      }
+      35% {
+        filter:drop-shadow(0 0 7px rgba(124,58,237,.8)) drop-shadow(0 0 20px rgba(34,211,238,.5));
+        background-position:50% 0%;
+      }
+      100% {
+        filter:drop-shadow(0 0 6px rgba(124,58,237,.7)) drop-shadow(0 0 18px rgba(34,211,238,.4));
+        background-position:0% 0%;
+      }
     }
 
     /* =========================
@@ -114,7 +195,9 @@
       transition:opacity .7s cubic-bezier(.16,1,.3,1),
                  transform .7s cubic-bezier(.16,1,.3,1),
                  filter .7s cubic-bezier(.16,1,.3,1);
-      scroll-margin-top:90px; /* keeps anchor nav from hiding titles under sticky header */
+      scroll-margin-top:90px;
+      position:relative;
+      z-index:2;
     }
     section.visible {
       opacity:1;
@@ -134,13 +217,22 @@
     /* =========================
        HEADER / NAV / BRANDING
        ========================= */
-    header {
+    header.site-header {
       position:sticky;
       top:0;
-      z-index:40;
+      z-index:50;
       background:var(--header-bg);
       backdrop-filter:saturate(1.2) blur(8px);
       border-bottom:1px solid var(--border);
+      transition:transform .3s ease;
+    }
+
+    header.site-header.hide {
+      transform:translateY(-100%);
+    }
+
+    header.site-header.collapsed {
+      transform:translateY(-100%);
     }
 
     .nav-row {
@@ -164,25 +256,21 @@
       text-transform:uppercase;
       font-size:clamp(18px,2.2vw,22px);
 
-      /* gradient text */
       background:linear-gradient(90deg,#7c3aed 0%,#22d3ee 100%);
       background-size:200% 100%;
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
 
-      /* base glow */
       text-shadow:
         0 0 10px rgba(124,58,237,.5),
         0 0 20px rgba(34,211,238,.35);
 
       filter:drop-shadow(0 0 5px rgba(124,58,237,.5));
 
-      /* loop pulse */
       animation:brandPulse 3s ease-in-out infinite;
     }
 
-    /* pulse keyframes for header brand */
     @keyframes brandPulse {
       0% {
         text-shadow:
@@ -222,9 +310,9 @@
 
     .header-cta {
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       flex-wrap:wrap;
-      gap:14px;
+      gap:16px;
       justify-content:flex-end;
     }
 
@@ -232,36 +320,61 @@
       display:none;
       background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
       color:#fff;
-      font-size:13px;
+      font-size:14px;
       font-weight:600;
-      padding:8px 10px;
+      padding:10px 12px;
       border-radius:10px;
       line-height:1.2;
       white-space:nowrap;
+      box-shadow:0 10px 20px rgba(0,0,0,.6);
     }
 
     nav.primary-nav {
       display:flex;
-      gap:14px;
       flex-wrap:wrap;
+      gap:10px;
     }
 
     nav.primary-nav a {
-      font-size:13px;
-      line-height:1;
-      font-weight:500;
-      padding:8px 10px;
-      border-radius:10px;
+      font-size:14px;
+      line-height:1.2;
+      font-weight:600;
+      padding:10px 14px;
+      border-radius:12px;
       color:var(--text-primary);
-      background:transparent;
-      border:1px solid transparent;
+      background:var(--chip-bg);
+      border:1px solid var(--border);
+      box-shadow:0 10px 20px rgba(0,0,0,.5);
       transition:all .18s ease;
     }
 
     nav.primary-nav a:hover,
     nav.primary-nav a:focus {
-      background:var(--chip-bg);
-      border-color:var(--border);
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      box-shadow:0 20px 40px rgba(0,0,0,.8),0 0 24px rgba(124,58,237,.5);
+      color:#fff;
+      border-color:transparent;
+    }
+
+    /* hide button */
+    .hide-header-btn {
+      appearance:none;
+      border:1px solid var(--border);
+      background:var(--panel);
+      color:var(--text-primary);
+      border-radius:10px;
+      font-size:14px;
+      font-weight:600;
+      line-height:1;
+      padding:10px 12px;
+      cursor:pointer;
+      box-shadow:0 10px 20px rgba(0,0,0,.5);
+    }
+    .hide-header-btn:hover {
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      border-color:transparent;
+      color:#fff;
+      box-shadow:0 20px 40px rgba(0,0,0,.8),0 0 24px rgba(124,58,237,.5);
     }
 
     @media (max-width:640px){
@@ -270,6 +383,10 @@
       .brand-text {
         font-size:17px;
         letter-spacing:.16em;
+      }
+      .hide-header-btn {
+        font-size:13px;
+        padding:8px 10px;
       }
     }
 
@@ -652,6 +769,8 @@
       text-align:center;
       padding:32px 20px;
       margin-top:48px;
+      position:relative;
+      z-index:2;
     }
 
     /* =========================
@@ -694,7 +813,8 @@
       .btn-primary {
         transition:none;
       }
-      .brand-text {
+      .brand-text,
+      .brand-bg-line1 {
         animation:none;
       }
     }
@@ -702,8 +822,14 @@
 </head>
 <body>
 
+  <!-- fixed glowing brand watermark in background -->
+  <div class="brand-bg">
+    <div class="brand-bg-line1">NEXT LEVEL BARBERSHOP</div>
+    <div class="brand-bg-line2">ALBUQUERQUE, NM</div>
+  </div>
+
   <!-- ===== HEADER ===== -->
-  <header>
+  <header class="site-header" id="siteHeader">
     <div class="wrap nav-row">
       <div class="brand">
         <span class="brand-text">NEXT LEVEL BARBERSHOP</span>
@@ -721,6 +847,10 @@
           <a href="#contact">CONTACT</a>
           <a href="#location">LOCATION</a>
         </nav>
+
+        <button class="hide-header-btn" id="toggleHeaderBtn" title="Hide / Show menu">
+          ⇕
+        </button>
       </div>
     </div>
   </header>
@@ -811,7 +941,7 @@
     </div>
   </section>
 
-  <!-- ===== REVIEWS / SOCIAL PROOF ===== -->
+  <!-- ===== REVIEWS ===== -->
   <section id="reviews" class="band">
     <div class="wrap">
       <h2 class="section-title">What People Are Saying</h2>
@@ -948,7 +1078,6 @@
           6510 Paradise Blvd NW Unit D, Albuquerque, NM 87114
         </p>
 
-        <!-- choose maps platform -->
         <div class="map-links">
           <a
             class="map-btn google"
@@ -996,7 +1125,7 @@
   </footer>
 
   <script>
-    // Reveal full sections on scroll (fade/slide/blur in)
+    // ===== Scroll reveal for sections =====
     const sectionObserver=new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
         if(e.isIntersecting){
@@ -1007,7 +1136,7 @@
     },{threshold:.15});
     document.querySelectorAll('section').forEach(s=>sectionObserver.observe(s));
 
-    // Staggered reveal for groups of cards (barbers, services, reviews)
+    // ===== Staggered card reveal (barbers/services/reviews) =====
     const groupObserver=new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -1015,13 +1144,50 @@
           kids.forEach((el,i)=>{
             setTimeout(()=>{
               el.classList.add('show');
-            }, i*80); // 80ms stagger per card
+            }, i*80);
           });
           groupObserver.unobserve(entry.target);
         }
       });
     },{threshold:.2});
     document.querySelectorAll('.reveal-group').forEach(g=>groupObserver.observe(g));
+
+    // ===== Hide header on scroll down / show on scroll up =====
+    const header = document.getElementById('siteHeader');
+    const toggleBtn = document.getElementById('toggleHeaderBtn');
+
+    let lastScrollY = window.scrollY;
+    let manualCollapse = false;
+
+    window.addEventListener('scroll', () => {
+      const currentY = window.scrollY;
+
+      if (manualCollapse) {
+        // if user manually collapsed, don't auto-show/hide
+        lastScrollY = currentY;
+        return;
+      }
+
+      // scrolling down, past 80px -> hide
+      if (currentY > lastScrollY && currentY > 80){
+        header.classList.add('hide');
+      } else {
+        // scrolling up -> show
+        header.classList.remove('hide');
+      }
+
+      lastScrollY = currentY;
+    });
+
+    // manual toggle button
+    toggleBtn.addEventListener('click', () => {
+      manualCollapse = !manualCollapse;
+      if (manualCollapse){
+        header.classList.add('collapsed');
+      } else {
+        header.classList.remove('collapsed');
+      }
+    });
   </script>
 </body>
 </html>
