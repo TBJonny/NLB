@@ -12,6 +12,7 @@
   --glow-shadow-main: 0 30px 80px rgba(0,0,0,.7),
                       0 0 60px rgba(90,110,255,.4);
 
+  /* pill-grad now has a 30%-ish blue/purple tint */
   --pill-grad: radial-gradient(circle at 30% 30%,
                                rgba(120,130,255,.22) 0%,
                                rgba(0,0,0,0) 70%),
@@ -36,7 +37,7 @@
   --pill-radius: .75rem;
 }
 
-/* Light mode overrides (prefers light scheme) */
+/* Light mode overrides */
 @media (prefers-color-scheme: light) {
   :root {
     --bg-body-start: radial-gradient(circle at 20% 20%, rgba(120,130,255,.12) 0%, rgba(255,255,255,0) 60%);
@@ -48,9 +49,14 @@
     --glass-bg: rgba(255,255,255,.5);
     --glass-outline: rgba(0,0,0,.06);
 
-    --glow-shadow-main: none; /* kill big shadows for perf */
+    --glow-shadow-main: none; /* kill heavy shadows for perf */
 
-    --pill-grad: rgba(255,255,255,.7); /* simpler / cheaper */
+    /* keep a very light blue tint even in light mode */
+    --pill-grad: radial-gradient(circle at 30% 30%,
+                                 rgba(120,130,255,.18) 0%,
+                                 rgba(255,255,255,0) 70%),
+                 rgba(255,255,255,.7);
+
     --pill-text: #1a1a1a;
 
     --accent1: rgba(90,130,255,1);
@@ -148,7 +154,7 @@ main {
   text-overflow: ellipsis;
 }
 
-/* Subtle pulsating glow around shop name */
+/* subtle pulse on brand */
 .pulse-glow {
   text-shadow:
     0 0 8px var(--accent-glow),
@@ -179,9 +185,10 @@ main {
   flex-direction: column;
   justify-content: center;
   gap: .3rem;
-  min-width: 2.75rem;
+  min-width: 2.5rem;
   align-items: center;
   cursor: pointer;
+  z-index: 1001; /* ensure above overlay start */
 }
 @media (prefers-color-scheme: light) {
   .burger-btn {
@@ -237,9 +244,9 @@ main {
 .nav-overlay {
   position: fixed;
   inset: 0;
-  z-index: 999;
-  background: rgba(0,0,0,.4);
-  backdrop-filter: blur(16px) saturate(140%);
+  z-index: 2000;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(20px) saturate(140%);
   opacity: 0;
   pointer-events: none;
   transition: opacity .25s ease;
@@ -251,7 +258,7 @@ main {
 @media (prefers-color-scheme: light) {
   .nav-overlay {
     background: rgba(0,0,0,.15);
-    backdrop-filter: blur(16px) saturate(140%);
+    backdrop-filter: blur(20px) saturate(140%);
   }
 }
 
@@ -268,7 +275,7 @@ main {
   background: var(--glass-bg);
   border: 1px solid var(--glass-outline);
   border-radius: var(--section-radius);
-  width: min(320px, 80%);
+  width: min(280px, 80%);
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: var(--glow-shadow-main);
@@ -387,7 +394,6 @@ main {
   box-shadow: 0 0 16px var(--accent1), 0 0 32px var(--accent2);
 }
 
-/* hero / welcome text */
 .hero-desc {
   margin: 1rem auto 1.5rem;
   max-width: 40rem;
@@ -426,7 +432,7 @@ main {
   }
 }
 
-/* Softer card (like the little location box, hours/contact cards) */
+/* Softer card (hours/contact/map cards, location block) */
 .pill-surface-soft {
   background: var(--glass-bg);
   border: 1px solid var(--glass-outline);
@@ -434,6 +440,7 @@ main {
   box-shadow: var(--glow-shadow-main);
   padding: 1rem 1.25rem;
   text-align: center;
+  width: 100%;
 }
 @media (prefers-color-scheme: light) {
   .pill-surface-soft {
@@ -441,7 +448,7 @@ main {
   }
 }
 
-/* location mini-block in hero */
+/* hero location mini-block */
 .location-card {
   max-width: 40rem;
   margin: 1rem auto 0;
@@ -536,12 +543,13 @@ main {
   margin: 0 auto;
 }
 
+/* force consistent row layout so price badges align */
 .service-item {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;          /* keep one row structure */
   align-items: flex-start;
-  justify-content: space-between;
-  gap: .75rem 1rem;
+  justify-content: flex-start;
+  gap: 1rem;
   padding: 1rem 1.25rem;
 }
 
@@ -566,7 +574,7 @@ main {
 }
 
 .price-badge {
-  flex-shrink: 0;
+  flex: 0 0 auto;
   text-align: center;
   font-size: .9rem;
   font-weight: 600;
@@ -574,6 +582,7 @@ main {
   min-width: 3.5rem;
   padding: .6rem .75rem;
   border-radius: var(--pill-radius);
+  margin-left: auto;          /* pushes it to far right */
 }
 
 .pill-strong {
@@ -661,15 +670,31 @@ main {
 
 
 /* ========== VISIT / HOURS / CONTACT / MAP ========= */
+
+/* Default mobile: stack Hours, then Contact, then Map */
 .visit-grid {
   display: grid;
   gap: 1rem;
   text-align: center;
+
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "hours"
+    "contact"
+    "map";
 }
 
+#visit-hours   { grid-area: hours; }
+#visit-contact { grid-area: contact; }
+#visit-map     { grid-area: map; }
+
 @media(min-width:768px){
+  /* Desktop: Hours | Contact  on first row, Map full width on second row */
   .visit-grid {
-    grid-template-columns: repeat(3, minmax(0,1fr));
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "hours contact"
+      "map   map";
     align-items: start;
   }
 }
@@ -705,7 +730,7 @@ main {
   color: var(--text-dim);
 }
 
-/* map shell: NO backdrop-filter so iframe draws correctly */
+/* map shell */
 .map-shell {
   width: 100%;
   border-radius: var(--section-radius);
