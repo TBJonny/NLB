@@ -13,7 +13,7 @@
 <header id="siteHeader" class="site-header">
   <div class="header-inner">
 
-    <!-- Brand row (always shows on mobile, also shows on desktop) -->
+    <!-- Brand + burger -->
     <div class="brand-row">
       <h1 class="brand-name pulse-glow">
         NEXT LEVEL BARBERSHOP
@@ -26,7 +26,7 @@
       </button>
     </div>
 
-    <!-- Desktop nav row -->
+    <!-- Desktop nav pills -->
     <nav class="header-links">
       <a class="header-pill" href="#welcome">Home</a>
       <a class="header-pill" href="#barbers">Our Barbers</a>
@@ -36,7 +36,7 @@
     </nav>
   </div>
 
-  <!-- Slide-out / overlay nav drawer (mobile) -->
+  <!-- Slide-out mobile drawer -->
   <div id="navOverlay" class="nav-overlay hidden">
     <div id="navDrawer" class="nav-drawer">
       <ul class="drawer-list">
@@ -57,7 +57,7 @@
 
 <main id="contentMain">
 
-  <!-- WELCOME / HERO -->
+  <!-- WELCOME -->
   <section id="welcome" class="card-section reveal-on-scroll">
     <div class="section-inner">
       <div class="section-headblock">
@@ -366,11 +366,6 @@
         <div class="accent-bar"></div>
       </div>
 
-      <!-- We’re using grid areas so desktop is:
-           [Hours][Contact]
-           [Map  ][Map    ]
-           Mobile is stacked Hours, Contact, Map
-      -->
       <div class="visit-grid">
         <div id="visit-hours" class="visit-col pill-surface-soft reveal-on-scroll">
           <h3 class="visit-label">Hours</h3>
@@ -440,7 +435,7 @@ const navOverlay  = document.getElementById('navOverlay');
 const navDrawer   = document.getElementById('navDrawer');
 
 function openDrawer() {
-  // start visible so transitions can play
+  // make overlay visible first so transition runs
   navOverlay.classList.remove('hidden');
   requestAnimationFrame(() => {
     navOverlay.classList.add('show');
@@ -451,7 +446,7 @@ function openDrawer() {
 function closeDrawer() {
   navOverlay.classList.remove('show');
   navDrawer.classList.remove('show');
-  // after transition, fully hide so it doesn't block clicks
+  // after transition, hide fully
   setTimeout(() => {
     if (!navOverlay.classList.contains('show')) {
       navOverlay.classList.add('hidden');
@@ -475,7 +470,7 @@ navOverlay.addEventListener('click', (e) => {
   }
 });
 
-// tap a link closes it
+// click any link closes it
 document.querySelectorAll('#navDrawer a').forEach(a => {
   a.addEventListener('click', () => {
     closeDrawer();
@@ -483,9 +478,7 @@ document.querySelectorAll('#navDrawer a').forEach(a => {
 });
 
 
-/* ========= REVEAL ON SCROLL =========
-   cheap GPU transform only (translateY + opacity)
-*/
+/* ========= REVEAL ON SCROLL ========= */
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach(entry => {
