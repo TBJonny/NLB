@@ -6,31 +6,37 @@
 
   <title>Next Level Barbershop • Albuquerque, NM</title>
 
-  <!-- Favicon / browser tab icon -->
-  <!-- Make sure favicon.png (your skull logo on transparent bg) is in the same folder -->
+  <!-- Browser tab icon (skull). Keep favicon.png in same folder -->
   <link rel="icon" type="image/png" href="favicon.png" />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="site-body">
 
-  <!-- HEADER / NAV -->
-  <header class="site-header glass-header">
-    <!-- subtle skull watermark in header bg -->
-    <div class="header-watermark"></div>
-
+  <!-- HEADER -->
+  <header class="site-header">
     <div class="header-inner">
+      <!-- Brand / Shop name -->
       <div class="brand-wrap">
-        <!-- Skull mark next to name -->
-        <img src="favicon.png" class="brand-logo" alt="Next Level Barbershop logo" />
-        <div class="brand-text">
-          <span class="brand-name pulse-glow">NEXT LEVEL BARBERSHOP</span>
-        </div>
+        <a href="#welcome" class="brand-name pulse-glow">
+          NEXT LEVEL BARBERSHOP
+        </a>
       </div>
 
-      <!-- burger -->
+      <!-- Desktop nav pills -->
+      <nav class="header-nav-desktop">
+        <a href="#welcome" class="desk-link-pill pill-surface">Home</a>
+        <a href="#barbers" class="desk-link-pill pill-surface">Our Barbers</a>
+        <a href="#reviews" class="desk-link-pill pill-surface">Reviews</a>
+        <a href="#services" class="desk-link-pill pill-surface">Services</a>
+        <a href="#hours" class="desk-link-pill pill-surface">Hours</a>
+        <a href="#contact" class="desk-link-pill pill-surface">Contact</a>
+        <a href="#location" class="desk-link-pill pill-surface">Location</a>
+      </nav>
+
+      <!-- Mobile burger -->
       <button
-        class="burger-btn glass-btn"
+        class="burger-btn pill-surface"
         id="burgerBtn"
         aria-controls="navPanel"
         aria-expanded="false"
@@ -41,68 +47,70 @@
     </div>
   </header>
 
-  <!-- NAV PANEL (slide / glass) -->
-  <!-- starts hidden -->
+  <!-- MOBILE NAV PANEL -->
   <nav
-    class="nav-panel glass-pop"
+    class="nav-panel"
     id="navPanel"
     aria-hidden="true"
   >
     <ul class="nav-list">
-      <li class="nav-item"><a href="#welcome" class="nav-link">Home</a></li>
-      <li class="nav-item"><a href="#barbers" class="nav-link">Our Barbers</a></li>
-      <li class="nav-item"><a href="#reviews" class="nav-link">Reviews</a></li>
-      <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
-      <li class="nav-item"><a href="#hours" class="nav-link">Hours</a></li>
-      <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-      <li class="nav-item"><a href="#location" class="nav-link">Location</a></li>
+      <li class="nav-item"><a href="#welcome" class="nav-link pill-surface">Home</a></li>
+      <li class="nav-item"><a href="#barbers" class="nav-link pill-surface">Our Barbers</a></li>
+      <li class="nav-item"><a href="#reviews" class="nav-link pill-surface">Reviews</a></li>
+      <li class="nav-item"><a href="#services" class="nav-link pill-surface">Services</a></li>
+      <li class="nav-item"><a href="#hours" class="nav-link pill-surface">Hours</a></li>
+      <li class="nav-item"><a href="#contact" class="nav-link pill-surface">Contact</a></li>
+      <li class="nav-item"><a href="#location" class="nav-link pill-surface">Location</a></li>
     </ul>
 
     <div class="nav-phone">
-      <a class="call-btn big-call" href="tel:+15055036216">(505) 503-6216</a>
+      <a class="call-btn big-call pill-cta" href="tel:+15055036216">
+        (505) 503-6216
+      </a>
     </div>
   </nav>
 
   <!-- PAGE CONTENT -->
   <main class="page-main">
 
-    <!-- WELCOME / BADGES -->
+    <!-- WELCOME -->
     <section id="welcome" class="observe-me section-wrap">
-      <div class="card-section pop-card glass-card">
+      <div class="card-section pop-card">
         <header class="section-head">
           <div class="eyebrow">WELCOME TO</div>
           <h1 class="section-title underline-gradient">NEXT LEVEL BARBERSHOP</h1>
         </header>
 
         <p class="section-desc">
-          Professional cuts, sharp fades, and a clean vibe. Locally owned. Walk-ins welcome.
-          Appointments preferred. Payment method can vary by barber — just confirm when you book.
+          Professional cuts, sharp fades, and a clean vibe. Locally owned.
+          Walk-ins welcome. Appointments preferred. Payment method can vary by
+          barber — just confirm when you book.
         </p>
 
-        <!-- badges row 1 -->
+        <!-- row 1 -->
         <div class="pill-row">
-          <span class="info-pill pill-strong">Locally Owned</span>
-          <span class="info-pill pill-strong">Walk-Ins Welcome</span>
+          <span class="info-pill pill-surface">Locally Owned</span>
+          <span class="info-pill pill-surface">Walk-Ins Welcome</span>
         </div>
 
         <!-- row 2 -->
         <div class="pill-row">
-          <span class="info-pill pill-strong">Appointments Preferred</span>
+          <span class="info-pill pill-surface">Appointments Preferred</span>
         </div>
 
-        <!-- payment row -->
+        <!-- payments -->
         <div class="pill-row">
-          <span class="info-pill pay-pill pill-strong">💵 Cash</span>
-          <span class="info-pill pay-pill pill-strong">🍎 Apple Pay</span>
-          <span class="info-pill pay-pill pill-strong">💸 Cash App</span>
+          <span class="info-pill pill-surface">💵 Cash</span>
+          <span class="info-pill pill-surface">🍎 Apple Pay</span>
+          <span class="info-pill pill-surface">💸 Cash App</span>
         </div>
 
         <div class="pill-row">
-          <span class="info-pill pay-pill pill-strong">📲 Venmo</span>
+          <span class="info-pill pill-surface">📲 Venmo</span>
         </div>
 
-        <!-- location quick facts -->
-        <div class="info-box glass-soft">
+        <!-- location quick hits -->
+        <div class="info-box sub-card">
           <div class="info-line">📍 Albuquerque, NM</div>
           <div class="info-line">🍔 Right next to Bob’s Burgers</div>
           <div class="info-line">
@@ -112,76 +120,74 @@
       </div>
     </section>
 
-
     <!-- BARBERS -->
     <section id="barbers" class="observe-me section-wrap">
-      <div class="card-section pop-card glass-card">
+      <div class="card-section pop-card">
         <header class="section-head simple-head">
           <h2 class="section-title-sm">OUR BARBERS 💈</h2>
         </header>
 
         <div class="barber-grid">
 
-          <article class="barber-card glass-soft pill-strong">
+          <article class="barber-card sub-card">
             <h3 class="barber-name">VINCENT (OWNER)</h3>
             <p class="barber-tagline">Founder. Fader. Visionary.</p>
-            <a class="book-btn pill-strong" href="tel:+15055036216">Call to Book</a>
+            <a class="book-btn pill-surface" href="tel:+15055036216">Call to Book</a>
           </article>
 
-          <article class="barber-card glass-soft pill-strong">
+          <article class="barber-card sub-card">
             <h3 class="barber-name">Z WALUW</h3>
             <p class="barber-tagline">Precision in every pass.</p>
-            <a class="book-btn pill-strong" href="tel:+15055036216">Call to Book</a>
+            <a class="book-btn pill-surface" href="tel:+15055036216">Call to Book</a>
           </article>
 
-          <article class="barber-card glass-soft pill-strong">
+          <article class="barber-card sub-card">
             <h3 class="barber-name">G-MO</h3>
             <p class="barber-tagline">Style that speaks before you do.</p>
-            <a class="book-btn pill-strong" href="tel:+15055036216">Call to Book</a>
+            <a class="book-btn pill-surface" href="tel:+15055036216">Call to Book</a>
           </article>
 
-          <article class="barber-card glass-soft pill-strong">
+          <article class="barber-card sub-card">
             <h3 class="barber-name">DESHAUN</h3>
             <p class="barber-tagline">Sharp fades. Chill vibes.</p>
-            <a class="book-btn pill-strong" href="tel:+15055036216">Call to Book</a>
+            <a class="book-btn pill-surface" href="tel:+15055036216">Call to Book</a>
           </article>
 
-          <article class="barber-card glass-soft pill-strong">
+          <article class="barber-card sub-card">
             <h3 class="barber-name">CASH</h3>
             <p class="barber-tagline">
               Quick with the clippers, real with the results.
             </p>
-            <a class="book-btn pill-strong" href="tel:+15055036216">Book w/ Cash</a>
+            <a class="book-btn pill-surface" href="tel:+15055036216">Book w/ Cash</a>
           </article>
 
-          <article class="barber-card glass-soft pill-strong">
+          <article class="barber-card sub-card">
             <h3 class="barber-name">JONNY</h3>
             <p class="barber-tagline">Where art meets the edge.</p>
-            <a class="book-btn pill-strong" href="tel:+15055036216">Book w/ Jonny</a>
+            <a class="book-btn pill-surface" href="tel:+15055036216">Book w/ Jonny</a>
           </article>
 
-          <article class="barber-card glass-soft pill-strong">
+          <article class="barber-card sub-card">
             <h3 class="barber-name">TAYLOR</h3>
             <p class="barber-tagline">
               Clean blends. Subtle structure. Quiet precision.
             </p>
-            <a class="book-btn pill-strong" href="tel:+15055036216">Book w/ Taylor</a>
+            <a class="book-btn pill-surface" href="tel:+15055036216">Book w/ Taylor</a>
           </article>
 
         </div>
       </div>
     </section>
 
-
     <!-- SERVICES -->
     <section id="services" class="observe-me section-wrap">
-      <div class="card-section pop-card glass-card">
+      <div class="card-section pop-card">
         <header class="section-head simple-head">
-          <h2 class="section-title-sm">SERVICES & PRICING 💵</h2>
+          <h2 class="section-title-sm">SERVICES &amp; PRICING 💵</h2>
         </header>
 
         <ul class="service-list">
-          <li class="service-card glass-soft">
+          <li class="service-card sub-card">
             <div class="service-main">
               <div class="service-emoji">👨‍🦱</div>
               <div class="service-text">
@@ -192,47 +198,51 @@
                 </div>
               </div>
             </div>
-            <span class="price-chip pill-strong">$35</span>
+            <span class="price-chip pill-surface">$35</span>
           </li>
 
-          <li class="service-card glass-soft">
+          <li class="service-card sub-card">
             <div class="service-main">
               <div class="service-emoji">🧔</div>
               <div class="service-text">
                 <div class="service-name">Beard Add-On (with cut)</div>
                 <div class="service-desc">
-                  Add a beard cleanup / line-up to your haircut. Sharp outline, clean finish.
+                  Add a beard cleanup / line-up to your haircut. Sharp outline,
+                  clean finish.
                 </div>
               </div>
             </div>
-            <span class="price-chip pill-strong">+ $5</span>
+            <span class="price-chip pill-surface">+ $5</span>
           </li>
 
-          <li class="service-card glass-soft">
+          <li class="service-card sub-card">
             <div class="service-main">
               <div class="service-emoji">🔥</div>
               <div class="service-text">
                 <div class="service-name">Razor Fade</div>
                 <div class="service-desc">
-                  Down to skin with a tight, smooth fade and detail work. Can add beard detail.
+                  Down to skin with a tight, smooth fade and detail work. Can add
+                  beard detail.
                 </div>
               </div>
             </div>
-            <span class="price-chip pill-strong">$40</span>
+            <span class="price-chip pill-surface">$40</span>
           </li>
 
-          <li class="service-card glass-soft">
+          <li class="service-card sub-card">
             <div class="service-main">
               <div class="service-emoji">✂️</div>
               <div class="service-text">
                 <div class="service-name">Style Cut</div>
-                <div class="service-desc">Custom look, texture work, extra time and detail.</div>
+                <div class="service-desc">
+                  Custom look, texture work, extra time and detail.
+                </div>
               </div>
             </div>
-            <span class="price-chip pill-strong">$45</span>
+            <span class="price-chip pill-surface">$45</span>
           </li>
 
-          <li class="service-card glass-soft">
+          <li class="service-card sub-card">
             <div class="service-main">
               <div class="service-emoji">💨</div>
               <div class="service-text">
@@ -242,10 +252,10 @@
                 </div>
               </div>
             </div>
-            <span class="price-chip pill-strong">Ask</span>
+            <span class="price-chip pill-surface">Ask</span>
           </li>
 
-          <li class="service-card glass-soft">
+          <li class="service-card sub-card">
             <div class="service-main">
               <div class="service-emoji">💥</div>
               <div class="service-text">
@@ -255,10 +265,10 @@
                 </div>
               </div>
             </div>
-            <span class="price-chip pill-strong">Ask</span>
+            <span class="price-chip pill-surface">Ask</span>
           </li>
 
-          <li class="service-card glass-soft">
+          <li class="service-card sub-card">
             <div class="service-main">
               <div class="service-emoji">🪖</div>
               <div class="service-text">
@@ -268,10 +278,10 @@
                 </div>
               </div>
             </div>
-            <span class="price-chip pill-strong">$28</span>
+            <span class="price-chip pill-surface">$28</span>
           </li>
 
-          <li class="service-card glass-soft">
+          <li class="service-card sub-card">
             <div class="service-main">
               <div class="service-emoji">🏈</div>
               <div class="service-text">
@@ -281,10 +291,10 @@
                 </div>
               </div>
             </div>
-            <span class="price-chip pill-strong">Ask</span>
+            <span class="price-chip pill-surface">Ask</span>
           </li>
 
-          <li class="service-card glass-soft">
+          <li class="service-card sub-card">
             <div class="service-main">
               <div class="service-emoji">🧔‍♂️</div>
               <div class="service-text">
@@ -294,10 +304,10 @@
                 </div>
               </div>
             </div>
-            <span class="price-chip pill-strong">$20</span>
+            <span class="price-chip pill-surface">$20</span>
           </li>
 
-          <li class="service-card glass-soft">
+          <li class="service-card sub-card">
             <div class="service-main">
               <div class="service-emoji">💈</div>
               <div class="service-text">
@@ -307,10 +317,10 @@
                 </div>
               </div>
             </div>
-            <span class="price-chip pill-strong">$100</span>
+            <span class="price-chip pill-surface">$100</span>
           </li>
 
-          <li class="service-card glass-soft">
+          <li class="service-card sub-card">
             <div class="service-main">
               <div class="service-emoji">🎨</div>
               <div class="service-text">
@@ -320,23 +330,22 @@
                 </div>
               </div>
             </div>
-            <span class="price-chip pill-strong">From $30</span>
+            <span class="price-chip pill-surface">From $30</span>
           </li>
         </ul>
       </div>
     </section>
 
-
     <!-- REVIEWS -->
     <section id="reviews" class="observe-me section-wrap">
-      <div class="card-section pop-card glass-card">
+      <div class="card-section pop-card">
         <header class="section-head simple-head">
           <p class="reviews-intro">
             Recent 5★ Google reviews — real people talking about real cuts.
           </p>
         </header>
 
-        <div class="review-card glass-soft">
+        <div class="review-card sub-card">
           <div class="review-top">
             <div class="review-name">Keely Struck</div>
             <div class="review-date">a month ago</div>
@@ -344,47 +353,46 @@
           <div class="review-stars">⭐⭐⭐⭐⭐ <span class="rating-num">5.0</span></div>
           <p class="review-body">
             “They did a great job on my son’s hair! It was his first haircut and I
-            wanted kinda like a baby mullet — they are really good with kids and very
-            patient. I love the way it turned out!!”
+            wanted kinda like a baby mullet — they are really good with kids and
+            very patient. I love the way it turned out!!”
           </p>
           <div class="review-service">Service: Haircut • Google review</div>
         </div>
 
-        <div class="review-card glass-soft">
+        <div class="review-card sub-card">
           <div class="review-top">
             <div class="review-name">Jennifer Lopez</div>
             <div class="review-date">a month ago</div>
           </div>
           <div class="review-stars">⭐⭐⭐⭐⭐ <span class="rating-num">5.0</span></div>
           <p class="review-body">
-            “I take my toddler here to get a haircut from Cash and she does an amazing
-            job every time. She’s very good with kids and is pretty fast. We’ll be
-            going back with barber Cash!”
+            “I take my toddler here to get a haircut from Cash and she does an
+            amazing job every time. She’s very good with kids and is pretty fast.
+            We’ll be going back with barber Cash!”
           </p>
           <div class="review-service">Service: Haircut • Google review</div>
         </div>
 
-        <div class="review-card glass-soft">
+        <div class="review-card sub-card">
           <div class="review-top">
             <div class="review-name">Francesca Tafoya</div>
             <div class="review-date">3 weeks ago</div>
           </div>
           <div class="review-stars">⭐⭐⭐⭐⭐ <span class="rating-num">5.0</span></div>
           <p class="review-body">
-            “If I could give a million stars I would! Taylor was so amazing and I have
-            a great cut for my new job tomorrow! We had a great conversation and she
-            was fast, gentle and efficient. I’ll be back next week. And always
-            remember, kindness is free 🙏🏽💕”
+            “If I could give a million stars I would! Taylor was so amazing and I
+            have a great cut for my new job tomorrow! We had a great conversation
+            and she was fast, gentle and efficient. I’ll be back next week. And
+            always remember, kindness is free 🙏🏽💕”
           </p>
           <div class="review-service">Service: Haircut • Google review</div>
         </div>
       </div>
     </section>
 
-
     <!-- HOURS / CONTACT / MAP -->
     <section id="hours" class="observe-me section-wrap">
-      <div class="card-section pop-card glass-card">
+      <div class="card-section pop-card">
         <header class="section-head">
           <div class="eyebrow">VISIT US</div>
           <h2 class="section-title underline-gradient">
@@ -393,7 +401,7 @@
         </header>
 
         <!-- HOURS -->
-        <div class="info-block glass-soft center-block">
+        <div class="info-block sub-card center-block">
           <h3 class="info-block-title">Hours</h3>
           <p class="info-block-line">Mon – Thu: 10:00 AM – 7:00 PM</p>
           <p class="info-block-line">Fri – Sat: 10:00 AM – 8:00 PM</p>
@@ -404,7 +412,7 @@
         </div>
 
         <!-- CONTACT -->
-        <div id="contact" class="info-block glass-soft center-block">
+        <div id="contact" class="info-block sub-card center-block">
           <h3 class="info-block-title">Contact</h3>
           <p class="info-block-line">
             <a class="call-link" href="tel:+15055036216">(505) 503-6216</a>
@@ -418,7 +426,7 @@
         </div>
 
         <!-- MAP -->
-        <div id="location" class="info-block glass-soft center-block">
+        <div id="location" class="info-block sub-card center-block">
           <h3 class="info-block-title">Find Us</h3>
 
           <div class="map-shell">
@@ -434,14 +442,14 @@
 
           <div class="map-actions">
             <a
-              class="map-btn pill-strong"
+              class="map-btn pill-surface"
               target="_blank"
               rel="noopener"
               href="https://maps.apple.com/?address=6510%20Paradise%20Blvd%20NW%20Unit%20D%2C%20Albuquerque%2C%20NM%2087114"
             >🍎 Apple Maps</a>
 
             <a
-              class="map-btn pill-strong"
+              class="map-btn pill-surface"
               target="_blank"
               rel="noopener"
               href="https://www.google.com/maps/search/?api=1&query=6510+Paradise+Blvd+NW+Unit+D+Albuquerque+NM+87114"
@@ -458,10 +466,9 @@
 
   </main>
 
-
-  <!-- SCRIPT: nav toggle + scroll reveal -->
+  <!-- SCRIPT -->
   <script>
-    // NAV PANEL TOGGLE
+    // NAV TOGGLE
     const burgerBtn = document.getElementById('burgerBtn');
     const navPanel = document.getElementById('navPanel');
 
@@ -487,12 +494,11 @@
       }
     });
 
-    // Close nav if user taps a link
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', closeNav);
     });
 
-    // SCROLL REVEAL ANIMATION
+    // SCROLL REVEAL
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
@@ -504,10 +510,9 @@
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
 
-    // Every .card-section inside .observe-me gets observed
     document.querySelectorAll('.observe-me .card-section').forEach(card => {
       observer.observe(card);
     });
