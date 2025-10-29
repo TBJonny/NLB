@@ -24,8 +24,8 @@
 <body>
   <!-- =======================================================
        STICKY HEADER
-       mobile: brand + burger in one frosted pill
-       desktop: brand row + nav row (no burger)
+       mobile: brand + burger
+       desktop: brand row + nav row
        ======================================================= -->
   <header class="site-header">
     <div class="header-shell">
@@ -104,14 +104,11 @@
 
   <!-- =======================================================
        HERO / WELCOME
-       - parallax bg
-       - payment pills breathe
-       - headings glow pulse
        ======================================================= -->
   <section id="welcome" class="site-section hero-section reveal">
     <div class="hero-bg-layer" id="heroBg"></div>
 
-    <div class="section-card hero-card">
+    <div class="section-card hero-card glow-ready">
       <header class="section-head">
         <div class="section-eyebrow">WELCOME TO</div>
 
@@ -160,7 +157,7 @@
     <div class="lineup-grid">
 
       <!-- OUR BARBERS -->
-      <section id="barbers" class="barbers-block section-card sub-card">
+      <section id="barbers" class="barbers-block section-card sub-card glow-ready">
         <header class="section-head">
           <div class="section-eyebrow">OUR BARBERS</div>
           <h2 class="section-title title-pulse">Pick Your Barber</h2>
@@ -169,14 +166,15 @@
 
         <div class="barbers-list">
           <!-- VINCENT -->
-          <article class="barber-card">
+          <article class="barber-card card-idle">
             <div class="barber-main">
               <div class="barber-headerline">
                 <h3 class="barber-name">VINCENT</h3>
                 <span class="barber-role-pill">OWNER</span>
               </div>
               <p class="barber-tagline">Founder. Fader. Visionary.</p>
-              <button class="call-btn" data-tel="15055036216">Call to Book</button>
+              <button class="call-btn"
+                data-tel="15055036216">Call to Book</button>
             </div>
             <div class="barber-extra">
               <p>Specialty: Full shop oversight, blended fades, overall quality control.</p>
@@ -184,14 +182,15 @@
           </article>
 
           <!-- Z WALUW -->
-          <article class="barber-card">
+          <article class="barber-card card-idle">
             <div class="barber-main">
               <div class="barber-headerline">
                 <h3 class="barber-name">Z WALUW</h3>
                 <span class="barber-role-pill">DETAIL</span>
               </div>
               <p class="barber-tagline">Precision in every pass.</p>
-              <button class="call-btn" data-tel="15055036216">Call to Book</button>
+              <button class="call-btn"
+                data-tel="15055036216">Call to Book</button>
             </div>
             <div class="barber-extra">
               <p>Specialty: Razor work, crisp tapers, detail work.</p>
@@ -199,14 +198,15 @@
           </article>
 
           <!-- GMO -->
-          <article class="barber-card">
+          <article class="barber-card card-idle">
             <div class="barber-main">
               <div class="barber-headerline">
                 <h3 class="barber-name">GMO</h3>
                 <span class="barber-role-pill">STYLE</span>
               </div>
               <p class="barber-tagline">Style that speaks before you do.</p>
-              <button class="call-btn" data-tel="15055036216">Call to Book</button>
+              <button class="call-btn"
+                data-tel="15055036216">Call to Book</button>
             </div>
             <div class="barber-extra">
               <p>Specialty: Custom looks, trend cuts, texture on top.</p>
@@ -214,14 +214,15 @@
           </article>
 
           <!-- DESHAUN -->
-          <article class="barber-card">
+          <article class="barber-card card-idle">
             <div class="barber-main">
               <div class="barber-headerline">
                 <h3 class="barber-name">DESHAUN</h3>
                 <span class="barber-role-pill">FADES</span>
               </div>
               <p class="barber-tagline">Sharp fades. Chill vibes.</p>
-              <button class="call-btn" data-tel="15055036216">Call to Book</button>
+              <button class="call-btn"
+                data-tel="15055036216">Call to Book</button>
             </div>
             <div class="barber-extra">
               <p>Specialty: Tapers, beard line-ups, keeping it clean and smooth.</p>
@@ -229,14 +230,20 @@
           </article>
 
           <!-- CASH -->
-          <article class="barber-card">
+          <article class="barber-card card-idle">
             <div class="barber-main">
               <div class="barber-headerline">
                 <h3 class="barber-name">CASH</h3>
                 <span class="barber-role-pill">KIDS CUTS</span>
               </div>
-              <p class="barber-tagline">Quick with the clippers, real with the results.</p>
-              <button class="call-btn" data-tel="15055036216">Book w/ Cash</button>
+              <p class="barber-tagline">
+                Quick with the clippers, real with the results.
+              </p>
+              <a class="call-btn"
+                data-link="https://booksy.com/en-us/dl/show-business/1346592"
+                target="_blank" rel="noopener noreferrer">
+                Book w/ Cash
+              </a>
             </div>
             <div class="barber-extra">
               <p>Specialty: Kids cuts, fast turnaround, patient with first-timers.</p>
@@ -244,14 +251,18 @@
           </article>
 
           <!-- JONNY -->
-          <article class="barber-card">
+          <article class="barber-card card-idle">
             <div class="barber-main">
               <div class="barber-headerline">
                 <h3 class="barber-name">JONNY</h3>
                 <span class="barber-role-pill">CUSTOM</span>
               </div>
               <p class="barber-tagline">Where art meets the edge.</p>
-              <button class="call-btn" data-tel="15055036216">Book w/ Jonny</button>
+              <a class="call-btn"
+                data-link="https://booksy.com/en-us/dl/show-business/1300123"
+                target="_blank" rel="noopener noreferrer">
+                Book w/ Jonny
+              </a>
             </div>
             <div class="barber-extra">
               <p>Specialty: Burst fades, blowout tapers, custom detail work.</p>
@@ -259,14 +270,20 @@
           </article>
 
           <!-- TAYLOR -->
-          <article class="barber-card">
+          <article class="barber-card card-idle">
             <div class="barber-main">
               <div class="barber-headerline">
                 <h3 class="barber-name">TAYLOR</h3>
                 <span class="barber-role-pill">POLISHED</span>
               </div>
-              <p class="barber-tagline">Clean blends. Subtle structure. Quiet precision.</p>
-              <button class="call-btn" data-tel="15055036216">Book w/ Taylor</button>
+              <p class="barber-tagline">
+                Clean blends. Subtle structure. Quiet precision.
+              </p>
+              <a class="call-btn"
+                data-link="https://booksy.com/en-us/dl/show-business/1592260"
+                target="_blank" rel="noopener noreferrer">
+                Book w/ Taylor
+              </a>
             </div>
             <div class="barber-extra">
               <p>Specialty: Gentle touch, professional polish, interview-ready cuts.</p>
@@ -277,7 +294,7 @@
       </section>
 
       <!-- SERVICES & PRICING -->
-      <section id="services" class="services-block section-card sub-card">
+      <section id="services" class="services-block section-card sub-card glow-ready">
         <header class="section-head">
           <div class="section-eyebrow">SERVICES & PRICING</div>
           <h2 class="section-title title-pulse">Clean Cuts • Real Prices</h2>
@@ -285,7 +302,7 @@
         </header>
 
         <ul class="services-list">
-          <li class="service-item">
+          <li class="service-item card-idle">
             <div class="service-top">
               <span class="service-name">💇 Regular Haircut</span>
               <span class="service-price-pill">$35</span>
@@ -296,7 +313,7 @@
             </p>
           </li>
 
-          <li class="service-item">
+          <li class="service-item card-idle">
             <div class="service-top">
               <span class="service-name">🧔 Beard Add-On (with cut)</span>
               <span class="service-price-pill">+$5</span>
@@ -307,7 +324,7 @@
             </p>
           </li>
 
-          <li class="service-item">
+          <li class="service-item card-idle">
             <div class="service-top">
               <span class="service-name">🔥 Razor Fade</span>
               <span class="service-price-pill">$40</span>
@@ -318,7 +335,7 @@
             </p>
           </li>
 
-          <li class="service-item">
+          <li class="service-item card-idle">
             <div class="service-top">
               <span class="service-name">✂️ Style Cut</span>
               <span class="service-price-pill">$45</span>
@@ -328,7 +345,7 @@
             </p>
           </li>
 
-          <li class="service-item">
+          <li class="service-item card-idle">
             <div class="service-top">
               <span class="service-name">💨 Blowout Taper</span>
               <span class="service-price-pill">Ask</span>
@@ -338,7 +355,7 @@
             </p>
           </li>
 
-          <li class="service-item">
+          <li class="service-item card-idle">
             <div class="service-top">
               <span class="service-name">💥 Burst Fade</span>
               <span class="service-price-pill">Ask</span>
@@ -348,7 +365,7 @@
             </p>
           </li>
 
-          <li class="service-item">
+          <li class="service-item card-idle">
             <div class="service-top">
               <span class="service-name">🧱 Flat Top</span>
               <span class="service-price-pill">Ask</span>
@@ -358,7 +375,7 @@
             </p>
           </li>
 
-          <li class="service-item">
+          <li class="service-item card-idle">
             <div class="service-top">
               <span class="service-name">🐍 Mullet</span>
               <span class="service-price-pill">Ask</span>
@@ -368,7 +385,7 @@
             </p>
           </li>
 
-          <li class="service-item">
+          <li class="service-item card-idle">
             <div class="service-top">
               <span class="service-name">🪖 Military / EMT Cut</span>
               <span class="service-price-pill">$28</span>
@@ -378,7 +395,7 @@
             </p>
           </li>
 
-          <li class="service-item">
+          <li class="service-item card-idle">
             <div class="service-top">
               <span class="service-name">🎨 Designs</span>
               <span class="service-price-pill">$10</span>
@@ -388,7 +405,7 @@
             </p>
           </li>
 
-          <li class="service-item">
+          <li class="service-item card-idle">
             <div class="service-top">
               <span class="service-name">🧼 Beard</span>
               <span class="service-price-pill">$20</span>
@@ -398,7 +415,7 @@
             </p>
           </li>
 
-          <li class="service-item">
+          <li class="service-item card-idle">
             <div class="service-top">
               <span class="service-name">🌀 Perm</span>
               <span class="service-price-pill">$100</span>
@@ -408,7 +425,7 @@
             </p>
           </li>
 
-          <li class="service-item">
+          <li class="service-item card-idle">
             <div class="service-top">
               <span class="service-name">🎨 Color</span>
               <span class="service-price-pill">Starting at $30</span>
@@ -427,7 +444,7 @@
        REVIEWS
        ======================================================= -->
   <section id="reviews" class="site-section reviews-section reveal">
-    <div class="section-card reviews-card">
+    <div class="section-card reviews-card glow-ready">
       <header class="section-head">
         <div class="section-eyebrow">RECENT 5★ GOOGLE REVIEWS</div>
         <h2 class="section-title title-pulse">Real people. Real cuts.</h2>
@@ -435,7 +452,7 @@
       </header>
 
       <div class="reviews-list">
-        <article class="review-card">
+        <article class="review-card card-idle">
           <div class="review-head">
             <span class="review-name">Keely Struck</span>
             <span class="review-date">a month ago</span>
@@ -449,7 +466,7 @@
           <div class="review-meta">Service: Haircut • Google review</div>
         </article>
 
-        <article class="review-card">
+        <article class="review-card card-idle">
           <div class="review-head">
             <span class="review-name">Jennifer Lopez</span>
             <span class="review-date">a month ago</span>
@@ -463,7 +480,7 @@
           <div class="review-meta">Service: Haircut • Google review</div>
         </article>
 
-        <article class="review-card">
+        <article class="review-card card-idle">
           <div class="review-head">
             <span class="review-name">Francesca Tafoya</span>
             <span class="review-date">3 weeks ago</span>
@@ -486,7 +503,7 @@
        VISIT / MAP
        ======================================================= -->
   <section id="visit" class="site-section visit-section reveal">
-    <div class="section-card visit-card">
+    <div class="section-card visit-card glow-ready">
       <header class="section-head">
         <div class="section-eyebrow">VISIT US</div>
         <h2 class="section-title title-pulse">Hours • Contact • Directions</h2>
@@ -495,7 +512,7 @@
 
       <div class="visit-flex">
         <div class="visit-col">
-          <div class="visit-box">
+          <div class="visit-box card-idle">
             <h3 class="visit-box-title">Hours</h3>
             <p>
               Mon – Thu: 10:00 AM – 7:00 PM<br/>
@@ -507,7 +524,7 @@
             </p>
           </div>
 
-          <div class="visit-box">
+          <div class="visit-box card-idle">
             <h3 class="visit-box-title">Contact</h3>
             <p class="visit-contact-num">📞 (505) 503-6216</p>
             <p>
@@ -520,7 +537,7 @@
         </div>
 
         <div class="visit-col">
-          <div class="visit-box" id="map">
+          <div class="visit-box card-idle" id="map">
             <h3 class="visit-box-title">Find Us</h3>
 
             <div class="map-embed-wrap">
@@ -590,7 +607,6 @@
     </a>
   </nav>
 
-
   <!-- =======================================================
        JS interactions
        ======================================================= -->
@@ -626,19 +642,28 @@
       }
     });
 
-    // call buttons
+    // call / book buttons
     document.querySelectorAll(".call-btn").forEach(btn => {
       btn.addEventListener("click", (e) => {
         e.stopPropagation();
-        const tel = btn.getAttribute("data-tel") || "15055036216";
-        window.location.href = "tel:" + tel;
+        const link = btn.getAttribute("data-link");
+        const tel = btn.getAttribute("data-tel");
+
+        if (link) {
+          window.open(link, "_blank", "noopener,noreferrer");
+        } else if (tel) {
+          window.location.href = "tel:" + tel;
+        }
       });
     });
 
-    // barber card open/close (only one)
+    // barber card open/close (one at a time)
     const barberCards = document.querySelectorAll(".barber-card");
     barberCards.forEach(card => {
-      card.addEventListener("click", () => {
+      card.addEventListener("click", (e) => {
+        // don't close card if they clicked a button
+        if (e.target.closest(".call-btn")) return;
+
         if (card.classList.contains("open")) {
           card.classList.remove("open");
           return;
@@ -648,19 +673,7 @@
       });
     });
 
-    // section reveal once
-    const revealSections = document.querySelectorAll(".reveal");
-    const revealObserver = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    revealSections.forEach(sec => revealObserver.observe(sec));
-
-    // hero parallax bg
+    // hero parallax bg (smooth GPU transform only)
     const heroBg = document.getElementById("heroBg");
     let ticking = false;
     function onScroll() {
@@ -674,6 +687,25 @@
       }
     }
     window.addEventListener("scroll", onScroll, { passive: true });
+
+    // section reveal once + bounce + glow upgrade
+    const revealSections = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sec = entry.target;
+          sec.classList.add("visible", "bounce-in");
+
+          // light up any .glow-ready content inside
+          sec.querySelectorAll(".glow-ready, .card-idle").forEach(el => {
+            el.classList.add("glow-active");
+          });
+
+          obs.unobserve(sec);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealSections.forEach(sec => io.observe(sec));
   </script>
 </body>
 </html>
