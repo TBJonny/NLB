@@ -1,54 +1,51 @@
 /* =========================================================
    THEME VARS
-   - darker mode: neon purple/blue + tiny gold hints
-   - light mode: frosted white w/ color glow, NO dark drop shadows
    ========================================================= */
-
 :root {
   --bg-page-start: #0a0a12;
   --bg-page-end: #1a1f3a;
 
-  --glass-bg: rgba(20, 22, 32, 0.55);
+  --glass-bg: rgba(20, 22, 32, 0.45);
   --glass-border: rgba(255, 255, 255, 0.1);
 
   --txt-main: #ffffff;
   --txt-dim: rgba(255, 255, 255, 0.7);
 
-  --accent-purple: rgb(168, 104, 255);  /* brighter than before */
-  --accent-blue: rgb(0, 235, 255);      /* brighter than before */
+  --accent-purple: rgb(168, 104, 255);
+  --accent-blue: rgb(0, 235, 255);
   --accent-gold: rgba(255, 214, 123, 0.8);
 
-  /* pill backgrounds = 30% stronger color pop than last version */
-  --pill-bg-solid: rgba(25, 30, 45, 0.75);
-  --pill-border: rgba(255, 255, 255, 0.18);
+  --pill-bg-solid: rgba(25,30,45,0.7);
+  --pill-border: rgba(255,255,255,0.18);
 
   --card-radius: 20px;
   --pill-radius: 14px;
 
-  /* glow stack on dark: keep neon */
-  --glow-neon:
+  /* heavy glow we use ONLY after reveal */
+  --glow-neon-strong:
     0 0 24px rgba(0,235,255,.6),
     0 0 48px rgba(168,104,255,.45),
     0 0 80px rgba(168,104,255,.25);
 
-  /* subtle inner shading for depth IN dark mode */
+  /* lighter idle glow for perf while off-screen */
+  --glow-neon-soft:
+    0 0 8px rgba(0,235,255,.4),
+    0 0 18px rgba(168,104,255,.25);
+
+  /* subtle inner shading in dark mode only */
   --inner-dark: inset 0 0 60px rgba(0,0,0,.45);
 
-  /* header glass bg */
   --header-bg: rgba(10,12,20,0.55);
   --header-border: rgba(255,255,255,0.12);
 
-  --nav-overlay-bg: rgba(5,5,10,0.6);
-  --nav-card-bg: rgba(15,18,30,0.8);
+  --nav-overlay-bg: rgba(5,5,10,0.45);
+  --nav-card-bg: rgba(15,18,30,0.75);
 
-  --quickbar-bg: rgba(15,18,30,0.7);
+  --quickbar-bg: rgba(15,18,30,0.6);
   --quickbar-border: rgba(255,255,255,.12);
 }
 
-/* LIGHT MODE OVERRIDES:
-   - no heavy dark shadows
-   - keep color glow, keep frost
-*/
+/* LIGHT MODE (perf mode: zero dark shadows, keep color glow) */
 @media (prefers-color-scheme: light) {
   :root {
     --bg-page-start: #ffffff;
@@ -76,18 +73,22 @@
     --quickbar-bg: rgba(255,255,255,0.6);
     --quickbar-border: rgba(0,0,0,.08);
 
-    --inner-dark: inset 0 0 40px rgba(0,0,0,0); /* kill muddy inner shadow */
-    --glow-neon:
-      0 0 24px rgba(0,170,255,.35),
-      0 0 48px rgba(150,90,255,.3),
-      0 0 80px rgba(150,90,255,.15);
+    --inner-dark: inset 0 0 40px rgba(0,0,0,0);
+
+    --glow-neon-strong:
+      0 0 24px rgba(0,170,255,.4),
+      0 0 48px rgba(150,90,255,.35),
+      0 0 80px rgba(150,90,255,.18);
+
+    --glow-neon-soft:
+      0 0 8px rgba(0,170,255,.3),
+      0 0 18px rgba(150,90,255,.2);
   }
 }
 
 /* =========================================================
    GLOBAL BASE
    ========================================================= */
-
 * {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
@@ -107,21 +108,32 @@ html, body {
   position: relative;
 }
 
-/* each main section scroll-reveal */
+/* section reveal baseline (idle state before visible) */
 .site-section {
   position: relative;
   padding: 5rem 1rem 4rem;
   opacity: 0;
   transform: translateY(40px) scale(.98);
-  transition: opacity .45s ease, transform .45s ease;
   will-change: opacity, transform;
 }
+
+/* when visible */
 .site-section.visible {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
 
-/* shared frosted card shell */
+/* bounce-in gives quick up / slight overshoot */
+.bounce-in {
+  animation: bounceIn .5s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes bounceIn {
+  0%   { transform: translateY(40px) scale(.96); }
+  60%  { transform: translateY(-6px) scale(1.01); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* shared frosted content card */
 .section-card {
   position: relative;
   border-radius: var(--card-radius);
@@ -131,24 +143,35 @@ html, body {
   -webkit-backdrop-filter: blur(18px) saturate(150%);
   color: var(--txt-main);
 
-  /* no heavy black drop-shadow in light mode; only colored glow */
-  box-shadow: var(--inner-dark), var(--glow-neon);
+  /* SOFTER by default for perf */
+  box-shadow: var(--inner-dark), var(--glow-neon-soft);
 
   padding: 2rem 1.25rem 2rem;
   max-width: 1100px;
   margin: 0 auto;
 }
 
-/* inner "sub cards" inside grid keep consistent spacing */
+/* stronger glow only AFTER section is revealed */
+.glow-ready.glow-active {
+  box-shadow: var(--inner-dark), var(--glow-neon-strong);
+}
+
+/* smaller inner cards that also wake up on reveal */
+.card-idle {
+  box-shadow: var(--glow-neon-soft);
+}
+.glow-active .card-idle,
+.card-idle.glow-active {
+  box-shadow: var(--glow-neon-strong);
+}
+
 .sub-card {
   padding: 2rem 1.25rem 2rem;
 }
 
 /* =========================================================
-   HEADER / TOP NAV
+   HEADER / NAV
    ========================================================= */
-
-/* wrapper gives us a rounded "Google style" floating bar */
 .site-header {
   position: sticky;
   top: 0;
@@ -164,26 +187,21 @@ html, body {
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   border-radius: 16px;
-  box-shadow: var(--glow-neon);
+  box-shadow: var(--glow-neon-soft);
+  will-change: transform;
 }
-
-/* content inside header */
 .header-inner {
   display: flex;
   flex-direction: column;
   row-gap: .5rem;
   padding: .75rem 1rem;
 }
-
-/* row 1: brand + burger (mobile)
-   row 1 centered only brand on desktop */
 .header-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: .5rem;
 }
-
 .brand-text {
   font-weight: 600;
   font-size: clamp(.9rem, .6rem + 1vw, 1.1rem);
@@ -205,8 +223,6 @@ html, body {
     0 0 32px rgba(168,104,255,.4),
     0 0 60px rgba(168,104,255,.2);
 }
-
-/* brand pulse every 3s */
 .brand-pulse {
   animation: brandPulse 3s ease-in-out infinite;
 }
@@ -225,7 +241,7 @@ html, body {
   }
 }
 
-/* burger button */
+/* burger button (mobile) */
 .nav-toggle {
   background: var(--pill-bg-solid);
   border: 1px solid var(--pill-border);
@@ -237,15 +253,13 @@ html, body {
   cursor: pointer;
   min-width: 44px;
   min-height: 44px;
-
-  box-shadow: var(--glow-neon);
+  box-shadow: var(--glow-neon-soft);
   background-image: radial-gradient(
     circle at 20% 20%,
     rgba(0,235,255,.25) 0%,
     rgba(168,104,255,.18) 40%,
     rgba(0,0,0,0) 70%
   );
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -280,7 +294,6 @@ html, body {
   justify-content: center;
   gap: .5rem .75rem;
 }
-
 .desktop-nav-pill {
   text-decoration: none;
   color: var(--txt-main);
@@ -291,15 +304,13 @@ html, body {
   border-radius: var(--pill-radius);
   background: var(--pill-bg-solid);
   border: 1px solid var(--pill-border);
-
-  box-shadow: var(--glow-neon);
+  box-shadow: var(--glow-neon-soft);
   background-image: radial-gradient(
     circle at 20% 20%,
     rgba(0,235,255,.25) 0%,
     rgba(168,104,255,.18) 40%,
     rgba(0,0,0,0) 70%
   );
-
   text-shadow:
     0 0 12px rgba(0,235,255,.6),
     0 0 24px rgba(168,104,255,.45);
@@ -323,7 +334,6 @@ html, body {
 /* =========================================================
    NAV OVERLAY DRAWER (MOBILE MENU)
    ========================================================= */
-
 .nav-overlay {
   position: fixed;
   inset: 0;
@@ -331,20 +341,19 @@ html, body {
   backdrop-filter: blur(10px) saturate(160%);
   -webkit-backdrop-filter: blur(10px) saturate(160%);
   z-index: 10000;
+
   opacity: 0;
   pointer-events: none;
-
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
   padding: 1rem;
-  transition: opacity .25s ease;
+  transition: opacity .2s ease;
 }
 .nav-overlay.show {
   opacity: 1;
   pointer-events: auto;
 }
-
 .nav-card {
   background: var(--nav-card-bg);
   border: 1px solid var(--glass-border);
@@ -353,19 +362,21 @@ html, body {
   max-width: 360px;
   color: var(--txt-main);
 
-  box-shadow: var(--glow-neon);
+  box-shadow: var(--glow-neon-strong);
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
 
   padding: 1rem 1rem 1.5rem;
   position: relative;
-  animation: slideIn .25s ease both;
+  transform: translateY(-10px) scale(.97);
+  opacity:0;
+  transition: transform .22s cubic-bezier(.16,1,.3,1),
+              opacity .22s cubic-bezier(.16,1,.3,1);
 }
-@keyframes slideIn {
-  from {transform: translateY(-10px) scale(.97); opacity:0;}
-  to   {transform: translateY(0) scale(1);   opacity:1;}
+.nav-overlay.show .nav-card {
+  transform: translateY(0) scale(1);
+  opacity:1;
 }
-
 .nav-close {
   position: absolute;
   top: .75rem;
@@ -377,7 +388,6 @@ html, body {
   cursor: pointer;
   text-shadow: 0 0 12px rgba(0,235,255,.7);
 }
-
 .nav-groups {
   margin-top: 1.5rem;
   display: grid;
@@ -394,7 +404,6 @@ html, body {
     0 0 12px rgba(0,235,255,.8),
     0 0 24px rgba(168,104,255,.5);
 }
-
 .nav-link-pill {
   display: block;
   background: var(--pill-bg-solid);
@@ -408,20 +417,17 @@ html, body {
   line-height: 1.2;
   text-align: center;
   margin-bottom: .6rem;
-
-  box-shadow: var(--glow-neon);
+  box-shadow: var(--glow-neon-soft);
   background-image: radial-gradient(
     circle at 20% 20%,
     rgba(0,235,255,.25) 0%,
     rgba(168,104,255,.18) 40%,
     rgba(0,0,0,0) 70%
   );
-
   text-shadow:
     0 0 12px rgba(0,235,255,.6),
     0 0 24px rgba(168,104,255,.45);
 }
-
 .nav-footer {
   border-top: 1px solid var(--glass-border);
   margin-top: 1.5rem;
@@ -445,8 +451,7 @@ html, body {
   color: var(--txt-main);
   text-decoration: none;
   min-width: max-content;
-
-  box-shadow: var(--glow-neon);
+  box-shadow: var(--glow-neon-soft);
   background-image: radial-gradient(
     circle at 20% 20%,
     rgba(0,235,255,.25) 0%,
@@ -463,13 +468,11 @@ html, body {
 /* =========================================================
    SECTION HEADERS INSIDE CARDS
    ========================================================= */
-
 .section-head {
   text-align: center;
   margin-bottom: 2rem;
   color: var(--txt-main);
 }
-
 .section-eyebrow {
   font-size: .8rem;
   letter-spacing: .15em;
@@ -478,15 +481,13 @@ html, body {
   font-weight: 500;
   margin-bottom: .5rem;
 }
-
 .section-title {
-  font-size: clamp(1.3rem, 1rem + 2vw, 1.8rem); /* BIGGER */
+  font-size: clamp(1.3rem, 1rem + 2vw, 1.8rem);
   font-weight: 600;
   line-height: 1.2;
   margin: 0 0 .75rem;
   letter-spacing: .07em;
   text-align: center;
-
   background: radial-gradient(circle at 20% 20%,
     var(--accent-blue) 0%,
     var(--accent-purple) 40%,
@@ -494,13 +495,10 @@ html, body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-
   text-shadow:
     0 0 24px rgba(0,235,255,.7),
     0 0 48px rgba(168,104,255,.45);
 }
-
-/* pulse on section titles too */
 .title-pulse {
   animation: titlePulse 3s ease-in-out infinite;
 }
@@ -517,7 +515,6 @@ html, body {
       0 0 96px rgba(255,214,123,.4);
   }
 }
-
 .section-underline {
   width: 180px;
   height: 4px;
@@ -534,7 +531,6 @@ html, body {
     0 0 32px rgba(168,104,255,.45),
     0 0 48px rgba(255,214,123,.4);
 }
-
 .section-lede {
   text-align: center;
   max-width: 40rem;
@@ -548,7 +544,6 @@ html, body {
 /* =========================================================
    HERO / PARALLAX BG
    ========================================================= */
-
 .hero-section {
   padding-top: 6rem;
 }
@@ -557,7 +552,6 @@ html, body {
   overflow: hidden;
   z-index: 1;
 }
-
 .hero-bg-layer {
   position: absolute;
   inset: 0;
@@ -572,6 +566,7 @@ html, body {
   z-index: 0;
   opacity: .28;
   transform: translateY(0);
+  will-change: transform;
 }
 @media (prefers-color-scheme: light) {
   .hero-bg-layer {
@@ -583,7 +578,6 @@ html, body {
 /* =========================================================
    PILLS / PAYMENT
    ========================================================= */
-
 .pill-row {
   display: flex;
   flex-wrap: wrap;
@@ -602,10 +596,7 @@ html, body {
   line-height: 1.2;
   min-width: max-content;
   text-align: center;
-
-  /* color glow instead of dark shadow */
-  box-shadow: var(--glow-neon);
-
+  box-shadow: var(--glow-neon-soft);
   background-image: radial-gradient(
     circle at 20% 20%,
     rgba(0,235,255,.28) 0%,
@@ -613,24 +604,19 @@ html, body {
     rgba(0,0,0,0) 70%
   );
 }
-
-/* payment pills breathe */
 .pay-pill {
   animation: breathe 3s ease-in-out infinite;
 }
 @keyframes breathe {
   0%,100% {
-    box-shadow: var(--glow-neon);
+    box-shadow: var(--glow-neon-soft);
   }
   50% {
-    box-shadow:
-      0 0 32px rgba(0,235,255,.9),
-      0 0 64px rgba(168,104,255,.6),
-      0 0 96px rgba(168,104,255,.4);
+    box-shadow: var(--glow-neon-strong);
   }
 }
 
-/* location blurb under hero */
+/* hero mini location card */
 .location-card {
   background: rgba(0,0,0,0.35);
   border-radius: var(--card-radius);
@@ -640,7 +626,7 @@ html, body {
   text-align: center;
   max-width: 32rem;
   margin: 1.5rem auto 0;
-  box-shadow: var(--glow-neon);
+  box-shadow: var(--glow-neon-soft);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
 }
@@ -660,12 +646,10 @@ html, body {
 /* =========================================================
    BARBERS
    ========================================================= */
-
 .barbers-list {
   display: grid;
   gap: 1rem;
 }
-
 .barber-card {
   background: rgba(0,0,0,0.35);
   border-radius: var(--card-radius);
@@ -673,12 +657,17 @@ html, body {
   color: var(--txt-main);
   padding: 1rem 1rem 1rem;
   cursor: pointer;
-
-  box-shadow: var(--glow-neon); /* just glow, no dark drop in light */
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   overflow: hidden;
   transition: background .2s ease;
+}
+.barber-card.card-idle {
+  box-shadow: var(--glow-neon-soft);
+}
+.glow-active .barber-card,
+.barber-card.glow-active {
+  box-shadow: var(--glow-neon-strong);
 }
 @media (prefers-color-scheme: light) {
   .barber-card {
@@ -693,26 +682,22 @@ html, body {
     background: rgba(255,255,255,0.7);
   }
 }
-
 .barber-headerline {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: .5rem .75rem;
 }
-
 .barber-name {
   margin: 0;
   font-size: 1rem;
   font-weight: 600;
   color: var(--txt-main);
   letter-spacing: .05em;
-
   text-shadow:
     0 0 16px rgba(0,235,255,.8),
     0 0 32px rgba(168,104,255,.6);
 }
-
 .barber-role-pill {
   border-radius: var(--pill-radius);
   border: 1px solid var(--pill-border);
@@ -721,7 +706,6 @@ html, body {
   line-height: 1.2;
   font-weight: 600;
   color: var(--txt-main);
-
   background: var(--pill-bg-solid);
   background-image: radial-gradient(
     circle at 20% 20%,
@@ -729,20 +713,15 @@ html, body {
     rgba(168,104,255,.18) 40%,
     rgba(0,0,0,0) 70%
   );
-  box-shadow:
-    0 0 24px rgba(255,214,123,.7),
-    0 0 48px rgba(168,104,255,.5),
-    0 0 80px rgba(0,235,255,.4);
+  box-shadow: var(--glow-neon-soft);
 }
-
 .barber-tagline {
   margin: .5rem 0 .9rem;
   font-size: .9rem;
   color: var(--txt-dim);
   line-height: 1.4;
 }
-
-/* call to book button */
+/* button / Booksy / Call */
 .call-btn {
   appearance: none;
   -webkit-appearance: none;
@@ -756,16 +735,20 @@ html, body {
   line-height: 1.2;
   cursor: pointer;
   min-width: max-content;
-
-  box-shadow: var(--glow-neon);
+  text-decoration:none;
+  display:inline-block;
   background-image: radial-gradient(
     circle at 20% 20%,
     rgba(0,235,255,.28) 0%,
     rgba(168,104,255,.22) 40%,
     rgba(0,0,0,0) 70%
   );
+  box-shadow: var(--glow-neon-soft);
 }
-
+.glow-active .call-btn,
+.call-btn.glow-active {
+  box-shadow: var(--glow-neon-strong);
+}
 .barber-extra {
   color: var(--txt-main);
   font-size: .9rem;
@@ -784,7 +767,6 @@ html, body {
 /* =========================================================
    SERVICES
    ========================================================= */
-
 .services-list {
   list-style: none;
   margin: 0;
@@ -792,24 +774,27 @@ html, body {
   display: grid;
   gap: 1rem;
 }
-
 .service-item {
   background: rgba(0,0,0,0.35);
   border-radius: var(--card-radius);
   border: 1px solid var(--glass-border);
   color: var(--txt-main);
   padding: 1rem 1rem .9rem;
-
-  box-shadow: var(--glow-neon);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+.service-item.card-idle {
+  box-shadow: var(--glow-neon-soft);
+}
+.glow-active .service-item,
+.service-item.glow-active {
+  box-shadow: var(--glow-neon-strong);
 }
 @media (prefers-color-scheme: light) {
   .service-item {
     background: rgba(255,255,255,0.5);
   }
 }
-
 .service-top {
   display: flex;
   flex-wrap: wrap;
@@ -818,7 +803,6 @@ html, body {
   gap: .5rem .75rem;
   margin-bottom: .4rem;
 }
-
 .service-name {
   font-weight: 600;
   font-size: 1rem;
@@ -828,7 +812,6 @@ html, body {
     0 0 16px rgba(0,235,255,.8),
     0 0 32px rgba(168,104,255,.6);
 }
-
 .service-price-pill {
   border-radius: var(--pill-radius);
   border: 1px solid var(--pill-border);
@@ -838,7 +821,6 @@ html, body {
   font-weight: 600;
   font-size: .9rem;
   line-height: 1.2;
-
   background: var(--pill-bg-solid);
   background-image: radial-gradient(
     circle at 20% 20%,
@@ -846,12 +828,12 @@ html, body {
     rgba(0,235,255,.22) 40%,
     rgba(0,0,0,0) 70%
   );
-  box-shadow:
-    0 0 24px rgba(255,214,123,.7),
-    0 0 48px rgba(0,235,255,.6),
-    0 0 80px rgba(168,104,255,.45);
+  box-shadow: var(--glow-neon-soft);
 }
-
+.glow-active .service-price-pill,
+.service-price-pill.glow-active {
+  box-shadow: var(--glow-neon-strong);
+}
 .service-desc {
   margin: 0;
   font-size: .9rem;
@@ -863,7 +845,6 @@ html, body {
 /* =========================================================
    REVIEWS
    ========================================================= */
-
 .reviews-list {
   display: grid;
   gap: 1rem;
@@ -874,10 +855,15 @@ html, body {
   border: 1px solid var(--glass-border);
   padding: 1rem 1rem 1rem;
   color: var(--txt-main);
-
-  box-shadow: var(--glow-neon);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+.review-card.card-idle {
+  box-shadow: var(--glow-neon-soft);
+}
+.glow-active .review-card,
+.review-card.glow-active {
+  box-shadow: var(--glow-neon-strong);
 }
 @media (prefers-color-scheme: light) {
   .review-card {
@@ -926,7 +912,6 @@ html, body {
 /* =========================================================
    VISIT / MAP
    ========================================================= */
-
 .visit-flex {
   display: grid;
   gap: 1.5rem;
@@ -936,7 +921,6 @@ html, body {
     grid-template-columns: 1fr 1fr;
   }
 }
-
 .visit-box {
   background: rgba(0,0,0,0.35);
   border-radius: var(--card-radius);
@@ -944,17 +928,21 @@ html, body {
   padding: 1rem 1rem 1rem;
   color: var(--txt-main);
   text-align: center;
-
-  box-shadow: var(--glow-neon);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+.visit-box.card-idle {
+  box-shadow: var(--glow-neon-soft);
+}
+.glow-active .visit-box,
+.visit-box.glow-active {
+  box-shadow: var(--glow-neon-strong);
 }
 @media (prefers-color-scheme: light) {
   .visit-box {
     background: rgba(255,255,255,0.5);
   }
 }
-
 .visit-box-title {
   margin: 0 0 .5rem;
   font-size: 1rem;
@@ -965,7 +953,6 @@ html, body {
     0 0 16px rgba(0,235,255,.8),
     0 0 32px rgba(168,104,255,.6);
 }
-
 .visit-box p {
   margin: 0 0 .6rem;
   color: var(--txt-main);
@@ -980,18 +967,19 @@ html, body {
   font-style: italic;
   font-size: .8rem;
 }
-
 .map-embed-wrap {
   border-radius: var(--card-radius);
   border: 1px solid var(--glass-border);
   overflow: hidden;
   background: #000;
-  box-shadow: var(--glow-neon);
+  box-shadow: var(--glow-neon-soft);
+}
+.glow-active .map-embed-wrap {
+  box-shadow: var(--glow-neon-strong);
 }
 @media (prefers-color-scheme: light) {
   .map-embed-wrap {
     background: #fff;
-    box-shadow: var(--glow-neon); /* color glow only */
   }
 }
 .map-embed {
@@ -1006,7 +994,6 @@ html, body {
 @media(min-width:1024px){
   .map-embed { height: 280px; }
 }
-
 .map-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -1025,20 +1012,17 @@ html, body {
   font-weight: 500;
   line-height: 1.2;
   min-width: max-content;
-
-  box-shadow: var(--glow-neon);
+  box-shadow: var(--glow-neon-soft);
   background-image: radial-gradient(
     circle at 20% 20%,
     rgba(0,235,255,.28) 0%,
     rgba(168,104,255,.22) 40%,
     rgba(0,0,0,0) 70%
   );
-
   text-shadow:
     0 0 12px rgba(0,235,255,.7),
     0 0 24px rgba(168,104,255,.5);
 }
-
 .foot-note {
   margin-top: 2rem;
   text-align: center;
@@ -1050,7 +1034,6 @@ html, body {
 /* =========================================================
    DESKTOP GRID LAYOUT
    ========================================================= */
-
 .lineup-grid {
   display: grid;
   gap: 2rem;
@@ -1064,7 +1047,7 @@ html, body {
   }
 }
 
-/* CONTACT FLOAT (desktop footer CTA) */
+/* CONTACT FLOAT (desktop only) */
 .contact-float {
   position: fixed;
   right: 1rem;
@@ -1085,15 +1068,13 @@ html, body {
   line-height: 1.4;
   color: var(--txt-main);
   text-align: left;
-
-  box-shadow: var(--glow-neon);
+  box-shadow: var(--glow-neon-soft);
   background-image: radial-gradient(
     circle at 20% 20%,
     rgba(0,235,255,.28) 0%,
     rgba(168,104,255,.22) 40%,
     rgba(0,0,0,0) 70%
   );
-
   text-shadow:
     0 0 12px rgba(0,235,255,.7),
     0 0 24px rgba(168,104,255,.5);
@@ -1105,7 +1086,6 @@ html, body {
 /* =========================================================
    MOBILE QUICK ACTION BAR
    ========================================================= */
-
 .quick-bar {
   position: fixed;
   left: 0;
@@ -1120,7 +1100,7 @@ html, body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  box-shadow: var(--glow-neon);
+  box-shadow: var(--glow-neon-soft);
 }
 @media(min-width:1024px){
   .quick-bar { display: none; }
@@ -1155,9 +1135,9 @@ html, body {
 }
 
 /* =========================================================
-   MOBILE PERFORMANCE
+   MOBILE PERFORMANCE HINTS
+   content-visibility to skip off-screen rendering cost
    ========================================================= */
-
 @media(max-width:768px){
   #barbers,
   #services,
@@ -1172,6 +1152,6 @@ html, body {
 /* =========================================================
    UTILS
    ========================================================= */
-
 p {margin-top:0;}
 a {color: var(--accent-blue); text-decoration:none;}
+```0
