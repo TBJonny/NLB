@@ -13,7 +13,7 @@
 <header id="siteHeader" class="site-header">
   <div class="header-inner">
 
-    <!-- Brand row (mobile layout) -->
+    <!-- Brand row (always shows on mobile, also shows on desktop) -->
     <div class="brand-row">
       <h1 class="brand-name pulse-glow">
         NEXT LEVEL BARBERSHOP
@@ -366,9 +366,13 @@
         <div class="accent-bar"></div>
       </div>
 
+      <!-- We’re using grid areas so desktop is:
+           [Hours][Contact]
+           [Map  ][Map    ]
+           Mobile is stacked Hours, Contact, Map
+      -->
       <div class="visit-grid">
-
-        <div class="visit-col pill-surface-soft reveal-on-scroll">
+        <div id="visit-hours" class="visit-col pill-surface-soft reveal-on-scroll">
           <h3 class="visit-label">Hours</h3>
           <p class="visit-text">
             Mon – Thu: 10:00 AM – 7:00 PM<br/>
@@ -380,7 +384,7 @@
           </p>
         </div>
 
-        <div class="visit-col pill-surface-soft reveal-on-scroll">
+        <div id="visit-contact" class="visit-col pill-surface-soft reveal-on-scroll">
           <h3 class="visit-label">Contact</h3>
           <p class="visit-text">
             (505) 503-6216<br/>
@@ -391,7 +395,7 @@
           </p>
         </div>
 
-        <div class="visit-col pill-surface-soft reveal-on-scroll">
+        <div id="visit-map" class="visit-col pill-surface-soft reveal-on-scroll">
           <h3 class="visit-label">Find Us</h3>
 
           <div class="map-shell">
@@ -422,7 +426,6 @@
             Walk-ins welcome • Appointments preferred
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -437,8 +440,8 @@ const navOverlay  = document.getElementById('navOverlay');
 const navDrawer   = document.getElementById('navDrawer');
 
 function openDrawer() {
+  // start visible so transitions can play
   navOverlay.classList.remove('hidden');
-  // small async so CSS transition can catch
   requestAnimationFrame(() => {
     navOverlay.classList.add('show');
     navDrawer.classList.add('show');
@@ -448,7 +451,7 @@ function openDrawer() {
 function closeDrawer() {
   navOverlay.classList.remove('show');
   navDrawer.classList.remove('show');
-  // wait for transition then hide node for a11y / clicks
+  // after transition, fully hide so it doesn't block clicks
   setTimeout(() => {
     if (!navOverlay.classList.contains('show')) {
       navOverlay.classList.add('hidden');
@@ -465,14 +468,14 @@ burgerBtn.addEventListener('click', (e) => {
   }
 });
 
+// click outside drawer closes it
 navOverlay.addEventListener('click', (e) => {
-  // click outside drawer closes
   if (!navDrawer.contains(e.target)) {
     closeDrawer();
   }
 });
 
-// close drawer on nav link tap
+// tap a link closes it
 document.querySelectorAll('#navDrawer a').forEach(a => {
   a.addEventListener('click', () => {
     closeDrawer();
@@ -481,8 +484,7 @@ document.querySelectorAll('#navDrawer a').forEach(a => {
 
 
 /* ========= REVEAL ON SCROLL =========
-   Smooth "pop up / settle" animation.
-   We only animate transform+opacity (cheap on GPU).
+   cheap GPU transform only (translateY + opacity)
 */
 const observer = new IntersectionObserver(
   (entries) => {
@@ -494,16 +496,14 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  {
-    threshold: 0.15
-  }
+  { threshold: 0.15 }
 );
 
 document.querySelectorAll('.reveal-on-scroll').forEach(el => {
   el.style.willChange = 'transform, opacity';
   observer.observe(el);
 });
-
 </script>
+
 </body>
 </html>
