@@ -899,3 +899,23 @@ main {
     padding: 2.4rem 2.6rem 3rem;
   }
 }
+
+
+/* ===== Enhancements (merge-safe) ===== */
+
+/* Anchor offset so sticky header doesn't cover titles */
+section[id] { scroll-margin-top: 5rem; }
+
+/* Larger burger tap target + visible focus */
+#burgerBtn { width: 3.2rem; height: 3rem; }
+#burgerBtn:focus-visible { outline: 2px solid var(--gold-star); outline-offset: 3px; }
+
+/* Universal focus for a/button (keyboard users) */
+a:focus-visible, button:focus-visible { outline: 2px solid #6bb7ff; outline-offset: 3px; border-radius: 10px; }
+
+/* Lock body scroll when nav is open */
+.body-lock { overflow: hidden; }
+
+/* iOS safe-area comfort spacing */
+body { padding-bottom: calc(4.25rem + env(safe-area-inset-bottom)); }
+.bottom-nav { padding-bottom: calc(.5rem + env(safe-area-inset-bottom)); }
