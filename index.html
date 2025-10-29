@@ -13,7 +13,7 @@
 <header id="siteHeader" class="site-header">
   <div class="header-inner">
 
-    <!-- Brand + burger -->
+    <!-- Top row: Shop name + burger -->
     <div class="brand-row">
       <h1 class="brand-name pulse-glow">
         NEXT LEVEL BARBERSHOP
@@ -26,7 +26,7 @@
       </button>
     </div>
 
-    <!-- Desktop nav pills -->
+    <!-- Desktop nav pills (centered under name on desktop only) -->
     <nav class="header-links">
       <a class="header-pill" href="#welcome">Home</a>
       <a class="header-pill" href="#barbers">Our Barbers</a>
@@ -36,8 +36,9 @@
     </nav>
   </div>
 
-  <!-- Slide-out mobile drawer -->
-  <div id="navOverlay" class="nav-overlay hidden">
+  <!-- MOBILE NAV DRAWER / OVERLAY -->
+  <!-- starts completely display:none so it NEVER sits behind hero -->
+  <div id="navOverlay" class="nav-overlay" style="display:none;">
     <div id="navDrawer" class="nav-drawer">
       <ul class="drawer-list">
         <li><a class="drawer-pill" href="#welcome">Home</a></li>
@@ -60,6 +61,7 @@
   <!-- WELCOME -->
   <section id="welcome" class="card-section reveal-on-scroll">
     <div class="section-inner">
+
       <div class="section-headblock">
         <div class="section-eyebrow">WELCOME TO</div>
         <h2 class="section-title">NEXT LEVEL BARBERSHOP</h2>
@@ -92,6 +94,7 @@
           <li>🧍‍♂️ Walk-Ins Welcome • 📅 Appointments Preferred</li>
         </ul>
       </div>
+
     </div>
   </section>
 
@@ -99,6 +102,7 @@
   <!-- BARBERS -->
   <section id="barbers" class="card-section reveal-on-scroll">
     <div class="section-inner">
+
       <div class="section-headblock">
         <h2 class="section-title">OUR BARBERS 💈</h2>
         <div class="accent-bar"></div>
@@ -160,6 +164,7 @@
   <!-- SERVICES -->
   <section id="services" class="card-section reveal-on-scroll">
     <div class="section-inner">
+
       <div class="section-headblock">
         <h2 class="section-title">SERVICES &amp; PRICING 💵</h2>
         <div class="accent-bar"></div>
@@ -298,6 +303,7 @@
   <!-- REVIEWS -->
   <section id="reviews" class="card-section reveal-on-scroll">
     <div class="section-inner">
+
       <div class="section-headblock">
         <h2 class="section-title">Recent Google Reviews ⭐</h2>
         <div class="accent-bar"></div>
@@ -360,6 +366,7 @@
   <!-- VISIT / HOURS / CONTACT / MAP -->
   <section id="visit" class="card-section reveal-on-scroll">
     <div class="section-inner">
+
       <div class="section-headblock">
         <div class="section-eyebrow">VISIT US</div>
         <h2 class="section-title">Hours • Contact • Directions</h2>
@@ -367,6 +374,7 @@
       </div>
 
       <div class="visit-grid">
+
         <div id="visit-hours" class="visit-col pill-surface-soft reveal-on-scroll">
           <h3 class="visit-label">Hours</h3>
           <p class="visit-text">
@@ -421,6 +429,7 @@
             Walk-ins welcome • Appointments preferred
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -430,13 +439,14 @@
 
 <script>
 /* ========= MOBILE NAV DRAWER ========= */
-const burgerBtn   = document.getElementById('burgerBtn');
-const navOverlay  = document.getElementById('navOverlay');
-const navDrawer   = document.getElementById('navDrawer');
+const burgerBtn  = document.getElementById('burgerBtn');
+const navOverlay = document.getElementById('navOverlay');
+const navDrawer  = document.getElementById('navDrawer');
 
 function openDrawer() {
-  // make overlay visible first so transition runs
-  navOverlay.classList.remove('hidden');
+  // make overlay visible
+  navOverlay.style.display = 'flex';
+  // next frame -> animate
   requestAnimationFrame(() => {
     navOverlay.classList.add('show');
     navDrawer.classList.add('show');
@@ -446,20 +456,20 @@ function openDrawer() {
 function closeDrawer() {
   navOverlay.classList.remove('show');
   navDrawer.classList.remove('show');
-  // after transition, hide fully
+  // after transition, fully hide
   setTimeout(() => {
     if (!navOverlay.classList.contains('show')) {
-      navOverlay.classList.add('hidden');
+      navOverlay.style.display = 'none';
     }
   }, 250);
 }
 
 burgerBtn.addEventListener('click', (e) => {
   e.stopPropagation();
-  if (navOverlay.classList.contains('hidden')) {
-    openDrawer();
-  } else {
+  if (navOverlay.classList.contains('show')) {
     closeDrawer();
+  } else {
+    openDrawer();
   }
 });
 
@@ -470,7 +480,7 @@ navOverlay.addEventListener('click', (e) => {
   }
 });
 
-// click any link closes it
+// click any nav link closes it
 document.querySelectorAll('#navDrawer a').forEach(a => {
   a.addEventListener('click', () => {
     closeDrawer();
