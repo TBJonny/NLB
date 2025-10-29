@@ -1,5 +1,5 @@
 /* =========================================================
-   PERFORMANCE FROST THEME (lighter, less lag)
+   LIGHTWEIGHT FROST THEME, TUNED FOR SMOOTHNESS
    ========================================================= */
 :root {
   --bg-page-start: #0a0a12;
@@ -15,32 +15,26 @@
   --accent-blue: rgb(0, 235, 255);
   --accent-gold: rgb(255, 214, 123);
 
-  /* pills now use this bright wash instead of box-shadow glow */
   --pill-glass-bg: rgba(20,22,32,0.55);
   --pill-glass-border: rgba(255,255,255,.18);
 
-  /* card tint (sections, barber cards, etc) */
   --card-bg-dark: rgba(0,0,0,0.35);
   --card-bg-light: rgba(255,255,255,0.5);
 
-  /* header background */
   --header-bg: rgba(10,12,20,0.55);
   --header-border: rgba(255,255,255,0.12);
 
-  /* nav drawer */
   --nav-overlay-bg: rgba(5,5,10,0.45);
   --nav-card-bg: rgba(15,18,30,0.75);
 
-  /* bottom quick bar */
   --quickbar-bg: rgba(15,18,30,0.6);
   --quickbar-border: rgba(255,255,255,.12);
 
-  /* radius */
   --card-radius: 20px;
   --pill-radius: 14px;
 }
 
-/* LIGHT MODE (no dark shadows, still colorful) */
+/* LIGHT MODE (no dark shadows) */
 @media (prefers-color-scheme: light) {
   :root {
     --bg-page-start: #ffffff;
@@ -59,7 +53,7 @@
     --pill-glass-bg: rgba(255,255,255,0.6);
     --pill-glass-border: rgba(0,0,0,.08);
 
-    --card-bg-dark: rgba(255,255,255,0.5); /* same frosted look in light */
+    --card-bg-dark: rgba(255,255,255,0.5);
     --header-bg: rgba(255,255,255,0.4);
     --header-border: rgba(0,0,0,0.08);
 
@@ -72,7 +66,7 @@
 }
 
 /* =========================================================
-   GLOBAL BASE
+   BASE
    ========================================================= */
 * {
   box-sizing: border-box;
@@ -93,8 +87,7 @@ html, body {
 }
 
 /* =========================================================
-   SECTION REVEAL ANIMATION
-   (lighter than before, no heavy shadows added)
+   SECTION REVEAL
    ========================================================= */
 .site-section {
   position: relative;
@@ -117,9 +110,8 @@ html, body {
 }
 
 /* =========================================================
-   CORE FROST CARDS (sections)
-   - removed neon box-shadow stacks for perf
-   - still blurred glass w/ subtle colored edge
+   SECTION CARDS / FROST
+   No heavy glow shadows, just subtle colored aura
    ========================================================= */
 .section-card {
   position: relative;
@@ -130,9 +122,11 @@ html, body {
   -webkit-backdrop-filter: blur(18px) saturate(150%);
   color: var(--txt-main);
 
-  /* DROP ALL BLACK INSET SHADOWS + HUGE GLOWS */
-  box-shadow: 0 0 24px rgba(0,235,255,.18),
-              0 0 48px rgba(168,104,255,.12);
+  /* super light aura instead of stacked shadows */
+  box-shadow:
+    0 0 24px rgba(0,235,255,.18),
+    0 0 36px rgba(168,104,255,.12),
+    0 0 48px rgba(255,214,123,.08);
 
   padding: 2rem 1.25rem 2rem;
   max-width: 1100px;
@@ -142,7 +136,7 @@ html, body {
   padding: 2rem 1.25rem 2rem;
 }
 
-/* Cards INSIDE sections (barber cards, service items, review cards, etc) */
+/* inner cards */
 .card-idle {
   border-radius: var(--card-radius);
   background: var(--card-bg-dark);
@@ -150,7 +144,6 @@ html, body {
   color: var(--txt-main);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
-  /* no box-shadow neon here by default (perf) */
   box-shadow: none;
   transition: background .2s ease, box-shadow .2s ease;
 }
@@ -160,13 +153,13 @@ html, body {
   }
 }
 
-/* When revealed, instead of heavy glow, just a soft ring so it's still alive */
+/* on reveal, gentle halo (lighter than before) */
 .glow-active .card-idle,
 .card-idle.glow-active {
   box-shadow:
-    0 0 16px rgba(0,235,255,.4),
-    0 0 32px rgba(168,104,255,.28),
-    0 0 48px rgba(255,214,123,.18);
+    0 0 16px rgba(255,214,123,.28),
+    0 0 28px rgba(168,104,255,.2),
+    0 0 40px rgba(0,235,255,.18);
 }
 
 /* =========================================================
@@ -188,9 +181,11 @@ html, body {
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   border-radius: 16px;
 
-  /* lighter glow edge, no shadow stacking */
-  box-shadow: 0 0 24px rgba(0,235,255,.2),
-              0 0 32px rgba(168,104,255,.15);
+  /* lighter edge aura */
+  box-shadow:
+    0 0 24px rgba(0,235,255,.18),
+    0 0 36px rgba(168,104,255,.12),
+    0 0 48px rgba(255,214,123,.08);
 
   will-change: transform;
 }
@@ -207,29 +202,34 @@ html, body {
   gap: .5rem;
 }
 
+/* Brand: slightly bigger & bolder */
 .brand-text {
-  font-weight: 600;
-  font-size: clamp(.9rem, .6rem + 1vw, 1.1rem);
+  font-weight: 650;
+  font-size: clamp(1rem, .7rem + 1vw, 1.2rem);
+  line-height: 1.2;
   color: var(--txt-main);
-  letter-spacing: .08em;
+  letter-spacing: .09em;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 75vw;
+
   background: radial-gradient(circle at 20% 20%,
-    var(--accent-blue) 0%,
+    var(--accent-gold) 0%,
     var(--accent-purple) 40%,
-    var(--accent-gold) 80%);
+    var(--accent-blue) 80%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 
-  /* keep pulse glow, but bias more gold warmth */
+  /* smoother pulse-friendly glow */
   text-shadow:
     0 0 12px rgba(255,214,123,.6),
     0 0 24px rgba(168,104,255,.45),
-    0 0 40px rgba(0,235,255,.4);
+    0 0 36px rgba(0,235,255,.35);
 }
+
+/* softer keyframe so first paint doesn't blast the shadow */
 .brand-pulse {
   animation: brandPulse 3s ease-in-out infinite;
 }
@@ -238,13 +238,13 @@ html, body {
     text-shadow:
       0 0 12px rgba(255,214,123,.6),
       0 0 24px rgba(168,104,255,.45),
-      0 0 40px rgba(0,235,255,.4);
+      0 0 36px rgba(0,235,255,.35);
   }
   50% {
     text-shadow:
-      0 0 18px rgba(255,214,123,.9),
-      0 0 32px rgba(168,104,255,.7),
-      0 0 60px rgba(0,235,255,.6);
+      0 0 16px rgba(255,214,123,.9),
+      0 0 32px rgba(168,104,255,.6),
+      0 0 48px rgba(0,235,255,.5);
   }
 }
 
@@ -260,13 +260,11 @@ html, body {
   cursor: pointer;
   min-width: 44px;
   min-height: 44px;
-
-  /* subtle color wash instead of glow-shadow */
   background-image: radial-gradient(
     circle at 20% 20%,
-    rgba(0,235,255,.22) 0%,
+    rgba(255,214,123,.22) 0%,
     rgba(168,104,255,.18) 40%,
-    rgba(255,214,123,.15) 70%
+    rgba(0,235,255,.15) 70%
   );
   box-shadow: none;
   display: flex;
@@ -283,8 +281,9 @@ html, body {
   background: var(--txt-main);
   border-radius: 2px;
   position: relative;
-  box-shadow: 0 0 10px rgba(255,214,123,.7),
-              0 0 20px rgba(168,104,255,.5);
+  box-shadow:
+    0 0 10px rgba(255,214,123,.7),
+    0 0 20px rgba(168,104,255,.5);
 }
 .burger-lines::before {
   position: absolute;
@@ -307,19 +306,18 @@ html, body {
 .desktop-nav-pill {
   text-decoration: none;
   color: var(--txt-main);
-  font-size: .8rem;
+  font-size: .85rem;
   line-height: 1.2;
   font-weight: 500;
   padding: .6rem .8rem;
   border-radius: var(--pill-radius);
   background: var(--pill-glass-bg);
   border: 1px solid var(--pill-glass-border);
-
   background-image: radial-gradient(
     circle at 20% 20%,
-    rgba(0,235,255,.22) 0%,
+    rgba(255,214,123,.22) 0%,
     rgba(168,104,255,.18) 40%,
-    rgba(255,214,123,.15) 70%
+    rgba(0,235,255,.15) 70%
   );
   box-shadow: none;
   text-shadow:
@@ -328,7 +326,7 @@ html, body {
     0 0 24px rgba(0,235,255,.35);
 }
 
-/* desktop header alignment */
+/* desktop alignment */
 @media(min-width:1024px){
   .header-top {
     justify-content: center;
@@ -336,7 +334,7 @@ html, body {
   .brand-text {
     max-width: 100%;
     text-align: center;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     letter-spacing: .12em;
   }
   .nav-toggle { display: none; }
@@ -344,8 +342,7 @@ html, body {
 }
 
 /* =========================================================
-   NAV OVERLAY DRAWER
-   (lighter box-shadow, clearer pills)
+   NAV DRAWER (MOBILE MENU)
    ========================================================= */
 .nav-overlay {
   position: fixed;
@@ -375,9 +372,11 @@ html, body {
   max-width: 360px;
   color: var(--txt-main);
 
-  /* softer than before */
-  box-shadow: 0 0 32px rgba(0,235,255,.28),
-              0 0 48px rgba(168,104,255,.18);
+  /* softer halo */
+  box-shadow:
+    0 0 24px rgba(0,235,255,.22),
+    0 0 36px rgba(168,104,255,.16),
+    0 0 48px rgba(255,214,123,.12);
 
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
@@ -429,18 +428,18 @@ html, body {
   text-decoration: none;
   border-radius: var(--pill-radius);
   padding: .9rem 1rem;
-  font-size: .95rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 550;
   line-height: 1.2;
   text-align: center;
   margin-bottom: .6rem;
-  box-shadow: none;
   background-image: radial-gradient(
     circle at 20% 20%,
-    rgba(0,235,255,.22) 0%,
+    rgba(255,214,123,.22) 0%,
     rgba(168,104,255,.18) 40%,
-    rgba(255,214,123,.15) 70%
+    rgba(0,235,255,.15) 70%
   );
+  box-shadow: none;
   text-shadow:
     0 0 8px rgba(255,214,123,.6),
     0 0 16px rgba(168,104,255,.45),
@@ -450,7 +449,7 @@ html, body {
   border-top: 1px solid var(--glass-border);
   margin-top: 1.5rem;
   padding-top: 1rem;
-  font-size: .85rem;
+  font-size: .9rem;
   color: var(--txt-main);
   line-height: 1.4;
   text-align: center;
@@ -465,31 +464,30 @@ html, body {
   border-radius: var(--pill-radius);
   padding: .6rem .9rem;
   font-size: .9rem;
-  font-weight: 500;
+  font-weight: 550;
   color: var(--txt-main);
   text-decoration: none;
   min-width: max-content;
-  box-shadow: none;
   background-image: radial-gradient(
     circle at 20% 20%,
-    rgba(0,235,255,.22) 0%,
+    rgba(255,214,123,.22) 0%,
     rgba(168,104,255,.18) 40%,
-    rgba(255,214,123,.15) 70%
+    rgba(0,235,255,.15) 70%
   );
+  box-shadow: none;
   text-shadow:
     0 0 8px rgba(255,214,123,.6),
     0 0 16px rgba(168,104,255,.45),
     0 0 24px rgba(0,235,255,.35);
 }
 .nav-footer-note {
-  font-size: .75rem;
+  font-size: .8rem;
   color: var(--txt-dim);
   margin-top: .75rem;
 }
 
 /* =========================================================
-   SECTION HEAD / TITLES
-   Keep glow + pulse, make it warmer w/ gold
+   SECTION HEADERS / TITLES
    ========================================================= */
 .section-head {
   text-align: center;
@@ -505,8 +503,8 @@ html, body {
   margin-bottom: .5rem;
 }
 .section-title {
-  font-size: clamp(1.4rem, 1rem + 2vw, 1.9rem);
-  font-weight: 600;
+  font-size: clamp(1.45rem, 1rem + 2vw, 2rem);
+  font-weight: 650;
   line-height: 1.2;
   margin: 0 0 .75rem;
   letter-spacing: .07em;
@@ -520,8 +518,8 @@ html, body {
   color: transparent;
   text-shadow:
     0 0 24px rgba(255,214,123,.8),
-    0 0 48px rgba(168,104,255,.45),
-    0 0 72px rgba(0,235,255,.4);
+    0 0 40px rgba(168,104,255,.45),
+    0 0 60px rgba(0,235,255,.4);
 }
 .title-pulse {
   animation: titlePulse 3s ease-in-out infinite;
@@ -530,18 +528,18 @@ html, body {
   0%,100% {
     text-shadow:
       0 0 24px rgba(255,214,123,.8),
-      0 0 48px rgba(168,104,255,.45),
-      0 0 72px rgba(0,235,255,.4);
+      0 0 40px rgba(168,104,255,.45),
+      0 0 60px rgba(0,235,255,.4);
   }
   50% {
     text-shadow:
       0 0 32px rgba(255,214,123,1),
-      0 0 64px rgba(168,104,255,.7),
-      0 0 96px rgba(0,235,255,.6);
+      0 0 56px rgba(168,104,255,.7),
+      0 0 80px rgba(0,235,255,.6);
   }
 }
 .section-underline {
-  width: 180px;
+  width: 190px;
   height: 4px;
   margin: 0 auto 1rem;
   border-radius: 999px;
@@ -552,22 +550,22 @@ html, body {
     var(--accent-blue) 100%
   );
   box-shadow:
-    0 0 16px rgba(255,214,123,.8),
-    0 0 32px rgba(168,104,255,.45),
-    0 0 48px rgba(0,235,255,.4);
+    0 0 12px rgba(255,214,123,.7),
+    0 0 20px rgba(168,104,255,.45),
+    0 0 28px rgba(0,235,255,.4);
 }
 .section-lede {
   text-align: center;
   max-width: 40rem;
   margin: 0 auto 2rem;
-  font-size: 1.05rem;
+  font-size: 1.07rem;
   color: var(--txt-main);
   font-weight: 450;
   line-height: 1.5;
 }
 
 /* =========================================================
-   HERO / PARALLAX LAYER
+   HERO BG (STATIC NOW)
    ========================================================= */
 .hero-section { padding-top: 6rem; }
 .hero-card {
@@ -575,8 +573,8 @@ html, body {
   overflow: hidden;
   z-index: 1;
   background: transparent;
-  box-shadow: none;
   border-radius: var(--card-radius);
+  box-shadow: none;
 }
 .hero-bg-layer {
   position: absolute;
@@ -591,8 +589,6 @@ html, body {
   pointer-events: none;
   z-index: 0;
   opacity: .28;
-  transform: translateY(0);
-  will-change: transform;
 }
 @media (prefers-color-scheme: light) {
   .hero-bg-layer {
@@ -602,8 +598,8 @@ html, body {
 }
 
 /* =========================================================
-   PILLS / PAYMENT / CALL TO ACTION
-   (frosted vibrant, NO heavy glow shadow)
+   PILLS / PAYMENT / CALL / PRICE
+   (still frosted and colorful, no glow shadow)
    ========================================================= */
 .pill-row {
   display: flex;
@@ -612,6 +608,7 @@ html, body {
   gap: .75rem;
   margin: 0 auto 1rem;
 }
+
 .pill-btn,
 .pay-pill,
 .call-btn,
@@ -626,33 +623,27 @@ html, body {
   background: var(--pill-glass-bg);
   border: 1px solid var(--pill-glass-border);
   color: var(--txt-main);
-  font-weight: 500;
+  font-weight: 550;
   line-height: 1.2;
   min-width: max-content;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-
-  /* flat padding defaults */
   padding: .7rem 1rem;
   font-size: .9rem;
 
-  /* colorful wash instead of shadow glow */
   background-image: radial-gradient(
     circle at 20% 20%,
     rgba(255,214,123,.22) 0%,
     rgba(168,104,255,.18) 40%,
     rgba(0,235,255,.15) 70%
   );
-
-  /* NO box-shadow here now */
   box-shadow: none;
   text-shadow:
     0 0 8px rgba(255,214,123,.6),
     0 0 16px rgba(168,104,255,.45),
     0 0 24px rgba(0,235,255,.35);
 }
-
 .pay-row {
   display: flex;
   flex-wrap: wrap;
@@ -660,10 +651,7 @@ html, body {
   gap: .5rem .75rem;
 }
 
-/* breathe animation is removed for perf on pills */
-/* (headings still pulse) */
-
-/* hero mini location card */
+/* mini location info under hero */
 .location-card {
   background: var(--card-bg-dark);
   border-radius: var(--card-radius);
@@ -673,10 +661,8 @@ html, body {
   text-align: center;
   max-width: 32rem;
   margin: 1.5rem auto 0;
-
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
-
   box-shadow: none;
 }
 @media (prefers-color-scheme: light) {
@@ -733,19 +719,20 @@ html, body {
 }
 .barber-name {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.05rem;
+  font-weight: 650;
   color: var(--txt-main);
   letter-spacing: .05em;
   text-shadow:
     0 0 16px rgba(255,214,123,.8),
-    0 0 32px rgba(168,104,255,.6);
+    0 0 28px rgba(168,104,255,.6),
+    0 0 40px rgba(0,235,255,.4);
 }
 .barber-role-pill {
   border-radius: var(--pill-radius);
   border: 1px solid var(--pill-glass-border);
-  padding: .3rem .5rem;
-  font-size: .7rem;
+  padding: .35rem .6rem;
+  font-size: .75rem;
   line-height: 1.2;
   font-weight: 600;
   color: var(--txt-main);
@@ -817,19 +804,20 @@ html, body {
   margin-bottom: .4rem;
 }
 .service-name {
-  font-weight: 600;
+  font-weight: 650;
   font-size: 1rem;
   line-height: 1.3;
   color: var(--txt-main);
   text-shadow:
     0 0 16px rgba(255,214,123,.8),
-    0 0 32px rgba(168,104,255,.6);
+    0 0 28px rgba(168,104,255,.6),
+    0 0 40px rgba(0,235,255,.4);
 }
 .service-price-pill {
-  padding: .4rem .6rem;
-  font-weight: 600;
+  font-weight: 650;
   font-size: .9rem;
   line-height: 1.2;
+  padding: .4rem .6rem;
   text-shadow:
     0 0 8px rgba(255,214,123,.6),
     0 0 16px rgba(168,104,255,.45),
@@ -866,11 +854,12 @@ html, body {
   flex-wrap: wrap;
   gap: .5rem;
   font-size: .9rem;
-  font-weight: 600;
+  font-weight: 650;
   color: var(--txt-main);
   text-shadow:
     0 0 16px rgba(255,214,123,.8),
-    0 0 32px rgba(168,104,255,.6);
+    0 0 28px rgba(168,104,255,.6),
+    0 0 40px rgba(0,235,255,.4);
 }
 .review-date {
   font-weight: 400;
@@ -924,13 +913,14 @@ html, body {
 }
 .visit-box-title {
   margin: 0 0 .5rem;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.05rem;
+  font-weight: 650;
   letter-spacing: .05em;
   color: var(--txt-main);
   text-shadow:
     0 0 16px rgba(255,214,123,.8),
-    0 0 32px rgba(168,104,255,.6);
+    0 0 28px rgba(168,104,255,.6),
+    0 0 40px rgba(0,235,255,.4);
 }
 .visit-box p {
   margin: 0 0 .6rem;
@@ -939,7 +929,7 @@ html, body {
   line-height: 1.45;
 }
 .visit-contact-num {
-  font-weight: 600;
+  font-weight: 650;
 }
 .visit-hint {
   color: var(--txt-dim);
@@ -978,10 +968,10 @@ html, body {
   margin-top: 1rem;
 }
 .map-btn {
-  padding: .7rem 1rem;
+  font-weight: 550;
   font-size: .9rem;
-  font-weight: 500;
   line-height: 1.2;
+  padding: .7rem 1rem;
 }
 .foot-note {
   margin-top: 2rem;
@@ -1024,24 +1014,21 @@ html, body {
   line-height: 1.4;
   color: var(--txt-main);
   text-align: left;
+  border-radius: var(--pill-radius);
   background: var(--pill-glass-bg);
   border: 1px solid var(--pill-glass-border);
-
   background-image: radial-gradient(
     circle at 20% 20%,
     rgba(255,214,123,.22) 0%,
     rgba(168,104,255,.18) 40%,
     rgba(0,235,255,.15) 70%
   );
-
   box-shadow: none;
   text-shadow:
     0 0 8px rgba(255,214,123,.6),
     0 0 16px rgba(168,104,255,.45),
     0 0 24px rgba(0,235,255,.35);
-
   padding: .8rem 1rem;
-  border-radius: var(--pill-radius);
 }
 .contact-line + .contact-line { margin-top: .4rem; }
 
@@ -1062,8 +1049,6 @@ html, body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-
-  /* no giant glow */
   box-shadow: none;
 }
 @media(min-width:1024px){
@@ -1076,9 +1061,9 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: .7rem;
+  font-size: .75rem;
   line-height: 1.2;
-  font-weight: 500;
+  font-weight: 550;
   min-width: 0;
   text-align: center;
 }
@@ -1088,8 +1073,8 @@ html, body {
   margin-bottom: .25rem;
   text-shadow:
     0 0 12px rgba(255,214,123,.8),
-    0 0 24px rgba(168,104,255,.6),
-    0 0 36px rgba(0,235,255,.45);
+    0 0 20px rgba(168,104,255,.6),
+    0 0 28px rgba(0,235,255,.45);
 }
 .quick-label {
   white-space: nowrap;
@@ -1100,7 +1085,7 @@ html, body {
 }
 
 /* =========================================================
-   MOBILE PERFORMANCE HINTS
+   MOBILE PERF HINTS
    ========================================================= */
 @media(max-width:768px){
   #barbers,
@@ -1114,7 +1099,7 @@ html, body {
 }
 
 /* =========================================================
-   BASIC TAG STYLES
+   UTIL
    ========================================================= */
 p {margin-top:0;}
 a {color: var(--accent-blue); text-decoration:none;}
