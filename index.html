@@ -37,7 +37,7 @@
             <span class="brand-text brand-pulse">NEXT LEVEL BARBERSHOP</span>
           </div>
 
-          <!-- burger only on mobile / tablet -->
+          <!-- burger only matters on mobile/tablet -->
           <button class="nav-toggle" id="navToggle" aria-label="Menu">
             <span class="burger-lines"></span>
           </button>
@@ -106,6 +106,8 @@
        HERO / WELCOME
        ======================================================= -->
   <section id="welcome" class="site-section hero-section reveal">
+    <!-- NOTE: heroBg is now static (not animated on scroll anymore)
+         This kills the lag from repainting a blurred layer every frame. -->
     <div class="hero-bg-layer" id="heroBg"></div>
 
     <div class="section-card hero-card glow-ready">
@@ -126,9 +128,9 @@
 
       <!-- highlight pills -->
       <div class="pill-row">
-        <div class="pill-btn pill-solid">Locally Owned</div>
-        <div class="pill-btn pill-solid">Walk-Ins Welcome</div>
-        <div class="pill-btn pill-solid">Appointments Preferred</div>
+        <div class="pill-btn">Locally Owned</div>
+        <div class="pill-btn">Walk-Ins Welcome</div>
+        <div class="pill-btn">Appointments Preferred</div>
       </div>
 
       <!-- payment methods -->
@@ -611,7 +613,7 @@
        JS interactions
        ======================================================= -->
   <script>
-    // smooth scroll for anchor links
+    // Smooth scroll for in-page links
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener("click", e => {
         const id = a.getAttribute("href").slice(1);
@@ -624,7 +626,7 @@
       });
     });
 
-    // nav drawer logic
+    // mobile nav drawer logic
     const navToggle = document.getElementById("navToggle");
     const navOverlay = document.getElementById("navOverlay");
     const navClose = document.getElementById("navClose");
@@ -636,13 +638,13 @@
       navOverlay.classList.remove("show");
     });
     navOverlay.addEventListener("click", (e) => {
-      // tap outside card closes
+      // tap background outside the card closes
       if (e.target === navOverlay) {
         navOverlay.classList.remove("show");
       }
     });
 
-    // call / book buttons
+    // call / book buttons for each barber
     document.querySelectorAll(".call-btn").forEach(btn => {
       btn.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -657,11 +659,11 @@
       });
     });
 
-    // barber card open/close (one at a time)
+    // barber cards expand/collapse
     const barberCards = document.querySelectorAll(".barber-card");
     barberCards.forEach(card => {
       card.addEventListener("click", (e) => {
-        // don't close card if they clicked a button
+        // ignore if user tapped the book/call button
         if (e.target.closest(".call-btn")) return;
 
         if (card.classList.contains("open")) {
@@ -673,22 +675,7 @@
       });
     });
 
-    // hero parallax bg (smooth GPU transform only)
-    const heroBg = document.getElementById("heroBg");
-    let ticking = false;
-    function onScroll() {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const y = window.scrollY * 0.05;
-          heroBg.style.transform = `translateY(${y}px)`;
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    // section reveal once + bounce + glow upgrade
+    // IntersectionObserver reveal-once with bounce
     const revealSections = document.querySelectorAll(".reveal");
     const io = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
@@ -696,7 +683,7 @@
           const sec = entry.target;
           sec.classList.add("visible", "bounce-in");
 
-          // light up any .glow-ready content inside
+          // Add glow-active state to inner content once
           sec.querySelectorAll(".glow-ready, .card-idle").forEach(el => {
             el.classList.add("glow-active");
           });
@@ -706,6 +693,10 @@
       });
     }, { threshold: 0.15 });
     revealSections.forEach(sec => io.observe(sec));
+
+    // NOTE:
+    // We REMOVED the scroll parallax JS for heroBg.
+    // That background layer now sits still to avoid expensive blur redraw every scroll frame.
   </script>
 </body>
 </html>
