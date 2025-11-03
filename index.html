@@ -329,7 +329,7 @@
           </li>
         </ul>
         <div class="glass-subcard service-note">
-          <div class="service-note-line">💬 Prices can vary slightly by barber — confirm when you call or book.</div>
+          <div class="service-note-line">💬 Prices can vary by barber; Style Cut starts at $45; Shampoo, color, and perms vary — ask your barber or call for details — confirm when you call or book.</div>
           <div class="service-note-line">🧴 Shampoo &amp; conditioning available on request.</div>
         </div>
       </div>
@@ -339,47 +339,62 @@
          REVIEWS
          ========================= -->
     <section id="reviews" class="section-card reveal">
-      <div class="section-inner">
-        <header class="section-heading">
-          <div class="eyebrow">WHAT PEOPLE SAY ⭐</div>
-          <h2 class="section-title pulse-gold">Real ones, real reviews</h2>
-          <div class="title-underline small"></div>
-        </header>
-        <div class="reviews-wrap">
-          <article class="review-card glass-card-mini">
-            <header class="review-header">
-              <div class="reviewer strong">Maya R.</div>
-              <div class="review-stars gold-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            </header>
-            <p>“Shop is immaculate and the crew is friendly. They took their time on my son’s fade and it came out clean. Highly recommend!”</p>
-          </article>
-          <article class="review-card glass-card-mini">
-            <header class="review-header">
-              <div class="reviewer strong">Jordan S.</div>
-              <div class="review-stars gold-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            </header>
-            <p>“These guys make you feel like family. Booked with Z and left feeling brand new. Attention to detail is top-tier.”</p>
-          </article>
-          <article class="review-card glass-card-mini">
-            <header class="review-header">
-              <div class="reviewer strong">Chris D.</div>
-              <div class="review-stars gold-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            </header>
-            <p>“Walked in, got seated fast, and the cut was sharp. Shop vibe is cool, music’s on point, and they know what they’re doing.”</p>
-          </article>
-          <article class="review-card glass-card-mini">
-            <header class="review-header">
-              <div class="reviewer strong">Marissa L.</div>
-              <div class="review-stars gold-stars" aria-label="5 out of 5 stars">★★★★★</div>
-            </header>
-            <p>“My kid is picky about haircuts but Taylor took the time to make him comfortable. Fade was smooth and we’ll definitely be back.”</p>
-          </article>
-        </div>
-        <div class="cta-row">
-          <a class="glass-pill strong" href="https://g.page/r/CQf1i9WlLl5aEB0/review" target="_blank" rel="noopener">Drop us a Google review ⭐</a>
-        </div>
+  <header class="section-title">
+    <div class="eyebrow">WHAT PEOPLE SAY <span aria-hidden="true">⭐</span></div>
+    <h2 class="display title-gradient">REAL ONES, REAL REVIEWS</h2>
+  </header>
+
+  <div class="reviews-grid">
+    <article class="review-card">
+      <div class="review-top">
+        <strong class="review-name">J O‑C</strong>
+        <span class="review-time">2 months ago</span>
       </div>
-    </section>
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">
+        Been coming here for years and it’s always solid. All the barbers know their craft, and no matter who I sit with, I leave looking fresh.
+        I usually just walk in and they get me taken care of without any hassle. Consistent, professional, and worth every visit.
+      </p>
+      <ul class="review-details">
+        <li><strong>Price</strong> $30–40</li>
+        <li><strong>Services</strong> Haircut, Beard trim</li>
+        <li><strong>Requested style</strong> Mid Skin Fade usually and whatever they recommend</li>
+        <li><strong>Stylist</strong> Cash, Deshaun, Jonny &amp; GMO are a must</li>
+      </ul>
+    </article>
+
+    <article class="review-card">
+      <div class="review-top">
+        <strong class="review-name">Jennifer Lopez</strong>
+        <span class="review-time">1 month ago</span>
+      </div>
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">
+        I take my toddler here to get a haircut from Cash and she does an amazing job every time.
+        She is very good with kids and is pretty fast. We will be going back with barber Cash!
+      </p>
+      <ul class="review-details">
+        <li><strong>Price</strong> $30–40</li>
+        <li><strong>Services</strong> Haircut</li>
+      </ul>
+    </article>
+
+    <article class="review-card">
+      <div class="review-top">
+        <strong class="review-name">Francesca Tafoya</strong>
+        <span class="review-time">3 weeks ago</span>
+      </div>
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">
+        If I could give a million stars for my experience today I would! Taylor was so amazing and I have a great cut for my new job tomorrow!
+        We had a great conversation and she was fast, gentle and efficient in my haircut. Thank y’all so much! I’ll be back next week.
+      </p>
+      <ul class="review-details">
+        <li><strong>Services</strong> Haircut</li>
+      </ul>
+    </article>
+  </div>
+</section>
 
     <!-- =========================
          VISIT / CONTACT
@@ -562,86 +577,5 @@
       footerYear.textContent = new Date().getFullYear();
     }
   </script>
-
-<script>
-// ===== CONFIG: phone & Booksy links =====
-const SHOP_PHONE = 'tel:+15055036216';
-// TODO: Paste your real Booksy links here:
-const BOOKSY = {
-  JONNY: 'https://booksy.link/jonny',   // <-- replace with real Booksy URL
-  CASH:  'https://booksy.link/cash',    // <-- replace with real Booksy URL
-  TAYLOR:'https://booksy.link/taylor'   // <-- replace with real Booksy URL
-};
-
-// ===== Make "BOOK W/ {name}" buttons link correctly =====
-(function wireBookButtons(){
-  const telNames = ['VINCENT','DESHAUN','Z WALUW','Z WALUW','GMO','Z WALUW','Z WALUW','ZWALU','Z WALUW'];
-  const mapBooksy = {'JONNY':'JONNY','CA$H':'CASH','CASH':'CASH','TAYLOR':'TAYLOR'};
-  const nodes = document.querySelectorAll('a, button');
-  nodes.forEach(node => {
-    const t = (node.textContent || '').trim().toUpperCase();
-    // Only target "BOOK W/" controls
-    if (!t.startsWith('BOOK W')) return;
-    // Find the name (last token)
-    const name = t.replace('BOOK W', '').replace(/[\s/]+/g,' ').trim();
-    // Route
-    if (telNames.some(n => name.includes(n))) {
-      node.setAttribute('href', SHOP_PHONE);
-    } else {
-      // Booksy or fallback to phone
-      const key = Object.keys(mapBooksy).find(k => name.includes(k));
-      const url = key ? BOOKSY[mapBooksy[key]] : SHOP_PHONE;
-      node.setAttribute('href', url);
-      if (url.startsWith('http')) node.setAttribute('target','_blank');
-    }
-    // If it's a <button>, convert to link behavior
-    if (node.tagName === 'BUTTON') {
-      node.addEventListener('click', () => {
-        const href = node.getAttribute('href');
-        if (href) window.location.href = href;
-      });
-      node.style.cursor = 'pointer';
-    }
-  });
-})();
-
-// ===== Mobile drawer (hamburger) shows nav pills =====
-(function mobileNav(){
-  const burger = document.querySelector('#navToggle, .hamburger, .barber-toggle');
-  const drawer = document.querySelector('#mobileNav, .nav-drawer');
-  if (!burger || !drawer) return;
-  const body = document.body;
-  function open(){ drawer.classList.add('open'); burger.setAttribute('aria-expanded','true'); body.classList.add('body-lock'); }
-  function close(){ drawer.classList.remove('open'); burger.setAttribute('aria-expanded','false'); body.classList.remove('body-lock'); }
-  burger.addEventListener('click', () => drawer.classList.contains('open') ? close() : open());
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-  document.addEventListener('click', e => { if (!drawer.contains(e.target) && !burger.contains(e.target)) close(); });
-})();
-
-// ===== Parallax + section glow (respects reduced motion) =====
-(function effects(){
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const layer = document.querySelector('.parallax-layer');
-  if (!reduce && layer){
-    let raf = null;
-    window.addEventListener('scroll', () => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        const y = window.scrollY || 0;
-        layer.style.transform = `translateY(${y * 0.08}px)`;
-        raf = null;
-      });
-    }, {passive:true});
-  }
-  const sections = document.querySelectorAll('section, .section-card');
-  const io = new IntersectionObserver((entries)=>{
-    for (const e of entries){
-      if (e.isIntersecting){ e.target.classList.add('glow-on'); io.unobserve(e.target); }
-    }
-  }, {threshold: 0.12});
-  sections.forEach(s => io.observe(s));
-})();
-</script>
-
 </body>
 </html>

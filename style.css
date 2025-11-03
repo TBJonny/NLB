@@ -901,30 +901,66 @@ main {
 }
 
 
-/* ===== NAV PILL UNIFY + HOVER ===== */
-.nav-pill, .nav-link, .pill {
-  display: inline-flex; align-items: center; justify-content: center;
-  min-width: 120px; height: 44px; padding: 0 .9rem;
-  border-radius: 999px; border: 1px solid var(--pill-border, rgba(255,255,255,.08));
-  background: var(--pill-bg, rgba(255,255,255,.06));
-  text-transform: uppercase; letter-spacing: .04em;
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-}
-@media (hover:hover){
-  .nav-pill:hover, .nav-link:hover, .pill:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,.25); background: rgba(255,255,255,.10); }
-}
-
-/* ===== Review stars: keep gold but soften glow ===== */
-.stars, .star-gold { color: #FFC107; text-shadow: 0 0 4px rgba(255,215,0,.18); }
-
-/* ===== Section glow when revealed ===== */
-.glow-on {
-  box-shadow: 0 30px 80px rgba(0,0,0,.35), 0 0 140px rgba(129,140,248,.10) inset;
-}
-
-/* ===== Centering + overflow guard ===== */
-html, body { max-width: 100vw; overflow-x: clip; }
+/* ===== NLHC DEPLOY FIX PACK ===== */
+* { box-sizing: border-box; }
+html, body { margin: 0; max-width: 100vw; overflow-x: clip; }
 :root { --content-max: 1120px; }
-section, .section-card, .section-inner, .hero, .hero-inner, .reviews-card, .map-card { width: 100%; max-width: var(--content-max); margin-inline: auto; }
+main { display: flex; flex-direction: column; align-items: center; }
 section[id] { scroll-margin-top: 5.25rem; }
-.body-lock { overflow: hidden; }
+section, .section-card, .section-inner, .section-content, .hero, .hero-inner, .map-card, .reviews-card {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+}
+img, video, iframe { max-width: 100%; height: auto; display: block; }
+.reveal, .section-card, [class*="card"] { overflow: hidden; }
+
+
+/* === NLHC UPDATE (nav pills size, hover softness, reviews glow) === */
+.nav-pills { display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; }
+.nav-pill { 
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width: clamp(120px, 12vw, 160px); height: 44px; 
+  padding: 0 .9rem; border-radius: var(--radius-pill, 999px);
+  text-align:center;
+}
+/* softer hover */
+.nav-pill:hover { 
+  box-shadow: 0 0 0 1px rgba(112, 173, 255, .35), 0 6px 18px rgba(112, 173, 255, .18);
+  filter: brightness(1.03);
+}
+
+/* tone down gold star glow */
+.review-stars { 
+  color: #ffd26a; 
+  text-shadow: 0 0 4px rgba(255, 210, 106, .25);
+}
+
+/* reviews grid */
+.reviews-grid { 
+  display:grid; gap:1rem; 
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.review-card { 
+  background: var(--card-bg, rgba(255,255,255,.05));
+  border: 1px solid var(--card-border, rgba(255,255,255,.08));
+  border-radius: 16px; padding: 1rem 1.1rem;
+  box-shadow: 0 6px 26px rgba(0,0,0,.25);
+}
+.review-top { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:.35rem; }
+.review-time { opacity:.8; font-size:.9rem; }
+
+/* card & button hover glow softness */
+.card:hover, .section-card:hover {
+  box-shadow: 0 10px 28px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.05);
+}
+.pill:hover, .button:hover {
+  box-shadow: 0 0 0 1px rgba(255,255,255,.2), 0 10px 22px rgba(0,0,0,.25);
+}
+
+/* Mobile header simplification */
+@media (max-width: 768px) {
+  .brand-text { display:block; }
+  .desktop-nav { display:none; }
+  .mobile-header { display:flex; align-items:center; justify-content:space-between; }
+}
