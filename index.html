@@ -3,11 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Next Level: Hero Cuts — Albuquerque</title>
+  <title>Next Level Barbershop — Albuquerque</title>
 
-  <!-- Favicon (optional file you already shared) -->
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="apple-touch-icon" href="favicon.png" />
+  <!-- System status-bar colors -->
+  <meta name="theme-color" content="#0d121b" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
+
+  <!-- Add-to-Home (better iOS PWA look) -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Icons (works now with your favicon; drop real maskable icons later) -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+  <link rel="manifest" href="site.webmanifest">
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -17,7 +26,7 @@
   <header class="site-header">
     <div class="header-inner section-inner">
       <div class="brand">
-        <span class="brand-text">Next Level: Hero Cuts</span>
+        <span class="brand-text">Next Level Barbershop</span>
       </div>
 
       <button id="navToggle" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
@@ -76,7 +85,7 @@
       </header>
 
       <div class="grid cards">
-        <!-- Booksy links: paste your exact URLs in place of the placeholders below -->
+        <!-- Replace placeholders with your exact Booksy links -->
         <article class="barber-card">
           <h3 class="barber-name">Jonny</h3>
           <p class="barber-role">Owner • Fades • Designs</p>
@@ -95,7 +104,7 @@
           <a class="glass-pill" href="PASTE_TAYLOR_BOOKSY_URL_HERE" target="_blank" rel="noopener">Book w/ Taylor</a>
         </article>
 
-        <!-- These route to shop phone as requested -->
+        <!-- Phone routes for these four -->
         <article class="barber-card">
           <h3 class="barber-name">Vincent</h3>
           <p class="barber-role">Tapers • Classic styles</p>
@@ -133,26 +142,11 @@
       </header>
 
       <ul class="service-list">
-        <li class="service-row">
-          <span class="service-name">Style Cut</span>
-          <span class="service-price">$45+</span>
-        </li>
-        <li class="service-row">
-          <span class="service-name">Razor Fade + Beard</span>
-          <span class="service-price">$55+</span>
-        </li>
-        <li class="service-row">
-          <span class="service-name">Kids Cut</span>
-          <span class="service-price">$35+</span>
-        </li>
-        <li class="service-row">
-          <span class="service-name">Beard Trim / Lineup</span>
-          <span class="service-price">$20+</span>
-        </li>
-        <li class="service-row">
-          <span class="service-name">Hot Towel Shave</span>
-          <span class="service-price">$35+</span>
-        </li>
+        <li class="service-row"><span class="service-name">Style Cut</span><span class="service-price">$45+</span></li>
+        <li class="service-row"><span class="service-name">Razor Fade + Beard</span><span class="service-price">$55+</span></li>
+        <li class="service-row"><span class="service-name">Kids Cut</span><span class="service-price">$35+</span></li>
+        <li class="service-row"><span class="service-name">Beard Trim / Lineup</span><span class="service-price">$20+</span></li>
+        <li class="service-row"><span class="service-name">Hot Towel Shave</span><span class="service-price">$35+</span></li>
       </ul>
 
       <p class="service-note">✳️ Style cuts start at $45. Shampoo, color &amp; perms vary by barber — ask your barber or call.</p>
@@ -234,7 +228,6 @@
       </header>
 
       <div class="map-card">
-        <!-- Your exact Google Maps embed (responsive via CSS) -->
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5914077550096!2d-106.72760522378523!3d35.19173505670752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87226f7a1054dd87%3A0x7736d7f662fd5a2b!2sNext%20Level%20Barber%20Shop%20Albuquerque!5e0!3m2!1sen!2sus!4v1762186188303!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
@@ -242,9 +235,17 @@
 
   <footer class="site-footer">
     <div class="section-inner">
-      <small>© <span id="year"></span> Next Level: Hero Cuts. All rights reserved.</small>
+      <small>© <span id="year"></span> Next Level Barbershop. All rights reserved.</small>
     </div>
   </footer>
+
+  <!-- ===== Bottom quick-nav (mobile) ===== -->
+  <nav class="tabbar" aria-label="Quick navigation">
+    <a href="#barbers" data-tab="barbers">✂️<span>Barbers</span></a>
+    <a href="#services" data-tab="services">💵<span>Prices</span></a>
+    <a href="#contact"  data-tab="visit">📍<span>Visit</span></a>
+    <a href="#map"      data-tab="map">🗺️<span>Map</span></a>
+  </nav>
 
   <!-- Enhancements / Animations / Mobile Nav -->
   <script>
@@ -265,13 +266,7 @@
     burger.addEventListener('click', ()=> drawer.classList.contains('open') ? close() : open());
     scrim && scrim.addEventListener('click', close);
     document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });
-
-    links.forEach(a=>{
-      a.addEventListener('click', ()=>{
-        // Close on any link tap (anchors will smooth scroll below)
-        close();
-      });
-    });
+    links.forEach(a=> a.addEventListener('click', close));
   })();
 
   // Smooth scroll for in-page anchors
@@ -305,10 +300,29 @@
       t.appendChild(s);
       setTimeout(()=>s.remove(), 600);
     }
-    document.querySelectorAll('.nav-pill, .glass-pill, .btn, .service-row').forEach(el=>{
+    document.querySelectorAll('.nav-pill, .glass-pill, .service-row, .tabbar a').forEach(el=>{
       if(getComputedStyle(el).position === 'static') el.style.position = 'relative';
       el.style.overflow = 'hidden';
       el.addEventListener('click', ripple);
+    });
+  })();
+
+  // Highlight active tab on scroll
+  (function(){
+    const tabs = document.querySelectorAll('.tabbar a');
+    const map = new Map([['#barbers','barbers'],['#services','services'],['#contact','visit'],['#map','map']]);
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          const id = '#'+e.target.id;
+          const key = map.get(id);
+          tabs.forEach(t=> t.classList.toggle('active', t.dataset.tab===key));
+        }
+      });
+    }, {threshold:.6});
+    ['barbers','services','contact','map'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) io.observe(el);
     });
   })();
   </script>
