@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Next Level Barbershop — Albuquerque</title>
 
-  <!-- System status-bar colors -->
-  <meta name="theme-color" content="#0d121b" media="(prefers-color-scheme: dark)">
+  <!-- System bars -->
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)">
 
-  <!-- Add-to-Home (better iOS PWA look) -->
+  <!-- iOS PWA niceties -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <!-- Icons (works now with your favicon; drop real maskable icons later) -->
+  <!-- Icons -->
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
   <link rel="manifest" href="site.webmanifest">
@@ -22,7 +22,7 @@
 </head>
 <body>
 
-  <!-- =================== HEADER =================== -->
+  <!-- ============ HEADER ============ -->
   <header class="site-header">
     <div class="header-inner section-inner">
       <div class="brand">
@@ -34,7 +34,7 @@
       </button>
     </div>
 
-    <!-- Desktop/Tablet nav pills -->
+    <!-- Desktop pills -->
     <nav class="nav-row section-inner" aria-label="Primary">
       <a class="nav-pill" href="#welcome">Home</a>
       <a class="nav-pill" href="#barbers">Barbers</a>
@@ -60,7 +60,7 @@
     </div>
   </nav>
 
-  <!-- =================== WELCOME =================== -->
+  <!-- ============ WELCOME ============ -->
   <section id="welcome" class="hero section-card reveal">
     <div class="section-inner">
       <header class="section-heading">
@@ -75,7 +75,7 @@
     </div>
   </section>
 
-  <!-- =================== BARBERS =================== -->
+  <!-- ============ BARBERS ============ -->
   <section id="barbers" class="section-card reveal">
     <div class="section-inner">
       <header class="section-heading">
@@ -85,54 +85,59 @@
       </header>
 
       <div class="grid cards">
-        <!-- Replace placeholders with your exact Booksy links -->
-        <article class="barber-card">
-          <h3 class="barber-name">Jonny</h3>
-          <p class="barber-role">Owner • Fades • Designs</p>
-          <a class="glass-pill" href="PASTE_JONNY_BOOKSY_URL_HERE" target="_blank" rel="noopener">Book w/ Jonny</a>
-        </article>
-
-        <article class="barber-card">
-          <h3 class="barber-name">Ca$h</h3>
-          <p class="barber-role">Kids cuts • Gentle & fast</p>
-          <a class="glass-pill" href="PASTE_CASH_BOOKSY_URL_HERE" target="_blank" rel="noopener">Book w/ Ca$h</a>
-        </article>
-
-        <article class="barber-card">
-          <h3 class="barber-name">Taylor</h3>
-          <p class="barber-role">Shaves • Professional finish</p>
-          <a class="glass-pill" href="PASTE_TAYLOR_BOOKSY_URL_HERE" target="_blank" rel="noopener">Book w/ Taylor</a>
-        </article>
-
-        <!-- Phone routes for these four -->
+        <!-- 1. Vincent (Owner) -->
         <article class="barber-card">
           <h3 class="barber-name">Vincent</h3>
-          <p class="barber-role">Tapers • Classic styles</p>
+          <p class="barber-role">Owner • Master Barber</p>
           <a class="glass-pill" href="tel:+15055036216">Book w/ Vincent</a>
         </article>
 
+        <!-- 2. Zaluw -->
+        <article class="barber-card">
+          <h3 class="barber-name">Zaluw</h3>
+          <p class="barber-role">Detail specialist • Precision</p>
+          <a class="glass-pill" href="tel:+15055036216">Book w/ Zaluw</a>
+        </article>
+
+        <!-- 3. GMO -->
+        <article class="barber-card">
+          <h3 class="barber-name">GMO</h3>
+          <p class="barber-role">Style architect • Clean lines</p>
+          <a class="glass-pill" href="tel:+15055036216">Book w/ GMO</a>
+        </article>
+
+        <!-- 4. Deshaun -->
         <article class="barber-card">
           <h3 class="barber-name">Deshaun</h3>
-          <p class="barber-role">Fades • Lineups</p>
+          <p class="barber-role">Fade technician • Sharp details</p>
           <a class="glass-pill" href="tel:+15055036216">Book w/ Deshaun</a>
         </article>
 
+        <!-- 5. Ca$h (Booksy link) -->
         <article class="barber-card">
-          <h3 class="barber-name">Zwalu</h3>
-          <p class="barber-role">Modern cuts</p>
-          <a class="glass-pill" href="tel:+15055036216">Book w/ Zwalu</a>
+          <h3 class="barber-name">Ca$h</h3>
+          <p class="barber-role">Kids & family • Quick & gentle</p>
+          <a class="glass-pill" href="PASTE_CASH_BOOKSY_URL_HERE" target="_blank" rel="noopener">Book w/ Ca$h</a>
         </article>
 
+        <!-- 6. Jonny (Booksy link) -->
         <article class="barber-card">
-          <h3 class="barber-name">GMO</h3>
-          <p class="barber-role">Fades • Beard work</p>
-          <a class="glass-pill" href="tel:+15055036216">Book w/ GMO</a>
+          <h3 class="barber-name">Jonny</h3>
+          <p class="barber-role">Custom work • Designs</p>
+          <a class="glass-pill" href="PASTE_JONNY_BOOKSY_URL_HERE" target="_blank" rel="noopener">Book w/ Jonny</a>
+        </article>
+
+        <!-- 7. Taylor (Booksy link) -->
+        <article class="barber-card">
+          <h3 class="barber-name">Taylor</h3>
+          <p class="barber-role">Polished finish • Shaves</p>
+          <a class="glass-pill" href="PASTE_TAYLOR_BOOKSY_URL_HERE" target="_blank" rel="noopener">Book w/ Taylor</a>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- =================== SERVICES =================== -->
+  <!-- ============ SERVICES ============ -->
   <section id="services" class="section-card reveal">
     <div class="section-inner">
       <header class="section-heading">
@@ -153,7 +158,7 @@
     </div>
   </section>
 
-  <!-- =================== REVIEWS =================== -->
+  <!-- ============ REVIEWS ============ -->
   <section id="reviews" class="section-card reveal">
     <div class="section-inner">
       <header class="section-heading">
@@ -202,7 +207,7 @@
     </div>
   </section>
 
-  <!-- =================== CONTACT =================== -->
+  <!-- ============ CONTACT ============ -->
   <section id="contact" class="section-card reveal">
     <div class="section-inner">
       <header class="section-heading">
@@ -218,7 +223,7 @@
     </div>
   </section>
 
-  <!-- =================== MAP / DIRECTIONS =================== -->
+  <!-- ============ DIRECTIONS ============ -->
   <section id="map" class="section-card reveal">
     <div class="section-inner">
       <header class="section-heading">
@@ -239,7 +244,7 @@
     </div>
   </footer>
 
-  <!-- ===== Bottom quick-nav (mobile) ===== -->
+  <!-- Mobile quick-nav -->
   <nav class="tabbar" aria-label="Quick navigation">
     <a href="#barbers" data-tab="barbers">✂️<span>Barbers</span></a>
     <a href="#services" data-tab="services">💵<span>Prices</span></a>
@@ -247,9 +252,8 @@
     <a href="#map"      data-tab="map">🗺️<span>Map</span></a>
   </nav>
 
-  <!-- Enhancements / Animations / Mobile Nav -->
   <script>
-  // Year
+  // Year stamp
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // Mobile drawer
@@ -269,7 +273,7 @@
     links.forEach(a=> a.addEventListener('click', close));
   })();
 
-  // Smooth scroll for in-page anchors
+  // Smooth in-page scroll
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click', (e)=>{
       const id = a.getAttribute('href');
@@ -278,12 +282,19 @@
     });
   });
 
-  // Scroll reveal (intersection observer)
+  // Reveal + gold “active” sheen on section
   (function(){
-    const io = new IntersectionObserver((entries)=>{
+    const rev = new IntersectionObserver((entries)=>{
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
     }, { rootMargin: '0px 0px -10% 0px', threshold: .08 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => rev.observe(el));
+
+    const active = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        e.target.classList.toggle('active', e.isIntersecting);
+      });
+    }, { threshold: .6 });
+    document.querySelectorAll('.section-card').forEach(el => active.observe(el));
   })();
 
   // Ripple feedback
