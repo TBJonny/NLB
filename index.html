@@ -1,243 +1,316 @@
-/* ===== Base / Theme ===== */
-:root {
-  --bg: #0d121b;
-  --surface: rgba(18,24,36,.86);
-  --card: rgba(22,29,43,.85);
-  --text: #eaf0f8;
-  --muted: #b7c1d1;
-  --border: rgba(255,255,255,.10);
-  --gold: #d4b24c;
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Next Level: Hero Cuts — Albuquerque</title>
 
-  --page-max: 1160px;
-  --wrap-pad: clamp(16px, 3vw, 28px);
-  --ease: cubic-bezier(0.16,1,0.3,1);
-  --ease-soft: cubic-bezier(0.22,1,0.36,1);
-  --dur: .5s;
+  <!-- Favicon (optional file you already shared) -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
 
-  color-scheme: dark;
-}
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-@media (prefers-color-scheme: light){
-  :root{
-    --bg: #f7f8fb;
-    --surface: rgba(255,255,255,.78);
-    --card: rgba(255,255,255,.85);
-    --text: #0c1420;
-    --muted: #3a4a60;
-    --border: rgba(15,20,30,.12);
-    color-scheme: light;
-  }
-}
+  <!-- =================== HEADER =================== -->
+  <header class="site-header">
+    <div class="header-inner section-inner">
+      <div class="brand">
+        <span class="brand-text">Next Level: Hero Cuts</span>
+      </div>
 
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
-html, body { background: var(--bg); color: var(--text); }
-html, body { overflow-x: hidden; }
+      <button id="navToggle" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span>
+      </button>
+    </div>
 
-body{
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
-               "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, system-ui, sans-serif;
-  font-weight: 700; /* per your request: bold feel across the site */
-  line-height: 1.35;
-}
+    <!-- Desktop/Tablet nav pills -->
+    <nav class="nav-row section-inner" aria-label="Primary">
+      <a class="nav-pill" href="#welcome">Home</a>
+      <a class="nav-pill" href="#barbers">Barbers</a>
+      <a class="nav-pill" href="#services">Services</a>
+      <a class="nav-pill" href="#reviews">Reviews</a>
+      <a class="nav-pill" href="#contact">Contact</a>
+      <a class="nav-pill" href="#map">Directions</a>
+      <a class="nav-pill" href="tel:+15055036216">Call</a>
+    </nav>
+  </header>
 
-.section-inner{ width: min(var(--page-max), 100%); margin-inline: auto; padding-inline: var(--wrap-pad); }
+  <!-- Mobile drawer -->
+  <nav id="mobileNav" class="mobile-nav" aria-label="Primary">
+    <div class="scrim" data-close></div>
+    <div class="sheet">
+      <a class="nav-pill" href="#welcome">Home</a>
+      <a class="nav-pill" href="#barbers">Barbers</a>
+      <a class="nav-pill" href="#services">Services</a>
+      <a class="nav-pill" href="#reviews">Reviews</a>
+      <a class="nav-pill" href="#contact">Contact</a>
+      <a class="nav-pill" href="#map">Directions</a>
+      <a class="nav-pill" href="tel:+15055036216">Call</a>
+    </div>
+  </nav>
 
-.section-card{
-  position: relative;
-  background: var(--card);
-  border: 1px solid var(--border);
-  margin: 28px auto;
-  border-radius: 22px;
-  padding: clamp(18px, 3vw, 28px) 0;
-  box-shadow: 0 20px 60px rgba(0,0,0,.25);
-}
+  <!-- =================== WELCOME =================== -->
+  <section id="welcome" class="hero section-card reveal">
+    <div class="section-inner">
+      <header class="section-heading">
+        <div class="eyebrow">ALBUQUERQUE • WESTSIDE</div>
+        <h1 class="section-title xl">Level up your look 💈</h1>
+        <p class="lead">Fresh fades, clean shaves, and kid-friendly cuts. Tap a barber below to book or call the shop.</p>
+        <div class="cta-row">
+          <a class="glass-pill cta" href="#barbers">Tap in with the Crew</a>
+          <a class="glass-pill cta outline" href="tel:+15055036216">Call the Shop</a>
+        </div>
+      </header>
+    </div>
+  </section>
 
-.hero{
-  background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)) , var(--card);
-}
+  <!-- =================== BARBERS =================== -->
+  <section id="barbers" class="section-card reveal">
+    <div class="section-inner">
+      <header class="section-heading">
+        <div class="eyebrow">THE TEAM</div>
+        <h2 class="section-title">OUR BARBERS 💈</h2>
+        <div class="title-underline"></div>
+      </header>
 
-.section-heading { text-align: center; margin-bottom: clamp(14px, 3vw, 22px); }
-.eyebrow { font-size: .9rem; opacity: .85; font-weight: 800; }
-.section-title { font-weight: 900; letter-spacing: .02em; line-height: 1.15; margin: 6px 0 8px; }
-.section-title.xl { font-size: clamp(28px, 6vw, 44px); }
-.title-underline { width: 72px; height: 3px; margin: 10px auto 0; background: linear-gradient(90deg, transparent, var(--gold), transparent); border-radius: 2px; }
+      <div class="grid cards">
+        <!-- Booksy links: paste your exact URLs in place of the placeholders below -->
+        <article class="barber-card">
+          <h3 class="barber-name">Jonny</h3>
+          <p class="barber-role">Owner • Fades • Designs</p>
+          <a class="glass-pill" href="PASTE_JONNY_BOOKSY_URL_HERE" target="_blank" rel="noopener">Book w/ Jonny</a>
+        </article>
 
-.lead { text-align: center; max-width: 60ch; margin: 0 auto; opacity: .95; }
+        <article class="barber-card">
+          <h3 class="barber-name">Ca$h</h3>
+          <p class="barber-role">Kids cuts • Gentle & fast</p>
+          <a class="glass-pill" href="PASTE_CASH_BOOKSY_URL_HERE" target="_blank" rel="noopener">Book w/ Ca$h</a>
+        </article>
 
-/* Subtle background spotlight */
-body::before{
-  content:""; position:fixed; inset:-20%; pointer-events:none; z-index:-1;
-  background:
-    radial-gradient(1200px 800px at 50% 120%, rgba(255,200,50,.05), transparent 65%),
-    radial-gradient(circle at 80% 10%, rgba(160,180,255,.06), transparent 45%),
-    radial-gradient(circle at 20% 15%, rgba(255,220,140,.08), transparent 38%);
-}
+        <article class="barber-card">
+          <h3 class="barber-name">Taylor</h3>
+          <p class="barber-role">Shaves • Professional finish</p>
+          <a class="glass-pill" href="PASTE_TAYLOR_BOOKSY_URL_HERE" target="_blank" rel="noopener">Book w/ Taylor</a>
+        </article>
 
-/* ===== Header / Brand / Nav ===== */
-.site-header{ position: sticky; top: 0; z-index: 1000; background: rgba(0,0,0,0); padding-top: 12px; }
-.header-inner{
-  display: grid; grid-template-columns: 1fr auto; align-items: center;
-  padding-block: 6px;
-}
-.brand-text{ font-weight: 900; white-space: nowrap; }
+        <!-- These route to shop phone as requested -->
+        <article class="barber-card">
+          <h3 class="barber-name">Vincent</h3>
+          <p class="barber-role">Tapers • Classic styles</p>
+          <a class="glass-pill" href="tel:+15055036216">Book w/ Vincent</a>
+        </article>
 
-/* Desktop nav pills */
-.nav-row{
-  display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center;
-  padding: 12px 0 6px;
-}
-.nav-pill{
-  display: inline-grid; place-items: center; height: 48px; min-width: clamp(112px, 11vw, 156px);
-  padding: 0 1rem; border-radius: 999px; text-decoration: none; color: var(--text);
-  background: var(--surface); border: 1px solid var(--border);
-  font-weight: 900;
-  transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
-}
-.nav-pill:hover{ transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,.18); }
-.nav-pill:active{ transform: translateY(0); }
+        <article class="barber-card">
+          <h3 class="barber-name">Deshaun</h3>
+          <p class="barber-role">Fades • Lineups</p>
+          <a class="glass-pill" href="tel:+15055036216">Book w/ Deshaun</a>
+        </article>
 
-/* Burger (mobile) */
-.burger{
-  width: 44px; height: 44px; border-radius: 14px;
-  border: 1px solid var(--border); background: var(--surface);
-  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
-  display: grid; place-items: center;
-}
-.burger span,
-.burger span::before,
-.burger span::after{
-  content:""; display:block; width:22px; height:2px; background: var(--text);
-  border-radius:2px; transition: transform .25s ease, opacity .2s ease;
-}
-.burger span{ position: relative; }
-.burger span::before{ position:absolute; transform: translateY(-7px); }
-.burger span::after{  position:absolute; transform: translateY(7px); }
-.burger[aria-expanded="true"] span{ background: transparent; }
-.burger[aria-expanded="true"] span::before{ transform: rotate(45deg); }
-.burger[aria-expanded="true"] span::after{  transform: rotate(-45deg); }
+        <article class="barber-card">
+          <h3 class="barber-name">Zwalu</h3>
+          <p class="barber-role">Modern cuts</p>
+          <a class="glass-pill" href="tel:+15055036216">Book w/ Zwalu</a>
+        </article>
 
-/* Drawer */
-.mobile-nav{ display:none; position: fixed; inset: 0; z-index: 1100; pointer-events: none; }
-.mobile-nav .scrim{
-  position:absolute; inset:0; background: rgba(6,10,16,.55);
-  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
-  opacity:0; transition: opacity .2s var(--ease);
-}
-.mobile-nav .sheet{
-  position:absolute; left:50%; transform: translateX(-50%) translateY(-10%);
-  top: 64px; width: min(92vw, 520px); padding: 1rem; display:grid; gap: .6rem;
-  background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
-  opacity:0; transition: opacity .25s var(--ease), transform .25s var(--ease);
-}
-.mobile-nav .nav-pill{ width: 100%; height: 50px; }
+        <article class="barber-card">
+          <h3 class="barber-name">GMO</h3>
+          <p class="barber-role">Fades • Beard work</p>
+          <a class="glass-pill" href="tel:+15055036216">Book w/ GMO</a>
+        </article>
+      </div>
+    </div>
+  </section>
 
-.mobile-nav.open{ display:block; pointer-events: auto; }
-.mobile-nav.open .scrim{ opacity: 1; }
-.mobile-nav.open .sheet{ opacity: 1; transform: translateX(-50%) translateY(0); }
+  <!-- =================== SERVICES =================== -->
+  <section id="services" class="section-card reveal">
+    <div class="section-inner">
+      <header class="section-heading">
+        <div class="eyebrow">MENU</div>
+        <h2 class="section-title">SERVICES &amp; PRICING 💈</h2>
+        <div class="title-underline"></div>
+      </header>
 
-@media (min-width: 900px){
-  .burger{ display: none; }
-}
-@media (max-width: 899px){
-  .nav-row{ display: none; }
-}
+      <ul class="service-list">
+        <li class="service-row">
+          <span class="service-name">Style Cut</span>
+          <span class="service-price">$45+</span>
+        </li>
+        <li class="service-row">
+          <span class="service-name">Razor Fade + Beard</span>
+          <span class="service-price">$55+</span>
+        </li>
+        <li class="service-row">
+          <span class="service-name">Kids Cut</span>
+          <span class="service-price">$35+</span>
+        </li>
+        <li class="service-row">
+          <span class="service-name">Beard Trim / Lineup</span>
+          <span class="service-price">$20+</span>
+        </li>
+        <li class="service-row">
+          <span class="service-name">Hot Towel Shave</span>
+          <span class="service-price">$35+</span>
+        </li>
+      </ul>
 
-/* ===== Buttons / Pills / Ripple ===== */
-.glass-pill{
-  display:inline-grid; place-items:center; height: 48px; padding: 0 18px; border-radius: 999px;
-  background: var(--surface); color: var(--text); text-decoration: none; border: 1px solid var(--border);
-  font-weight: 900;
-  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
-}
-.glass-pill:hover{ transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,.18); }
-.glass-pill.outline{ background: transparent; }
+      <p class="service-note">✳️ Style cuts start at $45. Shampoo, color &amp; perms vary by barber — ask your barber or call.</p>
+    </div>
+  </section>
 
-/* Ripple effect element */
-.ripple{
-  position:absolute; border-radius:50%; background: rgba(255,255,255,.35);
-  transform: scale(0); animation: rip 600ms var(--ease) forwards;
-  pointer-events:none; mix-blend-mode: screen; opacity:.75;
-}
-@keyframes rip{ to { transform: scale(2.4); opacity: 0; } }
+  <!-- =================== REVIEWS =================== -->
+  <section id="reviews" class="section-card reveal">
+    <div class="section-inner">
+      <header class="section-heading">
+        <div class="eyebrow">WHAT PEOPLE SAY ⭐</div>
+        <h2 class="section-title">REVIEWS</h2>
+        <div class="title-underline"></div>
+      </header>
 
-.cta-row{ display: flex; gap: .6rem; justify-content: center; margin-top: 10px; }
+      <div class="reviews-wrap">
+        <article class="review-card">
+          <div class="review-head">
+            <div class="review-avatar">J</div>
+            <div>
+              <div class="review-name">J O-C</div>
+              <div class="review-time">2 months ago</div>
+            </div>
+            <div class="gold-stars" aria-label="5 out of 5">★★★★★</div>
+          </div>
+          <p>Been coming here for years and it’s always solid. All the barbers know their craft, and no matter who I sit with, I leave looking fresh. I usually just walk in and they get me taken care of without any hassle. Consistent, professional, and worth every visit.</p>
+        </article>
 
-/* ===== Cards / Grids ===== */
-.grid.cards{
-  display: grid; gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  padding-bottom: 6px;
-}
+        <article class="review-card">
+          <div class="review-head">
+            <div class="review-avatar">J</div>
+            <div>
+              <div class="review-name">Jennifer Lopez</div>
+              <div class="review-time">1 month ago</div>
+            </div>
+            <div class="gold-stars" aria-label="5 out of 5">★★★★★</div>
+          </div>
+          <p>I take my toddler here to get a haircut from Cash and she does an amazing job every time. She is very good with kids and is pretty fast. We will be going back with barber Cash!</p>
+        </article>
 
-.barber-card{
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 18px; padding: 16px;
-  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
-}
-.barber-card:hover{ transform: translateY(-2px); }
+        <article class="review-card">
+          <div class="review-head">
+            <div class="review-avatar">F</div>
+            <div>
+              <div class="review-name">Francesca Tafoya</div>
+              <div class="review-time">3 weeks ago</div>
+            </div>
+            <div class="gold-stars" aria-label="5 out of 5">★★★★★</div>
+          </div>
+          <p>If I could give a million stars for my experience today I would! Taylor was so amazing and I have a great cut for my new job tomorrow! We had a great conversation and she was fast, gentle and efficient in my haircut. Thank y’all so much! I’ll be back next week. And always remember, kindness is free.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-.barber-name{ margin: 0 0 4px; font-size: 1.1rem; font-weight: 900; }
-.barber-role{ margin: 0 0 12px; opacity: .9; }
+  <!-- =================== CONTACT =================== -->
+  <section id="contact" class="section-card reveal">
+    <div class="section-inner">
+      <header class="section-heading">
+        <div class="eyebrow">GET IN TOUCH</div>
+        <h2 class="section-title">Contact</h2>
+        <div class="title-underline"></div>
+      </header>
 
-/* ===== Services ===== */
-.service-list { list-style: none; padding: 0; margin: 0; }
-.service-row{
-  display: grid; grid-template-columns: 1fr auto; align-items: center;
-  padding: 14px 16px; border-radius: 14px; border: 1px solid var(--border);
-  background: var(--surface);
-  transition: transform .25s var(--ease), background .25s var(--ease);
-}
-.service-row + .service-row{ margin-top: 10px; }
-.service-row:hover{ transform: translateY(-1px); }
-.service-name{ font-weight: 900; }
-.service-price{ opacity: .95; }
-.service-note{ margin-top: 12px; opacity: .9; text-align: center; }
+      <div class="contact-grid">
+        <a class="glass-pill" href="tel:+15055036216">📞 (505) 503-6216</a>
+        <a class="glass-pill outline" href="#map">🧭 Directions</a>
+      </div>
+    </div>
+  </section>
 
-/* ===== Reviews ===== */
-.reviews-wrap{
-  display: grid; gap: 12px;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-}
-.review-card{
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 18px; padding: 14px 16px; box-shadow: 0 12px 30px rgba(0,0,0,.2);
-}
-.review-head{
-  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .75rem; margin-bottom: .5rem;
-}
-.review-avatar{
-  width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
-  font-weight: 900; color: var(--text);
-  background: radial-gradient(120% 120% at 20% 20%, rgba(255,255,255,.1), rgba(255,255,255,.03));
-  border: 1px solid var(--border);
-}
-.review-name{ font-weight: 900; }
-.review-time{ opacity: .8; font-size: .95rem; }
-.gold-stars{ color: var(--gold); letter-spacing: .12em; filter: drop-shadow(0 0 0 rgba(212,178,76,.2)); }
+  <!-- =================== MAP / DIRECTIONS =================== -->
+  <section id="map" class="section-card reveal">
+    <div class="section-inner">
+      <header class="section-heading">
+        <div class="eyebrow">FIND US</div>
+        <h2 class="section-title">DIRECTIONS</h2>
+        <div class="title-underline"></div>
+      </header>
 
-/* ===== Contact / Map ===== */
-.contact-grid{ display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; }
+      <div class="map-card">
+        <!-- Your exact Google Maps embed (responsive via CSS) -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5914077550096!2d-106.72760522378523!3d35.19173505670752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87226f7a1054dd87%3A0x7736d7f662fd5a2b!2sNext%20Level%20Barber%20Shop%20Albuquerque!5e0!3m2!1sen!2sus!4v1762186188303!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
 
-.map-card iframe{
-  width: 100% !important;
-  height: clamp(320px, 52vw, 520px) !important;
-  border: 0;
-}
+  <footer class="site-footer">
+    <div class="section-inner">
+      <small>© <span id="year"></span> Next Level: Hero Cuts. All rights reserved.</small>
+    </div>
+  </footer>
 
-/* ===== Animations / Reveal ===== */
-.reveal{ opacity: 0; transform: translateY(16px); }
-.reveal.in{ opacity: 1; transform: translateY(0); transition: opacity var(--dur) var(--ease-soft), transform var(--dur) var(--ease-soft); }
+  <!-- Enhancements / Animations / Mobile Nav -->
+  <script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-@media (prefers-reduced-motion: reduce){
-  .reveal{ opacity: 1; transform: none; }
-  .nav-pill, .glass-pill, .barber-card, .service-row, .review-card { transition: none !important; }
-}
+  // Mobile drawer
+  (function(){
+    const burger = document.getElementById('navToggle');
+    const drawer = document.getElementById('mobileNav');
+    if(!burger || !drawer) return;
+    const scrim = drawer.querySelector('[data-close]');
+    const links = drawer.querySelectorAll('a');
 
-/* ===== Footer ===== */
-.site-footer{ padding: 20px 0 40px; text-align: center; opacity: .85; }
+    function open(){ drawer.classList.add('open'); burger.setAttribute('aria-expanded','true'); document.body.classList.add('body-lock'); }
+    function close(){ drawer.classList.remove('open'); burger.setAttribute('aria-expanded','false'); document.body.classList.remove('body-lock'); }
 
-/* ===== Safety: make sure nothing hides content ===== */
-.body-lock{ overflow: hidden; }
-section, header, footer { opacity: 1 !important; transform: none !important; }
+    burger.addEventListener('click', ()=> drawer.classList.contains('open') ? close() : open());
+    scrim && scrim.addEventListener('click', close);
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });
+
+    links.forEach(a=>{
+      a.addEventListener('click', ()=>{
+        // Close on any link tap (anchors will smooth scroll below)
+        close();
+      });
+    });
+  })();
+
+  // Smooth scroll for in-page anchors
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', (e)=>{
+      const id = a.getAttribute('href');
+      const t = document.querySelector(id);
+      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+
+  // Scroll reveal (intersection observer)
+  (function(){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: .08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  })();
+
+  // Ripple feedback
+  (function(){
+    function ripple(e){
+      const t = e.currentTarget;
+      const rect = t.getBoundingClientRect();
+      const d = Math.max(rect.width, rect.height);
+      const s = document.createElement('span');
+      s.className = 'ripple';
+      s.style.width = s.style.height = d+'px';
+      s.style.left = (e.clientX - rect.left - d/2)+'px';
+      s.style.top  = (e.clientY - rect.top  - d/2)+'px';
+      t.appendChild(s);
+      setTimeout(()=>s.remove(), 600);
+    }
+    document.querySelectorAll('.nav-pill, .glass-pill, .btn, .service-row').forEach(el=>{
+      if(getComputedStyle(el).position === 'static') el.style.position = 'relative';
+      el.style.overflow = 'hidden';
+      el.addEventListener('click', ripple);
+    });
+  })();
+  </script>
+</body>
+</html>
