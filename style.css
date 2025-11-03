@@ -941,3 +941,5 @@ section .section-title, h2.section-title, .title-xl { font-family: var(--ui-font
 .site-header .brand-row, .brand-row { display: flex; align-items: center; justify-content: center; width: 100%; }
 .brand-row .brand-text { font-size: clamp(18px, 2.1vw, 24px); }
 .nav-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: .5rem; }
+
+.brand-text br{display:none} .brand-text{white-space:nowrap}
