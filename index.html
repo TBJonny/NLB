@@ -429,13 +429,7 @@
             <h2 class="section-title pulse-gold">Drop a pin &amp; ride out</h2>
           </header>
           <div class="map-frame">
-            <iframe
-              title="Next Level Barbershop Map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3364.078361969636!2d-106.5869486!3d35.1067086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87220c320a9c9589%3A0xb1923112e78569af!2sNext%20Level%20Barbershop!5e0!3m2!1sen!2sus!4v1685758184582!5m2!1sen!2sus"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5914077550096!2d-106.72760522378523!3d35.19173505670752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87226f7a1054dd87%3A0x7736d7f662fd5a2b!2sNext%20Level%20Barber%20Shop%20Albuquerque!5e0!3m2!1sen!2sus!4v1762186188303!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
           <div class="map-actions">
             <a class="glass-pill strong" href="https://maps.apple.com/?q=6200+Coors+Blvd+NW+%23D2+Albuquerque+NM+87120" target="_blank" rel="noopener">🍎 Open in Apple Maps</a>
@@ -568,5 +562,86 @@
       footerYear.textContent = new Date().getFullYear();
     }
   </script>
+
+<script>
+// ===== CONFIG: phone & Booksy links =====
+const SHOP_PHONE = 'tel:+15055036216';
+// TODO: Paste your real Booksy links here:
+const BOOKSY = {
+  JONNY: 'https://booksy.link/jonny',   // <-- replace with real Booksy URL
+  CASH:  'https://booksy.link/cash',    // <-- replace with real Booksy URL
+  TAYLOR:'https://booksy.link/taylor'   // <-- replace with real Booksy URL
+};
+
+// ===== Make "BOOK W/ {name}" buttons link correctly =====
+(function wireBookButtons(){
+  const telNames = ['VINCENT','DESHAUN','Z WALUW','Z WALUW','GMO','Z WALUW','Z WALUW','ZWALU','Z WALUW'];
+  const mapBooksy = {'JONNY':'JONNY','CA$H':'CASH','CASH':'CASH','TAYLOR':'TAYLOR'};
+  const nodes = document.querySelectorAll('a, button');
+  nodes.forEach(node => {
+    const t = (node.textContent || '').trim().toUpperCase();
+    // Only target "BOOK W/" controls
+    if (!t.startsWith('BOOK W')) return;
+    // Find the name (last token)
+    const name = t.replace('BOOK W', '').replace(/[\s/]+/g,' ').trim();
+    // Route
+    if (telNames.some(n => name.includes(n))) {
+      node.setAttribute('href', SHOP_PHONE);
+    } else {
+      // Booksy or fallback to phone
+      const key = Object.keys(mapBooksy).find(k => name.includes(k));
+      const url = key ? BOOKSY[mapBooksy[key]] : SHOP_PHONE;
+      node.setAttribute('href', url);
+      if (url.startsWith('http')) node.setAttribute('target','_blank');
+    }
+    // If it's a <button>, convert to link behavior
+    if (node.tagName === 'BUTTON') {
+      node.addEventListener('click', () => {
+        const href = node.getAttribute('href');
+        if (href) window.location.href = href;
+      });
+      node.style.cursor = 'pointer';
+    }
+  });
+})();
+
+// ===== Mobile drawer (hamburger) shows nav pills =====
+(function mobileNav(){
+  const burger = document.querySelector('#navToggle, .hamburger, .barber-toggle');
+  const drawer = document.querySelector('#mobileNav, .nav-drawer');
+  if (!burger || !drawer) return;
+  const body = document.body;
+  function open(){ drawer.classList.add('open'); burger.setAttribute('aria-expanded','true'); body.classList.add('body-lock'); }
+  function close(){ drawer.classList.remove('open'); burger.setAttribute('aria-expanded','false'); body.classList.remove('body-lock'); }
+  burger.addEventListener('click', () => drawer.classList.contains('open') ? close() : open());
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  document.addEventListener('click', e => { if (!drawer.contains(e.target) && !burger.contains(e.target)) close(); });
+})();
+
+// ===== Parallax + section glow (respects reduced motion) =====
+(function effects(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const layer = document.querySelector('.parallax-layer');
+  if (!reduce && layer){
+    let raf = null;
+    window.addEventListener('scroll', () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        const y = window.scrollY || 0;
+        layer.style.transform = `translateY(${y * 0.08}px)`;
+        raf = null;
+      });
+    }, {passive:true});
+  }
+  const sections = document.querySelectorAll('section, .section-card');
+  const io = new IntersectionObserver((entries)=>{
+    for (const e of entries){
+      if (e.isIntersecting){ e.target.classList.add('glow-on'); io.unobserve(e.target); }
+    }
+  }, {threshold: 0.12});
+  sections.forEach(s => io.observe(s));
+})();
+</script>
+
 </body>
 </html>
