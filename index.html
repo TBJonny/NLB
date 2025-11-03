@@ -6,21 +6,6 @@
   <meta name="description" content="Next Level Barbershop • Clean fades, sharp cuts, walk-ins welcome in Albuquerque, NM. Book your barber, browse services, and get directions." />
   <title>Next Level Barbershop</title>
   <link rel="stylesheet" href="style.css" />
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<style>:root{--ui-font:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Segoe UI',Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif}</style>
-<meta property="og:title" content="Next Level Barbershop">
-<meta property="og:description" content="Clean fades, sharp tapers, and a laid‑back vibe in Albuquerque. Walk‑ins welcome, appointments preferred.">
-<meta property="og:url" content="https://example.com">
-<meta name="twitter:card" content="summary_large_image">
-
-<link rel="icon" href="favicon.ico?v=3" sizes="any">
-<link rel="icon" type="image/png" href="favicon-32.png?v=3" sizes="32x32">
-<link rel="icon" type="image/png" href="favicon-192.png?v=3" sizes="192x192">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3" sizes="180x180">
-<link rel="manifest" href="site.webmanifest?v=3">
-<meta property="og:image" content="og-image.png?v=3">
-
 </head>
 <body>
   <!-- =========================
@@ -28,7 +13,6 @@
        ========================= -->
   <header class="site-header header-mobile">
     <div class="header-inner">
-<button id="navToggle" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
       <div class="brand pulse-gold">
         <span class="brand-text">NEXT LEVEL BARBERSHOP</span>
       </div>
@@ -40,14 +24,15 @@
     </div>
   </header>
 <nav id="mobileNav" class="mobile-nav" aria-label="Primary">
-  <div class="drawer-inner">
-    <a class="nav-pill glass-pill" href="#welcome">Home</a>
-<a class="nav-pill glass-pill" href="#barbers">BARBERS</a>
-<a class="nav-pill glass-pill" href="#services">Services</a>
-<a class="nav-pill glass-pill" href="#reviews">Reviews</a>
-<a class="nav-pill glass-pill" href="#visit">Hours &amp; Contact</a>
-<a class="nav-pill glass-pill" href="#map">Map</a>
-<a class="nav-pill glass-pill call-link" href="tel:15055036216">CALL</a>
+  <div class="scrim" data-close></div>
+  <div class="sheet">
+    <a class="nav-pill" href="#welcome">Home</a>
+    <a class="nav-pill" href="#barbers">Barbers</a>
+    <a class="nav-pill" href="#services">Services & Prices</a>
+    <a class="nav-pill" href="#reviews">Reviews</a>
+    <a class="nav-pill" href="#visit">Contact</a>
+    <a class="nav-pill" href="#map">Map</a>
+    <a class="nav-pill" href="tel:+15055036216">Call</a>
   </div>
 </nav>
 
@@ -62,12 +47,12 @@
       </div>
       <nav class="desktop-nav-row">
         <a class="nav-pill glass-pill" href="#welcome">Home</a>
-        <a class="nav-pill glass-pill" href="#barbers">BARBERS</a>
+        <a class="nav-pill glass-pill" href="#barbers">Our Barbers</a>
         <a class="nav-pill glass-pill" href="#services">Services</a>
         <a class="nav-pill glass-pill" href="#reviews">Reviews</a>
         <a class="nav-pill glass-pill" href="#visit">Hours &amp; Contact</a>
         <a class="nav-pill glass-pill" href="#map">Map</a>
-        <a class="nav-pill glass-pill call-link" href="tel:15055036216">CALL</a>
+        <a class="nav-pill glass-pill call-link" href="tel:15055036216">(505) 503-6216</a>
       </nav>
     </div>
   </header>
@@ -79,14 +64,14 @@
     <div class="nav-drawer glass-card">
       <nav class="drawer-nav">
         <a class="drawer-link glass-pill" href="#welcome">Home</a>
-        <a class="drawer-link glass-pill" href="#barbers">BARBERS</a>
+        <a class="drawer-link glass-pill" href="#barbers">Our Barbers</a>
         <a class="drawer-link glass-pill" href="#services">Services &amp; Prices</a>
         <a class="drawer-link glass-pill" href="#reviews">Reviews</a>
         <a class="drawer-link glass-pill" href="#visit">Hours • Contact</a>
         <a class="drawer-link glass-pill" href="#map">Map</a>
       </nav>
       <div class="drawer-bottom">
-        <a class="call-cta glass-pill strong" href="tel:15055036216">CALL</a>
+        <a class="call-cta glass-pill strong" href="tel:15055036216">Call (505) 503-6216</a>
       </div>
     </div>
     <button class="drawer-backdrop" id="drawerBackdrop" aria-label="Close menu"></button>
@@ -127,7 +112,7 @@
       <div class="section-inner section-wide">
         <header class="section-heading">
           <div class="eyebrow">OUR BARBERS 💈</div>
-          <h2 class="section-title pulse-gold">OUR BARBERS 💈</h2>
+          <h2 class="section-title pulse-gold">Tap in with the crew</h2>
           <div class="title-underline small"></div>
         </header>
         <div class="barber-grid">
@@ -137,7 +122,7 @@
                 <span class="barber-name">Vincent</span>
                 <span class="barber-role">Owner • Master Barber</span>
               </div>
-              <a class="book-pill glass-pill strong" href="tel:15055036216">CALL</a>
+              <a class="book-pill glass-pill strong" href="tel:15055036216">Book w/ Vincent</a>
             </div>
             <button class="barber-toggle" type="button" aria-expanded="false" aria-controls="barber-extra-vincent">
               <span class="barber-line">Founder. Fader. Visionary.</span>
@@ -154,7 +139,7 @@
                 <span class="barber-name">Z Waluw</span>
                 <span class="barber-role">Detail Specialist</span>
               </div>
-              <a class="book-pill glass-pill strong" href="tel:15055036216">CALL</a>
+              <a class="book-pill glass-pill strong" href="tel:15055036216">Book w/ Z Waluw</a>
             </div>
             <button class="barber-toggle" type="button" aria-expanded="false" aria-controls="barber-extra-zwaluw">
               <span class="barber-line">Precision in every pass.</span>
@@ -171,7 +156,7 @@
                 <span class="barber-name">GMO</span>
                 <span class="barber-role">Style Architect</span>
               </div>
-              <a class="book-pill glass-pill strong" href="tel:15055036216">CALL</a>
+              <a class="book-pill glass-pill strong" href="tel:15055036216">Book w/ GMO</a>
             </div>
             <button class="barber-toggle" type="button" aria-expanded="false" aria-controls="barber-extra-gmo">
               <span class="barber-line">Style that speaks before you do.</span>
@@ -188,7 +173,7 @@
                 <span class="barber-name">Deshaun</span>
                 <span class="barber-role">Fade Technician</span>
               </div>
-              <a class="book-pill glass-pill strong" href="tel:15055036216">CALL</a>
+              <a class="book-pill glass-pill strong" href="tel:15055036216">Book w/ Deshaun</a>
             </div>
             <button class="barber-toggle" type="button" aria-expanded="false" aria-controls="barber-extra-deshaun">
               <span class="barber-line">Sharp fades. Chill vibes.</span>
@@ -260,7 +245,7 @@
       <div class="section-inner section-wide">
         <header class="section-heading">
           <div class="eyebrow">SERVICES &amp; PRICING 💸</div>
-          <h2 class="section-title pulse-gold">SERVICES AND PRICING 💈</h2>
+          <h2 class="section-title pulse-gold">Choose your upgrade</h2>
           <div class="title-underline small"></div>
         </header>
         <ul class="service-list">
@@ -367,40 +352,42 @@
          REVIEWS
          ========================= -->
     <section id="reviews" class="section-card reveal">
-      <div class="section-inner">
-        <header class="section-heading">
-          <div class="eyebrow">WHAT PEOPLE SAY ⭐</div>
-          <h2 class="section-title pulse-gold">REVIEWS</h2>
-          <div class="title-underline small"></div>
-        </header>
-<div class="reviews-wrap grid-auto">
-  <article class="review-card glass-card-mini">
-    <header class="review-header">
-      <div class="reviewer strong">J O‑C</div>
-      <div class="review-time">2 months ago</div>
-      <div class="review-stars gold-stars" aria-label="5 out of 5 stars">★★★★★</div>
-    </header>
+<div class="reviews-wrap">
+  <article class="review-card">
+    <div class="review-head">
+      <div class="review-avatar">J</div>
+      <div>
+        <div class="review-name">J O-C</div>
+        <div class="review-time">2 months ago</div>
+      </div>
+      <div class="gold-stars" aria-label="5 out of 5">★★★★★</div>
+    </div>
     <p>Been coming here for years and it’s always solid. All the barbers know their craft, and no matter who I sit with, I leave looking fresh. I usually just walk in and they get me taken care of without any hassle. Consistent, professional, and worth every visit.</p>
   </article>
-  <article class="review-card glass-card-mini">
-    <header class="review-header">
-      <div class="reviewer strong">Jennifer Lopez</div>
-      <div class="review-time">1 month ago</div>
-      <div class="review-stars gold-stars" aria-label="5 out of 5 stars">★★★★★</div>
-    </header>
+  <article class="review-card">
+    <div class="review-head">
+      <div class="review-avatar">J</div>
+      <div>
+        <div class="review-name">Jennifer Lopez</div>
+        <div class="review-time">1 month ago</div>
+      </div>
+      <div class="gold-stars" aria-label="5 out of 5">★★★★★</div>
+    </div>
     <p>I take my toddler here to get a haircut from Cash and she does an amazing job every time. She is very good with kids and is pretty fast. We will be going back with barber Cash!</p>
   </article>
-  <article class="review-card glass-card-mini">
-    <header class="review-header">
-      <div class="reviewer strong">Francesca Tafoya</div>
-      <div class="review-time">3 weeks ago</div>
-      <div class="review-stars gold-stars" aria-label="5 out of 5 stars">★★★★★</div>
-    </header>
+  <article class="review-card">
+    <div class="review-head">
+      <div class="review-avatar">F</div>
+      <div>
+        <div class="review-name">Francesca Tafoya</div>
+        <div class="review-time">3 weeks ago</div>
+      </div>
+      <div class="gold-stars" aria-label="5 out of 5">★★★★★</div>
+    </div>
     <p>If I could give a million stars for my experience today I would! Taylor was so amazing and I have a great cut for my new job tomorrow! We had a great conversation and she was fast, gentle and efficient in my haircut. Thank y’all so much! I’ll be back next week. And always remember, kindness is free.</p>
   </article>
 </div>
-
-</div></section>
+</section>
 
     <!-- =========================
          VISIT / CONTACT
@@ -424,7 +411,7 @@
           </article>
           <article class="visit-card glass-card-mini">
             <h3 class="visit-heading strong">Call the Shop</h3>
-            <p><a class="strong call-link" href="tel:15055036216">CALL</a></p>
+            <p><a class="strong call-link" href="tel:15055036216">(505) 503-6216</a></p>
             <p>Reach your barber directly for bookings, availability, and payment info.</p>
           </article>
           <article class="visit-card glass-card-mini">
@@ -447,10 +434,16 @@
         <div class="map-card glass-card">
           <header class="section-heading map-heading">
             <div class="eyebrow">FIND US</div>
-            <h2 class="section-title pulse-gold">Drop a pin &amp; ride out</h2>
+            <h2 class="section-title pulse-gold">DIRECTIONS</h2>
           </header>
           <div class="map-frame">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5914077550096!2d-106.72760522378523!3d35.19173505670752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87226f7a1054dd87%3A0x7736d7f662fd5a2b!2sNext%20Level%20Barber%20Shop%20Albuquerque!5e0!3m2!1sen!2sus!4v1762186188303!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe
+              title="Next Level Barbershop Map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3364.078361969636!2d-106.5869486!3d35.1067086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87220c320a9c9589%3A0xb1923112e78569af!2sNext%20Level%20Barbershop!5e0!3m2!1sen!2sus!4v1685758184582!5m2!1sen!2sus"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
           <div class="map-actions">
             <a class="glass-pill strong" href="https://maps.apple.com/?q=6200+Coors+Blvd+NW+%23D2+Albuquerque+NM+87120" target="_blank" rel="noopener">🍎 Open in Apple Maps</a>
@@ -585,15 +578,22 @@
   </script>
 
 <script>
-(function(){
-  const burger=document.getElementById('navToggle');
-  const drawer=document.getElementById('mobileNav');
-  if(!burger || !drawer) return;
+(() => {
+  const burger = document.getElementById('navToggle');
+  const drawer = document.getElementById('mobileNav');
+  if (!burger || !drawer) return;
+  const scrim = drawer.querySelector('[data-close]');
+  const links = drawer.querySelectorAll('a[href^="#"], a[href^="tel:"]');
   function open(){ drawer.classList.add('open'); burger.setAttribute('aria-expanded','true'); document.body.classList.add('body-lock'); }
   function close(){ drawer.classList.remove('open'); burger.setAttribute('aria-expanded','false'); document.body.classList.remove('body-lock'); }
-  burger.addEventListener('click', ()=> drawer.classList.contains('open')? close(): open());
-  drawer.addEventListener('click', (e)=>{ if(e.target.tagName==='A') close(); });
-  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+  burger.addEventListener('click', () => drawer.classList.contains('open') ? close() : open());
+  scrim && scrim.addEventListener('click', close);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  links.forEach(a => { a.addEventListener('click', e => {
+      const href = a.getAttribute('href'); if (!href || href.startsWith('tel:')) return;
+      const t = document.querySelector(href); if (!t) return;
+      e.preventDefault(); close(); setTimeout(() => t.scrollIntoView({behavior:'smooth', block:'start'}), 200);
+  }); });
 })();
 </script>
 
