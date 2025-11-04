@@ -2,343 +2,369 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Next Level Barbershop – Albuquerque</title>
-  <meta name="description" content="Next Level Barbershop • Clean fades, sharp tapers, kid-friendly cuts. Walk-ins welcome; call ahead to lock your spot." />
-  <meta name="theme-color" content="#000000" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Next Level Barbershop — Albuquerque, NM</title>
 
-  <!-- Icons / PWA -->
+  <!-- App icons & PWA -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest" />
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+  <meta name="theme-color" content="#000000">
 
-  <!-- Open Graph (optional if you have og-image.png) -->
-  <meta property="og:title" content="Next Level Barbershop" />
-  <meta property="og:description" content="Tap in with the crew. Walk-ins welcome • Appointments preferred." />
-  <meta property="og:image" content="og-image.png" />
-  <meta property="og:type" content="website" />
+  <!-- SEO basics -->
+  <meta name="description" content="Next Level Barbershop — clean fades, sharp tapers, and kid-friendly cuts. Walk-ins welcome. Appointments preferred. Albuquerque, NM." />
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Use system fonts (iOS/Android look); no external font needed -->
+  <!-- System font stack; bold, readable, iOS vibe without custom font download -->
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <!-- ===== Top Nav ===== -->
-  <header class="site-header">
-    <div class="brand-row">
-      <a class="brand" href="#top" aria-label="Next Level Barbershop home">NEXT LEVEL BARBERSHOP</a>
+<body class="no-scroll-x">
+  <!-- Header / Top nav -->
+  <header class="site-header" data-elevate>
+    <div class="wrap">
+      <a class="brand" href="#home" aria-label="Next Level Barbershop">NEXT LEVEL BARBERSHOP</a>
 
-      <button class="hamburger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+      <!-- Desktop nav -->
+      <nav class="nav-desktop" aria-label="Primary">
+        <a class="pill" href="#barbers">Barbers</a>
+        <a class="pill" href="#prices">Services & Prices</a>
+        <a class="pill" href="#reviews">Reviews</a>
+        <a class="pill" href="#visit">Hours & Contact</a>
+        <a class="pill" href="#map">Map</a>
+        <a class="pill pill-call" href="tel:+15055036216">(505) 503-6216</a>
+      </nav>
+
+      <!-- Mobile burger -->
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
     </div>
 
-    <nav class="top-pills" aria-label="Primary">
-      <a class="pill" href="#home">Home</a>
-      <a class="pill" href="#barbers">Our Barbers</a>
-      <a class="pill" href="#services">Services</a>
-      <a class="pill" href="#reviews">Reviews</a>
-      <a class="pill" href="#visit">Directions</a>
-      <a class="pill pill-call" href="tel:+15055036216">(505) 503-6216</a>
-    </nav>
-
-    <!-- Mobile Sheet -->
-    <div class="sheet" id="mobileMenu" hidden>
-      <nav class="sheet-nav">
-        <a href="#home" class="sheet-link">Home</a>
-        <a href="#barbers" class="sheet-link">Barbers</a>
-        <a href="#services" class="sheet-link">Services & Prices</a>
-        <a href="#reviews" class="sheet-link">Reviews</a>
-        <a href="#visit" class="sheet-link">Directions</a>
-        <a href="tel:+15055036216" class="sheet-link strong">Call</a>
+    <!-- Mobile drawer -->
+    <div class="drawer" id="drawer" hidden>
+      <nav class="drawer-list">
+        <a href="#home" class="drawer-link">Home</a>
+        <a href="#barbers" class="drawer-link">Barbers</a>
+        <a href="#prices" class="drawer-link">Services & Prices</a>
+        <a href="#reviews" class="drawer-link">Reviews</a>
+        <a href="#map" class="drawer-link">Directions</a>
+        <a href="tel:+15055036216" class="drawer-link drawer-call">Call</a>
       </nav>
     </div>
   </header>
 
   <main id="home">
-    <!-- ===== Hero ===== -->
-    <section class="card hero section-glow" aria-labelledby="hero-title">
-      <p class="eyebrow">ALBUQUERQUE • WESTSIDE</p>
-      <h1 id="hero-title" class="title-xl">Level up your look 💈</h1>
-      <p class="lede">
-        Fresh fades, clean shaves, and kid-friendly cuts. Tap a barber below to book — or call the shop.
-      </p>
+    <!-- Hero -->
+    <section class="card hero">
+      <div class="wrap">
+        <p class="eyebrow">ALBUQUERQUE • WESTSIDE</p>
+        <h1 class="title">Level up your look 💈</h1>
+        <p class="lede">
+          Fresh fades, clean shaves, and kid-friendly cuts. Tap a barber below to book or call the shop.
+        </p>
 
-      <div class="cta-row">
-        <a class="btn" href="#barbers">Tap in with the Crew</a>
-        <a class="btn btn-ghost" href="tel:+15055036216">Call the Shop</a>
-      </div>
+        <div class="cta-row">
+          <a href="#barbers" class="btn">Tap in with the Crew</a>
+          <a href="tel:+15055036216" class="btn btn-ghost">Call the Shop</a>
+        </div>
 
-      <div class="info-box">
         <ul class="bullets">
           <li>6200 Coors Blvd NW #D2, Albuquerque NM</li>
           <li>Right next to Bob’s Burgers</li>
-          <li>Walk-Ins Welcome • 📅 Appointments Preferred</li>
+          <li>Walk-Ins Welcome • Appointments Preferred</li>
         </ul>
       </div>
     </section>
 
-    <!-- ===== Barbers ===== -->
-    <section id="barbers" class="section-glow" aria-labelledby="barbers-title">
-      <div class="section-head">
-        <p class="eyebrow">OUR BARBERS 💈</p>
-        <h2 id="barbers-title" class="title-lg">Tap in with the Crew</h2>
-      </div>
+    <!-- Barbers -->
+    <section id="barbers" class="card section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">OUR BARBERS 💈</p>
+          <h2 class="section-title">Tap in with the Crew</h2>
+        </div>
 
-      <div class="grid cards">
-        <!-- Order requested: Vincent, Z WaluW, GMO, Deshaun, Ca$h, Jonny, Taylor -->
+        <div class="grid grid-cards">
+          <!-- Vincent -->
+          <article class="bio">
+            <header class="bio-hd">
+              <h3>Vincent</h3>
+              <div class="role">Owner • Master Barber</div>
+            </header>
+            <p class="tagline">Founder. Fader. Visionary.</p>
+            <a class="chip" href="tel:+15055036216">Book w/ Vincent</a>
+          </article>
 
-        <article class="card barber">
-          <header class="barber-head">
-            <h3>Vincent</h3>
-            <p class="sub">Owner • Master Barber</p>
-          </header>
-          <p class="blurb">Founder. Fader. Visionary.</p>
-          <div class="barber-actions">
-            <a class="btn btn-pill" href="tel:+15055036216">Book w/ Vincent</a>
-          </div>
-        </article>
+          <!-- Z WaluW -->
+          <article class="bio">
+            <header class="bio-hd">
+              <h3>Z WaluW</h3>
+              <div class="role">Detail Specialist</div>
+            </header>
+            <p class="tagline">Precision in every pass.</p>
+            <a class="chip" href="tel:+15055036216">Book w/ Z WaluW</a>
+          </article>
 
-        <article class="card barber">
-          <header class="barber-head">
-            <h3>Z WaluW</h3>
-            <p class="sub">Detail Specialist</p>
-          </header>
-          <p class="blurb">Precision in every pass.</p>
-          <div class="barber-actions">
-            <a class="btn btn-pill" href="tel:+15055036216">Book w/ Z WaluW</a>
-          </div>
-        </article>
+          <!-- GMO -->
+          <article class="bio">
+            <header class="bio-hd">
+              <h3>GMO</h3>
+              <div class="role">Style Architect</div>
+            </header>
+            <p class="tagline">Style that speaks before you do.</p>
+            <a class="chip" href="tel:+15055036216">Book w/ GMO</a>
+          </article>
 
-        <article class="card barber">
-          <header class="barber-head">
-            <h3>GMO</h3>
-            <p class="sub">Style Architect</p>
-          </header>
-          <p class="blurb">Style that speaks before you do.</p>
-          <div class="barber-actions">
-            <a class="btn btn-pill" href="tel:+15055036216">Book w/ GMO</a>
-          </div>
-        </article>
+          <!-- Deshaun -->
+          <article class="bio">
+            <header class="bio-hd">
+              <h3>Deshaun</h3>
+              <div class="role">Fade Technician</div>
+            </header>
+            <p class="tagline">Sharp fades. Chill vibes.</p>
+            <a class="chip" href="tel:+15055036216">Book w/ Deshaun</a>
+          </article>
 
-        <article class="card barber">
-          <header class="barber-head">
-            <h3>Deshaun</h3>
-            <p class="sub">Fade Technician</p>
-          </header>
-          <p class="blurb">Sharp fades. Chill vibes.</p>
-          <div class="barber-actions">
-            <a class="btn btn-pill" href="tel:+15055036216">Book w/ Deshaun</a>
-          </div>
-        </article>
+          <!-- Ca$h -->
+          <article class="bio">
+            <header class="bio-hd">
+              <h3>Ca$h</h3>
+              <div class="role">Kids & Family Pro</div>
+            </header>
+            <p class="tagline">Quick with the clippers, real with the results.</p>
+            <!-- keep your actual Booksy link here if you have it -->
+            <a class="chip" href="https://booksy.com/">Book w/ Ca$h</a>
+          </article>
 
-        <article class="card barber">
-          <header class="barber-head">
-            <h3>Ca$h</h3>
-            <p class="sub">Kids & Family Pro</p>
-          </header>
-          <p class="blurb">Quick with the clippers, real with the results.</p>
-          <div class="barber-actions">
-            <!-- TODO: replace with your live Booksy link for Ca$h -->
-            <a class="btn btn-pill" href="https://booksy.com/" target="_blank" rel="noopener">Book w/ Ca$h</a>
-          </div>
-        </article>
+          <!-- Jonny -->
+          <article class="bio">
+            <header class="bio-hd">
+              <h3>Jonny</h3>
+              <div class="role">Custom Work</div>
+            </header>
+            <p class="tagline">Where art meets the edge.</p>
+            <!-- keep your actual Booksy link here if you have it -->
+            <a class="chip" href="https://booksy.com/">Book w/ Jonny</a>
+          </article>
 
-        <article class="card barber">
-          <header class="barber-head">
-            <h3>Jonny</h3>
-            <p class="sub">Custom Work</p>
-          </header>
-          <p class="blurb">Where art meets the edge.</p>
-          <div class="barber-actions">
-            <!-- TODO: replace with your live Booksy link for Jonny -->
-            <a class="btn btn-pill" href="https://booksy.com/" target="_blank" rel="noopener">Book w/ Jonny</a>
-          </div>
-        </article>
-
-        <article class="card barber">
-          <header class="barber-head">
-            <h3>Taylor</h3>
-            <p class="sub">Polished Finish</p>
-          </header>
-          <p class="blurb">Clean blends. Subtle structure.</p>
-          <div class="barber-actions">
-            <!-- TODO: replace with your live Booksy link for Taylor -->
-            <a class="btn btn-pill" href="https://booksy.com/" target="_blank" rel="noopener">Book w/ Taylor</a>
-          </div>
-        </article>
+          <!-- Taylor -->
+          <article class="bio">
+            <header class="bio-hd">
+              <h3>Taylor</h3>
+              <div class="role">Polished Finish</div>
+            </header>
+            <p class="tagline">Clean blends. Subtle structure.</p>
+            <!-- keep your actual Booksy link here if you have it -->
+            <a class="chip" href="https://booksy.com/">Book w/ Taylor</a>
+          </article>
+        </div>
       </div>
     </section>
 
-    <!-- ===== Services & Pricing ===== -->
-    <section id="services" class="section-glow" aria-labelledby="services-title">
-      <div class="section-head">
-        <p class="eyebrow">SERVICES AND PRICING 💈</p>
-        <h2 id="services-title" class="title-lg">Choose your Upgrade</h2>
-      </div>
+    <!-- Services & Pricing -->
+    <section id="prices" class="card section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">SERVICES AND PRICING 💈</p>
+          <h2 class="section-title">Choose your upgrade</h2>
+        </div>
 
-      <ul class="service-list">
-        <li class="service">
-          <div class="service-text">
-            <h3>Regular Haircut</h3>
-            <p>Classic or modern. Clippers, scissors, and styling to match your look.</p>
-          </div>
-          <span class="price">$35</span>
-        </li>
+        <ul class="list">
+          <li class="list-item">
+            <div>
+              <strong>Regular Haircut</strong>
+              <p>Classic or modern. Clippers, scissors, and styling.</p>
+            </div>
+            <span class="price">$35</span>
+          </li>
 
-        <li class="service">
-          <div class="service-text">
-            <h3>Beard Add-On (with cut)</h3>
-            <p>Line up, clean up, and detail with razor finish.</p>
-          </div>
-          <span class="price">+ $5</span>
-        </li>
+          <li class="list-item">
+            <div>
+              <strong>Beard Add-On (with cut)</strong>
+              <p>Line up, clean up, and detail with razor finish.</p>
+            </div>
+            <span class="price">+ $5</span>
+          </li>
 
-        <li class="service">
-          <div class="service-text">
-            <h3>Razor Fade</h3>
-            <p>Skin-tight fade with razor detailing and hot towel finish.</p>
-          </div>
-          <span class="price">$40</span>
-        </li>
+          <li class="list-item">
+            <div>
+              <strong>Razor Fade</strong>
+              <p>Skin-tight fade with razor detailing and hot towel finish.</p>
+            </div>
+            <span class="price">$40</span>
+          </li>
 
-        <li class="service">
-          <div class="service-text">
-            <h3>Style Cut</h3>
-            <p>Extra time for transformations, scissor work, and texture building.</p>
-          </div>
-          <span class="price">$45</span>
-        </li>
-      </ul>
+          <li class="list-item">
+            <div>
+              <strong>Style Cut</strong>
+              <p>Transformations, scissor work, texture building.</p>
+            </div>
+            <span class="price">$45</span>
+          </li>
 
-      <div class="note card">
-        <p><strong>Heads up:</strong> Shampoo, color, and perms depend on the barber — <em>ask your barber or call the shop</em>.</p>
-        <p class="fine">Prices can vary slightly by barber; confirm when you book or call.</p>
-      </div>
-    </section>
+          <li class="list-item">
+            <div>
+              <strong>Shampoo • Color • Perms</strong>
+              <p>Pricing varies. <em>Ask your barber or call for details.</em></p>
+            </div>
+            <span class="price">Ask</span>
+          </li>
+        </ul>
 
-    <!-- ===== Reviews ===== -->
-    <section id="reviews" class="section-glow" aria-labelledby="reviews-title">
-      <div class="section-head">
-        <p class="eyebrow">REVIEWS</p>
-        <h2 id="reviews-title" class="title-lg">What people say ⭐</h2>
-      </div>
-
-      <div class="grid testimonials">
-        <article class="card review">
-          <header class="review-head">
-            <h3>J O-C</h3>
-            <span class="age">2 months ago</span>
-            <div class="stars" aria-label="5 stars">★★★★★</div>
-          </header>
-          <p>
-            Been coming here for years and it’s always solid. All the barbers know their craft, and no matter who I sit with, I leave looking fresh. I usually just walk in and they get me taken care of without any hassle. Consistent, professional, and worth every visit.
-          </p>
-        </article>
-
-        <article class="card review">
-          <header class="review-head">
-            <h3>Jennifer Lopez</h3>
-            <span class="age">1 month ago</span>
-            <div class="stars" aria-label="5 stars">★★★★★</div>
-          </header>
-          <p>
-            I take my toddler here to get a haircut from Cash and she does an amazing job every time. She is very good with kids and is pretty fast. We will be going back with barber Ca$h!
-          </p>
-        </article>
-
-        <article class="card review">
-          <header class="review-head">
-            <h3>Francesca Tafoya</h3>
-            <span class="age">3 weeks ago</span>
-            <div class="stars" aria-label="5 stars">★★★★★</div>
-          </header>
-          <p>
-            If I could give a million stars for my experience today I would! Taylor was so amazing and I have a great cut for my new job tomorrow. Fast, gentle and efficient.
-          </p>
-        </article>
-      </div>
-
-      <div class="cta-row">
-        <a class="btn btn-ghost" href="https://www.google.com/maps/place/Next+Level+Barber+Shop+Albuquerque" target="_blank" rel="noopener">Drop Us a Google Review</a>
+        <p class="fine">Prices can vary slightly by barber — confirm when you call or book.</p>
       </div>
     </section>
 
-    <!-- ===== Directions (Map) ===== -->
-    <section id="visit" class="section-glow" aria-labelledby="visit-title">
-      <div class="section-head">
-        <p class="eyebrow">DIRECTIONS 📍</p>
-        <h2 id="visit-title" class="title-lg">Drop a Pin & Ride Out</h2>
-      </div>
+    <!-- Reviews -->
+    <section id="reviews" class="card section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">REVIEWS ⭐</p>
+          <h2 class="section-title">Real ones, real reviews</h2>
+        </div>
 
-      <div class="map card">
-        <div class="map-embed">
-          <!-- Your exact embed: -->
+        <div class="grid grid-reviews">
+          <article class="review">
+            <header class="review-hd">
+              <h3 class="name">J O-C</h3><span class="when">2 months ago</span>
+              <span class="stars" aria-label="5 stars">★★★★★</span>
+            </header>
+            <p>
+              Been coming here for years and it’s always solid. All the barbers know their craft, and no matter who I sit with, I leave looking fresh. I usually just walk in and they get me taken care of without any hassle. Consistent, professional, and worth every visit.
+            </p>
+          </article>
+
+          <article class="review">
+            <header class="review-hd">
+              <h3 class="name">Jennifer Lopez</h3><span class="when">1 month ago</span>
+              <span class="stars" aria-label="5 stars">★★★★★</span>
+            </header>
+            <p>
+              I take my toddler here to get a haircut from Ca$h and she does an amazing job every time. She is very good with kids and is pretty fast. We will be going back with barber Ca$h!
+            </p>
+          </article>
+
+          <article class="review">
+            <header class="review-hd">
+              <h3 class="name">Francesca Tafoya</h3><span class="when">3 weeks ago</span>
+              <span class="stars" aria-label="5 stars">★★★★★</span>
+            </header>
+            <p>
+              If I could give a million stars for my experience today I would! Taylor was so amazing and I have a great cut for my new job tomorrow! Kindness is free 🙏🏽💕
+            </p>
+          </article>
+        </div>
+
+        <a class="btn btn-ghost" href="https://maps.app.goo.gl/" target="_blank" rel="noopener">Drop us a Google review</a>
+      </div>
+    </section>
+
+    <!-- Visit & Contact -->
+    <section id="visit" class="card section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">VISIT & CONTACT 📍</p>
+          <h2 class="section-title">Pull up or call ahead</h2>
+        </div>
+
+        <div class="grid grid-visit">
+          <div class="box">
+            <h3>Shop Hours</h3>
+            <p>Mon – Thu: 10am – 6pm<br>Fri – Sat: 9am – 7pm<br>Sun: Closed (appointments by request)</p>
+            <p class="fine">Hours can vary by barber. Call or DM to confirm.</p>
+          </div>
+
+          <div class="box">
+            <h3>Call the Shop</h3>
+            <a class="btn" href="tel:+15055036216">Call</a>
+          </div>
+
+          <div class="box">
+            <h3>Pull Up</h3>
+            <p>6200 Coors Blvd NW #D2<br>Albuquerque, NM 87120<br>Next to Bob’s Burgers</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Directions -->
+    <section id="map" class="card section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">DIRECTIONS 📍</p>
+          <h2 class="section-title">Drop a pin & ride out</h2>
+        </div>
+
+        <div class="map-frame">
+          <!-- Your requested embed (responsive wrapper makes it fluid) -->
           <iframe
+            title="Next Level Barbershop Map"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5914077550096!2d-106.72760522378523!3d35.19173505670752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87226f7a1054dd87%3A0x7736d7f662fd5a2b!2sNext%20Level%20Barber%20Shop%20Albuquerque!5e0!3m2!1sen!2sus!4v1762186188303!5m2!1sen!2sus"
-            width="600" height="450" style="border:0;" allowfullscreen=""
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Google Map">
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen>
           </iframe>
         </div>
-        <div class="map-actions">
-          <a class="btn btn-ghost" target="_blank" rel="noopener"
-             href="http://maps.apple.com/?daddr=Next+Level+Barber+Shop+Albuquerque">🍎 Open in Apple Maps</a>
-          <a class="btn btn-ghost" target="_blank" rel="noopener"
-             href="https://www.google.com/maps/dir/?api=1&destination=Next+Level+Barber+Shop+Albuquerque">📍 Open in Google Maps</a>
+
+        <div class="cta-row">
+          <a class="btn btn-ghost" href="https://maps.apple.com/?daddr=Next%20Level%20Barber%20Shop%20Albuquerque" target="_blank" rel="noopener">🍎 Open in Apple Maps</a>
+          <a class="btn btn-ghost" href="https://maps.google.com/?q=Next%20Level%20Barber%20Shop%20Albuquerque" target="_blank" rel="noopener">📍 Open in Google Maps</a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- ===== Bottom Quick Nav (mobile) ===== -->
-  <nav class="bottom-nav" aria-label="Quick">
-    <a href="#barbers" class="bnav"><span class="ico">✂️</span><span>Barbers</span></a>
-    <a href="#services" class="bnav"><span class="ico">💵</span><span>Prices</span></a>
-    <a href="#visit" class="bnav"><span class="ico">📍</span><span>Visit</span></a>
-    <a href="#visit" class="bnav"><span class="ico">🗺️</span><span>Map</span></a>
-  </nav>
-
+  <!-- Footer -->
   <footer class="site-footer">
-    <p>Next Level Barbershop • Stay sharp. Stay Next Level. © 2025</p>
+    <div class="wrap">
+      NEXT LEVEL BARBERSHOP
+      <span class="fine">Stay sharp. Stay Next Level. © 2025</span>
+    </div>
   </footer>
 
+  <!-- Mobile bottom tabs -->
+  <nav class="mobile-tabs" aria-label="Quick access">
+    <a href="#barbers">💈<span>Barbers</span></a>
+    <a href="#prices">🏷️<span>Prices</span></a>
+    <a href="#visit">📍<span>Visit</span></a>
+    <a href="#map">🗺️<span>Map</span></a>
+  </nav>
+
   <script>
-    // Simple, accessible mobile sheet
-    const burger = document.querySelector('.hamburger');
-    const sheet = document.getElementById('mobileMenu');
-    const links = sheet.querySelectorAll('a');
+    // Burger / drawer
+    const burger = document.getElementById('burger');
+    const drawer = document.getElementById('drawer');
 
-    const openSheet = () => {
-      sheet.hidden = false;
-      document.body.classList.add('lock');
-      burger.setAttribute('aria-expanded','true');
-      burger.classList.add('is-open');
-      links[0].focus();
-    };
-
-    const closeSheet = () => {
-      sheet.hidden = true;
-      document.body.classList.remove('lock');
-      burger.setAttribute('aria-expanded','false');
-      burger.classList.remove('is-open');
-      burger.focus();
-    };
+    function closeDrawer() {
+      drawer.setAttribute('hidden', 'hidden');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('freeze');
+    }
 
     burger.addEventListener('click', () => {
-      if (sheet.hidden) openSheet(); else closeSheet();
+      const open = burger.getAttribute('aria-expanded') === 'true';
+      if (open) { closeDrawer(); }
+      else {
+        drawer.removeAttribute('hidden');
+        burger.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('freeze');
+      }
     });
-    sheet.addEventListener('click', (e) => {
-      if (e.target === sheet) closeSheet();
-    });
-    links.forEach(a => a.addEventListener('click', closeSheet));
 
-    // PWA: register service worker (safe no-op)
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').catch(()=>{});
-      });
-    }
+    // Close drawer when any link is clicked
+    drawer.addEventListener('click', (e) => {
+      if (e.target.matches('a')) closeDrawer();
+    });
+
+    // Ensure drawer is never shown on desktop
+    const mq = window.matchMedia('(min-width: 960px)');
+    mq.addEventListener('change', (e) => { if (e.matches) closeDrawer(); });
+
+    // Small header elevation on scroll
+    const header = document.querySelector('.site-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 6) header.classList.add('elevated');
+      else header.classList.remove('elevated');
+    });
   </script>
 </body>
 </html>
