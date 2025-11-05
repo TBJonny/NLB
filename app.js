@@ -84,3 +84,26 @@ if ('serviceWorker' in navigator) {
     }
   } catch {}
 })();
+
+
+// Web Share for quick sharing (falls back to link selection)
+(() => {
+  try {
+    const btn = document.getElementById('share-site');
+    if (btn) btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (navigator.share) {
+        navigator.share({
+          title: 'Next Level Barbershop',
+          text: 'Book a cut, see prices, and get directions.',
+          url: location.origin + location.pathname
+        }).catch(()=>{});
+      } else {
+        // fallback: copy link
+        navigator.clipboard?.writeText(location.href);
+        btn.textContent = 'Link Copied';
+        setTimeout(() => btn.textContent = 'Share', 1600);
+      }
+    });
+  } catch {}
+})();
