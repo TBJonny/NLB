@@ -1,7 +1,6 @@
-[README.txt](https://github.com/user-attachments/files/22891769/README.txt)
-Next Level BarberShop — Final v2.1
-- Headings: uppercase, larger, bolder.
-- Fixed CTA overlay bug; buttons are consistent.
-- Mobile responsive.
-- Auto dark/light theme via prefers-color-scheme.
-Deploy: rename to index.html and upload to Vercel/Netlify/etc.
+Next Level Barbershop — Final v2
+- Sticky Call FAB; mobile menu closes correctly.
+- Light mode color accents; dark hero halo.
+- Hours Mon–Sun; no side scroll.
+- Icons & manifest for PWA splash.
+Deploy: upload all files. For PWA updates, hard refresh (or unregister old SW).

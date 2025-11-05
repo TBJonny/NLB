@@ -1,3 +1,9 @@
-// Minimal service worker just to pass PWA install and keep things stable.
-self.addEventListener('install', () => self.skipWaiting());
-self.addEventListener('activate', (evt) => evt.waitUntil(self.clients.claim()));
+
+self.addEventListener('install', (e)=>{
+  e.waitUntil(caches.open('nlb-v1').then(cache=>cache.addAll([
+    '/', '/index.html','/style.css','/app.js','/site.webmanifest','/og-image.png','/apple-touch-icon.png',
+  ])));
+});
+self.addEventListener('fetch', (e)=>{
+  e.respondWith(caches.match(e.request).then(res=>res || fetch(e.request)));
+});
