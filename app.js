@@ -28,3 +28,23 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').catch(()=>{});
   });
 }
+
+
+// Lightweight reveal-on-scroll + parallax (perf friendly)
+(() => {
+  try {
+    const root = document.documentElement;
+    const onScroll = () => root.style.setProperty('--scrollY', String(window.scrollY||0));
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) if (e.isIntersecting) e.target.classList.add('in');
+      }, {threshold: 0.12, rootMargin: '0px 0px -10% 0px'});
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    }
+  } catch {}
+})();
