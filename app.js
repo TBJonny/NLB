@@ -48,3 +48,39 @@ if ('serviceWorker' in navigator) {
     }
   } catch {}
 })();
+
+
+// Auto-highlight floating dock based on section visibility + Services polish
+(() => {
+  try {
+    const anchors = Array.from(document.querySelectorAll('.bottom-dock a'));
+    const map = new Map(anchors.map(a => [a.getAttribute('href').replace('#',''), a]));
+    if ('IntersectionObserver' in window) {
+      const io2 = new IntersectionObserver((entries) => {
+        let best = null, max = 0;
+        for (const e of entries) {
+          const id = (e.target.getAttribute('data-anchor')||'').trim();
+          if (!id) continue;
+          const ratio = e.intersectionRatio || 0;
+          if (ratio > max) { max = ratio; best = id; }
+        }
+        if (best && map.has(best)) {
+          anchors.forEach(a => a.classList.remove('active'));
+          map.get(best).classList.add('active');
+        }
+      }, {threshold: [0,0.25,0.5,0.75,1]});
+      document.querySelectorAll('section[data-anchor]').forEach(el => io2.observe(el));
+    }
+    // Wrap Services list in a section-card (non-destructive)
+    const services = document.querySelector('#Services');
+    if (services && !services.querySelector('.section-card')) {
+      const firstList = services.querySelector('ul,ol');
+      if (firstList) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'section-card';
+        firstList.parentNode.insertBefore(wrapper, firstList);
+        wrapper.appendChild(firstList);
+      }
+    }
+  } catch {}
+})();

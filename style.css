@@ -179,3 +179,37 @@ body{padding-bottom:40px}
 @media (prefers-reduced-motion: reduce){
   .reveal,.parallax-float{transition:none; transform:none!important}
 }
+
+
+/* === Hero depth: gradient sweeps using pseudo elements, follows parallax var === */
+#Hero{position:relative; overflow:hidden}
+#Hero::before,#Hero::after{
+  content:""; position:absolute; inset:auto; left:50%; transform:translate(-50%, calc(var(--scrollY)*.03));
+  width:120vw; height:120px; pointer-events:none; filter:blur(30px); opacity:.35;
+  background:radial-gradient(60% 100% at 50% 50%, rgba(255,255,255,.18), rgba(255,255,255,0));
+  bottom:-20px;
+}
+#Hero::after{top:10px; bottom:auto; opacity:.18; transform:translate(-50%, calc(var(--scrollY)*-.02))}
+
+/* === Section header accent rule (animates when .in is added) === */
+section h2, section h3{position:relative; text-align:center}
+section h2::after, section h3::after{
+  content:""; position:absolute; left:50%; bottom:-10px; height:3px; width:120px;
+  background:currentColor; transform:translateX(-50%) scaleX(.15); transform-origin:center;
+  opacity:.35; transition:transform .45s ease .05s, opacity .45s ease .05s
+}
+section.in h2::after, section.in h3::after{transform:translateX(-50%) scaleX(1); opacity:.6}
+
+/* === Services readability (agnostic to markup) === */
+#Services .section-card{padding:12px}
+#Services ul{list-style:none; padding:0; margin:0}
+#Services li{display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-radius:10px}
+#Services li:nth-child(odd){background:rgba(255,255,255,.035)}
+#Services li:hover{background:rgba(255,255,255,.09)}
+@media (prefers-color-scheme: light){
+  #Services li:nth-child(odd){background:rgba(0,0,0,.035)}
+  #Services li:hover{background:rgba(0,0,0,.08)}
+}
+
+/* === Floating dock active state === */
+.bottom-dock a.active{border-width:2px; transform:none}
