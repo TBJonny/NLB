@@ -21,109 +21,41 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
 })();
 window.addEventListener('load', ()=>{ document.getElementById('loader')?.classList.add('hide'); });
 
+// Inject star rows into existing review cards (no new reviews)
+(() => {
+  try {
+    document.querySelectorAll('#Reviews .card').forEach(card => {
+      if (!card.querySelector('.stars')) {
+        const stars = document.createElement('span');
+        stars.className = 'stars';
+        stars.setAttribute('aria-label','5 out of 5 stars');
+        for (let i=0;i<5;i++){ const s = document.createElement('span'); s.className='star'; stars.appendChild(s); }
+        const strong = card.querySelector('strong');
+        if (strong && strong.nextSibling) {
+          strong.parentNode.insertBefore(stars, strong.nextSibling);
+        } else {
+          card.prepend(stars);
+        }
+      }
+    });
+  } catch {}
+})();
 
-// Register service worker for PWA (Android + iOS Safari support)
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', ()=>{
-    navigator.serviceWorker.register('/sw.js').catch(()=>{});
+// Scroll spy highlight for top nav
+(() => {
+  const links = Array.from(document.querySelectorAll('.nav .links a[href^="#"]'));
+  if (!links.length) return;
+  const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.getAttribute('id');
+        links.forEach(l => l.classList.toggle('active', l === map.get(id)));
+      }
+    });
+  }, {rootMargin:'-35% 0% -60% 0%', threshold:0.01});
+  map.forEach((a,id) => {
+    const sec = document.getElementById(id);
+    if (sec) obs.observe(sec);
   });
-}
-
-
-// Lightweight reveal-on-scroll + parallax (perf friendly)
-(() => {
-  try {
-    const root = document.documentElement;
-    const onScroll = () => root.style.setProperty('--scrollY', String(window.scrollY||0));
-    window.addEventListener('scroll', onScroll, {passive:true});
-    onScroll();
-
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => {
-        for (const e of entries) if (e.isIntersecting) e.target.classList.add('in');
-      }, {threshold: 0.12, rootMargin: '0px 0px -10% 0px'});
-      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-    } else {
-      document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
-    }
-  } catch {}
-})();
-
-
-// Auto-highlight floating dock based on section visibility + Services polish
-(() => {
-  try {
-    const anchors = Array.from(document.querySelectorAll('.bottom-dock a'));
-    const map = new Map(anchors.map(a => [a.getAttribute('href').replace('#',''), a]));
-    if ('IntersectionObserver' in window) {
-      const io2 = new IntersectionObserver((entries) => {
-        let best = null, max = 0;
-        for (const e of entries) {
-          const id = (e.target.getAttribute('data-anchor')||'').trim();
-          if (!id) continue;
-          const ratio = e.intersectionRatio || 0;
-          if (ratio > max) { max = ratio; best = id; }
-        }
-        if (best && map.has(best)) {
-          anchors.forEach(a => a.classList.remove('active'));
-          map.get(best).classList.add('active');
-        }
-      }, {threshold: [0,0.25,0.5,0.75,1]});
-      document.querySelectorAll('section[data-anchor]').forEach(el => io2.observe(el));
-    }
-    // Wrap Services list in a section-card (non-destructive)
-    const services = document.querySelector('#Services');
-    if (services && !services.querySelector('.section-card')) {
-      const firstList = services.querySelector('ul,ol');
-      if (firstList) {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'section-card';
-        firstList.parentNode.insertBefore(wrapper, firstList);
-        wrapper.appendChild(firstList);
-      }
-    }
-  } catch {}
-})();
-
-
-// Web Share for quick sharing (falls back to link selection)
-(() => {
-  try {
-    const btn = document.getElementById('share-site');
-    if (btn) btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (navigator.share) {
-        navigator.share({
-          title: 'Next Level Barbershop',
-          text: 'Book a cut, see prices, and get directions.',
-          url: location.origin + location.pathname
-        }).catch(()=>{});
-      } else {
-        // fallback: copy link
-        navigator.clipboard?.writeText(location.href);
-        btn.textContent = 'Link Copied';
-        setTimeout(() => btn.textContent = 'Share', 1600);
-      }
-    });
-  } catch {}
-})();
-
-
-// Highlight today's hours and clean stray text
-(() => {
-  try {
-    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    const today = days[new Date().getDay()];
-    document.querySelectorAll('.hours .row, .section-card .row').forEach(r => {
-      const t = r.textContent.trim();
-      for (const d of days) {
-        if (t.startsWith(d)) { if (d === today) r.classList.add('today'); break; }
-      }
-    });
-    // Remove any stray bullets from legacy hero lines if still present
-    document.querySelectorAll('p').forEach(p => {
-      const txt = p.textContent || "";
-      if (/Appointments Preferred|Coors|Bob's Burgers/i.test(txt)) p.remove();
-    });
-  } catch {}
 })();
