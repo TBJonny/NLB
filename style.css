@@ -224,3 +224,52 @@ section.in h2::after, section.in h3::after{transform:translateX(-50%) scaleX(1);
 
 /* Better focus states */
 :focus-visible{outline:3px solid #00b7ff; outline-offset:2px; border-radius:8px}
+
+
+/* === Brand Accents: Gold, Blue, Purple === */
+:root{
+  --gold:#FFD86B;
+  --blue:#6CA8FF;
+  --purple:#B58CFF;
+  --accent-grad: radial-gradient(60% 120% at 50% 0%, rgba(255,216,107,.18), rgba(108,168,255,.12) 40%, rgba(181,140,255,.14) 80%, rgba(0,0,0,0) 100%);
+}
+body::before{
+  content:""; position:fixed; inset:-10% -10% auto -10%; height:45vh; pointer-events:none;
+  background:var(--accent-grad); z-index:-1; filter:blur(20px);
+}
+/* Make accents pop on headings and key pills */
+h1,h2,h3{letter-spacing:.3px}
+h1{background:linear-gradient(180deg,#fff,rgba(255,255,255,.88));-webkit-background-clip:text;background-clip:text;color:transparent}
+.accent{background:linear-gradient(90deg,var(--gold),var(--blue),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* Chip/pill hover rings */
+.pill:hover{box-shadow:0 0 0 3px rgba(255,216,107,.25),0 6px 16px rgba(0,0,0,.18)}
+@media (prefers-color-scheme: light){
+  .pill:hover{box-shadow:0 0 0 3px rgba(108,168,255,.25),0 6px 16px rgba(0,0,0,.10)}
+}
+
+/* Remove old bottom dock visuals and reduce padding */
+.bottom-dock{display:none!important}
+body{padding-bottom:20px}
+
+/* Reviews gold stars */
+.stars{display:inline-flex;gap:2px;vertical-align:middle}
+.stars .star{width:18px;height:18px;display:inline-block;background:conic-gradient(var(--gold),#f5a623,var(--gold));-webkit-mask:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><path d=%22M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z%22/></svg>') center/contain no-repeat;mask: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><path d=%22M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z%22/></svg>') center/contain no-repeat}
+.stars.small .star{width:14px;height:14px}
+
+/* Services price lines */
+.price-line{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:12px}
+.price-line:nth-child(odd){background:rgba(255,255,255,.035)}
+.price-line:hover{background:rgba(255,255,255,.09)}
+.price-name{display:flex;align-items:center;gap:10px;font-weight:800}
+.price-emoji{font-size:20px}
+.price-cost{font-weight:900}
+
+/* Light scheme alternates */
+@media (prefers-color-scheme: light){
+  .price-line:nth-child(odd){background:rgba(0,0,0,.035)}
+  .price-line:hover{background:rgba(0,0,0,.08)}
+}
+
+/* Footer/Bottom card tidy */
+footer,.bottom-card{display:none!important}
