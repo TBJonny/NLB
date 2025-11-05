@@ -1,6 +1,6 @@
 
 self.addEventListener('install', (e)=>{
-  e.waitUntil(caches.open('nlb-v10').then(cache=>cache.addAll([
+  e.waitUntil(caches.open('nlb-v11').then(cache=>cache.addAll([
     '/', '/index.html','/style.css','/app.js','/site.webmanifest','/og-image.png','/apple-touch-icon.png',
   ])));
 });

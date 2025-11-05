@@ -107,3 +107,23 @@ if ('serviceWorker' in navigator) {
     });
   } catch {}
 })();
+
+
+// Highlight today's hours and clean stray text
+(() => {
+  try {
+    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const today = days[new Date().getDay()];
+    document.querySelectorAll('.hours .row, .section-card .row').forEach(r => {
+      const t = r.textContent.trim();
+      for (const d of days) {
+        if (t.startsWith(d)) { if (d === today) r.classList.add('today'); break; }
+      }
+    });
+    // Remove any stray bullets from legacy hero lines if still present
+    document.querySelectorAll('p').forEach(p => {
+      const txt = p.textContent || "";
+      if (/Appointments Preferred|Coors|Bob's Burgers/i.test(txt)) p.remove();
+    });
+  } catch {}
+})();
