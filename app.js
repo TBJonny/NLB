@@ -20,3 +20,11 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>{
   setInterval(()=>{ x -= 1; el.style.transform = `translateX(${x}px)`; if(Math.abs(x) > el.scrollWidth/2) x = 0; }, 16);
 })();
 window.addEventListener('load', ()=>{ document.getElementById('loader')?.classList.add('hide'); });
+
+
+// Register service worker for PWA (Android + iOS Safari support)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('/sw.js').catch(()=>{});
+  });
+}

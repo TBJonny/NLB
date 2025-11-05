@@ -78,3 +78,9 @@ button{font:inherit}
   display:grid;place-items:center;z-index:100;transition:.3s opacity;}
 #loader img{width:120px;height:120px;border-radius:24px;filter:drop-shadow(0 8px 22px rgba(0,0,0,.35))}
 #loader.hide{opacity:0;pointer-events:none}
+
+
+/* --- Additions for barber-card pills --- */
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.pill.sm{padding:6px 10px;font-size:12px}
+.card .pill{border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,0))}
