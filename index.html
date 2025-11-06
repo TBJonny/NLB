@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="style.css" />
   <script defer src="app.js"></script>
 
-  <!-- LocalBusiness/Barbershop schema -->
+  <!-- Schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -37,8 +37,8 @@
 </head>
 <body>
 
-<!-- Sticky top bar (nothing above it) -->
-<header class="topbar" id="topbar">
+<!-- Sticky header -->
+<header id="topbar" class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="#Home" aria-label="Home">
       <img src="icon-64.png" alt="" />
@@ -53,25 +53,25 @@
       <a class="link-pill" data-nav href="#Map">Directions</a>
     </nav>
 
-    <button id="menuBtn" class="hamburger" aria-controls="drawer" aria-expanded="false" aria-label="Open menu">
+    <button id="menuBtn" type="button" class="hamburger" aria-controls="drawer" aria-expanded="false" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
   </div>
+</header>
 
-  <!-- Mobile drawer -->
-  <div id="drawer" class="drawer" aria-hidden="true">
-    <div class="sheet">
-      <div class="wrap">
-        <a data-nav href="#Home">Home</a>
-        <a data-nav href="#Barbers">Barbers</a>
-        <a data-nav href="#Services">Services</a>
-        <a data-nav href="#Reviews">Reviews</a>
-        <a data-nav href="#Map">Directions</a>
-        <a href="tel:+15055036216">Call the Shop</a>
-      </div>
+<!-- Mobile drawer lives OUTSIDE header so it can overlay everything -->
+<div id="drawer" class="drawer" aria-hidden="true">
+  <div class="sheet">
+    <div class="wrap">
+      <a data-nav href="#Home">Home</a>
+      <a data-nav href="#Barbers">Barbers</a>
+      <a data-nav href="#Services">Services</a>
+      <a data-nav href="#Reviews">Reviews</a>
+      <a data-nav href="#Map">Directions</a>
+      <a href="tel:+15055036216">Call the Shop</a>
     </div>
   </div>
-</header>
+</div>
 
 <!-- HERO -->
 <section id="Home" class="hero">
@@ -84,7 +84,7 @@
       <a class="cta" href="tel:+15055036216">(505) 503-6216</a>
     </div>
 
-    <!-- LED ribbon “screen” -->
+    <!-- LED ribbon -->
     <div class="ticker" aria-label="Location ribbon">
       <div class="ticker-track">
         <span class="ticker-text">
@@ -137,15 +137,13 @@
   </div>
 </section>
 
-<!-- REVIEWS (your 4 real ones w/ stars) -->
+<!-- REVIEWS -->
 <section id="Reviews" class="section">
   <div class="wrap">
     <h2>Reviews</h2>
     <div class="grid">
-
       <article class="card hover review">
-        <div class="review-meta">
-          <span class="who">Francesca Tafoya</span> • <span class="when">4 weeks ago</span>
+        <div class="review-meta"><span class="who">Francesca Tafoya</span> • <span class="when">4 weeks ago</span>
           <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
         </div>
         <p>If I could give a million stars for my experience today I would! Taylor was amazing and I have a great cut for my new job tomorrow. Fast, gentle, and efficient. I will be back next week. Kindness is free. 🙏💕</p>
@@ -153,17 +151,15 @@
       </article>
 
       <article class="card hover review">
-        <div class="review-meta">
-          <span class="who">Keely Struck</span> • <span class="when">1 month ago</span>
+        <div class="review-meta"><span class="who">Keely Struck</span> • <span class="when">1 month ago</span>
           <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
         </div>
         <p>They did a great job on my son’s hair. It was his first haircut and I wanted a baby mullet. Very good with kids and very patient. Love the way it turned out!</p>
-        <div class="review-tag">Services: Haircut • Barber: —</div>
+        <div class="review-tag">Services: Haircut</div>
       </article>
 
       <article class="card hover review">
-        <div class="review-meta">
-          <span class="who">Jennifer Lopez</span> • <span class="when">2 months ago</span>
+        <div class="review-meta"><span class="who">Jennifer Lopez</span> • <span class="when">2 months ago</span>
           <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
         </div>
         <p>I take my toddler here to get a haircut from Cash and she does an amazing job every time. Very good with kids and fast. We will be going back with barber Cash!</p>
@@ -171,27 +167,22 @@
       </article>
 
       <article class="card hover review">
-        <div class="review-meta">
-          <span class="who">J O-C</span> • <span class="when">2 months ago</span>
+        <div class="review-meta"><span class="who">J O-C</span> • <span class="when">2 months ago</span>
           <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
         </div>
         <p>Been coming here for years and it is always solid. All the barbers know their craft. I usually walk in and they get me taken care of without any hassle. Consistent, professional, and worth every visit.</p>
-        <div class="review-tag">Services: Haircut &amp; Beard Trim • Requested style: Mid Skin Fade</div>
-        <div class="review-tag">Barbers: Cash, Deshaun, Jonny &amp; Gimo</div>
+        <div class="review-tag">Services: Haircut &amp; Beard Trim • Barbers: Cash, Deshaun, Jonny &amp; Gimo</div>
       </article>
-
     </div>
 
     <div class="cta-row" style="margin-top:16px">
       <a class="cta" target="_blank" rel="noopener"
-         href="https://www.google.com/search?q=Next+Level+Barber+Shop+Albuquerque+reviews">
-         Give us a review
-      </a>
+         href="https://www.google.com/search?q=Next+Level+Barber+Shop+Albuquerque+reviews">Give us a review</a>
     </div>
   </div>
 </section>
 
-<!-- MAP / HOURS (no extra bottom section, no Quick Links) -->
+<!-- MAP / HOURS -->
 <section id="Map" class="section">
   <div class="wrap">
     <h2>Directions</h2>
@@ -222,7 +213,7 @@
     <div class="card hover" style="margin-top:16px">
       <div class="map-embed">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5914077550096!2d-106.72760522378519!3d35.19173505670752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87226f7a1054dd87%3A0x7736d7f662fd5a2b!2sNext%20Level%20Barber%20Shop%20Albuquerque!5e0!3m2!1sen!2sus!4v1762372094637!5m2!1sen!2sus"
-              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </div>
