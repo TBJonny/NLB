@@ -8,18 +8,15 @@
 <link rel="icon" href="favicon.ico" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <link rel="manifest" href="site.webmanifest" />
-
 <meta name="theme-color" content="#ffffff" />
 <meta name="description" content="Fresh fades, clean shaves, and kid-friendly cuts on Albuquerque’s Westside." />
 
-<!-- Open Graph / Twitter -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Next Level Barbershop" />
 <meta property="og:description" content="Fresh fades, clean shaves, and kid-friendly cuts on Albuquerque’s Westside." />
 <meta property="og:image" content="icon-512.png" />
 <meta name="twitter:card" content="summary_large_image" />
 
-<!-- Local business schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -35,41 +32,31 @@
     "postalCode": "87114",
     "addressCountry": "US"
   },
-  "geo": {"@type": "GeoCoordinates","latitude":35.19173505670752,"longitude":-106.72760522378519},
+  "geo": {"@type":"GeoCoordinates","latitude":35.19173505670752,"longitude":-106.72760522378519},
   "url": "/"
 }
 </script>
 
 <style>
-  /* ---------- THEME ---------- */
+  /* THEME */
   :root{
-    --ink:#000;             /* light text */
-    --bg:#f7f8fb;           /* page background */
-    --surface:#fff;         /* cards / nav */
-    --border:rgba(0,0,0,.10);
-    --muted:rgba(0,0,0,.64);
-    --shadow:0 8px 24px rgba(0,0,0,.08);
-    --shadow-lg:0 16px 40px rgba(0,0,0,.14);
+    --ink:#000; --bg:#f7f8fb; --surface:#fff; --border:rgba(0,0,0,.10);
+    --muted:rgba(0,0,0,.64); --shadow:0 8px 24px rgba(0,0,0,.08); --shadow-lg:0 16px 40px rgba(0,0,0,.14);
     --gold:#FFD86B; --blue:#6CA8FF; --purple:#B58CFF;
   }
   [data-theme="dark"]{
-    --ink:#fff;
-    --bg:#0b0d10;
-    --surface:#121417;
-    --border:rgba(255,255,255,.10);
-    --muted:rgba(255,255,255,.75);
-    --shadow:0 10px 28px rgba(0,0,0,.55);
-    --shadow-lg:0 22px 60px rgba(0,0,0,.65);
+    --ink:#fff; --bg:#0b0d10; --surface:#121417; --border:rgba(255,255,255,.10);
+    --muted:rgba(255,255,255,.75); --shadow:0 10px 28px rgba(0,0,0,.55); --shadow-lg:0 22px 60px rgba(0,0,0,.65);
   }
   @media (prefers-color-scheme: dark){
     :root{color-scheme:dark}
-    :root:not([data-theme="light"]){ /* follow system unless user forced light */
+    :root:not([data-theme="light"]){
       --ink:#fff; --bg:#0b0d10; --surface:#121417; --border:rgba(255,255,255,.10);
       --muted:rgba(255,255,255,.75); --shadow:0 10px 28px rgba(0,0,0,.55); --shadow-lg:0 22px 60px rgba(0,0,0,.65);
     }
   }
 
-  /* ---------- BASE ---------- */
+  /* BASE */
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
   h1,h2,h3{margin:0 0 12px;font-weight:900}
@@ -83,64 +70,58 @@
   .muted{color:var(--muted)}
   .note{opacity:.8;text-align:center;margin-top:10px}
 
-  /* ---------- TOPBAR (Google Store style) ---------- */
+  /* TOP BAR */
   .topbar{position:sticky;top:0;z-index:100;background:color-mix(in oklab, var(--surface), transparent 0%);backdrop-filter:blur(8px) saturate(125%);border-bottom:1px solid var(--border)}
   .topbar-inner{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;justify-content:space-between}
   .brand{display:flex;align-items:center;gap:10px;min-width:0}
   .brand img{width:28px;height:28px;border-radius:6px}
   .brand .name{font-weight:900;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .links{display:flex;gap:10px;margin-left:12px}
+  .link-pill{padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:var(--surface)}
+  .link-pill:hover{background:color-mix(in oklab, var(--surface), var(--ink) 6%)}
   .actions{display:flex;align-items:center;gap:8px}
   .cta{padding:10px 14px;border:1px solid var(--border);border-radius:999px;background:var(--surface);font-weight:800;box-shadow:var(--shadow);transition:box-shadow .2s ease,transform .2s ease}
   .cta:hover{box-shadow:var(--shadow-lg);transform:translateY(-1px)}
   .hamburger{display:none;align-items:center;justify-content:center;width:42px;height:42px;border-radius:999px;border:1px solid var(--border);background:var(--surface);box-shadow:var(--shadow)}
   .hamburger svg{width:22px;height:22px}
-  .links{display:flex;gap:10px;margin-left:12px}
-  .link-pill{padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:var(--surface)}
-  .link-pill:hover{background:color-mix(in oklab, var(--surface), var(--ink) 6%)}
+  @media (max-width:900px){ .links{display:none} .hamburger{display:inline-flex} }
 
-  /* Mobile: collapse links to hamburger */
-  @media (max-width: 900px){
-    .links{display:none}
-    .hamburger{display:inline-flex}
-  }
-
-  /* ---------- MOBILE MENU (drawer) ---------- */
+  /* DRAWER */
   .drawer{position:fixed;inset:0 0 auto 0;height:0;overflow:hidden;background:color-mix(in oklab, var(--surface), transparent 15%);backdrop-filter:blur(6px);transition:height .25s ease}
   .drawer.open{height:280px;border-bottom:1px solid var(--border)}
   .drawer .wrap{display:flex;gap:10px;flex-wrap:wrap}
   .drawer a{padding:10px 14px;border:1px solid var(--border);border-radius:999px;background:var(--surface)}
 
-  /* ---------- AURORA HERO ---------- */
+  /* HERO */
   .hero{padding:42px 0 24px;position:relative;isolation:isolate}
   .hero::before{content:"";position:absolute;inset:-20% -10% auto;height:55vh;z-index:-1;filter:blur(28px);
     background:
       radial-gradient(120% 140% at 15% 0%, color-mix(in oklab, var(--gold), transparent 78%), transparent 45%),
       radial-gradient(120% 140% at 85% -20%, color-mix(in oklab, var(--blue), transparent 80%), transparent 55%),
-      radial-gradient(140% 120% at 50% 100%, color-mix(in oklab, var(--purple), transparent 78%), transparent 60%);}
-
+      radial-gradient(140% 120% at 50% 100%, color-mix(in oklab, var(--purple), transparent 78%), transparent 60%); }
   .eyebrow{letter-spacing:.25em;font-size:.8rem;opacity:.8;margin-bottom:6px}
   .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
 
-  /* ---------- CARDS & HOVER ---------- */
+  /* CARDS */
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
   .card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
   .card.hover{transition:transform .2s ease, box-shadow .2s ease}
   .card.hover:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
   .rule{height:2px;width:100%;margin:10px 0;background:linear-gradient(90deg, color-mix(in oklab, var(--ink), transparent 85%), transparent)}
 
-  /* ---------- BOOKING PILLS ---------- */
+  /* BOOK PILLS */
   .pill{display:inline-block;padding:12px 16px;border:1.5px solid var(--border);border-radius:999px;background:var(--surface);font-weight:900}
   .pill:hover{box-shadow:var(--shadow)}
   .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
 
-  /* ---------- SERVICES ---------- */
+  /* SERVICES */
   .price-line{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:14px}
   .price-line:nth-child(odd){background:color-mix(in oklab, var(--surface), var(--ink) 4%)}
   .price-name{display:flex;align-items:center;gap:10px;font-weight:900}
   .emoji{font-size:20px}
   .price-cost{font-weight:900}
 
-  /* ---------- STARS ---------- */
+  /* STARS */
   .stars{display:inline-flex;gap:2px;vertical-align:middle;margin-left:6px}
   .stars .star{
     width:14px;height:14px;display:inline-block;background:conic-gradient(#FFD86B,#f5a623,#FFD86B);
@@ -148,17 +129,21 @@
             mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>') center/contain no-repeat;
   }
 
-  /* ---------- HOURS ---------- */
+  /* HOURS */
   .hours .row{display:flex;justify-content:space-between;padding:10px 12px;border-radius:12px}
   .hours .row:nth-child(odd){background:color-mix(in oklab, var(--surface), var(--ink) 4%)}
   .hours .row.today{outline:2px solid color-mix(in oklab, var(--gold), transparent 45%);box-shadow:0 0 0 4px color-mix(in oklab, var(--blue), transparent 80%);background:linear-gradient(90deg, color-mix(in oklab, var(--gold), transparent 75%), color-mix(in oklab, var(--blue), transparent 78%) 50%, color-mix(in oklab, var(--purple), transparent 75%))}
 
-  /* ---------- MAP ---------- */
+  /* MAP */
   .map-embed iframe{width:100%;height:420px;border:0;border-radius:14px}
 
-  @media (max-width:780px){
-    .wrap{padding:18px}
-  }
+  /* REVIEW META */
+  .review-meta{display:flex;gap:8px;align-items:center;margin-bottom:6px;color:var(--muted);font-size:.9rem}
+  .review-meta .who{font-weight:800;color:var(--ink)}
+  .review-tag{display:inline-block;padding:6px 10px;border:1px solid var(--border);border-radius:999px;margin-top:10px;background:var(--surface)}
+  .review-img{border-radius:12px;margin-top:12px;max-width:100%;height:auto}
+
+  @media (max-width:780px){ .wrap{padding:18px} }
 </style>
 </head>
 <body>
@@ -171,7 +156,6 @@
       <span class="name">Next Level Barbershop</span>
     </a>
 
-    <!-- Desktop links -->
     <nav class="links" aria-label="Primary">
       <a class="link-pill" href="#Home">Home</a>
       <a class="link-pill" href="#Barbers">Barbers</a>
@@ -191,7 +175,6 @@
     </div>
   </div>
 
-  <!-- Mobile drawer -->
   <div id="drawer" class="drawer" role="dialog" aria-label="Menu">
     <div class="wrap">
       <a href="#Home">Home</a>
@@ -209,7 +192,7 @@
   <div class="wrap">
     <div class="eyebrow">ALBUQUERQUE • WESTSIDE</div>
     <h1>Welcome</h1>
-    <p class="muted">Fresh fades, clean shaves, and kid-friendly cuts. Select a barber below to book or call the shop.</p>
+    <p class="muted">Fresh fades, clean shaves, and kid-friendly cuts. Tap a barber below to book or call the shop.</p>
     <div class="cta-row">
       <a class="cta" href="#Barbers">Meet the Team</a>
       <a class="cta" href="tel:+15055036216">Call the Shop</a>
@@ -222,13 +205,13 @@
   <div class="wrap">
     <h2>Our Barbers 💈</h2>
     <div class="grid">
-      <article class="card hover"><h3>VINCENT</h3><div class="rule"></div><p class="muted">Owner • Master Barber</p><p>Founder, fader, visionary.</p><div class="pill-row"><a class="pill" href="#Home">Book with VINCENT</a></div></article>
-      <article class="card hover"><h3>ZWALU</h3><div class="rule"></div><p class="muted">Detail Specialist</p><p>Precision in every pass.</p><div class="pill-row"><a class="pill" href="#Home">Book with ZWALU</a></div></article>
-      <article class="card hover"><h3>GIMO</h3><div class="rule"></div><p class="muted">Style Architect</p><p>Style that speaks before you do.</p><div class="pill-row"><a class="pill" href="#Home">Book with GIMO</a></div></article>
-      <article class="card hover"><h3>DESHAUN</h3><div class="rule"></div><p class="muted">Fade Technician</p><p>Sharp fades. Calm atmosphere.</p><div class="pill-row"><a class="pill" href="#Home">Book with DESHAUN</a></div></article>
-      <article class="card hover"><h3>CASH</h3><div class="rule"></div><p class="muted">Kids & Family Pro</p><p>Quick with the clippers, focused on results.</p><div class="pill-row"><a class="pill" href="#Home">Book with CASH</a></div></article>
-      <article class="card hover"><h3>JONNY</h3><div class="rule"></div><p class="muted">Custom Work</p><p>Where art meets the edge.</p><div class="pill-row"><a class="pill" href="#Home">Book with JONNY</a></div></article>
-      <article class="card hover"><h3>TAYLOR</h3><div class="rule"></div><p class="muted">Fresh Cuts</p><p>Clean lines. Clean finish.</p><div class="pill-row"><a class="pill" href="#Home">Book with TAYLOR</a></div></article>
+      <article class="card hover"><h3>VINCENT</h3><div class="rule"></div><p class="muted">Owner • Master Barber</p><p>Founder, fader, visionary.</p><div class="pill-row"><a class="pill" href="#Home">Book w/ VINCENT</a></div></article>
+      <article class="card hover"><h3>ZWALU</h3><div class="rule"></div><p class="muted">Detail Specialist</p><p>Precision in every pass.</p><div class="pill-row"><a class="pill" href="#Home">Book w/ ZWALU</a></div></article>
+      <article class="card hover"><h3>GIMO</h3><div class="rule"></div><p class="muted">Style Architect</p><p>Style that speaks before you do.</p><div class="pill-row"><a class="pill" href="#Home">Book w/ GIMO</a></div></article>
+      <article class="card hover"><h3>DESHAUN</h3><div class="rule"></div><p class="muted">Fade Technician</p><p>Sharp fades. Calm atmosphere.</p><div class="pill-row"><a class="pill" href="#Home">Book w/ DESHAUN</a></div></article>
+      <article class="card hover"><h3>CASH</h3><div class="rule"></div><p class="muted">Kids & Family Pro</p><p>Quick with the clippers, focused on results.</p><div class="pill-row"><a class="pill" href="#Home">Book w/ CASH</a></div></article>
+      <article class="card hover"><h3>JONNY</h3><div class="rule"></div><p class="muted">Custom Work</p><p>Where art meets the edge.</p><div class="pill-row"><a class="pill" href="#Home">Book w/ JONNY</a></div></article>
+      <article class="card hover"><h3>TAYLOR</h3><div class="rule"></div><p class="muted">Fresh Cuts</p><p>Clean lines. Clean finish.</p><div class="pill-row"><a class="pill" href="#Home">Book w/ TAYLOR</a></div></article>
     </div>
   </div>
 </section>
@@ -256,20 +239,61 @@
   </div>
 </section>
 
-<!-- REVIEWS (use your real reviews; stars are added automatically) -->
+<!-- REVIEWS -->
 <section id="Reviews" class="section">
   <div class="wrap">
     <h2>Reviews</h2>
     <div class="grid">
-      <!-- Paste your existing review items here, for example:
-      <article class="card hover review"><p>“Clean fade and friendly team.” — <strong>Marcus P.</strong></p></article>
-      <article class="card hover review"><p>“Great with kids. Highly recommend.” — <strong>Alyssa R.</strong></p></article>
-      -->
+
+      <article class="card hover review">
+        <div class="review-meta">
+          <span class="who">Francesca Tafoya</span> • <span class="when">4 weeks ago</span>
+          <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
+        </div>
+        <p>If I could give a million stars for my experience today I would! Taylor was so amazing and I have a great cut for my new job tomorrow! We had a great conversation and she was fast, gentle and efficient in my haircut. Thank you so much! I will be back next week. And always remember, kindness is free. 🙏💕</p>
+        <div class="review-tag">Services: Haircut • Barber: Taylor</div>
+      </article>
+
+      <article class="card hover review">
+        <div class="review-meta">
+          <span class="who">Keely Struck</span> • <span class="when">1 month ago</span>
+          <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
+        </div>
+        <p>They did a great job on my son's hair! It was his first haircut and I wanted a baby mullet. They are really good with kids and very patient. I love the way it turned out!</p>
+        <div class="review-tag">Services: Haircut • Barber: (not specified)</div>
+      </article>
+
+      <article class="card hover review">
+        <div class="review-meta">
+          <span class="who">Jennifer Lopez</span> • <span class="when">2 months ago</span>
+          <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
+        </div>
+        <p>I take my toddler here to get a haircut from Cash and she does an amazing job every time. She is very good with kids and is pretty fast. We will be going back with barber Cash!</p>
+        <div class="review-tag">Services: Haircut • Barber: Cash</div>
+      </article>
+
+      <article class="card hover review">
+        <div class="review-meta">
+          <span class="who">J O-C</span> • <span class="when">2 months ago</span>
+          <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
+        </div>
+        <p>Been coming here for years and it is always solid. All the barbers know their craft, and no matter who I sit with, I leave looking fresh. I usually just walk in and they get me taken care of without any hassle. Consistent, professional, and worth every visit.</p>
+        <div class="review-tag">Services: Haircut & Beard Trim • Requested style: Mid Skin Fade</div>
+        <div class="review-tag">Barbers: Cash, Deshaun, Jonny & Gimo</div>
+      </article>
+
+    </div>
+
+    <div class="cta-row" style="margin-top:16px">
+      <a class="cta" target="_blank" rel="noopener"
+         href="https://www.google.com/search?q=Next+Level+Barber+Shop+Albuquerque+reviews">
+         Give us a review
+      </a>
     </div>
   </div>
 </section>
 
-<!-- VISIT / MAP -->
+<!-- MAP / VISIT -->
 <section id="Map" class="section">
   <div class="wrap">
     <h2>Visit</h2>
@@ -287,7 +311,7 @@
       </div>
 
       <div class="card hover">
-        <h3>Pull Up</h3>
+        <h3>Visit Us</h3>
         <address>6510 Paradise Blvd NW unit d, Albuquerque, NM 87114</address>
         <div class="pill-row">
           <a class="pill" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=6510+Paradise+Blvd+NW+unit+d,+Albuquerque,+NM+87114">Google Maps</a>
@@ -305,7 +329,7 @@
 </section>
 
 <script>
-  /* Mobile drawer */
+  /* Drawer */
   const drawer = document.getElementById('drawer');
   const menuBtn = document.getElementById('menuBtn');
   menuBtn?.addEventListener('click', () => {
@@ -313,7 +337,7 @@
     menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
 
-  /* Dark-mode toggle: remembers choice, otherwise follows system */
+  /* Dark-mode toggle (persist) */
   const root = document.documentElement;
   const savedTheme = localStorage.getItem('nlb-theme');
   if (savedTheme) root.setAttribute('data-theme', savedTheme);
@@ -334,7 +358,7 @@
     });
   })();
 
-  /* Scroll-spy: activate link while section is in view (desktop only links) */
+  /* Scroll-spy for desktop links */
   (() => {
     const links = Array.from(document.querySelectorAll('.links a[href^="#"]'));
     if (!links.length) return;
@@ -350,23 +374,22 @@
     map.forEach((a, id) => { const sec = document.getElementById(id); if (sec) io.observe(sec); });
   })();
 
-  /* Reviews: add gold stars to existing review text nodes (no text changes) */
+  /* Add stars to any review text that lacks them (safety net) */
   (() => {
     const scope = document.querySelector('#Reviews .grid');
     if (!scope) return;
-    scope.querySelectorAll('article, .review, p, li').forEach(el => {
-      if (el.querySelector('.stars')) return;
-      const txt = (el.textContent || '').trim();
-      if (!txt) return;
+    scope.querySelectorAll('article.review').forEach(el => {
+      const hasMetaStars = !!el.querySelector('.review-meta .stars');
+      if (hasMetaStars) return;
       const stars = document.createElement('span');
       stars.className = 'stars';
       stars.setAttribute('aria-label','5 out of 5');
       for (let i=0;i<5;i++){ const s=document.createElement('span'); s.className='star'; stars.appendChild(s); }
-      el.appendChild(stars);
+      el.prepend(stars);
     });
   })();
 
-  /* PWA service worker (if present) */
+  /* PWA SW */
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(()=>{}));
   }
