@@ -1,160 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Next Level Barbershop — Albuquerque, NM</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Next Level Barbershop — Albuquerque, NM</title>
 
-<link rel="icon" href="favicon.ico" />
-<link rel="apple-touch-icon" href="apple-touch-icon.png" />
-<link rel="manifest" href="site.webmanifest" />
-<meta name="theme-color" content="#ffffff" />
-<meta name="description" content="Fresh fades, clean shaves, and kid-friendly cuts on Albuquerque’s Westside." />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="Fresh fades, clean shaves, and kid-friendly cuts on Albuquerque’s Westside." />
 
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Next Level Barbershop" />
-<meta property="og:description" content="Fresh fades, clean shaves, and kid-friendly cuts on Albuquerque’s Westside." />
-<meta property="og:image" content="icon-512.png" />
-<meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Next Level Barbershop" />
+  <meta property="og:description" content="Fresh fades, clean shaves, and kid-friendly cuts on Albuquerque’s Westside." />
+  <meta property="og:image" content="icon-512.png" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Barbershop",
-  "name": "Next Level Barbershop",
-  "image": "icon-512.png",
-  "telephone": "+1-505-503-6216",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "6510 Paradise Blvd NW unit d",
-    "addressLocality": "Albuquerque",
-    "addressRegion": "NM",
-    "postalCode": "87114",
-    "addressCountry": "US"
-  },
-  "geo": {"@type":"GeoCoordinates","latitude":35.19173505670752,"longitude":-106.72760522378519},
-  "url": "/"
-}
-</script>
+  <link rel="preload" href="style.css" as="style" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="app.js"></script>
 
-<style>
-  /* ---------- THEME (system only) ---------- */
-  :root{
-    --ink:#000; --bg:#f7f8fb; --surface:#fff; --border:rgba(0,0,0,.10);
-    --muted:rgba(0,0,0,.64);
-    --shadow:0 8px 24px rgba(0,0,0,.08);
-    --shadow-lg:0 16px 40px rgba(0,0,0,.14);
-    --gold:#FFD86B; --blue:#6CA8FF; --purple:#B58CFF;
+  <!-- LocalBusiness/Barbershop schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Barbershop",
+    "name":"Next Level Barbershop",
+    "image":"icon-512.png",
+    "telephone":"+1-505-503-6216",
+    "address":{"@type":"PostalAddress","streetAddress":"6510 Paradise Blvd NW unit d","addressLocality":"Albuquerque","addressRegion":"NM","postalCode":"87114","addressCountry":"US"},
+    "geo":{"@type":"GeoCoordinates","latitude":35.19173505670752,"longitude":-106.72760522378519},
+    "url":"/"
   }
-  @media (prefers-color-scheme: dark){
-    :root{color-scheme:dark;
-      --ink:#fff; --bg:#0b0d10; --surface:#121417; --border:rgba(255,255,255,.10);
-      --muted:rgba(255,255,255,.75); --shadow:0 10px 28px rgba(0,0,0,.55); --shadow-lg:0 22px 60px rgba(0,0,0,.65);
-    }
-  }
-
-  /* ---------- BASE ---------- */
-  *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  h1,h2,h3{margin:0 0 12px;font-weight:900}
-  h1{font-size:clamp(32px,4.2vw,56px)}
-  h2{font-size:clamp(22px,3vw,30px)}
-  h3{font-size:clamp(16px,2.1vw,18px)}
-  p{margin:8px 0}
-  a{color:var(--ink);text-decoration:none}
-  .wrap{max-width:1100px;margin:0 auto;padding:24px}
-  .section{padding:28px 0}
-  .muted{color:var(--muted)}
-  .note{opacity:.85;text-align:center;margin-top:10px}
-
-  /* ---------- TOPBAR (Google-Store vibe) ---------- */
-  .topbar{position:sticky;top:0;z-index:100;background:color-mix(in oklab, var(--surface), transparent 0%);backdrop-filter:blur(8px) saturate(125%);border-bottom:1px solid var(--border);transition:box-shadow .2s ease}
-  .topbar.scrolled{box-shadow:0 6px 18px rgba(0,0,0,.08)}
-  .topbar-inner{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;justify-content:space-between}
-  .brand{display:flex;align-items:center;gap:10px;min-width:0}
-  .brand img{width:28px;height:28px;border-radius:6px}
-  .brand .name{font-weight:900;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .links{display:flex;gap:10px;margin-left:12px}
-  .link-pill{padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:var(--surface)}
-  .link-pill:hover{background:color-mix(in oklab, var(--surface), var(--ink) 6%)}
-  .cta{padding:10px 14px;border:1px solid var(--border);border-radius:999px;background:var(--surface);font-weight:800;box-shadow:var(--shadow);transition:box-shadow .2s ease,transform .2s ease}
-  .cta:hover{box-shadow:var(--shadow-lg);transform:translateY(-1px)}
-
-  /* ---------- HAMBURGER (animated) ---------- */
-  .hamburger{display:none;position:relative;width:44px;height:44px;border-radius:999px;border:1px solid var(--border);background:var(--surface);box-shadow:var(--shadow)}
-  .hamburger span{position:absolute;left:50%;top:50%;width:22px;height:2px;background:var(--ink);border-radius:2px;transform:translate(-50%,-50%);transition:.2s}
-  .hamburger span:nth-child(1){transform:translate(-50%,-9px)}
-  .hamburger span:nth-child(2){transform:translate(-50%,-1px)}
-  .hamburger span:nth-child(3){transform:translate(-50%,7px)}
-  .hamburger.active span:nth-child(1){transform:translate(-50%,-1px) rotate(45deg)}
-  .hamburger.active span:nth-child(2){opacity:0}
-  .hamburger.active span:nth-child(3){transform:translate(-50%,-1px) rotate(-45deg)}
-  @media (max-width:900px){ .links{display:none} .hamburger{display:inline-flex;justify-content:center;align-items:center} }
-
-  /* ---------- DRAWER ---------- */
-  .drawer{position:fixed;inset:0 0 auto 0;height:0;overflow:hidden;background:color-mix(in oklab, var(--surface), transparent 15%);backdrop-filter:blur(6px);transition:height .25s ease}
-  .drawer.open{height:280px;border-bottom:1px solid var(--border)}
-  .drawer .wrap{display:flex;gap:10px;flex-wrap:wrap}
-  .drawer a{padding:10px 14px;border:1px solid var(--border);border-radius:999px;background:var(--surface)}
-
-  /* ---------- AURORA HERO ---------- */
-  .hero{padding:42px 0 24px;position:relative;isolation:isolate}
-  .hero::before{content:"";position:absolute;inset:-20% -10% auto;height:55vh;z-index:-1;filter:blur(28px);
-    background:
-      radial-gradient(120% 140% at 15% 0%, color-mix(in oklab, var(--gold), transparent 78%), transparent 45%),
-      radial-gradient(120% 140% at 85% -20%, color-mix(in oklab, var(--blue), transparent 80%), transparent 55%),
-      radial-gradient(140% 120% at 50% 100%, color-mix(in oklab, var(--purple), transparent 78%), transparent 60%); }
-  .eyebrow{letter-spacing:.25em;font-size:.8rem;opacity:.8;margin-bottom:6px}
-  .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-
-  /* ---------- CARDS ---------- */
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-  .card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
-  .card.hover{transition:transform .2s ease, box-shadow .2s ease}
-  .card.hover:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-  .rule{height:2px;width:100%;margin:10px 0;background:linear-gradient(90deg, color-mix(in oklab, var(--ink), transparent 85%), transparent)}
-
-  /* ---------- BOOKING PILLS ---------- */
-  .pill{display:inline-block;padding:12px 16px;border:1.5px solid var(--border);border-radius:999px;background:var(--surface);font-weight:900}
-  .pill:hover{box-shadow:var(--shadow)}
-  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-
-  /* ---------- SERVICES ---------- */
-  .price-line{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:14px}
-  .price-line:nth-child(odd){background:color-mix(in oklab, var(--surface), var(--ink) 4%)}
-  .price-name{display:flex;align-items:center;gap:10px;font-weight:900}
-  .emoji{font-size:20px}
-  .price-cost{font-weight:900}
-
-  /* ---------- STARS ---------- */
-  .stars{display:inline-flex;gap:2px;vertical-align:middle;margin-left:6px}
-  .stars .star{
-    width:14px;height:14px;display:inline-block;background:conic-gradient(#FFD86B,#f5a623,#FFD86B);
-    -webkit-mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>') center/contain no-repeat;
-            mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>') center/contain no-repeat;
-  }
-
-  /* ---------- HOURS ---------- */
-  .hours .row{display:flex;justify-content:space-between;padding:10px 12px;border-radius:12px}
-  .hours .row:nth-child(odd){background:color-mix(in oklab, var(--surface), var(--ink) 4%)}
-  .hours .row.today{outline:2px solid color-mix(in oklab, var(--gold), transparent 45%);box-shadow:0 0 0 4px color-mix(in oklab, var(--blue), transparent 80%);background:linear-gradient(90deg, color-mix(in oklab, var(--gold), transparent 75%), color-mix(in oklab, var(--blue), transparent 78%) 50%, color-mix(in oklab, var(--purple), transparent 75%))}
-
-  /* ---------- MAP ---------- */
-  .map-embed iframe{width:100%;height:420px;border:0;border-radius:14px}
-
-  /* ---------- REVIEW META ---------- */
-  .review-meta{display:flex;gap:8px;align-items:center;margin-bottom:6px;color:var(--muted);font-size:.9rem}
-  .review-meta .who{font-weight:800;color:var(--ink)}
-  .review-tag{display:inline-block;padding:6px 10px;border:1px solid var(--border);border-radius:999px;margin-top:10px;background:var(--surface)}
-  .review-img{border-radius:12px;margin-top:12px;max-width:100%;height:auto}
-
-  @media (max-width:780px){ .wrap{padding:18px} }
-</style>
+  </script>
 </head>
 <body>
 
-<!-- TOP BAR -->
-<header class="topbar" role="banner" id="topbar">
+<!-- Sticky top bar (nothing above it) -->
+<header class="topbar" id="topbar">
   <div class="topbar-inner">
     <a class="brand" href="#Home" aria-label="Home">
       <img src="icon-64.png" alt="" />
@@ -162,11 +46,11 @@
     </a>
 
     <nav class="links" aria-label="Primary">
-      <a class="link-pill" href="#Home">Home</a>
-      <a class="link-pill" href="#Barbers">Barbers</a>
-      <a class="link-pill" href="#Services">Services</a>
-      <a class="link-pill" href="#Reviews">Reviews</a>
-      <a class="link-pill" href="#Map">Directions</a>
+      <a class="link-pill" data-nav href="#Home">Home</a>
+      <a class="link-pill" data-nav href="#Barbers">Barbers</a>
+      <a class="link-pill" data-nav href="#Services">Services</a>
+      <a class="link-pill" data-nav href="#Reviews">Reviews</a>
+      <a class="link-pill" data-nav href="#Map">Directions</a>
     </nav>
 
     <button id="menuBtn" class="hamburger" aria-controls="drawer" aria-expanded="false" aria-label="Open menu">
@@ -174,14 +58,17 @@
     </button>
   </div>
 
-  <div id="drawer" class="drawer" role="dialog" aria-label="Menu">
-    <div class="wrap">
-      <a href="#Home">Home</a>
-      <a href="#Barbers">Barbers</a>
-      <a href="#Services">Services</a>
-      <a href="#Reviews">Reviews</a>
-      <a href="#Map">Directions</a>
-      <a href="tel:+15055036216">Call the Shop</a>
+  <!-- Mobile drawer -->
+  <div id="drawer" class="drawer" aria-hidden="true">
+    <div class="sheet">
+      <div class="wrap">
+        <a data-nav href="#Home">Home</a>
+        <a data-nav href="#Barbers">Barbers</a>
+        <a data-nav href="#Services">Services</a>
+        <a data-nav href="#Reviews">Reviews</a>
+        <a data-nav href="#Map">Directions</a>
+        <a href="tel:+15055036216">Call the Shop</a>
+      </div>
     </div>
   </div>
 </header>
@@ -194,7 +81,19 @@
     <p class="muted">Fresh fades, clean shaves, and kid-friendly cuts. Tap a barber below to book or call the shop.</p>
     <div class="cta-row">
       <a class="cta" href="#Barbers">Meet the Team</a>
-      <a class="cta" href="tel:+15055036216">Call the Shop</a>
+      <a class="cta" href="tel:+15055036216">(505) 503-6216</a>
+    </div>
+
+    <!-- LED ribbon “screen” -->
+    <div class="ticker" aria-label="Location ribbon">
+      <div class="ticker-track">
+        <span class="ticker-text">
+          <span class="chip">Next to Bob’s Burgers</span>
+          • 6510 Paradise Blvd NW unit d, Albuquerque, NM 87114 • Walk-ins Welcome • Precision Cuts • Friendly Service
+          <span class="chip">Next to Bob’s Burgers</span>
+          • 6510 Paradise Blvd NW unit d, Albuquerque, NM 87114 • Walk-ins Welcome • Precision Cuts • Friendly Service
+        </span>
+      </div>
     </div>
   </div>
 </section>
@@ -234,12 +133,11 @@
       <div class="price-line"><div class="price-name"><span class="emoji">🌀</span> Perm</div><div class="price-cost">$100</div></div>
       <div class="price-line"><div class="price-name"><span class="emoji">🖌️</span> Color</div><div class="price-cost">From $30</div></div>
     </div>
-    <!-- Removed general stamps note as requested -->
-    <p class="note">Prices may vary by barber. Ask about kids cuts.</p>
+    <p class="note">Prices may vary by barber. Please call to confirm.</p>
   </div>
 </section>
 
-<!-- REVIEWS -->
+<!-- REVIEWS (your 4 real ones w/ stars) -->
 <section id="Reviews" class="section">
   <div class="wrap">
     <h2>Reviews</h2>
@@ -250,7 +148,7 @@
           <span class="who">Francesca Tafoya</span> • <span class="when">4 weeks ago</span>
           <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
         </div>
-        <p>If I could give a million stars for my experience today I would! Taylor was so amazing and I have a great cut for my new job tomorrow! We had a great conversation and she was fast, gentle and efficient in my haircut. Thank you so much! I will be back next week. And always remember, kindness is free. 🙏💕</p>
+        <p>If I could give a million stars for my experience today I would! Taylor was amazing and I have a great cut for my new job tomorrow. Fast, gentle, and efficient. I will be back next week. Kindness is free. 🙏💕</p>
         <div class="review-tag">Services: Haircut • Barber: Taylor</div>
       </article>
 
@@ -259,8 +157,8 @@
           <span class="who">Keely Struck</span> • <span class="when">1 month ago</span>
           <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
         </div>
-        <p>They did a great job on my son's hair! It was his first haircut and I wanted a baby mullet. They are really good with kids and very patient. I love the way it turned out!</p>
-        <div class="review-tag">Services: Haircut • Barber: (not specified)</div>
+        <p>They did a great job on my son’s hair. It was his first haircut and I wanted a baby mullet. Very good with kids and very patient. Love the way it turned out!</p>
+        <div class="review-tag">Services: Haircut • Barber: —</div>
       </article>
 
       <article class="card hover review">
@@ -268,7 +166,7 @@
           <span class="who">Jennifer Lopez</span> • <span class="when">2 months ago</span>
           <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
         </div>
-        <p>I take my toddler here to get a haircut from Cash and she does an amazing job every time. She is very good with kids and is pretty fast. We will be going back with barber Cash!</p>
+        <p>I take my toddler here to get a haircut from Cash and she does an amazing job every time. Very good with kids and fast. We will be going back with barber Cash!</p>
         <div class="review-tag">Services: Haircut • Barber: Cash</div>
       </article>
 
@@ -277,9 +175,9 @@
           <span class="who">J O-C</span> • <span class="when">2 months ago</span>
           <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
         </div>
-        <p>Been coming here for years and it is always solid. All the barbers know their craft, and no matter who I sit with, I leave looking fresh. I usually just walk in and they get me taken care of without any hassle. Consistent, professional, and worth every visit.</p>
-        <div class="review-tag">Services: Haircut & Beard Trim • Requested style: Mid Skin Fade</div>
-        <div class="review-tag">Barbers: Cash, Deshaun, Jonny & Gimo</div>
+        <p>Been coming here for years and it is always solid. All the barbers know their craft. I usually walk in and they get me taken care of without any hassle. Consistent, professional, and worth every visit.</p>
+        <div class="review-tag">Services: Haircut &amp; Beard Trim • Requested style: Mid Skin Fade</div>
+        <div class="review-tag">Barbers: Cash, Deshaun, Jonny &amp; Gimo</div>
       </article>
 
     </div>
@@ -293,7 +191,7 @@
   </div>
 </section>
 
-<!-- DIRECTIONS / MAP -->
+<!-- MAP / HOURS (no extra bottom section, no Quick Links) -->
 <section id="Map" class="section">
   <div class="wrap">
     <h2>Directions</h2>
@@ -313,6 +211,7 @@
       <div class="card hover">
         <h3>Visit Us</h3>
         <address>6510 Paradise Blvd NW unit d, Albuquerque, NM 87114</address>
+        <p class="muted">Next to Bob’s Burgers.</p>
         <div class="pill-row">
           <a class="pill" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=6510+Paradise+Blvd+NW+unit+d,+Albuquerque,+NM+87114">Google Maps</a>
           <a class="pill" target="_blank" rel="noopener" href="https://maps.apple.com/?daddr=6510+Paradise+Blvd+NW+unit+d,+Albuquerque,+NM+87114">Apple Maps</a>
@@ -322,68 +221,12 @@
 
     <div class="card hover" style="margin-top:16px">
       <div class="map-embed">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5914077550096!2d-106.72760522378519!3d35.19173505670752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87226f7a1054dd87%3A0x7736d7f662fd5a2b!2sNext%20Level%20Barber%20Shop%20Albuquerque!5e0!3m2!1sen!2sus!4v1762372094637!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5914077550096!2d-106.72760522378519!3d35.19173505670752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87226f7a1054dd87%3A0x7736d7f662fd5a2b!2sNext%20Level%20Barber%20Shop%20Albuquerque!5e0!3m2!1sen!2sus!4v1762372094637!5m2!1sen!2sus"
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </div>
 </section>
 
-<script>
-  /* Hamburger drawer + animation */
-  const drawer = document.getElementById('drawer');
-  const menuBtn = document.getElementById('menuBtn');
-  menuBtn?.addEventListener('click', () => {
-    const open = drawer.classList.toggle('open');
-    menuBtn.classList.toggle('active', open);
-    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-
-  /* Topbar shadow on scroll */
-  const topbar = document.getElementById('topbar');
-  const onScroll = () => topbar.classList.toggle('scrolled', window.scrollY > 6);
-  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
-
-  /* Highlight today’s hours */
-  (() => {
-    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    const today = days[new Date().getDay()];
-    document.querySelectorAll('.hours .row').forEach(r => {
-      const label = r.firstElementChild?.textContent?.trim();
-      if (label === today) r.classList.add('today');
-    });
-  })();
-
-  /* Scroll-spy for desktop links */
-  (() => {
-    const links = Array.from(document.querySelectorAll('.links a[href^="#"]'));
-    if (!links.length) return;
-    const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const id = e.target.id;
-          links.forEach(l => l.classList.toggle('active', l === map.get(id)));
-        }
-      });
-    }, { rootMargin: "-35% 0% -60% 0%", threshold: 0.01 });
-    map.forEach((a, id) => { const sec = document.getElementById(id); if (sec) io.observe(sec); });
-  })();
-
-  /* Safety net: add stars to any review missing them */
-  (() => {
-    document.querySelectorAll('#Reviews .review').forEach(el=>{
-      if (el.querySelector('.stars')) return;
-      const stars = document.createElement('span');
-      stars.className='stars'; stars.setAttribute('aria-label','5 out of 5');
-      for (let i=0;i<5;i++){ const s=document.createElement('span'); s.className='star'; stars.appendChild(s); }
-      el.querySelector('.review-meta')?.appendChild(stars);
-    });
-  })();
-
-  /* PWA service worker (optional) */
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(()=>{}));
-  }
-</script>
 </body>
 </html>
