@@ -1,4 +1,4 @@
-/* System font, black text, light surfaces */
+/* System font, high-contrast, light surfaces */
 :root{
   --ink:#000;
   --bg:#f7f8fb;
@@ -10,38 +10,40 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;color:var(--ink);background:var(--bg);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-
-/* Layout helpers */
-.wrap{max-width:1100px;margin:0 auto;padding:24px}
-.section{padding:28px 0}
 h1,h2,h3{margin:0 0 12px;font-weight:900}
 h1{font-size:clamp(32px,4.2vw,56px)}
 h2{font-size:clamp(22px,3vw,30px)}
 h3{font-size:clamp(16px,2.1vw,18px)}
 p{margin:8px 0}
 a{color:#000;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:24px}
+.section{padding:28px 0}
 .tiny{opacity:.7;font-size:.85rem}
 .note{opacity:.75;text-align:center;margin-top:8px}
 
-/* Nav (sticky) */
+/* Sticky NAV (Google Store vibe) */
 .nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.9);backdrop-filter:blur(10px) saturate(130%);border-bottom:1px solid var(--border)}
-.nav-inner{display:flex;align-items:center;gap:16px;justify-content:space-between;max-width:1100px;margin:0 auto;padding:10px 16px}
+.nav-inner{display:flex;align-items:center;gap:12px;justify-content:space-between;max-width:1100px;margin:0 auto;padding:10px 16px}
 .nav .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.2px}
-.nav .links{display:flex;gap:8px;flex-wrap:wrap}
-.nav .links a{padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:#fff}
-.nav .links a:hover{box-shadow:0 0 0 3px rgba(0,0,0,.06)}
-.nav .links a.pill{font-weight:800}
+.nav .brand span{white-space:nowrap}
+.nav .pill.call{padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:#fff;font-weight:800}
+.nav .pill.call:hover{box-shadow:0 0 0 3px rgba(0,0,0,.06)}
 
-/* Hero */
+/* Tabs row — horizontally scrollable on mobile */
+.tabs{display:flex;gap:8px;overflow-x:auto;white-space:nowrap;padding:8px 16px;border-top:1px solid var(--border)}
+.tabs a{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:#fff}
+.tabs a.active,.tabs a:hover{background:rgba(0,0,0,.06)}
+
+/* Hero + aurora glow (subtle, no text color change) */
 .hero{padding:42px 0 24px}
 .aurora{position:relative;isolation:isolate}
 .aurora::before{
   content:"";position:absolute;inset:-20% -10% auto;-webkit-mask:linear-gradient(#000,transparent);
   height:55vh;z-index:-1;filter:blur(28px);
   background:
-    radial-gradient(120% 140% at 15% 0%, rgba(255,216,107,.25), transparent 45%),
-    radial-gradient(120% 140% at 85% -20%, rgba(108,168,255,.22), transparent 55%),
-    radial-gradient(140% 120% at 50% 100%, rgba(181,140,255,.22), transparent 60%);
+    radial-gradient(120% 140% at 15% 0%, rgba(255,216,107,.22), transparent 45%),
+    radial-gradient(120% 140% at 85% -20%, rgba(108,168,255,.20), transparent 55%),
+    radial-gradient(140% 120% at 50% 100%, rgba(181,140,255,.20), transparent 60%);
 }
 .eyebrow{letter-spacing:.25em;font-size:.8rem;opacity:.8;margin-bottom:6px}
 .lead{opacity:.9;font-size:clamp(14px,1.8vw,18px)}
@@ -52,7 +54,7 @@ a{color:#000;text-decoration:none}
 .pill:hover{box-shadow:0 8px 18px rgba(0,0,0,.10),0 0 0 3px rgba(0,0,0,.06)}
 .pill.outline{background:transparent}
 
-/* Cards & grids (Google/Apple hover) */
+/* Cards & grids (Apple/Google hover) */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
 .card.hover{transition:transform .2s ease, box-shadow .2s ease}
@@ -69,7 +71,7 @@ a{color:#000;text-decoration:none}
 .emoji{font-size:20px}
 .price-cost{font-weight:900}
 
-/* Stars */
+/* Reviews: gold stars (we append to your real reviews with JS) */
 .stars{display:inline-flex;gap:2px;vertical-align:middle;margin-left:6px}
 .stars .star{
   width:14px;height:14px;display:inline-block;
@@ -88,6 +90,7 @@ a{color:#000;text-decoration:none}
 
 /* Responsive */
 @media (max-width: 780px){
-  .nav .links{justify-content:flex-end}
   .wrap{padding:18px}
+  .tabs{padding:8px 12px}
+  .nav .brand span{display:none} /* simpler brand on small screens */
 }
