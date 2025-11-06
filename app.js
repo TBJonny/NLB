@@ -1,4 +1,4 @@
-// Today highlight in hours
+// Highlight today's hours
 (() => {
   const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   const today = days[new Date().getDay()];
@@ -8,9 +8,9 @@
   });
 })();
 
-// Scroll-spy: highlight current nav link
+// Scroll-spy: set active tab as you scroll
 (() => {
-  const links = Array.from(document.querySelectorAll('.nav .links a[href^="#"]'));
+  const links = Array.from(document.querySelectorAll('.tabs a[href^="#"]'));
   if (!links.length) return;
   const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
   const io = new IntersectionObserver((entries) => {
@@ -25,4 +25,32 @@
     const sec = document.getElementById(id);
     if (sec) io.observe(sec);
   });
+})();
+
+// Reviews: add gold stars to your EXISTING reviews (no text changes)
+(() => {
+  const scope = document.querySelector('#Reviews');
+  if (!scope) return;
+  // Look for common review blocks: list items, paragraphs, or elements with .review
+  const candidates = scope.querySelectorAll('li, p, .review');
+  candidates.forEach(el => {
+    if (el.querySelector('.stars')) return; // already has stars
+    const txt = (el.textContent || '').trim();
+    if (!txt) return;
+    const stars = document.createElement('span');
+    stars.className = 'stars small';
+    stars.setAttribute('aria-label','5 out of 5');
+    for (let i=0;i<5;i++){
+      const s = document.createElement('span');
+      s.className = 'star';
+      stars.appendChild(s);
+    }
+    el.appendChild(stars);
+  });
+})();
+
+// Safety: remove any stray loader/extra block above nav if it exists
+(() => {
+  const stray = document.getElementById('loader');
+  if (stray) stray.remove();
 })();
