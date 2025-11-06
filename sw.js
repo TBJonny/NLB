@@ -1,4 +1,8 @@
-// Lightweight SW: no fetch hijack, no stale caches.
-// Only ensures fast activation so updates show immediately.
-self.addEventListener('install', (e) => self.skipWaiting());
-self.addEventListener('activate', (e) => e.waitUntil(self.clients.claim()));
+// Minimal service worker: no caching logic to avoid stale assets.
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(self.clients.claim());
+});
