@@ -1,13 +1,12 @@
-// Sticky shadow on scroll
+// Topbar shadow
 const topbar = document.getElementById('topbar');
 const onScroll = () => topbar.classList.toggle('scrolled', window.scrollY > 6);
 onScroll();
-window.addEventListener('scroll', onScroll, { passive: true });
+addEventListener('scroll', onScroll, { passive: true });
 
-// Drawer controls (now overlaying whole page)
+// Drawer
 const drawer = document.getElementById('drawer');
 const menuBtn = document.getElementById('menuBtn');
-
 function openDrawer(open) {
   drawer.classList.toggle('open', open);
   menuBtn.classList.toggle('active', open);
@@ -17,17 +16,16 @@ function openDrawer(open) {
 }
 menuBtn?.addEventListener('click', () => openDrawer(!drawer.classList.contains('open')));
 drawer?.addEventListener('click', (e) => { if (e.target === drawer) openDrawer(false); });
-window.addEventListener('keydown', (e) => { if (e.key === 'Escape') openDrawer(false); });
+addEventListener('keydown', (e) => { if (e.key === 'Escape') openDrawer(false); });
 
 // Smooth scroll with sticky offset
 function stickyScrollTo(id) {
   const el = document.getElementById(id);
   if (!el) return;
   const barH = topbar.getBoundingClientRect().height || 64;
-  const y = el.getBoundingClientRect().top + window.scrollY - (barH + 8);
-  window.scrollTo({ top: y, behavior: 'smooth' });
+  const y = el.getBoundingClientRect().top + scrollY - (barH + 8);
+  scrollTo({ top: y, behavior: 'smooth' });
 }
-
 const navLinks = document.querySelectorAll('[data-nav]');
 navLinks.forEach((a) => {
   a.addEventListener('click', (ev) => {
@@ -39,7 +37,7 @@ navLinks.forEach((a) => {
   });
 });
 
-// Scroll spy to keep pills active
+// Scroll spy
 const linkMap = new Map();
 navLinks.forEach(a => {
   const key = a.getAttribute('href').slice(1);
@@ -53,36 +51,31 @@ const io = new IntersectionObserver((entries) => {
     }
   });
 }, { rootMargin: "-35% 0% -60% 0%", threshold: 0.01 });
-['Home', 'Barbers', 'Services', 'Reviews', 'Map'].forEach(id => {
-  const sec = document.getElementById(id);
-  if (sec) io.observe(sec);
+['Home','Barbers','Services','Reviews','Map'].forEach(id => {
+  const sec = document.getElementById(id); if (sec) io.observe(sec);
 });
 
 // Highlight today's hours
 (() => {
   const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   const today = days[new Date().getDay()];
-  document.querySelectorAll('.hours .row').forEach(r => {
-    const label = r.firstElementChild?.textContent?.trim();
-    if (label === today) r.classList.add('today');
+  document.querySelectorAll('.hours .row').forEach(r=>{
+    if ((r.firstElementChild?.textContent||"").trim()===today) r.classList.add('today');
   });
 })();
 
-// Ensure stars exist for each review
+// Ensure stars present
 (() => {
-  document.querySelectorAll('#Reviews .review').forEach(el => {
+  document.querySelectorAll('#Reviews .review').forEach(el=>{
     if (el.querySelector('.stars')) return;
     const stars = document.createElement('span');
-    stars.className = 'stars';
-    stars.setAttribute('aria-label','5 out of 5');
-    for (let i = 0; i < 5; i++) { const s = document.createElement('span'); s.className = 'star'; stars.appendChild(s); }
+    stars.className='stars'; stars.setAttribute('aria-label','5 out of 5');
+    for(let i=0;i<5;i++){ const s=document.createElement('span'); s.className='star'; stars.appendChild(s); }
     el.querySelector('.review-meta')?.appendChild(stars);
   });
 })();
 
-// Optional PWA (safe no-op if missing)
+// Register SW (no caching of pages—just lifecycle)
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () =>
-    navigator.serviceWorker.register('/sw.js').catch(() => {})
-  );
+  addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=3').catch(()=>{}));
 }
