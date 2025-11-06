@@ -1,47 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Next Level Barbershop — Albuquerque, NM</title>
 
-  <link rel="icon" href="favicon.ico" />
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="Fresh fades, clean shaves, and kid-friendly cuts on Albuquerque’s Westside." />
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#ffffff"/>
 
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Next Level Barbershop" />
-  <meta property="og:description" content="Fresh fades, clean shaves, and kid-friendly cuts on Albuquerque’s Westside." />
-  <meta property="og:image" content="icon-512.png" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="description" content="Fresh fades, clean shaves, and kid-friendly cuts on Albuquerque’s Westside."/>
+  <meta property="og:title" content="Next Level Barbershop"/>
+  <meta property="og:description" content="Fresh fades, clean shaves, and kid-friendly cuts on Albuquerque’s Westside."/>
+  <meta property="og:image" content="icon-512.png"/>
 
-  <link rel="preload" href="style.css" as="style" />
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="app.js"></script>
-
-  <!-- Schema -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Barbershop",
-    "name":"Next Level Barbershop",
-    "image":"icon-512.png",
-    "telephone":"+1-505-503-6216",
-    "address":{"@type":"PostalAddress","streetAddress":"6510 Paradise Blvd NW unit d","addressLocality":"Albuquerque","addressRegion":"NM","postalCode":"87114","addressCountry":"US"},
-    "geo":{"@type":"GeoCoordinates","latitude":35.19173505670752,"longitude":-106.72760522378519},
-    "url":"/"
-  }
-  </script>
+  <!-- cache-bust -->
+  <link rel="stylesheet" href="style.css?v=2025-11-05-3">
+  <script defer src="app.js?v=2025-11-05-3"></script>
 </head>
 <body>
 
 <!-- Sticky header -->
 <header id="topbar" class="topbar">
   <div class="topbar-inner">
-    <a class="brand" href="#Home" aria-label="Home">
-      <img src="icon-64.png" alt="" />
+    <a class="brand" href="#Home">
+      <img src="icon-64.png" alt="">
       <span class="name">Next Level Barbershop</span>
     </a>
 
@@ -59,7 +43,7 @@
   </div>
 </header>
 
-<!-- Mobile drawer lives OUTSIDE header so it can overlay everything -->
+<!-- Mobile drawer OUTSIDE header -->
 <div id="drawer" class="drawer" aria-hidden="true">
   <div class="sheet">
     <div class="wrap">
@@ -84,7 +68,7 @@
       <a class="cta" href="tel:+15055036216">(505) 503-6216</a>
     </div>
 
-    <!-- LED ribbon -->
+    <!-- subtle LED ribbon -->
     <div class="ticker" aria-label="Location ribbon">
       <div class="ticker-track">
         <span class="ticker-text">
@@ -137,7 +121,7 @@
   </div>
 </section>
 
-<!-- REVIEWS -->
+<!-- REVIEWS (your 4 real ones with gold stars) -->
 <section id="Reviews" class="section">
   <div class="wrap">
     <h2>Reviews</h2>
