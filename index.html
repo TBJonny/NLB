@@ -11,17 +11,44 @@
   <meta name="theme-color" content="#ffffff"/>
 
   <meta name="description" content="Fresh fades, clean shaves, and kid-friendly cuts on Albuquerque’s Westside."/>
+  <meta property="og:type" content="website"/>
   <meta property="og:title" content="Next Level Barbershop"/>
   <meta property="og:description" content="Fresh fades, clean shaves, and kid-friendly cuts on Albuquerque’s Westside."/>
   <meta property="og:image" content="icon-512.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
 
-  <!-- cache-bust -->
+  <!-- cache-busted CSS/JS to avoid old versions sticking -->
   <link rel="stylesheet" href="style.css?v=2025-11-05-3">
   <script defer src="app.js?v=2025-11-05-3"></script>
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Barbershop",
+    "name":"Next Level Barbershop",
+    "image":"icon-512.png",
+    "telephone":"+1-505-503-6216",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"6510 Paradise Blvd NW unit d",
+      "addressLocality":"Albuquerque",
+      "addressRegion":"NM",
+      "postalCode":"87114",
+      "addressCountry":"US"
+    },
+    "geo":{
+      "@type":"GeoCoordinates",
+      "latitude":35.19173505670752,
+      "longitude":-106.72760522378519
+    },
+    "url":"/"
+  }
+  </script>
 </head>
 <body>
 
-<!-- Sticky header -->
+<!-- STICKY HEADER -->
 <header id="topbar" class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="#Home">
@@ -37,13 +64,18 @@
       <a class="link-pill" data-nav href="#Map">Directions</a>
     </nav>
 
-    <button id="menuBtn" type="button" class="hamburger" aria-controls="drawer" aria-expanded="false" aria-label="Open menu">
+    <button id="menuBtn"
+            type="button"
+            class="hamburger"
+            aria-controls="drawer"
+            aria-expanded="false"
+            aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<!-- Mobile drawer OUTSIDE header -->
+<!-- MOBILE DRAWER (OVERLAY) -->
 <div id="drawer" class="drawer" aria-hidden="true">
   <div class="sheet">
     <div class="wrap">
@@ -62,13 +94,15 @@
   <div class="wrap">
     <div class="eyebrow">ALBUQUERQUE • WESTSIDE</div>
     <h1>Welcome</h1>
-    <p class="muted">Fresh fades, clean shaves, and kid-friendly cuts. Tap a barber below to book or call the shop.</p>
+    <p class="muted">
+      Fresh fades, clean shaves, and kid-friendly cuts. Tap a barber below to book or call the shop.
+    </p>
     <div class="cta-row">
       <a class="cta" href="#Barbers">Meet the Team</a>
       <a class="cta" href="tel:+15055036216">(505) 503-6216</a>
     </div>
 
-    <!-- subtle LED ribbon -->
+    <!-- LED RIBBON / SCREEN EFFECT -->
     <div class="ticker" aria-label="Location ribbon">
       <div class="ticker-track">
         <span class="ticker-text">
@@ -82,18 +116,92 @@
   </div>
 </section>
 
-<!-- BARBERS -->
+<!-- BARBERS WITH FINAL BOOK LINKS -->
 <section id="Barbers" class="section">
   <div class="wrap">
     <h2>Our Barbers 💈</h2>
     <div class="grid">
-      <article class="card hover"><h3>VINCENT</h3><div class="rule"></div><p class="muted">Owner • Master Barber</p><p>Founder, fader, visionary.</p><div class="pill-row"><a class="pill" href="#Home">Book w/ VINCENT</a></div></article>
-      <article class="card hover"><h3>ZWALU</h3><div class="rule"></div><p class="muted">Detail Specialist</p><p>Precision in every pass.</p><div class="pill-row"><a class="pill" href="#Home">Book w/ ZWALU</a></div></article>
-      <article class="card hover"><h3>GIMO</h3><div class="rule"></div><p class="muted">Style Architect</p><p>Style that speaks before you do.</p><div class="pill-row"><a class="pill" href="#Home">Book w/ GIMO</a></div></article>
-      <article class="card hover"><h3>DESHAUN</h3><div class="rule"></div><p class="muted">Fade Technician</p><p>Sharp fades. Calm atmosphere.</p><div class="pill-row"><a class="pill" href="#Home">Book w/ DESHAUN</a></div></article>
-      <article class="card hover"><h3>CASH</h3><div class="rule"></div><p class="muted">Kids & Family Pro</p><p>Quick with the clippers, focused on results.</p><div class="pill-row"><a class="pill" href="#Home">Book w/ CASH</a></div></article>
-      <article class="card hover"><h3>JONNY</h3><div class="rule"></div><p class="muted">Custom Work</p><p>Where art meets the edge.</p><div class="pill-row"><a class="pill" href="#Home">Book w/ JONNY</a></div></article>
-      <article class="card hover"><h3>TAYLOR</h3><div class="rule"></div><p class="muted">Fresh Cuts</p><p>Clean lines. Clean finish.</p><div class="pill-row"><a class="pill" href="#Home">Book w/ TAYLOR</a></div></article>
+      <article class="card hover">
+        <h3>VINCENT</h3>
+        <div class="rule"></div>
+        <p class="muted">Owner • Master Barber</p>
+        <p>Founder, fader, visionary.</p>
+        <div class="pill-row">
+          <a class="pill" href="tel:+15055036216">Book w/ VINCENT</a>
+        </div>
+      </article>
+
+      <article class="card hover">
+        <h3>ZWALU</h3>
+        <div class="rule"></div>
+        <p class="muted">Detail Specialist</p>
+        <p>Precision in every pass.</p>
+        <div class="pill-row">
+          <a class="pill" href="tel:+15055036216">Book w/ ZWALU</a>
+        </div>
+      </article>
+
+      <article class="card hover">
+        <h3>GIMO</h3>
+        <div class="rule"></div>
+        <p class="muted">Style Architect</p>
+        <p>Style that speaks before you do.</p>
+        <div class="pill-row">
+          <a class="pill" href="tel:+15055036216">Book w/ GIMO</a>
+        </div>
+      </article>
+
+      <article class="card hover">
+        <h3>DESHAUN</h3>
+        <div class="rule"></div>
+        <p class="muted">Fade Technician</p>
+        <p>Sharp fades. Calm atmosphere.</p>
+        <div class="pill-row">
+          <a class="pill" href="tel:+15055036216">Book w/ DESHAUN</a>
+        </div>
+      </article>
+
+      <article class="card hover">
+        <h3>CASH</h3>
+        <div class="rule"></div>
+        <p class="muted">Kids &amp; Family Pro</p>
+        <p>Quick with the clippers, focused on results.</p>
+        <div class="pill-row">
+          <a class="pill"
+             href="https://booksy.com/en-us/dl/show-business/1346592"
+             target="_blank" rel="noopener">
+            Book w/ CASH
+          </a>
+        </div>
+      </article>
+
+      <article class="card hover">
+        <h3>JONNY</h3>
+        <div class="rule"></div>
+        <p class="muted">Custom Work</p>
+        <p>Where art meets the edge.</p>
+        <div class="pill-row">
+          <a class="pill"
+             href="https://booksy.com/en-us/dl/show-business/1300123"
+             target="_blank" rel="noopener">
+            Book w/ JONNY
+          </a>
+        </div>
+      </article>
+
+      <article class="card hover">
+        <h3>TAYLOR</h3>
+        <div class="rule"></div>
+        <p class="muted">Fresh Cuts</p>
+        <p>Clean lines. Clean finish.</p>
+        <div class="pill-row">
+          <a class="pill"
+             href="https://booksy.com/en-us/dl/show-business/1592260"
+             target="_blank" rel="noopener">
+            Book w/ TAYLOR
+          </a>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -121,56 +229,92 @@
   </div>
 </section>
 
-<!-- REVIEWS (your 4 real ones with gold stars) -->
+<!-- REVIEWS -->
 <section id="Reviews" class="section">
   <div class="wrap">
     <h2>Reviews</h2>
     <div class="grid">
+
       <article class="card hover review">
-        <div class="review-meta"><span class="who">Francesca Tafoya</span> • <span class="when">4 weeks ago</span>
-          <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
+        <div class="review-meta">
+          <span class="who">Francesca Tafoya</span> • <span class="when">4 weeks ago</span>
+          <span class="stars" aria-label="5 out of 5">
+            <span class="star"></span><span class="star"></span><span class="star"></span>
+            <span class="star"></span><span class="star"></span>
+          </span>
         </div>
-        <p>If I could give a million stars for my experience today I would! Taylor was amazing and I have a great cut for my new job tomorrow. Fast, gentle, and efficient. I will be back next week. Kindness is free. 🙏💕</p>
+        <p>
+          If I could give a million stars for my experience today I would! Taylor was amazing and I have a great cut for my new job tomorrow.
+          Fast, gentle, and efficient. I will be back next week. Kindness is free. 🙏💕
+        </p>
         <div class="review-tag">Services: Haircut • Barber: Taylor</div>
       </article>
 
       <article class="card hover review">
-        <div class="review-meta"><span class="who">Keely Struck</span> • <span class="when">1 month ago</span>
-          <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
+        <div class="review-meta">
+          <span class="who">Keely Struck</span> • <span class="when">1 month ago</span>
+          <span class="stars" aria-label="5 out of 5">
+            <span class="star"></span><span class="star"></span><span class="star"></span>
+            <span class="star"></span><span class="star"></span>
+          </span>
         </div>
-        <p>They did a great job on my son’s hair. It was his first haircut and I wanted a baby mullet. Very good with kids and very patient. Love the way it turned out!</p>
+        <p>
+          They did a great job on my son’s hair. It was his first haircut and I wanted a baby mullet.
+          Very good with kids and very patient. Love the way it turned out!
+        </p>
         <div class="review-tag">Services: Haircut</div>
       </article>
 
       <article class="card hover review">
-        <div class="review-meta"><span class="who">Jennifer Lopez</span> • <span class="when">2 months ago</span>
-          <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
+        <div class="review-meta">
+          <span class="who">Jennifer Lopez</span> • <span class="when">2 months ago</span>
+          <span class="stars" aria-label="5 out of 5">
+            <span class="star"></span><span class="star"></span><span class="star"></span>
+            <span class="star"></span><span class="star"></span>
+          </span>
         </div>
-        <p>I take my toddler here to get a haircut from Cash and she does an amazing job every time. Very good with kids and fast. We will be going back with barber Cash!</p>
+        <p>
+          I take my toddler here to get a haircut from Cash and she does an amazing job every time.
+          Very good with kids and fast. We will be going back with barber Cash!
+        </p>
         <div class="review-tag">Services: Haircut • Barber: Cash</div>
       </article>
 
       <article class="card hover review">
-        <div class="review-meta"><span class="who">J O-C</span> • <span class="when">2 months ago</span>
-          <span class="stars" aria-label="5 out of 5"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></span>
+        <div class="review-meta">
+          <span class="who">J O-C</span> • <span class="when">2 months ago</span>
+          <span class="stars" aria-label="5 out of 5">
+            <span class="star"></span><span class="star"></span><span class="star"></span>
+            <span class="star"></span><span class="star"></span>
+          </span>
         </div>
-        <p>Been coming here for years and it is always solid. All the barbers know their craft. I usually walk in and they get me taken care of without any hassle. Consistent, professional, and worth every visit.</p>
-        <div class="review-tag">Services: Haircut &amp; Beard Trim • Barbers: Cash, Deshaun, Jonny &amp; Gimo</div>
+        <p>
+          Been coming here for years and it is always solid. All the barbers know their craft.
+          I usually walk in and they get me taken care of without any hassle.
+          Consistent, professional, and worth every visit.
+        </p>
+        <div class="review-tag">
+          Services: Haircut &amp; Beard Trim • Barbers: Cash, Deshaun, Jonny &amp; Gimo
+        </div>
       </article>
+
     </div>
 
     <div class="cta-row" style="margin-top:16px">
       <a class="cta" target="_blank" rel="noopener"
-         href="https://www.google.com/search?q=Next+Level+Barber+Shop+Albuquerque+reviews">Give us a review</a>
+         href="https://www.google.com/search?q=Next+Level+Barber+Shop+Albuquerque+reviews">
+        Give us a review
+      </a>
     </div>
   </div>
 </section>
 
-<!-- MAP / HOURS -->
+<!-- DIRECTIONS / MAP -->
 <section id="Map" class="section">
   <div class="wrap">
     <h2>Directions</h2>
     <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+
       <div class="card hover hours">
         <h3>Shop Hours</h3>
         <div class="row"><span>Monday</span><span>9:00 AM – 3:30 PM</span></div>
@@ -188,16 +332,29 @@
         <address>6510 Paradise Blvd NW unit d, Albuquerque, NM 87114</address>
         <p class="muted">Next to Bob’s Burgers.</p>
         <div class="pill-row">
-          <a class="pill" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=6510+Paradise+Blvd+NW+unit+d,+Albuquerque,+NM+87114">Google Maps</a>
-          <a class="pill" target="_blank" rel="noopener" href="https://maps.apple.com/?daddr=6510+Paradise+Blvd+NW+unit+d,+Albuquerque,+NM+87114">Apple Maps</a>
+          <a class="pill"
+             target="_blank" rel="noopener"
+             href="https://www.google.com/maps/dir/?api=1&destination=6510+Paradise+Blvd+NW+unit+d,+Albuquerque,+NM+87114">
+            Google Maps
+          </a>
+          <a class="pill"
+             target="_blank" rel="noopener"
+             href="https://maps.apple.com/?daddr=6510+Paradise+Blvd+NW+unit+d,+Albuquerque,+NM+87114">
+            Apple Maps
+          </a>
         </div>
       </div>
+
     </div>
 
     <div class="card hover" style="margin-top:16px">
       <div class="map-embed">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5914077550096!2d-106.72760522378519!3d35.19173505670752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87226f7a1054dd87%3A0x7736d7f662fd5a2b!2sNext%20Level%20Barber%20Shop%20Albuquerque!5e0!3m2!1sen!2sus!4v1762372094637!5m2!1sen!2sus"
-                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.5914077550096!2d-106.72760522378519!3d35.19173505670752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87226f7a1054dd87%3A0x7736d7f662fd5a2b!2sNext%20Level%20Barber%20Shop%20Albuquerque!5e0!3m2!1sen!2sus!4v1762372094637!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
     </div>
   </div>
