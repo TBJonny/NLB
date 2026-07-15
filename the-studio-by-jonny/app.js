@@ -25,8 +25,16 @@
   if (document.readyState !== 'complete') window.addEventListener('load', finishIntro, { once: true });
 
   const updateHeader = () => topbar?.classList.toggle('scrolled', window.scrollY > 12);
+  let headerFrame = 0;
+  const requestHeaderUpdate = () => {
+    if (headerFrame) return;
+    headerFrame = window.requestAnimationFrame(() => {
+      updateHeader();
+      headerFrame = 0;
+    });
+  };
   updateHeader();
-  window.addEventListener('scroll', updateHeader, { passive: true });
+  window.addEventListener('scroll', requestHeaderUpdate, { passive: true });
 
   const setMenu = (open) => {
     if (!menu || !menuButton) return;
@@ -137,7 +145,7 @@
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
-        .register('./sw.js?v=2', { updateViaCache: 'none' })
+        .register('./sw.js?v=3', { updateViaCache: 'none' })
         .then((registration) => registration.update())
         .catch(() => {});
     });
