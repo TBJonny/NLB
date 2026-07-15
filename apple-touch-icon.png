@@ -2,8 +2,8 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const body = document.body;
   const topbar = document.getElementById('topbar');
-  const menu = document.getElementById('mobileMenu');
-  const menuButton = document.getElementById('menuBtn');
+  const menu = document.getElementById('navOverlay');
+  const menuButton = document.getElementById('navToggleButton');
   const pageStarted = performance.now();
 
   let introComplete = false;
@@ -46,11 +46,14 @@
     body.classList.toggle('menu-open', open);
   };
 
-  menuButton?.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
-  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') setMenu(false);
-  });
+  if (menuButton && !menuButton.dataset.menuBound) {
+    menuButton.dataset.menuBound = 'true';
+    menuButton.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+    menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setMenu(false);
+    });
+  }
 
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (event) => {
@@ -147,7 +150,7 @@
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
-        .register('./sw.js?v=4', { updateViaCache: 'none' })
+        .register('./sw.js?v=5', { updateViaCache: 'none' })
         .then((registration) => registration.update())
         .catch(() => {});
     });
