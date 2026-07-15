@@ -15,6 +15,7 @@ Personal barber website and installable mobile web app for Jonny, an Albuquerque
 - Built-in hamburger fallback that works even when an older external script is cached
 - Versioned critical assets and fresh-first script/style updates
 - Spring-based interactions and active-card settling on mobile
+- Lightweight transform-only opening motion and frame-limited desktop parallax
 
 ## Before publishing
 
