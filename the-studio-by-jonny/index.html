@@ -18,14 +18,13 @@
 
   <title>The Studio by Jonny | Albuquerque Barber</title>
   <link rel="canonical" href="https://tbjonny.github.io/NLB/">
-  <link rel="manifest" href="site.webmanifest?v=4">
+  <link rel="manifest" href="site.webmanifest?v=5">
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preload" as="image" href="images/design-fade.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="style.css?v=4">
-  <script>document.documentElement.classList.add('js');</script>
-  <script src="app.js?v=4" defer></script>
+  <link rel="stylesheet" href="style.css?v=5">
+  <script src="app.js?v=5" defer></script>
 </head>
 
 <body id="top">
@@ -35,14 +34,6 @@
     - REPLACE_WITH_INSTAGRAM_HANDLE
     - REPLACE_WITH_PHONE_DIGITS and (505) 555-0123
   -->
-
-  <div class="page-loader" aria-hidden="true">
-    <div class="loader-lockup">
-      <img src="brand-mark.png" alt="">
-      <span class="loader-line"></span>
-      <p>THE STUDIO <small>BY JONNY</small></p>
-    </div>
-  </div>
 
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
@@ -66,14 +57,14 @@
 
       <div class="nav-actions">
         <a class="button button-small" href="https://booksy.com/en-us/REPLACE_WITH_BOOKSY_LINK" target="_blank" rel="noopener noreferrer">Book on Booksy</a>
-        <button class="menu-button" id="menuBtn" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+        <button class="menu-button" id="navToggleButton" type="button" aria-label="Open menu" aria-controls="navOverlay" aria-expanded="false">
           <span></span><span></span>
         </button>
       </div>
     </div>
   </header>
 
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu" id="navOverlay" aria-hidden="true">
     <div class="mobile-menu-inner">
       <p class="mobile-menu-label">Navigate</p>
       <nav aria-label="Mobile navigation">
@@ -266,5 +257,41 @@
     <a class="mobile-call" href="tel:REPLACE_WITH_PHONE_DIGITS"><span>Call</span><strong>Jonny</strong></a>
     <a class="mobile-book" href="https://booksy.com/en-us/REPLACE_WITH_BOOKSY_LINK" target="_blank" rel="noopener noreferrer"><span>Reserve</span><strong>Booksy</strong><i aria-hidden="true">&nearr;</i></a>
   </div>
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const body = document.body;
+      const button = document.getElementById('navToggleButton');
+      const menu = document.getElementById('navOverlay');
+
+      root.classList.add('js');
+      body.classList.add('page-ready');
+
+      if ('scrollRestoration' in history && !location.hash) {
+        history.scrollRestoration = 'manual';
+        const showHero = () => requestAnimationFrame(() => window.scrollTo(0, 0));
+        showHero();
+        window.addEventListener('pageshow', showHero, { once: true });
+      }
+
+      if (!button || !menu) return;
+
+      const setMenu = (open) => {
+        menu.classList.toggle('open', open);
+        button.classList.toggle('active', open);
+        button.setAttribute('aria-expanded', String(open));
+        button.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        menu.setAttribute('aria-hidden', String(!open));
+        body.classList.toggle('menu-open', open);
+      };
+
+      button.dataset.menuBound = 'true';
+      button.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+      menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+      window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') setMenu(false);
+      });
+    })();
+  </script>
 </body>
 </html>
