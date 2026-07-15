@@ -84,7 +84,9 @@
     element.style.transitionDelay = `${Math.min(index % 4, 3) * 55}ms`;
   });
 
-  if (reduceMotion || !('IntersectionObserver' in window)) {
+  const staticMobileContent = window.matchMedia('(max-width: 820px)').matches;
+
+  if (reduceMotion || staticMobileContent || !('IntersectionObserver' in window)) {
     revealTargets.forEach((element) => element.classList.add('is-visible'));
   } else {
     const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -145,7 +147,7 @@
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
-        .register('./sw.js?v=3', { updateViaCache: 'none' })
+        .register('./sw.js?v=4', { updateViaCache: 'none' })
         .then((registration) => registration.update())
         .catch(() => {});
     });

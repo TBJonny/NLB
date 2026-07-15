@@ -2033,19 +2033,6 @@ body.menu-open .mobile-action-bar { transform: translateY(120%); }
     transform: none;
   }
 
-  .gallery-item.reveal.is-visible {
-    opacity: 0.7;
-    filter: saturate(0.72) brightness(0.78);
-    transform: translateY(8px) scale(0.92);
-  }
-
-  .gallery-item.reveal.is-visible.is-active {
-    opacity: 1;
-    filter: saturate(1) brightness(1);
-    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.34);
-    transform: translateY(0) scale(1);
-  }
-
   .gallery-item:active {
     transform: scale(0.97) !important;
     transition-duration: 100ms;
@@ -2159,23 +2146,20 @@ body.menu-open .mobile-action-bar { transform: translateY(120%); }
     transition: none;
   }
 
-  .section {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 820px;
-  }
-
   .js .reveal,
   .js .reveal:not(.gallery-item) {
+    opacity: 1 !important;
     clip-path: none !important;
     filter: none !important;
-    transform: translate3d(0, 24px, 0) scale(0.98);
-    transition: opacity 340ms ease, transform 520ms var(--spring);
+    transform: none !important;
+    transition: none;
   }
 
   .js .reveal.is-visible,
   .js .reveal:not(.gallery-item).is-visible {
+    opacity: 1 !important;
     clip-path: none !important;
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: none !important;
   }
 
   .gallery-item {
@@ -2183,18 +2167,19 @@ body.menu-open .mobile-action-bar { transform: translateY(120%); }
     will-change: transform, opacity;
   }
 
-  .gallery-item.reveal.is-visible {
+  .gallery-item.reveal {
     opacity: 0.82;
     filter: none;
     box-shadow: none;
-    transform: translate3d(0, 6px, 0) scale(0.94);
+    transform: translate3d(0, 6px, 0) scale(0.94) !important;
+    transition: opacity 260ms ease, transform 420ms var(--spring);
   }
 
-  .gallery-item.reveal.is-visible.is-active {
+  .gallery-item.reveal.is-active {
     opacity: 1;
     filter: none;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(0, 0, 0) scale(1) !important;
   }
 
   .mobile-action-bar {
@@ -2207,6 +2192,70 @@ body.menu-open .mobile-action-bar { transform: translateY(120%); }
   .booking-card,
   .location-card {
     box-shadow: 0 16px 34px rgba(11, 13, 12, 0.14);
+  }
+}
+
+/* Reliable mobile/tablet navigation layer */
+@media (max-width: 1050px) {
+  .site-header {
+    z-index: 300;
+  }
+
+  .menu-button {
+    z-index: 2;
+    touch-action: manipulation;
+  }
+
+  .mobile-menu {
+    inset: 82px 0 0;
+    z-index: 250;
+    display: block;
+    padding: 22px 20px calc(28px + env(safe-area-inset-bottom));
+    visibility: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    clip-path: none;
+    opacity: 1;
+    pointer-events: none;
+    transform: translate3d(0, -105%, 0);
+    transition: transform 430ms var(--spring), visibility 0s linear 430ms;
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+
+  .mobile-menu.open {
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0);
+    transition: transform 430ms var(--spring), visibility 0s linear 0s;
+  }
+
+  .mobile-menu-inner {
+    width: min(100%, 620px);
+    min-height: 100%;
+    height: auto;
+  }
+
+  .mobile-menu-signature {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@media (max-width: 820px) {
+  .gallery-item.reveal {
+    opacity: 0.82 !important;
+  }
+
+  .gallery-item.reveal.is-active {
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .mobile-menu {
+    inset: 74px 0 0;
   }
 }
 
